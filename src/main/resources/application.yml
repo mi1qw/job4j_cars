@@ -1,0 +1,7 @@
+logging.level:
+  root: info
+spring:
+  sql.init.mode: always
+  thymeleaf:
+    cache: false
+    template-resolver-order: 0
