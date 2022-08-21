@@ -9,22 +9,18 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(of = "id")
 @NoArgsConstructor
 @Entity
-@Table(name = "engine")
-public class Engine {
+@Table(name = "model")
+public class Model {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
 
-    private String image;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Mark mark;
 
-    public Engine(final String name) {
+    public Model(final String name) {
         this.name = name;
-    }
-
-    public Engine(final String name, final String image) {
-        this.name = name;
-        this.image = image;
     }
 }

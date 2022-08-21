@@ -6,25 +6,18 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
-@EqualsAndHashCode(of = "id")
 @NoArgsConstructor
+@EqualsAndHashCode(of = "id")
 @Entity
-@Table(name = "engine")
-public class Engine {
+@Table(name = "category")
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
 
-    private String image;
-
-    public Engine(final String name) {
+    public Category(final String name) {
         this.name = name;
-    }
-
-    public Engine(final String name, final String image) {
-        this.name = name;
-        this.image = image;
     }
 }

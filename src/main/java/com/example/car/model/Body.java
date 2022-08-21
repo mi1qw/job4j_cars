@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(of = "id")
 @NoArgsConstructor
 @Entity
-@Table(name = "engine")
-public class Engine {
+@Table(name = "body")
+public class Body {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,11 +19,7 @@ public class Engine {
 
     private String image;
 
-    public Engine(final String name) {
-        this.name = name;
-    }
-
-    public Engine(final String name, final String image) {
+    public Body(final String name, final String image) {
         this.name = name;
         this.image = image;
     }
