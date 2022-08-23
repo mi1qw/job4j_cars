@@ -56,7 +56,7 @@ public class Account {
 
     private LocalDateTime created;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "city_id")
     private City city;
 
@@ -68,5 +68,6 @@ public class Account {
         this.password = password;
         this.phoneNumber = phoneNumber;
         this.city = city;
+        this.created = LocalDateTime.now();
     }
 }

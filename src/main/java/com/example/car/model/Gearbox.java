@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(of = "id")
 @NoArgsConstructor
 @Entity
-@Table(name = "mark")
-public class Mark {
+@Table(name = "gearbox")
+public class Gearbox {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,7 +20,7 @@ public class Mark {
 
     private String image;
 
-    public Mark(final String name, final String image) {
+    public Gearbox(final String name, final String image) {
         this.name = name;
         this.image = image;
     }

@@ -1,5 +1,6 @@
 package com.example.car.store;
 
+import com.example.car.model.Modification;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.InvocationTargetException;
@@ -21,7 +22,9 @@ public class CrudPersist<T> implements CRUDStore<T>, SessionStore {
 
     private void setMethodSetId() {
         try {
-            setId = aClass.getDeclaredMethod("setId", Long.class);
+            if (aClass != Modification.class) {
+                setId = aClass.getDeclaredMethod("setId", Long.class);
+            }
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
@@ -110,7 +113,8 @@ public class CrudPersist<T> implements CRUDStore<T>, SessionStore {
     public List<T> findByName(final String name) {
         try {
             return tx(session -> session
-                    .createQuery("from " + className + " a where a.name=:name", aClass)
+                    .createNativeQuery("select * from " + className + " a where a.name=:name",
+                            aClass)
                     .setParameter("name", name)
                     .list());
         } catch (Exception e) {

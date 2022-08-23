@@ -24,9 +24,22 @@
         <property name="hibernate.jdbc.time_zone">Europe/Kiev</property>
         <!-- List of XML mapping files -->
 
+        <mapping class="com.example.car.model.Account"/>
+        <mapping class="com.example.car.model.Body"/>
         <mapping class="com.example.car.model.Car"/>
+        <mapping class="com.example.car.model.Category"/>
+        <mapping class="com.example.car.model.City"/>
+        <mapping class="com.example.car.model.Color"/>
         <mapping class="com.example.car.model.Driver"/>
         <mapping class="com.example.car.model.Engine"/>
+        <mapping class="com.example.car.model.Gearbox"/>
+        <mapping class="com.example.car.model.Generations"/>
+        <mapping class="com.example.car.model.Mark"/>
+        <mapping class="com.example.car.model.Model"/>
+        <mapping class="com.example.car.model.Transmission"/>
+        <mapping class="com.example.car.model.ModificationId"/>
+        <mapping class="com.example.car.model.Modification"/>
+
 
     </session-factory>
 </hibernate-configuration>

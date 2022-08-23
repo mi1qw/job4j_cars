@@ -15,12 +15,14 @@ public class Model {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true, nullable = false)
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Mark mark;
 
-    public Model(final String name) {
+    public Model(final String name, final Mark mark) {
         this.name = name;
+        this.mark = mark;
     }
 }
