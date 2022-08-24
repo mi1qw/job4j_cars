@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @EqualsAndHashCode(of = "id")
@@ -18,6 +19,7 @@ public class Model {
     @Column(unique = true, nullable = false)
     private String name;
 
+    @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     private Mark mark;
 

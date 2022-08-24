@@ -1,0 +1,123 @@
+body {
+    font-family: sans-serif;
+}
+
+a {
+    color: #369;
+}
+
+
+#drop-area {
+    border: 2px dashed #ccc;
+    border-radius: 20px;
+    width: 480px;
+    margin: 25px auto;
+    padding: 20px;
+}
+
+#drop-area.highlight {
+    border-color: purple;
+}
+
+p {
+    margin-top: 0;
+}
+
+.my-form {
+    /*margin-bottom: 10px;*/
+}
+
+/*.MdsPhotos__sortable {*/
+#gallery {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    /*margin: -1px;*/
+    width: 100%;
+}
+
+#gallery img {
+    /*width: 100%;*/
+    /*margin-bottom: 10px;*/
+    /*margin-right: 10px;*/
+    /*vertical-align: middle;*/
+
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+
+    /*min-width: 100%;*/
+    /*min-height: 100%;*/
+    /*width: auto;*/
+    /*height: auto;*/
+}
+
+.button {
+    display: inline-block;
+    padding: 10px;
+    background: #ccc;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.button:hover {
+    background: #ddd;
+}
+
+#fileElem {
+    display: none;
+}
+
+.MdsPhoto__icon {
+    align-items: center;
+    background-color: #fff;
+    border-radius: 50%;
+    /*display: none;*/
+    justify-content: center;
+    padding: 4px;
+    position: absolute;
+    transition: background-color .2s, color .2s;
+}
+
+.MdsPhoto__icon_right {
+    right: 8px;
+    top: 8px;
+}
+
+.IconSvg_size_24 {
+    height: 24px !important;
+    width: 24px !important;
+}
+
+.MdsPhoto {
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 8px;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: block;
+    overflow: hidden;
+    position: relative;
+}
+
+.MdsPhotos__item {
+    flex: 1;
+    /*height: 130px;*/
+    margin: 1px;
+    max-width: 35%;
+    min-width: 30%;
+}
+
+
+.grid-square {
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+    background-color: #fff;
+    border: solid 1px rgb(0, 0, 0, 0.2);
+    padding: 10px;
+    margin: 12px;
+}
+

@@ -32,6 +32,8 @@ public class Job4jCarApplication {
     private ModificationStore modificationStore;
     @Autowired
     private ColorStore colorStore;
+    @Autowired
+    private FileSystemStore fileSystemStore;
 
     public static void main(final String[] args) {
         SpringApplication.run(Job4jCarApplication.class, args);
@@ -40,6 +42,7 @@ public class Job4jCarApplication {
     @Bean
     public CommandLineRunner dataLoader() {
         return args -> {
+            fileSystemStore.init();
             List<Account> all = accountStore.findAll();
 //            if (all.isEmpty()) {
             if (true) {
@@ -54,8 +57,22 @@ public class Job4jCarApplication {
 
 
                 try {
-                    colorStore.add(new Color("red", "red"));
-                    colorStore.add(new Color("black", "black"));
+                    colorStore.add(new Color("Чёрный", "black"));
+                    colorStore.add(new Color("Серебристый", "silver"));
+                    colorStore.add(new Color("Белый", "white"));
+                    colorStore.add(new Color("Серый", "gray"));
+                    colorStore.add(new Color("Синий", "blue"));
+                    colorStore.add(new Color("Красный", "red"));
+                    colorStore.add(new Color("Зелёный", "green"));
+                    colorStore.add(new Color("Коричневый", "brown"));
+                    colorStore.add(new Color("Бежевый", "beige"));
+                    colorStore.add(new Color("Голубой", "sky"));
+                    colorStore.add(new Color("Золотистый", "gold"));
+                    colorStore.add(new Color("Пурпурный", "magenta"));
+                    colorStore.add(new Color("Фиолетовый", "purple"));
+                    colorStore.add(new Color("Жёлтый", "yellow"));
+                    colorStore.add(new Color("Оранжевый", "orange"));
+                    colorStore.add(new Color("Розовый", "pink"));
                 } catch (Exception ignored) {
                 }
 
@@ -65,125 +82,350 @@ public class Job4jCarApplication {
                 Mark mercedes;
                 Mark vaz;
                 try {
-                    toyota = markStore.add(new Mark("Toyota", "aaa"));
-                    bmw = markStore.add(new Mark("BMW", "aaa"));
-                    mercedes = markStore.add(new Mark("Mercedes-Benz", "aaa"));
-                    vaz = markStore.add(new Mark("LADA (ВАЗ)", "aaa"));
+                    markStore.add(new Mark("Toyota", "logoToyota.png"));
+                    markStore.add(new Mark("BMW", "logoBMW.png"));
+                    markStore.add(new Mark("Mercedes-Benz", "logoMers.png"));
+                    markStore.add(new Mark("LADA (ВАЗ)", "logoVaz.png"));
+                    markStore.add(new Mark("Audi", "logoAudi.png"));
+                    markStore.add(new Mark("Hyundai", "logoHyundai.png"));
+                    markStore.add(new Mark("Kia", "logoKia.png"));
+                    markStore.add(new Mark("Nissan", "logoNissan.png"));
+                    markStore.add(new Mark("Renault", "logoRenault.png"));
+                    markStore.add(new Mark("Skoda", "logoSkoda.png"));
+                    markStore.add(new Mark("VW", "logoVW.png"));
                 } catch (Exception ignored) {
                 }
 
                 toyota = markStore.findByName("Toyota").get(0);
                 try {
-                    Model camry = modelStore.add(new Model("Camry", toyota));
-                    Model crown = modelStore.add(new Model("Crown", toyota));  // 2018
+                    modelStore.add(new Model("Camry", toyota));
+                    modelStore.add(new Model("Crown", toyota));
+                    modelStore.add(new Model("2 серии",
+                            markStore.findByName("BMW").get(0)));
+
                 } catch (Exception ignored) {
                 }
 
 
                 try {
-                    bodyStore.add(new Body("Седан", "Седан"));
-                    bodyStore.add(new Body("Хэтчбек", "Хэтчбек"));
-                    bodyStore.add(new Body("Лифтбек", "Лифтбек"));
-                    bodyStore.add(new Body("Внедорожник", "Внедорожник"));
-                    bodyStore.add(new Body("Универсал", "Универсал"));
-                    bodyStore.add(new Body("Купе", "Купе"));
-                    bodyStore.add(new Body("Мнинвэн", "Мнинвэн"));
+                    bodyStore.add(new Body("Седан", "sedan-side.png"));
+                    bodyStore.add(new Body("Хэтчбек", "hatch5d-side.png"));
+                    bodyStore.add(new Body("Лифтбек", "liftback-side.png"));
+                    bodyStore.add(new Body("Внедорожник", "suv5d-side.png"));
+                    bodyStore.add(new Body("Универсал", "universal-side.png"));
+                    bodyStore.add(new Body("Купе", "coupe-side.png"));
+                    bodyStore.add(new Body("Мнинвэн", "vclasse-side.png"));
                     bodyStore.add(new Body("Пикап", "Пикап"));
-                    bodyStore.add(new Body("Лимузин", "Лимузин"));
-                    bodyStore.add(new Body("Фургон", "Фургон"));
-                    bodyStore.add(new Body("Кабриолет", "Кабриолет"));
+                    bodyStore.add(new Body("Лимузин", "Лимузин.png"));
+                    bodyStore.add(new Body("Фургон", "van-side.png"));
+                    bodyStore.add(new Body("Кабриолет", "cabrio-side.png"));
                 } catch (Exception ignored) {
                 }
 
 
                 try {
-                    engineStore.add(new Engine("Бензин", "Бензин"));
-                    engineStore.add(new Engine("Дизель", "Дизель"));
-                    engineStore.add(new Engine("Гибрид", "Гибрид"));
-                    engineStore.add(new Engine("Электро", "Электро"));
+                    engineStore.add(new Engine("Бензин", "#gasoline"));
+                    engineStore.add(new Engine("Дизель", "#diesel"));
+                    engineStore.add(new Engine("Гибрид", "#hybrid"));
+                    engineStore.add(new Engine("Электро", "#electro"));
                 } catch (Exception ignored) {
                 }
 
 
                 try {
                     transmissionStore.add(new Transmission("Любой", "Любой"));
-                    transmissionStore.add(new Transmission("Передний", "Передний"));
-                    transmissionStore.add(new Transmission("Задний", "Задний"));
-                    transmissionStore.add(new Transmission("Полный", "Полный"));
+                    transmissionStore.add(new Transmission("Передний", "#forward-control"));
+                    transmissionStore.add(new Transmission("Задний", "#rear-drive"));
+                    transmissionStore.add(new Transmission("Полный", "#all-wheel-drive"));
                 } catch (Exception ignored) {
                 }
 
 
                 try {
-                    gearboxStore.add(new Gearbox("Автомат", "Автомат"));
-                    gearboxStore.add(new Gearbox("Робот", "Робот"));
-                    gearboxStore.add(new Gearbox("Вариатор", "Вариатор"));
-                    gearboxStore.add(new Gearbox("Механическая", "Механическая"));
+                    gearboxStore.add(new Gearbox("Автомат", "#automatic"));
+                    gearboxStore.add(new Gearbox("Робот", "#robot"));
+                    gearboxStore.add(new Gearbox("Вариатор", "#variator"));
+                    gearboxStore.add(new Gearbox("Механическая", "#mechanical"));
                 } catch (Exception ignored) {
                 }
 
 
                 try {
-                    ModificationId id = new ModificationId("3.5CVT 299л.с", (short) 2018,
+                    ModificationId id = new ModificationId("3.5 CVT 299 л.с", (short) 2018,
                             markStore.findByName("Toyota").get(0));
                     modificationStore.add(new Modification(id, (short) 299, (short) 3456,
-                            (byte) 6, "V-engine"));
+                            (byte) 6, "V-образное"));
 
-                    id = new ModificationId("2.5CVT 184л.с", (short) 2018,
+                    id = new ModificationId("2.5 CVT 184 л.с", (short) 2018,
                             markStore.findByName("Toyota").get(0));
                     modificationStore.add(new Modification(id, (short) 184, (short) 2487,
-                            (byte) 4, "V-engine"));
+                            (byte) 4, "V-образное"));
+
+                    //реальн
+                    id = new ModificationId("2.0 AT 245 л.c.", (short) 2018,
+                            markStore.findByName("Toyota").get(0));
+                    modificationStore.add(new Modification(id, (short) 245, (short) 1998,
+                            (byte) 4, "рядное"));
+
+                    //3.5 AT 249 л.с.
+                    id = new ModificationId("3.5 AT 249 л.с.", (short) 2021,
+                            markStore.findByName("Toyota").get(0));
+                    modificationStore.add(new Modification(id, (short) 249, (short) 3456,
+                            (byte) 6, "V-образное"));
+                    //2.5 AT 203 л.с.
+                    id = new ModificationId("2.5 AT 203 л.с.", (short) 2021,
+                            markStore.findByName("Toyota").get(0));
+                    modificationStore.add(new Modification(id, (short) 203, (short) 2487,
+                            (byte) 4, "рядное"));
+                    id = new ModificationId("2.5 CVT 208 л.с.", (short) 2021,
+                            markStore.findByName("Toyota").get(0));
+                    modificationStore.add(new Modification(id, (short) 208, (short) 2487,
+                            (byte) 4, "рядное"));
+                    id = new ModificationId("2.5 AT 202 л.с. 4x4", (short) 2021,
+                            markStore.findByName("Toyota").get(0));
+                    modificationStore.add(new Modification(id, (short) 202, (short) 2487,
+                            (byte) 4, "рядное"));
+                    id = new ModificationId("2.5 CVT 178 л.с. 4x4", (short) 2021,
+                            markStore.findByName("Toyota").get(0));
+                    modificationStore.add(new Modification(id, (short) 178, (short) 2487,
+                            (byte) 4, "рядное"));
+                    id = new ModificationId("218i 1.5 MT 140 л.с.", (short) 2019,
+                            markStore.findByName("BMW").get(0));
+                    modificationStore.add(new Modification(id, (short) 140, (short) 1499,
+                            (byte) 3, "рядное"));
+                    id = new ModificationId("2.0 AT 231 л.с.", (short) 2019,
+                            markStore.findByName("BMW").get(0));
+                    modificationStore.add(new Modification(id, (short) 231, (short) 1998,
+                            (byte) 4, "рядное"));
+                    id = new ModificationId("2.0 AT 150 л.с.", (short) 2019,
+                            markStore.findByName("BMW").get(0));
+                    modificationStore.add(new Modification(id, (short) 150, (short) 1995,
+                            (byte) 4, "рядное"));
+                    id = new ModificationId("1.5 MT 136 л.с.", (short) 2019,
+                            markStore.findByName("BMW").get(0));
+                    modificationStore.add(new Modification(id, (short) 136, (short) 1499,
+                            (byte) 3, "рядное"));
                 } catch (Exception ignored) {
                 }
 
 //                Mark toyota1 = markStore.findByName("Toyota").get(0);
 //                Modification cvt = modificationStore.findByName("CVT").get(0);
 
-                generationsStore.add(
-                        new Generations("name", "image",
-                                (short) 2000,
-                                markStore.findByName("Toyota").get(0),
-                                modelStore.findByName("Camry").get(0),
-                                bodyStore.findByName("Седан").get(0),
-                                engineStore.findByName("Бензин").get(0),
-                                transmissionStore.findByName("Передний").get(0),
-                                gearboxStore.findByName("Автомат").get(0),
-                                modificationStore.findByName("2.5CVT 184л.с").get(0))
-                );
+                /* Седан */
+                /*реальн*/
+                try {
+                    generationsStore.add(
+                            new Generations("XV (S220)", "CrownXV(S220).jpg",
+                                    (short) 2018,
+                                    markStore.findByName("Toyota").get(0),
+                                    modelStore.findByName("Crown").get(0),
+                                    bodyStore.findByName("Седан").get(0),
+                                    engineStore.findByName("Гибрид").get(0),
+                                    transmissionStore.findByName("Задний").get(0),
+                                    gearboxStore.findByName("Вариатор").get(0),
+                                    modificationStore.findByName("2.5 CVT 184 л.с").get(0))
+                    );
+                    // новый реальный
+                    generationsStore.add(
+                            new Generations("XV (S220)", "CrownXV(S220).jpg",
+                                    (short) 2018,
+                                    markStore.findByName("Toyota").get(0),
+                                    modelStore.findByName("Crown").get(0),
+                                    bodyStore.findByName("Седан").get(0),
+                                    engineStore.findByName("Бензин").get(0),
+                                    transmissionStore.findByName("Задний").get(0),
+                                    gearboxStore.findByName("Автомат").get(0),
+                                    modificationStore.findByName("2.0 AT 245 л.c.").get(0))
+                    );
+                    /*реал*/
+                    generationsStore.add(
+                            new Generations("XIV (S210)", "CrownXIV(S210).jpg",
+                                    (short) 2018,
+                                    markStore.findByName("Toyota").get(0),
+                                    modelStore.findByName("Crown").get(0),
+                                    bodyStore.findByName("Седан").get(0),
+                                    engineStore.findByName("Гибрид").get(0),
+                                    transmissionStore.findByName("Задний").get(0),
+                                    gearboxStore.findByName("Вариатор").get(0),
+                                    modificationStore.findByName("2.5 CVT 184 л.с").get(0))
+                    );
+                    generationsStore.add(
+                            new Generations("XIV (S210)", "CrownXIV(S210).jpg",
+                                    (short) 2018,
+                                    markStore.findByName("Toyota").get(0),
+                                    modelStore.findByName("Crown").get(0),
+                                    bodyStore.findByName("Седан").get(0),
+                                    engineStore.findByName("Бензин").get(0),
+                                    transmissionStore.findByName("Задний").get(0),
+                                    gearboxStore.findByName("Автомат").get(0),
+                                    modificationStore.findByName("3.5 CVT 299 л.с").get(0))
+                    );
 
-                generationsStore.add(
-                        new Generations("XV (S220)", "image1",
-                                (short) 2018,
-                                markStore.findByName("Toyota").get(0),
-                                modelStore.findByName("Crown").get(0),
-                                bodyStore.findByName("Седан").get(0),
-                                engineStore.findByName("Гибрид").get(0),
-                                transmissionStore.findByName("Задний").get(0),
-                                gearboxStore.findByName("Вариатор").get(0),
-                                modificationStore.findByName("2.5CVT 184л.с").get(0))
-                );
-                generationsStore.add(
-                        new Generations("XIV (S210)", "image1",
-                                (short) 2018,
-                                markStore.findByName("Toyota").get(0),
-                                modelStore.findByName("Crown").get(0),
-                                bodyStore.findByName("Седан").get(0),
-                                engineStore.findByName("Гибрид").get(0),
-                                transmissionStore.findByName("Задний").get(0),
-                                gearboxStore.findByName("Вариатор").get(0),
-                                modificationStore.findByName("2.5CVT 184л.с").get(0))
-                );
-                generationsStore.add(
-                        new Generations("XIV (S210)", "image1",
-                                (short) 2018,
-                                markStore.findByName("Toyota").get(0),
-                                modelStore.findByName("Crown").get(0),
-                                bodyStore.findByName("Седан").get(0),
-                                engineStore.findByName("Бензин").get(0),
-                                transmissionStore.findByName("Задний").get(0),
-                                gearboxStore.findByName("Вариатор").get(0),
-                                modificationStore.findByName("3.5CVT 299л.с").get(0))
-                );
+//                Camry
+                    generationsStore.add(
+                            new Generations("VIII (XV70) Рестайлинг", "VIII(XV70)reystaling.jpg",
+                                    (short) 2021,
+                                    markStore.findByName("Toyota").get(0),
+                                    modelStore.findByName("Camry").get(0),
+                                    bodyStore.findByName("Седан").get(0),
+                                    engineStore.findByName("Бензин").get(0),
+                                    transmissionStore.findByName("Передний").get(0),
+                                    gearboxStore.findByName("Автомат").get(0),
+                                    modificationStore.findByName("3.5 AT 249 л.с.").get(0))
+                    );
+                    generationsStore.add(
+                            new Generations("VIII (XV70) Рестайлинг", "VIII(XV70)reystaling.jpg",
+                                    (short) 2021,
+                                    markStore.findByName("Toyota").get(0),
+                                    modelStore.findByName("Camry").get(0),
+                                    bodyStore.findByName("Седан").get(0),
+                                    engineStore.findByName("Бензин").get(0),
+                                    transmissionStore.findByName("Передний").get(0),
+                                    gearboxStore.findByName("Автомат").get(0),
+                                    modificationStore.findByName("2.5 AT 203 л.с.").get(0))
+                    );
+                    generationsStore.add(
+                            new Generations("VIII (XV70) Рестайлинг", "VIII(XV70)reystaling.jpg",
+                                    (short) 2021,
+                                    markStore.findByName("Toyota").get(0),
+                                    modelStore.findByName("Camry").get(0),
+                                    bodyStore.findByName("Седан").get(0),
+                                    engineStore.findByName("Бензин").get(0),
+                                    transmissionStore.findByName("Передний").get(0),
+                                    gearboxStore.findByName("Вариатор").get(0),
+                                    modificationStore.findByName("2.5 CVT 208 л.с.").get(0))
+                    );
+                    generationsStore.add(
+                            new Generations("VIII (XV70) Рестайлинг", "VIII(XV70)reystaling.jpg",
+                                    (short) 2021,
+                                    markStore.findByName("Toyota").get(0),
+                                    modelStore.findByName("Camry").get(0),
+                                    bodyStore.findByName("Седан").get(0),
+                                    engineStore.findByName("Бензин").get(0),
+                                    transmissionStore.findByName("Полный").get(0),
+                                    gearboxStore.findByName("Автомат").get(0),
+                                    modificationStore.findByName("2.5 AT 202 л.с. 4x4").get(0))
+                    );
+
+                    generationsStore.add(
+                            new Generations("VIII (XV70)", "VIII(XV70).jpg",
+                                    (short) 2021,
+                                    markStore.findByName("Toyota").get(0),
+                                    modelStore.findByName("Camry").get(0),
+                                    bodyStore.findByName("Седан").get(0),
+                                    engineStore.findByName("Бензин").get(0),
+                                    transmissionStore.findByName("Передний").get(0),
+                                    gearboxStore.findByName("Автомат").get(0),
+                                    modificationStore.findByName("3.5 AT 249 л.с.").get(0))
+                    );
+                    generationsStore.add(
+                            new Generations("VIII (XV70)", "VIII(XV70).jpg",
+                                    (short) 2021,
+                                    markStore.findByName("Toyota").get(0),
+                                    modelStore.findByName("Camry").get(0),
+                                    bodyStore.findByName("Седан").get(0),
+                                    engineStore.findByName("Гибрид").get(0),
+                                    transmissionStore.findByName("Передний").get(0),
+                                    gearboxStore.findByName("Вариатор").get(0),
+                                    modificationStore.findByName("2.5 CVT 208 л.с.").get(0))
+                    );
+                    generationsStore.add(
+                            new Generations("VIII (XV70)", "VIII(XV70).jpg",
+                                    (short) 2021,
+                                    markStore.findByName("Toyota").get(0),
+                                    modelStore.findByName("Camry").get(0),
+                                    bodyStore.findByName("Седан").get(0),
+                                    engineStore.findByName("Гибрид").get(0),
+                                    transmissionStore.findByName("Полный").get(0),
+                                    gearboxStore.findByName("Вариатор").get(0),
+                                    modificationStore.findByName("2.5 CVT 178 л.с. 4x4").get(0))
+                    );
+
+//                    bmw
+                    generationsStore.add(
+                            new Generations("F44", "F44.jpg",
+                                    (short) 2019,
+                                    markStore.findByName("BMW").get(0),
+                                    modelStore.findByName("2 серии").get(0),
+                                    bodyStore.findByName("Седан").get(0),
+                                    engineStore.findByName("Бензин").get(0),
+                                    transmissionStore.findByName("Передний").get(0),
+                                    gearboxStore.findByName("Механическая").get(0),
+                                    modificationStore.findByName("218i 1.5 MT 140 л.с.").get(0))
+                    );
+                    generationsStore.add(
+                            new Generations("F44", "F44.jpg",
+                                    (short) 2019,
+                                    markStore.findByName("BMW").get(0),
+                                    modelStore.findByName("2 серии").get(0),
+                                    bodyStore.findByName("Седан").get(0),
+                                    engineStore.findByName("Бензин").get(0),
+                                    transmissionStore.findByName("Передний").get(0),
+                                    gearboxStore.findByName("Автомат").get(0),
+                                    modificationStore.findByName("2.0 AT 231 л.с.").get(0))
+                    );
+                    generationsStore.add(
+                            new Generations("F44", "F44.jpg",
+                                    (short) 2019,
+                                    markStore.findByName("BMW").get(0),
+                                    modelStore.findByName("2 серии").get(0),
+                                    bodyStore.findByName("Седан").get(0),
+                                    engineStore.findByName("Бензин").get(0),
+                                    transmissionStore.findByName("Передний").get(0),
+                                    gearboxStore.findByName("Робот").get(0),
+                                    modificationStore.findByName("218i 1.5 MT 140 л.с.").get(0))
+                    );
+                    generationsStore.add(
+                            new Generations("F44", "F44.jpg",
+                                    (short) 2019,
+                                    markStore.findByName("BMW").get(0),
+                                    modelStore.findByName("2 серии").get(0),
+                                    bodyStore.findByName("Седан").get(0),
+                                    engineStore.findByName("Бензин").get(0),
+                                    transmissionStore.findByName("Полный").get(0),
+                                    gearboxStore.findByName("Автомат").get(0),
+                                    modificationStore.findByName("2.0 AT 231 л.с.").get(0))
+                    );
+//                    купе
+                    generationsStore.add(
+                            new Generations("F22 Рестайлинг", "F22restayling.jpg",
+                                    (short) 2019,
+                                    markStore.findByName("BMW").get(0),
+                                    modelStore.findByName("2 серии").get(0),
+                                    bodyStore.findByName("Купе").get(0),
+                                    engineStore.findByName("Дизель").get(0),
+                                    transmissionStore.findByName("Задний").get(0),
+                                    gearboxStore.findByName("Автомат").get(0),
+                                    modificationStore.findByName("2.0 AT 150 л.с.").get(0))
+                    );
+//                    кабриолет
+                    generationsStore.add(
+                            new Generations("Кабриолет F22 Рестайлинг ",
+                                    "F22restaylingCabriolet.jpg",
+                                    (short) 2019,
+                                    markStore.findByName("BMW").get(0),
+                                    modelStore.findByName("2 серии").get(0),
+                                    bodyStore.findByName("Кабриолет").get(0),
+                                    engineStore.findByName("Дизель").get(0),
+                                    transmissionStore.findByName("Задний").get(0),
+                                    gearboxStore.findByName("Автомат").get(0),
+                                    modificationStore.findByName("2.0 AT 150 л.с.").get(0))
+                    );
+                    generationsStore.add(
+                            new Generations("Кабриолет F22 Рестайлинг ",
+                                    "F22restaylingCabriolet.jpg",
+                                    (short) 2019,
+                                    markStore.findByName("BMW").get(0),
+                                    modelStore.findByName("2 серии").get(0),
+                                    bodyStore.findByName("Кабриолет").get(0),
+                                    engineStore.findByName("Бензин").get(0),
+                                    transmissionStore.findByName("Задний").get(0),
+                                    gearboxStore.findByName("Механическая").get(0),
+                                    modificationStore.findByName("1.5 MT 136 л.с.").get(0))
+                    );
+                } catch (Exception ignored) {
+                }
+
             }
         };
 

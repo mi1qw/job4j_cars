@@ -34,3 +34,6 @@ build/
 
 *.trace.db
 *.mv.db
+
+### images folder ###
+/uploadPosts

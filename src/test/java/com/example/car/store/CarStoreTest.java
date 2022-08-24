@@ -3,12 +3,14 @@ package com.example.car.store;
 import com.example.car.model.Car;
 import com.example.car.model.Driver;
 import com.example.car.model.Engine;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Slf4j
 @SpringBootTest
 class CarStoreTest {
     @Autowired
@@ -37,4 +39,44 @@ class CarStoreTest {
                 .satisfies(n -> assertThat(n.getName()).isEqualTo("car-B"))
                 .satisfies(n -> assertThat(n.getEngine().getName()).isEqualTo("engine-B"));
     }
+
+    @Test
+    void addImages() {
+        Car car = new Car();
+        carStore.add(car);
+
+        car.getImages().add("aa");
+        car.getImages().add("bb");
+        car = carStore.addImages(car);
+        car.getImages().add("cc");
+        car = carStore.addImages(car);
+
+        car.getImages().remove(1);
+        car.setName("AAA");
+        car = carStore.addImages(car);
+    }
+
+    @Test
+    void addAndgetImages() {
+
+        Car car = carStore.getCar(116L);
+        log.info("car={}", car);
+        carStore.deleteImageByOrder(car, 16);
+        log.info("car={}", car);
+    }
+//    @Test
+//    void addImagesSQL() {
+//        Car car = new Car();
+//        car = carStore.add(car);
+//
+//        boolean a = carStore.addImage(car, "A");
+//        car.setId(0L);
+//        try {
+//            a = carStore.addImage(car, "B");
+//        } catch (Throwable e) {
+//            e.printStackTrace();
+//        }
+//
+//
+//    }
 }

@@ -1,13 +1,16 @@
 package com.example.car.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -25,8 +28,12 @@ public class Car {
     private String description;
     private BigDecimal price;
     private int odometer;
-    private boolean status;
     private String year;
+    private String yearPurchase;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private Status status = Status.newItem;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Account account;
@@ -47,8 +54,7 @@ public class Car {
     private Body body;
 
     @ManyToOne
-    @JoinColumn(name = "engine_id", foreignKey = @ForeignKey(name = "ENGINE_ID_FK"),
-            nullable = false)
+    @JoinColumn(name = "engine_id", foreignKey = @ForeignKey(name = "ENGINE_ID_FK"))
     private Engine engine;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -65,11 +71,12 @@ public class Car {
                     @JoinColumn(name = "driver_id", nullable = false, updatable = false)})
     private Set<Driver> drivers = new HashSet<>();
 
-    @ElementCollection
-    @CollectionTable(name = "image",
-            joinColumns = @JoinColumn(name = "post_id"))
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "image")
+    @OrderColumn
     @Column(name = "filename")
-    private Set<String> images = new HashSet<>();
+    private List<String> images = new ArrayList<>();
+
 
     public Car(final String name, final Engine engine) {
         this.name = name;

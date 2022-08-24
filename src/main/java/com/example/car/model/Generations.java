@@ -9,7 +9,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 @Entity
-@Table(name = "generations")
+@Table(name = "generations",
+        uniqueConstraints = @UniqueConstraint(columnNames =
+                {"name", "year", "body_id", "engine_id", "gearbox_id", "model_id", "mark_id",
+                        "name_id", "year_id", "transmission_id"})
+)
 public class Generations {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,7 +50,7 @@ public class Generations {
                        final Mark mark, final Model model,
                        final Body body, final Engine engine, final Transmission transmission,
                        final Gearbox gearbox, final Modification modification) {
-        this.name = mark.getName() + " " + model.getName() + " " + name;
+        this.name = name;
         this.image = image;
         this.year = year;
         this.model = model;

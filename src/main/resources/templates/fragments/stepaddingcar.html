@@ -1,0 +1,323 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+
+<div th:fragment="stepMark(state)" class="pt-3">
+  <!--  <p th:text="|*{state.name}  fragment0 *{state.step}|"></p>-->
+  <div th:if="*{!state.status}">
+    <div th:replace="::title(*{state})"></div>
+    <ul class="MarkField__items">
+      <li class="MarkFieldTile position-relative"
+          th:each="option:*{state.getOptions().values()}"
+          style="width: 127px">
+        <img class="h-auto w-auto card-img "
+             style="height: 48px !important;width: 48px !important;"
+             th:src="@{|/img/*{option.image}|}"/>
+        <div class="MarkFieldTile__name text-decoration-none" th:text="*{option.name}"></div>
+        <a class="stretched-link"
+           th:href="@{|/cars/addState?stateID=*{state.step}&id=*{option.id}|}"></a>
+      </li>
+    </ul>
+  </div>
+  <!--  <div th:if="*{state.status}" th:text="|*{state.value} - value|"></div>-->
+  <div th:if="*{state.status}">
+    <div th:replace="::resetStep('марка', *{state.value.name}, *{state})"></div>
+  </div>
+</div>
+
+
+<div th:fragment="stepModel(state)" class="pt-3"
+     th:if="${@userSession.getCarState().getStateList().get(__${state.step-1}__).status}">
+  <!--  <p th:text="|*{state.name}  fragment1 *{state.step}  getOptions *{state.getOptions()?.values()}|"></p>-->
+  <!--  <p th:text="*{state}"></p>-->
+  <!--  <p th:if="*{!state.status}" th:each="option:*{state.getOptions()?.values()}"-->
+  <!--     th:text="*{option.id}"></p>-->
+
+  <div th:if="*{!state.status}">
+    <div th:replace="::title(*{state})"></div>
+    <select id="select-models" class="form-select form-select-sm mb-3 w-50"
+            name="option.id">
+      <option selected>выбрать модель</option>
+      <option th:each="option:*{state.getOptions().values()}"
+              th:value="*{option.id}" th:text="*{option.name}"></option>
+    </select>
+  </div>
+  <!--  <div th:if="*{state.status}" th:text="|*{state.value} - value|"></div>-->
+  <div th:if="*{state.status}">
+    <div th:replace="::resetStep('модель', *{state.value.name}, *{state})"></div>
+    <!--    <div th:replace="::resetStep(*{state})"></div>-->
+  </div>
+</div>
+
+
+<div th:fragment="stepYear(state)" class="pt-3"
+     th:if="${@userSession.getCarState().getStateList().get(__${state.step-1}__).status}">
+  <div th:if="*{!state.status}">
+    <div th:replace="::title(*{state})"></div>
+    <div th:each="option:*{state.getOptions().values()}">
+      <a class="btn btn-light"
+         th:href="@{|/cars/addState?stateID=*{state.step}&id=*{option}|}"
+         th:text="*{option}"></a>
+    </div>
+  </div>
+  <!--  <div th:if="*{state.status}" th:text="|*{state.value} - value|"></div>-->
+  <div th:if="*{state.status}">
+    <div th:replace="::resetStep('год', *{state.value}, *{state})"></div>
+    <!--    <div th:replace="::resetStep(*{state})"></div>-->
+  </div>
+</div>
+
+
+<div th:fragment="stepBody(state)" class="pt-3"
+     th:if="${@userSession.getCarState().getStateList().get(__${state.step-1}__).status}">
+  <div th:if="*{!state.status}">
+    <div th:replace="::title(*{state})"></div>
+    <div class="BodyTypeField">
+      <div class="BodyTypeField__tile position-relative"
+           th:each="option:*{state.getOptions().values()}">
+        <img class="BodyTypeField__image"
+             th:src="@{|/img/*{option.image}|}"/>
+        <div class="BodyTypeField__name text-decoration-none" th:text="*{option.name}"></div>
+        <a class="stretched-link"
+           th:href="@{|/cars/addState?stateID=*{state.step}&id=*{option.id}|}"></a>
+      </div>
+    </div>
+  </div>
+  <!--  <div th:if="*{state.status}" th:text="|*{state.value} - value|"></div>-->
+  <div th:if="*{state.status}">
+    <div th:replace="::resetStep('кузов', *{state.value.name}, *{state})"></div>
+  </div>
+</div>
+
+
+<div th:fragment="stepGen(state)" class="pt-3"
+     th:if="${@userSession.getCarState().getStateList().get(__${state.step-1}__).status}">
+  <div th:if="*{!state.status}">
+    <div th:replace="::title(*{state})"></div>
+    <div class="BodyTypeField">
+      <label class="SuperGenField__tile position-relative"
+             th:each="option:*{state.getOptions().values()}">
+        <span class="Radio__text SuperGenField__radioContent"
+              role="presentation">
+         <img class="SuperGenField__image"
+              th:src="@{|/img/gen/*{option.image}|}"/>
+          [[*{option.name}]]
+        </span>
+        <a class="stretched-link"
+           th:href="@{|/cars/addState?stateID=*{state.step}&id=*{option.id}|}"></a>
+      </label>
+    </div>
+  </div>
+  <!--  <div th:if="*{state.status}" th:text="|*{state.value} - value|"></div>-->
+  <div th:if="*{state.status}">
+    <div th:replace="::resetStep('поколение', *{state.value.name}, *{state})"></div>
+  </div>
+</div>
+
+
+<div th:fragment="stepEngine(state)" class="pt-3"
+     th:if="${@userSession.getCarState().getStateList().get(__${state.step-1}__).status}">
+  <div th:if="*{!state.status}">
+    <div th:replace="::tag(*{state})"></div>
+  </div>
+  <div th:if="*{state.status}">
+    <div th:replace="::resetStepSVG('двигатель', *{state.value}, *{state})"></div>
+  </div>
+</div>
+
+
+<div th:fragment="stepTransm(state)" class="pt-3"
+     th:if="${@userSession.getCarState().getStateList().get(__${state.step-1}__).status}">
+  <div th:if="*{!state.status}">
+    <div th:replace="::tag(*{state})"></div>
+  </div>
+  <div th:if="*{state.status}">
+    <div th:replace="::resetStepSVG('привод', *{state.value}, *{state})"></div>
+  </div>
+</div>
+
+
+<div th:fragment="stepGear(state)" class="pt-3"
+     th:if="${@userSession.getCarState().getStateList().get(__${state.step-1}__).status}">
+  <div th:if="*{!state.status}">
+    <div th:replace="::tag(*{state})"></div>
+  </div>
+  <div th:if="*{state.status}">
+    <div th:replace="::resetStepSVG('коробка передач', *{state.value}, *{state})"></div>
+  </div>
+</div>
+
+
+<div th:fragment="stepModif(state)" class="pt-3"
+     th:if="${@userSession.getCarState().getStateList().get(__${state.step-1}__).status}">
+  <!--  <p th:text="|*{state.name}  fragment1 *{state.step}  getOptions *{state.getOptions()?.values()}|"></p>-->
+  <!--  <p th:text="*{state}"></p>-->
+  <!--  <p th:if="*{!state.status}" th:each="option:*{state.getOptions()?.values()}"-->
+  <!--     th:text="*{option.id}"></p>-->
+  <div th:if="*{!state.status}">
+    <div th:replace="::title(*{state})"></div>
+    <div th:each="option,iterStat:*{state.getOptions().values()}">
+      <a class="btn btn-light"
+         th:href="@{|/cars/addState?stateID=*{state.step}&id=*{iterStat.index}|}"
+         th:text="*{option}"></a>
+    </div>
+  </div>
+
+  <!--  <div th:if="*{state.status}" th:text="|*{state.value} - value|"></div>-->
+  <div th:if="*{state.status}">
+    <div th:replace="::resetStep('модификация', *{state.value}, *{state})"></div>
+  </div>
+</div>
+
+
+<div th:fragment="stepColor(state)" class="pt-3"
+     th:if="${@userSession.getCarState().getStateList().get(__${state.step-1}__).status}">
+  <div th:if="*{!state.status}">
+    <div th:replace="::title(*{state})"></div>
+    <div class="ColorField p-2">
+      <div th:each="option,iterStat:*{state.getOptions().values()}">
+        <!--      <p th:text="*{iterStat.index}"></p>-->
+        <a th:href="@{|/cars/addState?stateID=*{state.step}&id=*{option.id}|}">
+          <div th:classappend="|choose-color-*{option.color}|" class="ColorField__item"></div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+  <!--  <div th:if="*{state.status}" th:text="|*{state.value} - value|"></div>-->
+  <div th:if="*{state.status}">
+    <div th:replace="::resetStepColor('Цвет', *{state.value}, *{state})"></div>
+  </div>
+</div>
+
+
+<div th:fragment="title(state)"
+     class="fst-italic fw-semibold text-black-50 pb-1">
+  укажите [[*{state.name}]]
+</div>
+<!--<div class="fst-italic fw-semibold text-black-50">
+  укажите [[*{state.name}]]
+</div>-->
+
+
+<div th:fragment="tag(state)" class="pt-1">
+  <div th:replace="::title(*{state})"></div>
+  <div class="Tags Tags_wrap_wrap Tags_properGaps">
+    <span class="Tags__tag position-relative" th:each="option:*{state.getOptions().values()}">
+      <button
+          th:href="@{|/cars/addState?stateID=*{state.step}&id=*{option.id}|}"
+          class="Button Button_color_whiteHoverBlueLightExtra Button_size_xl Button_type_button Button_width_default Button_radius_round Tags__tagButton"
+          type="button">
+        <span class="Button__content">
+          <svg class="IconSvg IconSvg_gasoline IconSvg_size_24 EngineTypeField__icon">
+            <use th:attr="'xlink:href'= *{option.image}"></use>
+          </svg>
+          <div class="EngineTypeField" th:text="*{option.name}">
+          </div>
+        </span>
+        <a class="stretched-link"
+           th:href="@{|/cars/addState?stateID=*{state.step}&id=*{option.id}|}"></a>
+      </button>
+    </span>
+  </div>
+</div>
+
+
+<div th:fragment="resetStepColor1(text, value, step)" class="d-flex align-items-center">
+  <div th:text="|*{text} - *{value.name}|"></div>
+  <div class="ColorField__item ms-2"
+       th:classappend="|choose-color-*{value.color}|"></div>
+  <a th:if="*{state.options.size()>1}"
+     th:href="@{|/cars/resetState?stateID=*{state.step}|}" class="ms-3">
+    <button type="button" class="btn-close color-close" aria-label="Close"></button>
+  </a>
+</div>
+
+
+<div th:fragment="resetStepColor(text, value, step)" class="d-flex align-items-center">
+  <div th:text="*{text}" style="width: 150px"></div>
+  <div style="width: 40px">
+    <a th:if="*{state.options.size()>1}"
+       th:href="@{|/cars/resetState?stateID=*{state.step}|}" class="me-2">
+      <button type="button" class="btn-close color-close" aria-label="Close"></button>
+    </a>
+  </div>
+  <div class="ColorField__item ms-2"
+       th:classappend="|choose-color-*{value.color}|"
+       style="width: 28px;height: 28px;margin-left: 0 !important;"></div>
+</div>
+
+
+<div th:fragment="resetStep(text, value, step)" class="d-flex align-items-center">
+  <div th:text="*{text}" style="width: 150px"></div>
+  <div style="width: 40px">
+    <a th:if="*{state.options.size()>1}"
+       th:href="@{|/cars/resetState?stateID=*{state.step}|}" class="me-2">
+      <button type="button" class="btn-close color-close" aria-label="Close"></button>
+    </a>
+  </div>
+  <div th:text="*{value}"></div>
+</div>
+
+
+<div th:fragment="resetStepSVG(text, value, step)" class="d-flex align-items-center">
+  <div th:text="*{text}" style="width: 150px"></div>
+  <div style="width: 40px">
+    <a th:if="*{state.options.size()>1}"
+       th:href="@{|/cars/resetState?stateID=*{state.step}|}" class="me-2">
+      <button type="button" class="btn-close color-close" aria-label="Close"></button>
+    </a>
+  </div>
+  <div>  <span class="Tags__tag">
+      <button
+          class="Button Button_color_whiteHoverBlueLightExtra Button_size_xl Button_type_button Button_width_default Button_radius_round Tags__tagButton"
+          style="height: 32px;border-color:white;"
+          type="button">
+        <span class="Button__content">
+          <svg class="IconSvg IconSvg_gasoline IconSvg_size_24 EngineTypeField__icon"
+               style="margin-left: 0">
+            <use th:attr="'xlink:href'= *{value.image}"></use>
+          </svg>
+          <div class="EngineTypeField" th:text="*{value.name}">
+          </div>
+        </span>
+      </button>
+    </span>
+  </div>
+</div>
+
+
+<div th:fragment="resetStepSVG1(text, value, step)" class="pt-1">
+  <div th:text="*{text}" class="fw-semibold text-black-50"></div>
+  <div class="d-flex align-items-center p-1">
+  <span class="Tags__tag ms-3">
+      <button
+          class="Button Button_color_whiteHoverBlueLightExtra Button_size_xl Button_type_button Button_width_default Button_radius_round Tags__tagButton"
+          type="button">
+        <span class="Button__content">
+          <svg class="IconSvg IconSvg_gasoline IconSvg_size_24 EngineTypeField__icon">
+            <use th:attr="'xlink:href'= *{value.image}"></use>
+          </svg>
+          <div class="EngineTypeField" th:text="*{value.name}">
+          </div>
+        </span>
+      </button>
+    </span>
+    <a th:if="*{state.options.size()>1}"
+       th:href="@{|/cars/resetState?stateID=*{state.step}|}" class="ms-3">
+      <button type="button" class="btn-close color-close" aria-label="Close"></button>
+    </a>
+  </div>
+</div>
+
+
+</html>
+
+<!--<button th:each="option:*{state.getOptions().values()}"></button>-->
+
+<!--
+<p th:if="*{!state.status}"
+   th:each="option:*{state.getOptions().values()}"
+   th:text="|*{option.id} - id  *{option.name} - name  |">1</p>
+-->
