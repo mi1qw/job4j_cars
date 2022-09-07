@@ -17,7 +17,7 @@ public class UserSession {
     private Car newCar;
     private AtomicInteger maxID;
     private AtomicInteger order = new AtomicInteger();
-    private Map<Integer, String> images;
+//    private Map<Integer, String> images;
     // TODO создавать при создании сессии
-    private TabOrder tabOrder = new TabOrder();
+//    private TabOrder tabOrder = new TabOrder();
 }

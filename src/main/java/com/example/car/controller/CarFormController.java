@@ -121,7 +121,6 @@ public class CarFormController {
         if (userSession.getNewCar() == null) {
             Car car = carService.addCar();
             userSession.setNewCar(car);
-            userSession.setImages(new ConcurrentHashMap<>());
 //            session.setMaxID(new AtomicInteger(0));
         }
 
@@ -132,7 +131,7 @@ public class CarFormController {
         // сбросить счётчик первого order,
         // надо начинать не 0, со следующего List/size
 //        session.getTabOrder().setPrevTotal(0);
-        userSession.getTabOrder().setPrevTotal(newCar.getImages().size());
+//        userSession.getTabOrder().setPrevTotal(newCar.getImages().size());
 
         userSession.getOrder().set(newCar.getImages().size());
 
