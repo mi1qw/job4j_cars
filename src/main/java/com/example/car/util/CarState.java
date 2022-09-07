@@ -5,7 +5,10 @@ import com.example.car.service.GenerationsService;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Function;
@@ -15,6 +18,8 @@ import java.util.stream.Collectors;
 @Slf4j
 @Data
 public class CarState {
+
+
     private List<State<?, ?>> stateList = new ArrayList<>();
     private boolean isDone = false;
     private int[] steps = {0};
@@ -26,7 +31,15 @@ public class CarState {
     }
 
     public boolean isDone() {
-        return stateList.stream().anyMatch(n -> n.status);
+//        boolean allMatch1 = stateList.stream()
+//                .allMatch(n -> {
+//                    log.info("{}  {}", n.status, n.name);
+//                    return n.status;
+//                });
+        return stateList.stream()
+                .allMatch(n -> n.status);
+//        log.info("allMatch {}   allMatch1 {}", allMatch, allMatch1);
+//        return allMatch;
     }
 
     public Map<Long, Body> getBodiesByYearByModel(final GenerationsService generationsService) {

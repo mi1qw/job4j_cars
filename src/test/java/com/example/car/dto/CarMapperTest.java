@@ -25,10 +25,10 @@ class CarMapperTest {
     void carToDto() {
         Car car = new Car();
         car.setOdometer(100);
-        car.setYearPurchase("2000");
+        car.setYearPurchase((short) 2000);
         car.setDescription("dddd");
         car.setPrice(BigDecimal.valueOf(1000L));
-        car.setYear("2001");
+        car.setYear((short) 2001);
         car.setImages(List.of("A", "B"));
         CarDto carDto = carMapper.carToDto(car);
         log.info("{}", carDto);
@@ -38,16 +38,16 @@ class CarMapperTest {
     void dtoToCar() {
         Car car = new Car();
         car.setOdometer(0);
-        car.setYearPurchase("1900");
+        car.setYearPurchase((short) 1900);
         car.setDescription("aaa");
         car.setPrice(BigDecimal.valueOf(10L));
-        car.setYear("2001");
+        car.setYear((short) 2001);
         car.setImages(List.of("A", "B"));
 
         CarDto carDto = CarDto.builder()
                 .images("A|C|B")
                 .odometer(200)
-                .yearPurchase("2000")
+                .yearPurchase((short) 2000)
                 .description("description")
                 .price(BigDecimal.valueOf(1000L))
                 .build();
@@ -59,10 +59,10 @@ class CarMapperTest {
     void dtoUpdateCar() {
         Car car = new Car();
         car.setOdometer(0);
-        car.setYearPurchase("1900");
+        car.setYearPurchase((short) 1900);
         car.setDescription("aaa");
         car.setPrice(BigDecimal.valueOf(10L));
-        car.setYear("2001");
+        car.setYear((short) 2001);
         car.setImages(List.of("A", "B"));
 
         log.info("{}", car);
@@ -70,7 +70,7 @@ class CarMapperTest {
         CarDto carDto = CarDto.builder()
                 .images("A|C|B")
                 .odometer(200)
-                .yearPurchase("2000")
+                .yearPurchase((short) 2000)
                 .description("description")
                 .price(BigDecimal.valueOf(1000L))
                 .build();

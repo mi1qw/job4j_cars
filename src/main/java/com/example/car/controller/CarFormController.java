@@ -11,6 +11,7 @@ import com.example.car.service.MarkService;
 import com.example.car.util.CarState;
 import com.example.car.util.ImageUtil;
 import com.example.car.util.State;
+import com.example.car.validation.ValidationGroupSequence;
 import com.example.car.web.UserSession;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +22,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.thymeleaf.util.StringUtils;
@@ -99,9 +102,10 @@ public class CarFormController {
                 CarDto.builder()
                         .description("aaa")
                         .price(BigDecimal.valueOf(1100L))
-                        .yearPurchase("2001")
-                        .odometer(100)
-                        .build());
+                        .yearPurchase((short) 2001)
+                        .odometer(0)
+                        .build()
+        );
 
         CarState state = userSession.getCarState();
         if (state == null) {
@@ -176,8 +180,8 @@ public class CarFormController {
             stepNext.setValue(optionByID);
             stepNext.setStatus(true);
         }
-        return "addCar";
-
+//        return "addCar";
+        return "redirect:/cars/add";
 
 /*        CarState.State<?, ?> stepPrev;
 //        CarState.State<?, ?> stepNext;
@@ -267,10 +271,19 @@ public class CarFormController {
 //                .build();
     }
 
-    @PostMapping("/save")
-    public String savePost(final @ModelAttribute(name = "carform") CarDto carDto,
+    @PostMapping("/add")
+    public String savePost(final @Validated(ValidationGroupSequence.class)
+                           @ModelAttribute("carform") CarDto carDto,
+                           final BindingResult bindingResult,
                            final Model model) {
         log.info("{}", carDto);
+        if (bindingResult.hasErrors()) {
+//            log.info("{}", bindingResult);
+            return "addCar";
+        }
+
+//        final @ModelAttribute(name = "carform") CarDto carDto,
+//        final Model model){
 
         return "addCar";
     }

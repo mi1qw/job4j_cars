@@ -1,0 +1,5 @@
+name: job4j_cars
+packages:
+  - path: com.example.car
+remote_recording:
+  path: /http://127.0.0.1:8080/cars/

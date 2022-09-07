@@ -6,6 +6,7 @@ import com.example.car.service.ColorService;
 import com.example.car.service.GenerationsService;
 import com.example.car.service.MarkService;
 import com.example.car.service.ModelService;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,15 +16,12 @@ import java.util.function.Function;
 
 @Slf4j
 @Component
+@AllArgsConstructor
 public class State {
-    @Autowired
-    private MarkService markService;
-    @Autowired
-    private ModelService modelService;
-    @Autowired
-    private GenerationsService generationsService;
-    @Autowired
-    private ColorService colorService;
+    private final MarkService markService;
+    private final ModelService modelService;
+    private final GenerationsService generationsService;
+    private final ColorService colorService;
 
     public CarState createCarState() {
         Function<?, Map<?, ?>> mm = (n) -> modelService.getModelsByMark((Mark) n);

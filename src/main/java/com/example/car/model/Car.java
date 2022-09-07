@@ -28,8 +28,8 @@ public class Car {
     private String description;
     private BigDecimal price;
     private int odometer;
-    private String year;
-    private String yearPurchase;
+    private Short year;
+    private Short yearPurchase;
 
     @NotNull
     @Enumerated(EnumType.STRING)

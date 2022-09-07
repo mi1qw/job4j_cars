@@ -351,13 +351,44 @@ gallery.onclick = () => {
     // })
 }
 
+
+var odometerInput = document.getElementById('odometer');
+odometerInput.addEventListener('change', () => {
+        if (odometerInput.value == "") {
+            odometerInput.value = 1;
+        }
+    }
+);
+
+
+var imagesInput = document.getElementById('images');
+document.getElementById('carform').addEventListener('click', () => {
+    let listitems = getNamesImages();
+    let imagesValue;
+    if (listitems.length == 1) {
+        imagesValue = listitems[0];
+    } else {
+        imagesValue = listitems.join('|');
+    }
+    imagesInput.setAttribute('value', imagesValue);
+    // console.log("sendClick reorder");
+});
+
+
 function getNamesImages() {
     let divs = gallery.children;
     let listitems = [];
+
     for (let i = 0; i < divs.length; i++) {
         listitems.push(divs.item(i).dataset.img);
         console.log(divs.item(i).dataset.img);
     }
+
+    listitems = Array.from(gallery.children)
+        .filter(n => !n.hasAttribute('data-empty'))
+        .map(n => n.dataset.img);
+
+
     return listitems;
 }
 
@@ -422,7 +453,7 @@ function sendClick(value, url, callback) {
 }
 
 function yearBuy() {
-    let select = document.getElementById('yearBuy');
+    let select = document.getElementById('yearPurchase');
     let yearNow = new Date().getFullYear();
     for (let i = yearNow; i > 1899; i--) {
         let option = document.createElement('option');

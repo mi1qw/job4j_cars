@@ -1,0 +1,4 @@
+D:\projects\job4j_cars\appmap.yml:
+  remote_recording:
+    host: http://127.0.0.1
+    port: 8080

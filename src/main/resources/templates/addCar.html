@@ -372,6 +372,11 @@
 </div>
 
 <div class="container mt-5">
+
+  <!--  <p th:each="status:${@userSession.getCarState().getStateList()}"-->
+  <!--     th:text="|status=*{status.status}|"></p>-->
+  <!--  <p th:text="|isDone ${@userSession.getCarState().isDone()}|"></p>-->
+
   <!--  <img class="h-auto w-auto"-->
   <!--       th:src="@{/img/application-logo.jpg}" alt="Application Logo"/>-->
   <div class="numbering fw-bolder">1</div>
@@ -393,7 +398,8 @@
   </div>
 
 
-  <div class="pt-5">
+  <div th:if="${@userSession.getCarState().isDone()}"
+       class="pt-5">
     <div class="numbering fw-bolder">2</div>
     <div class="fw-bolder ps-5">Добавить фотографии</div>
 
@@ -470,23 +476,30 @@
   <!--  </div>-->
 
 
-  <div class="pt-5" style="max-width: 600px">
+  <div th:if="${@userSession.getCarState().isDone()}"
+       class="pt-5" style="max-width: 600px">
     <div class="numbering fw-bolder">3</div>
     <div class="fw-bolder ps-5">Описание</div>
 
-    <form th:action="@{/cars/save}" th:object="${carform}" method="post" id="usrform"
+    <form th:action="@{/cars/add}" th:object="${carform}" method="post" id="carform"
           class="ps-5 pt-4">
 
+      <input th:field="*{images}" hidden>
+
       <div class="form-floating mb-3" style="width: 8em">
-        <input type="number" class="form-control" id="odometer" placeholder="0"
+        <input type="number" min="1" class="form-control" id="odometer" placeholder="km"
+               th:classappend="${#fields.hasErrors('odometer')} ? ' is-invalid'"
                th:field="*{odometer}">
+        <div class="text-danger"
+             th:if="${#fields.hasErrors('odometer')}"
+             th:text="${#strings.listJoin(#fields.errors('odometer'),', ')}"></div>
         <label for="odometer">Пробег км.</label>
       </div>
 
       <!--    style="width: 21em"-->
-      <label class="small-label mt-2" for="yearBuy">год покупки</label>
+      <label class="small-label mt-2" for="yearPurchase">год покупки</label>
       <select class="form-select" aria-label="Default select example"
-              id="yearBuy" style="width: 8.7em"
+              id="yearPurchase" style="width: 8.7em"
               th:field="*{yearPurchase}">
         <option th:if="*{yearPurchase!=null}" selected
                 th:value="*{yearPurchase}"
@@ -518,7 +531,11 @@
       <div class="pt-4">
         <div class="form-floating" style="width: 8em">
           <input type="number" class="form-control" id="price" placeholder="0"
+                 th:classappend="${#fields.hasErrors('price')} ? ' is-invalid'"
                  th:field="*{price}">
+          <div class="text-danger"
+               th:if="${#fields.hasErrors('price')}"
+               th:text="${#strings.listJoin(#fields.errors('price'),', ')}"></div>
           <label for="price">Цена</label>
         </div>
       </div>
