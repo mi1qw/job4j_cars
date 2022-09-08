@@ -474,7 +474,8 @@
   <!--    </div>-->
   <!--    <div className="PhotosAdd__text">Добавить фото</div>-->
   <!--  </div>-->
-
+  <p th:text="${#fields.hasErrors()}"></p>
+<!--  <p th:text="${#strings.listJoin(#fields.errors('images'),', ')}"></p>-->
 
   <div th:if="${@userSession.getCarState().isDone()}"
        class="pt-5" style="max-width: 600px">

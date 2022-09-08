@@ -379,10 +379,10 @@ function getNamesImages() {
     let divs = gallery.children;
     let listitems = [];
 
-    for (let i = 0; i < divs.length; i++) {
-        listitems.push(divs.item(i).dataset.img);
-        console.log(divs.item(i).dataset.img);
-    }
+    // for (let i = 0; i < divs.length; i++) {
+    //     listitems.push(divs.item(i).dataset.img);
+    //     console.log(divs.item(i).dataset.img);
+    // }
 
     listitems = Array.from(gallery.children)
         .filter(n => !n.hasAttribute('data-empty'))

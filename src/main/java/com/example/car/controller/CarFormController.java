@@ -278,7 +278,7 @@ public class CarFormController {
                            final Model model) {
         log.info("{}", carDto);
         if (bindingResult.hasErrors()) {
-//            log.info("{}", bindingResult);
+            log.error("{}", bindingResult);
             return "addCar";
         }
 
