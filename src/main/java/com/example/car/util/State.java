@@ -18,21 +18,21 @@ public class State {
     private final ColorService colorService;
 
     public CarState createCarState() {
-        CarState carState = new CarState();
-        carState.addState("марку",
-                () -> carState.getMarks(markService));
-        carState.addState("модель",
-                () -> carState.getModelsByMark(modelService));
-        carState.addState("год выпуска",
-                () -> carState.getGenerationsByYear(generationsService));
-        carState.addState("кузов",
-                () -> carState.getBodiesByYearByModel(generationsService));
-        carState.addState("поколение", carState::getGenerationsByImg);
-        carState.addState("тип двигателя", carState::getGenerationsByEngine);
-        carState.addState("трансмиссию", carState::getGenerationsByTransmission);
-        carState.addState("коробку передач", carState::getGenerationsByGear);
-        carState.addState("модификацию", carState::getGenerationsModification);
-        carState.addState("цвет", colorService::findAllMap);
-        return carState;
+        CarState state = new CarState();
+        state.addStep("марку",
+                () -> state.getMarks(markService));
+        state.addStep("модель",
+                () -> state.getModelsByMark(modelService));
+        state.addStep("год выпуска",
+                () -> state.getGenerationsByYear(generationsService));
+        state.addStep("кузов",
+                () -> state.getBodiesByYearByModel(generationsService));
+        state.addStep("поколение", state::getGenerationsByImg);
+        state.addStep("тип двигателя", state::getGenerationsByEngine);
+        state.addStep("трансмиссию", state::getGenerationsByTransmission);
+        state.addStep("коробку передач", state::getGenerationsByGear);
+        state.addStep("модификацию", state::getGenerationsModification);
+        state.addStep("цвет", colorService::findAllMap);
+        return state;
     }
 }

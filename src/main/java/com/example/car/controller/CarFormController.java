@@ -32,7 +32,6 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Slf4j
@@ -111,12 +110,12 @@ public class CarFormController {
         if (state == null) {
             CarState carState = this.state.createCarState();
             userSession.setCarState(carState);
-            CarState.State<?, ?> step0 = carState.getStateList().get(0);
-            step0.makeOptions(null);
+            CarState.State<?, ?> step0 = carState.getStepList().get(0);
+            step0.makeOptions();
         } else {
-            CarState.State<?, ?> state0 = state.getStateList().get(0);
+            CarState.State<?, ?> state0 = state.getStepList().get(0);
             if (state0.getOptions().isEmpty()) {
-                state0.makeOptions(null);
+                state0.makeOptions();
             }
         }
         // TODO упростить в один метод
@@ -155,7 +154,7 @@ public class CarFormController {
         }
 
         // TODO упростить в один метод
-        CarState.State<?, ?> step = state.getStateList().get(stateID);
+        CarState.State<?, ?> step = state.getStepList().get(stateID);
         Object optionByID = step.getOptionByID(id);
         step.setValue(optionByID);
 
@@ -164,11 +163,11 @@ public class CarFormController {
         int step1 = stateID;
         CarState.State<?, ?> stepNext;
 
-        while (step1 + 1 < state.getStateList().size()) {
+        while (step1 + 1 < state.getStepList().size()) {
             ++step1;
-            stepNext = state.getStateList().get(step1);
+            stepNext = state.getStepList().get(step1);
             stepNext.setPrevGenerations(state.getGenerations());
-            Map<Long, ?> options = stepNext.makeOptions(optionByID);
+            Map<Long, ?> options = stepNext.makeOptions();
             if (options.size() > 1) {
                 break;
             }
@@ -207,16 +206,16 @@ public class CarFormController {
             // TODO куда перенаправить
             return "cars/add";
         }
-        CarState.State<?, ?> step = state.getStateList().get(stateID);
+        CarState.State<?, ?> step = state.getStepList().get(stateID);
         if (stateID < 9) {
             List<Generations> generations = state.getGenerations();
-            state.getStateList().get(stateID).resetStatusGen(state.getGenerations());
+            state.getStepList().get(stateID).resetStatusGen(state.getGenerations());
             int step1 = stateID + 1;
             for (int i = stateID + 1; i < 9; i++) {
-                state.getStateList().get(i).resetOption();
+                state.getStepList().get(i).resetOption();
             }
         } else {
-            state.getStateList().get(stateID).resetStatus();
+            state.getStepList().get(stateID).resetStatus();
         }
         return "redirect:/cars/add";
     }

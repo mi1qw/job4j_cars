@@ -21,15 +21,13 @@ import java.util.stream.Collectors;
 @Slf4j
 @Data
 public class CarState {
-
-
-    private List<State<?, ?>> stateList = new ArrayList<>();
+    private List<State<?, ?>> stepList = new ArrayList<>();
     private boolean isDone = false;
     private int[] steps = {0};
     private List<Generations> generations;
 
-    public void addState(final String name, final Supplier<Map<?, ?>> supplier) {
-        stateList.add(new State(steps, name, supplier));
+    public void addStep(final String name, final Supplier<Map<?, ?>> supplier) {
+        stepList.add(new State(steps, name, supplier));
     }
 
     public boolean isDone() {
@@ -38,7 +36,7 @@ public class CarState {
 //                    log.info("{}  {}", n.status, n.name);
 //                    return n.status;
 //                });
-        return stateList.stream()
+        return stepList.stream()
                 .allMatch(n -> n.status);
 //        log.info("allMatch {}   allMatch1 {}", allMatch, allMatch1);
 //        return allMatch;
@@ -49,18 +47,18 @@ public class CarState {
     }
 
     public Map<Long, Model> getModelsByMark(final ModelService modelService) {
-        Mark mark = (Mark) stateList.get(0).value;
+        Mark mark = (Mark) stepList.get(0).value;
         return modelService.getModelsByMark(mark);
     }
 
     public Map<Long, Short> getGenerationsByYear(final GenerationsService generationsService) {
-        Model model = (Model) stateList.get(1).value;
+        Model model = (Model) stepList.get(1).value;
         return generationsService.getYearsByModel(model);
     }
 
     public Map<Long, Body> getBodiesByYearByModel(final GenerationsService generationsService) {
-        Model modelvalue = (Model) stateList.get(1).value;
-        Short yearvalue = (Short) stateList.get(2).value;
+        Model modelvalue = (Model) stepList.get(1).value;
+        Short yearvalue = (Short) stepList.get(2).value;
         // TODO сделать модель в таблице уникальным по имени
         generations = generationsService.getGenerationsByYearByModel(yearvalue, modelvalue);
         return generations.stream()
@@ -70,7 +68,7 @@ public class CarState {
     }
 
     public Map<Long, Img> getGenerationsByImg() {
-        Body body = (Body) stateList.get(3).value;
+        Body body = (Body) stepList.get(3).value;
         generations = generations.stream()
                 .filter(n -> n.getBody().equals(body))
                 .collect(Collectors.toList());
@@ -82,7 +80,7 @@ public class CarState {
     }
 
     public Map<Long, Engine> getGenerationsByEngine() {
-        Img img1 = (Img) stateList.get(4).value;
+        Img img1 = (Img) stepList.get(4).value;
         String img = img1.name;
         generations = generations.stream()
                 .filter(n -> n.getName().equals(img))
@@ -94,7 +92,7 @@ public class CarState {
     }
 
     public Map<Long, Transmission> getGenerationsByTransmission() {
-        Engine engine = (Engine) stateList.get(5).value;
+        Engine engine = (Engine) stepList.get(5).value;
         generations = generations.stream()
                 .filter(n -> n.getEngine().equals(engine))
                 .collect(Collectors.toList());
@@ -105,7 +103,7 @@ public class CarState {
     }
 
     public Map<Long, Gearbox> getGenerationsByGear() {
-        Transmission transmission = (Transmission) stateList.get(6).value;
+        Transmission transmission = (Transmission) stepList.get(6).value;
         generations = generations.stream()
                 .filter(n -> n.getTransmission().equals(transmission))
                 .collect(Collectors.toList());
@@ -116,7 +114,7 @@ public class CarState {
     }
 
     public Map<Long, String> getGenerationsModification() {
-        Gearbox gearbox = (Gearbox) stateList.get(7).value;
+        Gearbox gearbox = (Gearbox) stepList.get(7).value;
         generations = generations.stream()
                 .filter(n -> n.getGearbox().equals(gearbox))
                 .collect(Collectors.toList());
@@ -158,7 +156,7 @@ public class CarState {
             this.status = true;
         }
 
-        public Map<Long, R> makeOptions(final Object t) {
+        public Map<Long, R> makeOptions() {
             if (options.isEmpty()) {
                 options.putAll(optionsSup.get());
 //                options..addAll(optionsSup.apply(t));

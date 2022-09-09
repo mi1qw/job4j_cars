@@ -381,7 +381,7 @@
   <!--       th:src="@{/img/application-logo.jpg}" alt="Application Logo"/>-->
   <div class="numbering fw-bolder">1</div>
   <div class="fw-bolder ps-5">Основная информация</div>
-  <div th:each="state:${@userSession.getCarState().getStateList()}"
+  <div th:each="state:${@userSession.getCarState().getStepList()}"
        class="ps-5">
     <div th:switch="*{state.step}">
       <div th:case="0" th:insert="fragments/stepaddingcar::stepMark(*{state})"></div>
