@@ -14,7 +14,7 @@ public class CarStore extends CrudPersist<Car> {
         super(Car.class);
     }
 
-    public Car addImages(final Car car) {
+    public Car merge(final Car car) {
         return tx(session -> {
             Car merge = session.merge(car);
             return merge;

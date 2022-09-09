@@ -158,14 +158,14 @@
     <div th:replace="::title(*{state})"></div>
     <div th:each="option,iterStat:*{state.getOptions().values()}">
       <a class="btn btn-light"
-         th:href="@{|/cars/addState?stateID=*{state.step}&id=*{iterStat.index}|}"
-         th:text="*{option}"></a>
+         th:href="@{|/cars/addState?stateID=*{state.step}&id=*{option.id}|}"
+         th:text="*{option.name}"></a>
     </div>
   </div>
 
   <!--  <div th:if="*{state.status}" th:text="|*{state.value} - value|"></div>-->
   <div th:if="*{state.status}">
-    <div th:replace="::resetStep('модификация', *{state.value}, *{state})"></div>
+    <div th:replace="::resetStep('модификация', *{state.value.name}, *{state})"></div>
   </div>
 </div>
 

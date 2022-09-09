@@ -47,13 +47,13 @@ class CarStoreTest {
 
         car.getImages().add("aa");
         car.getImages().add("bb");
-        car = carStore.addImages(car);
+        car = carStore.merge(car);
         car.getImages().add("cc");
-        car = carStore.addImages(car);
+        car = carStore.merge(car);
 
         car.getImages().remove(1);
         car.setName("AAA");
-        car = carStore.addImages(car);
+        car = carStore.merge(car);
     }
 
     @Test

@@ -5,6 +5,7 @@ import com.example.car.model.Mark;
 import com.example.car.model.Model;
 import com.example.car.store.GenerationsStore;
 import com.example.car.util.CarState;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -15,16 +16,11 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class GenerationsService {
     private final GenerationsStore generationsStore;
 
     private final Map<Long, Model> modelsMap = new HashMap<>();
-
-    public GenerationsService(final GenerationsStore generationsStore) {
-        this.generationsStore = generationsStore;
-//        modelStore.findAll().forEach(n -> modelsMap.put(n.getId(), n));
-//        this.marks.addAll(findAll());
-    }
 
     public List<Model> findAll() {
         return modelsMap.values().stream().toList();
@@ -48,7 +44,7 @@ public class GenerationsService {
         return generationsStore.getGenerationsByYearByModel(year, model);
     }
 
-    public Model findById(final Long id) {
-        return modelsMap.get(id);
+    public Generations findById(final Long id) {
+        return generationsStore.findById(id);
     }
 }

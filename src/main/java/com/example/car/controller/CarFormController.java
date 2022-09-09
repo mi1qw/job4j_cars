@@ -1,6 +1,7 @@
 package com.example.car.controller;
 
 import com.example.car.dto.CarDto;
+import com.example.car.dto.CarMapper;
 import com.example.car.dto.FileImageDto;
 import com.example.car.exception.StorageException;
 import com.example.car.model.Car;
@@ -44,6 +45,7 @@ public class CarFormController {
     private final MarkService markService;
     private final CarService carService;
     private final FileService fileService;
+    private final CarMapper carMapper;
 
     @PostMapping("/reorder")
     public ResponseEntity<?> reorder(final @RequestParam("value") String name) {
@@ -121,26 +123,27 @@ public class CarFormController {
         // TODO упростить в один метод
         //  как проверить что в сесии ошибка наличия файлов
 
-        if (userSession.getNewCar() == null) {
+        Car newCar = userSession.getNewCar();
+        if (newCar == null) {
             Car car = carService.addCar();
             userSession.setNewCar(car);
-//            session.setMaxID(new AtomicInteger(0));
+            newCar = car;
         }
-
-
-        Car newCar = userSession.getNewCar();
 //        log.info("{}", newCar);
-
-        // сбросить счётчик первого order,
-        // надо начинать не 0, со следующего List/size
-//        session.getTabOrder().setPrevTotal(0);
-//        userSession.getTabOrder().setPrevTotal(newCar.getImages().size());
-
+        // надо начинать не 0, со следующего List/size image
         userSession.getOrder().set(newCar.getImages().size());
+        return "addCar";
+    }
 
+    @GetMapping("/edit/{id}")
+    public String edit(final @PathVariable long id, final Model model) {
+        Car car = carService.getCar(id);
+        CarDto carDto = carMapper.carToDto(car);
+        model.addAttribute("carform", carDto);
 
-//        carState.getStateList()
-//        model.addAttribute("addState", state.getCarState());
+//        CarState carState = state.createCarState();
+        CarState state = this.state.fillList(car);
+        userSession.setCarState(state);
         return "addCar";
     }
 
@@ -276,11 +279,26 @@ public class CarFormController {
                            final BindingResult bindingResult,
                            final Model model) {
         log.info("{}", carDto);
+
+        userSession.getCarState().getStepList()
+                .forEach(n -> log.info("{}", n.getValue()));
+        System.out.println();
+        List<Long> generationsListID = userSession.getCarState()
+                .getGenerations().stream()
+                .map(Generations::getId)
+                .toList();
+        log.info("{}", generationsListID);
+
         if (bindingResult.hasErrors()) {
             log.error("{}", bindingResult);
             return "addCar";
         }
 
+        Car newCar = state.getResultCar();
+//        Car newCar = userSession.getNewCar();
+        carMapper.updateCar(carDto, newCar);
+        carService.merge(newCar);
+//        log.info("{}", newCar);
 //        final @ModelAttribute(name = "carform") CarDto carDto,
 //        final Model model){
 

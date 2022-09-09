@@ -60,6 +60,11 @@ public class Car {
     @ManyToOne(fetch = FetchType.LAZY)
     private Transmission transmission;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Gearbox gearbox;
+
+    private String modification;
+
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Set<Category> categories = new HashSet<>();
 

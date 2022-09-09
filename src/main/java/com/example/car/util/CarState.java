@@ -113,20 +113,29 @@ public class CarState {
                 .collect(Collectors.toMap(Gearbox::getId, Function.identity()));
     }
 
-    public Map<Long, String> getGenerationsModification() {
+    public Map<Long, GenMod> getGenerationsModification() {
         Gearbox gearbox = (Gearbox) stepList.get(7).value;
         generations = generations.stream()
                 .filter(n -> n.getGearbox().equals(gearbox))
                 .collect(Collectors.toList());
-        AtomicLong id = new AtomicLong();
+//        AtomicLong id = new AtomicLong();
         return generations.stream()
-                .map(Generations::getModification)
-                .distinct()
-                .collect(Collectors.toMap((n) -> id.getAndIncrement(),
-                        (n) -> n.getId().getNameId()));
+//                .map(Generations::getModification)
+//                .distinct()
+                .collect(Collectors.toMap(Generations::getId,
+                        (n) -> new GenMod(
+                                n.getId(),
+                                n.getModification().getId().getNameId())));
     }
 
-    protected record Img(Long id, String name, String image) {
+    public record Img(Long id, String name, String image) {
+    }
+
+    public record GenMod(Long id, String name) {
+    }
+
+    public void getResultCar() {
+
     }
 
     public static <T> Predicate<T> distinctByKey(final Function<? super T, ?> keyExtractor) {
