@@ -397,184 +397,184 @@
     </div>
   </div>
 
-
-  <div th:if="${@userSession.getCarState().isDone()}"
-       class="pt-5">
-    <div class="numbering fw-bolder">2</div>
-    <div class="fw-bolder ps-5">Добавить фотографии</div>
-
-
-    <!--    <div class="mb-3 mt-3 ps-5" style="max-width: 600px">-->
-    <!--      &lt;!&ndash;      <label for="formFile" class="form-label">Default file input example</label>&ndash;&gt;-->
-    <!--      <input class="form-control" type="file" id="formFile">-->
-    <!--    </div>-->
-
-
-    <!--    <input style="display: none;"-->
-    <!--           type="file" multiple accept="image/*"-->
-    <!--           onchange="handleFiles(this.files)-->
-    <!--               role="file-input">-->
-
-
-    <!--    <p>Upload multiple files with the file dialog or by dragging and dropping images onto the-->
-    <!--      dashed region</p>-->
-    <div id="drop-area">
-
-      <!--          th:if="${@userSession.getNewCar().getImages().isEmpty()}"-->
-      <div id="emptyArea">
-        <div class="d-flex justify-content-center"
-             style="height: 220px;cursor: pointer;">
-          <!--          <input style="display: none;"-->
-          <!--                 id="fileElemEmpty" type=file multiple accept="image/*"-->
-          <!--                 onchange="handleFiles(this.files)">-->
-          <div class="PhotosAdd__title">
-            <div class="PhotosAdd__icon">
-              <svg class="IconSvg IconSvg_photo IconSvg_size_32">
-                <use xlink:href="#photo"></use>
-              </svg>
-            </div>
-            <div class="PhotosAdd">Выберите или перетащите несколько фото</div>
-          </div>
-        </div>
-      </div>
-
-      <form class="my-form">
-        <input style="display: none;"
-               type="file" id="fileElem" multiple accept="image/*"
-               onchange="handleFiles(this.files)">
-        <!--        <label class="button" for="fileElem">перетащите несколько фото</label>-->
-      </form>
-      <progress class="display-none" id="progress-bar" max=100 value=0></progress>
-      <div id="gallery">
-        <div th:each="img:${@userSession.getNewCar().getImages()}"
-             th:attr="data-img=*{img}"
-             class="MdsPhoto MdsPhotos__item">
-          <div>
-            <a
-                href="javascript:void(0)"
-                th:onclick="aClick(this)">
-              <svg
-                  class="IconSvg IconSvg_trash IconSvg_size_24 MdsPhoto__icon MdsPhoto__icon_right">
-                <use xlink:href="#trash"></use>
-              </svg>
-            </a>
-          </div>
-          <img th:src="@{|/cars/img/*{img}|}">
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <!--  <div className="PhotosAdd__title">-->
-  <!--    <div className="PhotosAdd__icon">-->
-  <!--      <svg className="IconSvg IconSvg_photo IconSvg_size_24">-->
-  <!--        <use xlink:href="#photo"></use>-->
-  <!--      </svg>-->
-  <!--    </div>-->
-  <!--    <div className="PhotosAdd__text">Добавить фото</div>-->
-  <!--  </div>-->
-  <p th:text="${#fields.hasErrors()}"></p>
-<!--  <p th:text="${#strings.listJoin(#fields.errors('images'),', ')}"></p>-->
-
-  <div th:if="${@userSession.getCarState().isDone()}"
-       class="pt-5" style="max-width: 600px">
-    <div class="numbering fw-bolder">3</div>
-    <div class="fw-bolder ps-5">Описание</div>
-
+  <div th:if="${@userSession.getCarState().isDone()}">
     <form th:action="@{/cars/add}" th:object="${carform}" method="post" id="carform"
-          class="ps-5 pt-4">
+          class="pt-4">
 
-      <input th:field="*{images}" hidden>
 
-      <div class="form-floating mb-3" style="width: 8em">
-        <input type="number" min="1" class="form-control" id="odometer" placeholder="km"
-               th:classappend="${#fields.hasErrors('odometer')} ? ' is-invalid'"
-               th:field="*{odometer}">
+      <div class="pt-5">
+        <div class="numbering fw-bolder">2</div>
+        <div class="fw-bolder ps-5">Добавить фотографии</div>
+
+
+        <!--    <div class="mb-3 mt-3 ps-5" style="max-width: 600px">-->
+        <!--      &lt;!&ndash;      <label for="formFile" class="form-label">Default file input example</label>&ndash;&gt;-->
+        <!--      <input class="form-control" type="file" id="formFile">-->
+        <!--    </div>-->
+
+
+        <!--    <input style="display: none;"-->
+        <!--           type="file" multiple accept="image/*"-->
+        <!--           onchange="handleFiles(this.files)-->
+        <!--               role="file-input">-->
+
+
+        <!--    <p>Upload multiple files with the file dialog or by dragging and dropping images onto the-->
+        <!--      dashed region</p>-->
+        <div id="drop-area" class="ms-5">
+
+          <!--          th:if="${@userSession.getNewCar().getImages().isEmpty()}"-->
+          <div id="emptyArea">
+            <div class="d-flex justify-content-center"
+                 style="height: 220px;cursor: pointer;">
+              <!--          <input style="display: none;"-->
+              <!--                 id="fileElemEmpty" type=file multiple accept="image/*"-->
+              <!--                 onchange="handleFiles(this.files)">-->
+              <div class="PhotosAdd__title">
+                <div class="PhotosAdd__icon">
+                  <svg class="IconSvg IconSvg_photo IconSvg_size_32">
+                    <use xlink:href="#photo"></use>
+                  </svg>
+                </div>
+                <div class="PhotosAdd">Выберите или перетащите несколько фото</div>
+              </div>
+            </div>
+          </div>
+
+          <form class="my-form" id="my-form">
+            <input style="display: none;"
+                   type="file" id="fileElem" multiple accept="image/*"
+                   form="my-form"
+                   onchange="handleFiles(this.files)">
+            <!--        <label class="button" for="fileElem">перетащите несколько фото</label>-->
+          </form>
+          <progress class="display-none" id="progress-bar" max=100 value=0></progress>
+          <div id="gallery">
+            <div th:each="img:${@userSession.getNewCar().getImages()}"
+                 th:attr="data-img=${img}"
+                 class="MdsPhoto MdsPhotos__item">
+              <div>
+                <a
+                    href="javascript:void(0)"
+                    th:onclick="aClick(this)">
+                  <svg
+                      class="IconSvg IconSvg_trash IconSvg_size_24 MdsPhoto__icon MdsPhoto__icon_right">
+                    <use xlink:href="#trash"></use>
+                  </svg>
+                </a>
+              </div>
+              <img th:src="@{|/cars/img/${img}|}">
+            </div>
+          </div>
+        </div>
         <div class="text-danger"
-             th:if="${#fields.hasErrors('odometer')}"
-             th:text="${#strings.listJoin(#fields.errors('odometer'),', ')}"></div>
-        <label for="odometer">Пробег км.</label>
+             th:if="${#fields.hasErrors('images')}"
+             th:text="${#strings.listJoin(#fields.errors('images'),', ')}"></div>
       </div>
 
-      <!--    style="width: 21em"-->
-      <label class="small-label mt-2" for="yearPurchase">год покупки</label>
-      <select class="form-select" aria-label="Default select example"
-              id="yearPurchase" style="width: 8.7em"
-              th:field="*{yearPurchase}">
-        <option th:if="*{yearPurchase!=null}" selected
-                th:value="*{yearPurchase}"
-                th:text="*{yearPurchase}"></option>
-        <option th:if="*{yearPurchase==null}" selected value="0">Укажите год</option>
-      </select>
+
+      <div class="pt-4" style="max-width: 600px">
+        <div class="numbering fw-bolder">3</div>
+        <div class="fw-bolder ps-5">Описание</div>
+
+        <div class="ms-5 pt-3">
+          <input th:field="*{images}" hidden form="carform">
+
+          <div class="form-floating mb-3" style="width: 8em">
+            <input type="number" min="1" class="form-control" id="odometer" placeholder="km"
+                   form="carform"
+                   th:classappend="${#fields.hasErrors('odometer')} ? ' is-invalid'"
+                   th:field="*{odometer}">
+            <div class="text-danger"
+                 th:if="${#fields.hasErrors('odometer')}"
+                 th:text="${#strings.listJoin(#fields.errors('odometer'),', ')}"></div>
+            <label for="odometer">Пробег км.</label>
+          </div>
+
+          <!--    style="width: 21em"-->
+          <label class="small-label mt-2" for="yearPurchase">год покупки</label>
+          <select class="form-select" aria-label="Default select example"
+                  id="yearPurchase" style="width: 8.7em"
+                  th:field="*{yearPurchase}" form="carform">
+            <!--          <option th:if="*{yearPurchase!= unde}" selected-->
+            <!--                  th:value="*{yearPurchase}"-->
+            <!--                  th:text="*{yearPurchase}"></option>-->
+            <!--          <option th:if="*{yearPurchase==null}" selected value="0">Укажите год</option>-->
+          </select>
 
 
-      <!-- <div class="mb-3">
-         <label for="Title" class="form-label">Пробег</label>
-         <input type="text" class="form-control" id="Title"
-                th:value="*{title}" name="title">
-         &lt;!&ndash;              <div class="text-danger"&ndash;&gt;
-         &lt;!&ndash;                   th:if="${#fields.hasErrors('title')}"&ndash;&gt;
-         &lt;!&ndash;                   th:text="${#strings.listJoin(#fields.errors('title'),', ')}"&ndash;&gt;
-         &lt;!&ndash;              ></div>&ndash;&gt;
-       </div>-->
+          <!-- <div class="mb-3">
+             <label for="Title" class="form-label">Пробег</label>
+             <input type="text" class="form-control" id="Title"
+                    th:value="*{title}" name="title">
+             &lt;!&ndash;              <div class="text-danger"&ndash;&gt;
+             &lt;!&ndash;                   th:if="${#fields.hasErrors('title')}"&ndash;&gt;
+             &lt;!&ndash;                   th:text="${#strings.listJoin(#fields.errors('title'),', ')}"&ndash;&gt;
+             &lt;!&ndash;              ></div>&ndash;&gt;
+           </div>-->
 
-      <div class="pt-4">
-        <div class="form-floating">
-          <textarea th:field="*{description}"
+          <div class="pt-4">
+            <div class="form-floating">
+          <textarea th:field="*{description}" form="carform"
                     class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
                     style="height: 100px"></textarea>
-          <label for="floatingTextarea2">Описание</label>
+              <label for="floatingTextarea2">Описание</label>
+            </div>
+          </div>
+
+
+          <div class="pt-4">
+            <div class="form-floating" style="width: 8em">
+              <input type="number" class="form-control" id="price" placeholder="0" form="carform"
+                     th:classappend="${#fields.hasErrors('price')} ? ' is-invalid'"
+                     th:field="*{price}">
+              <div class="text-danger"
+                   th:if="${#fields.hasErrors('price')}"
+                   th:text="${#strings.listJoin(#fields.errors('price'),', ')}"></div>
+              <label for="price">Цена</label>
+            </div>
+          </div>
+
+
+          <div class="mb-3">
+            <!-- <label for="descriptionText" class="form-label">Description</label>
+             <textarea class="form-control" id="descriptionText" rows="3"
+                       form="usrform" name="description"
+                       th:field="*{description}"
+             ></textarea>-->
+          </div>
+
+
+          <!--            <div class="d-flex justify-content-end p-2 smaller">-->
+          <!--              <span class="text-black-50">Created:&nbsp;&nbsp; </span>-->
+          <!--              <span th:text="*{#dates.format(created, 'dd-MM-yyyy HH:mm')}"-->
+          <!--                    class="fw-bolder text-black-50"></span>-->
+          <!--            </div>-->
+
+          <!--    <select id="categories" class="form-select form-select-sm mb-3 w-50" multiple
+                      aria-label="multiple select example"
+                      size="4"
+                      th:field="*{categories}">
+                <option th:each="category:${@categoryService.getAllCategories()}"
+                        th:value="${{category}}"
+                        th:text="${category.name}"
+                ></option>
+              </select>-->
+
+          <div class="d-flex pt-3">
+            <div class="pe-3">
+              <button type="submit" class="btn btn-light btn-block py-1"
+                      form="carform">Save
+              </button>
+            </div>
+            <div>
+              <a th:href="@{#}" class="btn btn-light py-1">Cancel</a>
+            </div>
+          </div>
         </div>
       </div>
 
 
-      <div class="pt-4">
-        <div class="form-floating" style="width: 8em">
-          <input type="number" class="form-control" id="price" placeholder="0"
-                 th:classappend="${#fields.hasErrors('price')} ? ' is-invalid'"
-                 th:field="*{price}">
-          <div class="text-danger"
-               th:if="${#fields.hasErrors('price')}"
-               th:text="${#strings.listJoin(#fields.errors('price'),', ')}"></div>
-          <label for="price">Цена</label>
-        </div>
-      </div>
-
-
-      <div class="mb-3">
-        <!-- <label for="descriptionText" class="form-label">Description</label>
-         <textarea class="form-control" id="descriptionText" rows="3"
-                   form="usrform" name="description"
-                   th:field="*{description}"
-         ></textarea>-->
-      </div>
-
-
-      <!--            <div class="d-flex justify-content-end p-2 smaller">-->
-      <!--              <span class="text-black-50">Created:&nbsp;&nbsp; </span>-->
-      <!--              <span th:text="*{#dates.format(created, 'dd-MM-yyyy HH:mm')}"-->
-      <!--                    class="fw-bolder text-black-50"></span>-->
-      <!--            </div>-->
-
-      <!--    <select id="categories" class="form-select form-select-sm mb-3 w-50" multiple
-                  aria-label="multiple select example"
-                  size="4"
-                  th:field="*{categories}">
-            <option th:each="category:${@categoryService.getAllCategories()}"
-                    th:value="${{category}}"
-                    th:text="${category.name}"
-            ></option>
-          </select>-->
-
-      <div class="d-flex pt-3">
-        <div class="pe-3">
-          <button type="submit" class="btn btn-light btn-block py-1">Save</button>
-        </div>
-        <div>
-          <a th:href="@{#}" class="btn btn-light py-1">Cancel</a>
-        </div>
-      </div>
     </form>
   </div>
 

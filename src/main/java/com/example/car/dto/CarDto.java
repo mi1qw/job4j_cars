@@ -2,7 +2,6 @@ package com.example.car.dto;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Data;
@@ -14,8 +13,8 @@ import java.math.BigDecimal;
 @Data
 @Builder
 public class CarDto implements Serializable {
-    @NotNull(message = "0")
-    private int odometer;
+    @NotNull(message = "Укажите пробег")
+    private Integer odometer;
 
     @Min(value = 1900, message = "Неверный год")
     @NotNull

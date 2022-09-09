@@ -94,16 +94,14 @@ function updateProgress(fileNumber, percent) {
 }
 
 function handleFiles(files) {
-    files = [...files]
-    totalFiles = files.length
-    initializeProgress(files.length)
-    files.forEach(uploadFile)
-    // files.map(uploadFile);
-    // console.log(files);
-    // files.forEach(previewFile)
-    // console.log(files);
-
-    isExistImages();
+    if (files.length!==0){
+        files = [...files]
+        totalFiles = files.length
+        initializeProgress(files.length)
+        files.forEach(uploadFile)
+        // files.forEach(previewFile)
+        isExistImages();
+    }
 }
 
 function previewFile(file) {
@@ -333,24 +331,6 @@ new Sortable(gallery, {
     ghostClass: 'blue-background-class'
 });
 
-// todo назначить, ещё лучше менять порядок при сохранении формы целиком на сервере
-gallery.onclick = () => {
-
-    // var divs = gallery.children;
-    // var listitems = [];
-    // for (i = 0; i < divs.length; i++) {
-    //     listitems.push(divs.item(i).dataset.img);
-    //     console.log(divs.item(i).dataset.img);
-    // }
-
-    var listitems = getNamesImages();
-
-    console.log(listitems.join('|'));
-    // sendClick(listitems.join('|'), "/cars/reorder", () => {
-    //     console.log("sendClick reorder");
-    // })
-}
-
 
 var odometerInput = document.getElementById('odometer');
 odometerInput.addEventListener('change', () => {
@@ -362,33 +342,15 @@ odometerInput.addEventListener('change', () => {
 
 
 var imagesInput = document.getElementById('images');
-document.getElementById('carform').addEventListener('click', () => {
-    let listitems = getNamesImages();
-    let imagesValue;
-    if (listitems.length == 1) {
-        imagesValue = listitems[0];
-    } else {
-        imagesValue = listitems.join('|');
-    }
-    imagesInput.setAttribute('value', imagesValue);
-    // console.log("sendClick reorder");
-});
+document.getElementById('carform')
+    .addEventListener('submit', submitForm);
 
 
 function getNamesImages() {
-    let divs = gallery.children;
     let listitems = [];
-
-    // for (let i = 0; i < divs.length; i++) {
-    //     listitems.push(divs.item(i).dataset.img);
-    //     console.log(divs.item(i).dataset.img);
-    // }
-
     listitems = Array.from(gallery.children)
         .filter(n => !n.hasAttribute('data-empty'))
         .map(n => n.dataset.img);
-
-
     return listitems;
 }
 
@@ -398,9 +360,22 @@ function getCountImages() {
         .length > 0;
 }
 
-// return true;
 
 // return gallery.children?.length > 0;
+
+
+function submitForm() {
+
+    // уточнить порядок снимков
+    let listitems = getNamesImages();
+    let imagesValue;
+    if (listitems.length == 1) {
+        imagesValue = listitems[0];
+    } else {
+        imagesValue = listitems.join('|');
+    }
+    imagesInput.setAttribute('value', imagesValue);
+}
 
 
 function aClick(dataImg) {

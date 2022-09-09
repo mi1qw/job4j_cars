@@ -2,6 +2,8 @@ package com.example.car.util;
 
 import com.example.car.model.*;
 import com.example.car.service.GenerationsService;
+import com.example.car.service.MarkService;
+import com.example.car.service.ModelService;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
@@ -13,6 +15,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -25,9 +28,8 @@ public class CarState {
     private int[] steps = {0};
     private List<Generations> generations;
 
-    public void addState(final String name, final Function<?, Map<?, ?>> supplier,
-                         final Function<?, ?> longFunction) {
-        stateList.add(new State(steps, name, supplier, longFunction));
+    public void addState(final String name, final Supplier<Map<?, ?>> supplier) {
+        stateList.add(new State(steps, name, supplier));
     }
 
     public boolean isDone() {
@@ -40,6 +42,20 @@ public class CarState {
                 .allMatch(n -> n.status);
 //        log.info("allMatch {}   allMatch1 {}", allMatch, allMatch1);
 //        return allMatch;
+    }
+
+    public Map<Long, Mark> getMarks(final MarkService markService) {
+        return markService.findAllMap();
+    }
+
+    public Map<Long, Model> getModelsByMark(final ModelService modelService) {
+        Mark mark = (Mark) stateList.get(0).value;
+        return modelService.getModelsByMark(mark);
+    }
+
+    public Map<Long, Short> getGenerationsByYear(final GenerationsService generationsService) {
+        Model model = (Model) stateList.get(1).value;
+        return generationsService.getYearsByModel(model);
     }
 
     public Map<Long, Body> getBodiesByYearByModel(final GenerationsService generationsService) {
@@ -125,19 +141,16 @@ public class CarState {
         private String name;
         private int step;
         private boolean status = false;
-        private Function<T, Map<Long, R>> optionsSup;
-        private Function<T, R> longFunction;
+        private Supplier<Map<Long, R>> optionsSup;
         private Map<Long, R> options = new HashMap<>();
         private R value;
         private List<Generations> prevGenerations;
 
         public State(final int[] steps, final String name,
-                     final Function<T, Map<Long, R>> optionsSup,
-                     final Function<T, R> longFunction) {
+                     final Supplier<Map<Long, R>> optionsSup) {
             this.step = steps[0]++;
             this.name = name;
             this.optionsSup = optionsSup;
-            this.longFunction = longFunction;
         }
 
         public void setValue(final Object value) {
@@ -147,7 +160,7 @@ public class CarState {
 
         public Map<Long, R> makeOptions(final Object t) {
             if (options.isEmpty()) {
-                options.putAll(optionsSup.apply((T) t));
+                options.putAll(optionsSup.get());
 //                options..addAll(optionsSup.apply(t));
             }
             return options;
