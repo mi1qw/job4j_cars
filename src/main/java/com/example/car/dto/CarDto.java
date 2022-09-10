@@ -23,7 +23,7 @@ public class CarDto implements Serializable {
     private String description;
 
     @NotNull(message = "Укажите цену")
-    @NumberFormat(style = NumberFormat.Style.CURRENCY)
+//    @NumberFormat(style = NumberFormat.Style.CURRENCY)
     private BigDecimal price;
 
     @NotNull

@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -50,7 +51,13 @@ public class CarService {
     public Car reorderImg(final Car car, final String[] names) {
         return carStore.reorderImg(car.getId(), names);
     }
-//    public Car findByIdWithImages(final Long id) {
-//        return carStore.findByIdWithImages(id);
-//    }
+
+    public List<Car> finAll() {
+        return carStore.findAll();
+    }
+
+    // TODO фильтр добавить
+    public List<Car> finCarsWithEngineGearFILTR() {
+        return carStore.finCarsWithEngineGearFILTR();
+    }
 }

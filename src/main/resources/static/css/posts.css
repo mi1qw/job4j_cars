@@ -1,0 +1,117 @@
+.ticket-photo {
+    float: left;
+}
+
+.main-ticket-photo {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.content-post {
+    min-height: 200px;
+    margin-left: 315px;
+    display: block;
+    width: auto;
+    padding: 0;
+}
+
+.ticket-title {
+    line-height: 21px;
+    font-size: 18px;
+}
+
+.post-item {
+    width: 700px;
+    border-bottom: 1px solid #e0e3e4;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+}
+
+.ticket-item {
+    display: block;
+    font-size: 18px;
+    line-height: 1.2;
+    max-height: 42px;
+    overflow: hidden;
+    border: 0 none;
+}
+
+.bold {
+    font-weight: 400;
+}
+
+.blue {
+    color: #256799;
+}
+
+body {
+    font-weight: 400;
+    font-style: normal;
+    font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 20px;
+    color: #414042;
+    background: #fff;
+    overflow-y: scroll;
+    text-rendering: optimizeSpeed;
+}
+
+.price-ticket {
+    margin-bottom: 3px;
+}
+
+.ticket-item {
+    margin-top: 7px;
+    overflow: hidden;
+}
+
+.size22 {
+    font-size: 22px;
+}
+
+.bold-700 {
+    font-weight: 700;
+}
+
+.green {
+    color: #3c9806;
+}
+
+.characteristic {
+    display: inline-block;
+    width: 100%;
+}
+
+.unstyle, .unstyled {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+li.item-char {
+    padding-top: 5px;
+}
+
+.IconSvg_size_18 {
+    width: 18px;
+    height: 18px;
+}
+
+.tag_size {
+    font-size: 15px !important;
+    height: 20px;
+    line-height: 50px;
+}
+
+.characteristic .item-char {
+    float: left;
+    width: 50%;
+    white-space: nowrap;
+    overflow: hidden;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    line-height: 20px;
+    padding-top: 7px;
+}

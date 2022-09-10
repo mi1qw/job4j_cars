@@ -135,6 +135,14 @@ public class CarStore extends CrudPersist<Car> {
         return true;
     }
 
+    // TODO фильтр добавить
+    public List<Car> finCarsWithEngineGearFILTR() {
+        return tx(session ->
+                session.createQuery("from Car c join fetch c.gearbox "
+                                    + "join fetch c.transmission",
+                                Car.class)
+                        .list());
+    }
 }
 
 //jakarta.persistence.PersistenceException:
