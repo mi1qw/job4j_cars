@@ -385,7 +385,7 @@
 <div>
   <!--       th:text="*{post.name}"-->
   <div th:each="post:${posts}">
-    <div th:insert="fragments/postCar::post(*{post})"></div>
+    <div th:replace="fragments/postCar::post(*{post})"></div>
   </div>
 
 </div>
