@@ -54,7 +54,7 @@ class FilterFormTest implements SessionStore {
                     log.info("{}", rowNumber);
 
                     return carQuery
-                            .setFirstResult(2)
+                            .setFirstResult(0)
                             .setMaxResults(2)
                             .list();
                 }
