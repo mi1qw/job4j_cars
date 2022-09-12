@@ -12,7 +12,7 @@ import java.util.List;
 
 @Slf4j
 @Data
-public class FilterForm {
+public class FilterForm1 {
     private Mark mark;
     private Model model;
 
@@ -34,14 +34,10 @@ public class FilterForm {
     private String query;
     private List<FilterFormIn> params = new ArrayList<>();
 
-    public FilterForm(final String query) {
+    public FilterForm1(final String query) {
         this.query = query;
     }
 
-    public FilterForm addParam(final String name, final Object value) {
-        params.add(ElementForm.of(name, value));
-        return this;
-    }
 
     public String makeQuery() {
         if (params.isEmpty()) {
@@ -68,7 +64,7 @@ public class FilterForm {
         return query;
     }
 
-    public FilterForm addFromParam(final String name, final Object from) {
+    public FilterForm1 addFromParam(final String name, final Object from) {
         params.add(new ElementForm<>(name, from) {
             @Override
             public String getQuery() {
@@ -83,7 +79,7 @@ public class FilterForm {
         return this;
     }
 
-    public FilterForm addBeforeParam(final String name, final Object before) {
+    public FilterForm1 addBeforeParam(final String name, final Object before) {
         params.add(new ElementForm<>(name, before) {
             @Override
             public String getQuery() {
@@ -98,6 +94,11 @@ public class FilterForm {
         return this;
     }
 
+    public FilterForm1 addParam(final String name, final Object value) {
+        params.add(ElementForm.of(name, value));
+        return this;
+    }
+
 
     @RequiredArgsConstructor(staticName = "of")
     private static class ElementForm<T> implements FilterFormIn<Car> {
@@ -106,7 +107,7 @@ public class FilterForm {
 
         @Override
         public String getQuery() {
-            return " c.".concat(name).concat("=:").concat(name);
+            return " c.".concat(name).concat(".id").concat("=:").concat(name);
         }
 
         @Override

@@ -1,6 +1,5 @@
 package com.example.car.util;
 
-import com.example.car.model.Body;
 import com.example.car.model.Car;
 import com.example.car.model.Color;
 import com.example.car.service.ColorService;
@@ -23,7 +22,7 @@ class FilterFormTest implements SessionStore {
 
     @Test
     void emptyParam() {
-        FilterForm carC = new FilterForm("select c from Car c");
+        FilterForm1 carC = new FilterForm1("select c from Car c");
         List<Car> tx = tx(session ->
                 session.createQuery(carC.makeQuery(), Car.class)
                         .list());
@@ -34,10 +33,11 @@ class FilterFormTest implements SessionStore {
     @Test
     void addParam() {
         Color color = colorService.findById(11L);
-        FilterForm carC = new FilterForm("select c from Car c");
+        FilterForm1 carC = new FilterForm1("select c from Car c");
         carC
 //                .addParam("year", 2021)
-                .addParam("color", color);
+//                .addParam("color", color);
+                .addParam("color", 11);
 //                .addParam("id", 8)
 //                .addFromParam("odometer", 25)
 //                .addBeforeParam("odometer", 60);
