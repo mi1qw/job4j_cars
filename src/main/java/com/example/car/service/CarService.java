@@ -2,9 +2,12 @@ package com.example.car.service;
 
 import com.example.car.dto.CarMapper;
 import com.example.car.dto.FileImageDto;
+import com.example.car.dto.FilterDto;
 import com.example.car.model.Car;
 import com.example.car.store.CarStore;
+import com.example.car.util.FilterForm1;
 import com.example.car.util.State;
+import com.example.car.web.UserSession;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +20,7 @@ public class CarService {
     private final CarStore carStore;
     private final CarMapper carMapper;
     private final State state;
+    private final UserSession userSession;
 
     public Car addCar() {
         return carStore.add(new Car());
@@ -59,5 +63,9 @@ public class CarService {
     // TODO фильтр добавить
     public List<Car> finCarsWithEngineGearFILTR() {
         return carStore.finCarsWithEngineGearFILTR();
+    }
+
+    public List<Car> filterForm(final FilterDto filterDto) {
+        return carStore.findByFilter(filterDto);
     }
 }

@@ -33,9 +33,12 @@
         <path d='m7.5 0.5v1.5m-7 5.5h1.5m12.5 0h-1.5m-10.5-5 1 1m9-1-1 1' stroke='#DB5C4C'/>
       </symbol>
       <symbol viewBox="0 0 16 16" fill="none" id="clock">
-        <path d='M8 0C3.6 0 0 3.6 0 8C0 12.4 3.6 16 8 16C12.4 16 16 12.4 16 8C16 3.6 12.4 0 8 0ZM8 15C4.1 15 1 11.9 1 8C1 4.1 4.1 1 8 1C11.9 1 15 4.1 15 8C15 11.9 11.9 15 8 15Z' fill='#929292'/>
         <path
-            d='M8 5.5C8 5.22386 7.77614 5 7.5 5C7.22386 5 7 5.22386 7 5.5V9H11.5C11.7761 9 12 8.77614 12 8.5C12 8.22386 11.7761 8 11.5 8H8V5.5Z' fill='#929292'/>
+            d='M8 0C3.6 0 0 3.6 0 8C0 12.4 3.6 16 8 16C12.4 16 16 12.4 16 8C16 3.6 12.4 0 8 0ZM8 15C4.1 15 1 11.9 1 8C1 4.1 4.1 1 8 1C11.9 1 15 4.1 15 8C15 11.9 11.9 15 8 15Z'
+            fill='#929292'/>
+        <path
+            d='M8 5.5C8 5.22386 7.77614 5 7.5 5C7.22386 5 7 5.22386 7 5.5V9H11.5C11.7761 9 12 8.77614 12 8.5C12 8.22386 11.7761 8 11.5 8H8V5.5Z'
+            fill='#929292'/>
       </symbol>
       <symbol viewBox="0 0 32 32" fill="none" id="add">
         <circle cx="16" cy="16" r="16" fill="#000" fill-opacity=".06"></circle>
@@ -383,7 +386,9 @@
 </div>
 
 <div>
-  <!--       th:text="*{post.name}"-->
+
+  <div th:replace="fragments/filter::filterForm(${filter})"></div>
+
   <div th:each="post:${posts}">
     <div th:replace="fragments/postCar::post(*{post})"></div>
   </div>

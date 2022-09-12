@@ -1,0 +1,32 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<div th:fragment="filterForm(filter)" class="py-5">
+  <div th:text="*{filter}"></div>
+  <form th:action="@{/posts/}" th:object="${filter}" method="post">
+    <!--<div th:text=""></div>-->
+
+    <input th:field="*{mark}">
+    <input th:field="*{model}">
+
+    <input th:field="*{yearFrom}">
+    <input th:field="*{yearBefore}">
+
+    <input th:field="*{odometerFrom}">
+    <input th:field="*{odometerBefore}">
+
+    <input th:field="*{priceFrom}">
+    <input th:field="*{priceBefore}">
+
+    <input th:field="*{body}">
+    <input th:field="*{gearbox}">
+    <input th:field="*{engine}">
+    <input th:field="*{transmission}">
+
+    <button type="submit" class="btn btn-primary m-3"></button>
+
+  </form>
+
+</div>
+
+</html>

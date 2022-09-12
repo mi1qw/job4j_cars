@@ -1,5 +1,6 @@
 package com.example.car.util;
 
+import com.example.car.dto.FilterDto;
 import com.example.car.model.*;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -31,19 +32,59 @@ public class FilterForm1 {
     private Engine engine;
     private Transmission transmission;
 
+    private FilterDto filterDto;
+    private String baseQuery;
     private String query;
     private List<FilterFormIn> params = new ArrayList<>();
 
-    public FilterForm1(final String query) {
-        this.query = query;
+    public FilterForm1() {
+        // TODO  FilterDto можно хранить в бд и подставлять при создании сессии
+//        this.query = "select c from Car c";
+        this.baseQuery = "from Car c join fetch c.gearbox "
+                     + "join fetch c.transmission";
+
+        this.filterDto = FilterDto.builder()
+                .mark(1)
+                .yearFrom((short) 2000)
+                .yearBefore((short) 2030)
+                .odometerFrom(20)
+                .odometerBefore(100)
+                .build();
     }
 
+    public FilterForm1(final String query) {
+        this.baseQuery = query;
+    }
+
+    public void update(final FilterDto filter) {
+        this.filterDto = filter;
+        params.clear();
+        addParam("mark", filter.getMark());
+        addParam("model", filter.getModel());
+
+        addFromParam("year", filter.getYearFrom());
+        addBeforeParam("year", filter.getYearBefore());
+
+        addFromParam("odometer", filter.getOdometerFrom());
+        addBeforeParam("odometer", filter.getOdometerBefore());
+
+//        addFromParam("engineDisplacement", filter.getEngineDisplacementFrom());
+//        addBeforeParam("engineDisplacement", filter.getEngineDisplacementBefore());
+
+        addFromParam("price", filter.getPriceFrom());
+        addBeforeParam("price", filter.getPriceBefore());
+
+        addParam("body", filter.getBody());
+        addParam("gearbox", filter.getGearbox());
+        addParam("engine", filter.getEngine());
+        addParam("transmission", filter.getTransmission());
+    }
 
     public String makeQuery() {
         if (params.isEmpty()) {
             return query;
         }
-        this.query = query
+        this.query = baseQuery
                 .concat(" where")
                 .concat(params.get(0).getQuery());
         if (params.size() == 1) {
@@ -65,37 +106,43 @@ public class FilterForm1 {
     }
 
     public FilterForm1 addFromParam(final String name, final Object from) {
-        params.add(new ElementForm<>(name, from) {
-            @Override
-            public String getQuery() {
-                return " c.".concat(name).concat(" > " + from);
-            }
+        if (from != null) {
+            params.add(new ElementForm<>(name, from) {
+                @Override
+                public String getQuery() {
+                    return " c.".concat(name).concat(" > " + from);
+                }
 
-            @Override
-            public Query<Car> setParameter(final Query<Car> query) {
-                return query;
-            }
-        });
+                @Override
+                public Query<Car> setParameter(final Query<Car> query) {
+                    return query;
+                }
+            });
+        }
         return this;
     }
 
     public FilterForm1 addBeforeParam(final String name, final Object before) {
-        params.add(new ElementForm<>(name, before) {
-            @Override
-            public String getQuery() {
-                return " c.".concat(name).concat(" < " + before);
-            }
+        if (before != null) {
+            params.add(new ElementForm<>(name, before) {
+                @Override
+                public String getQuery() {
+                    return " c.".concat(name).concat(" < " + before);
+                }
 
-            @Override
-            public Query<Car> setParameter(final Query<Car> query) {
-                return query;
-            }
-        });
+                @Override
+                public Query<Car> setParameter(final Query<Car> query) {
+                    return query;
+                }
+            });
+        }
         return this;
     }
 
     public FilterForm1 addParam(final String name, final Object value) {
-        params.add(ElementForm.of(name, value));
+        if (value != null) {
+            params.add(ElementForm.of(name, value));
+        }
         return this;
     }
 

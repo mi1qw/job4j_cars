@@ -1,17 +1,27 @@
 package com.example.car.store;
 
 import com.example.car.dto.FileImageDto;
+import com.example.car.dto.FilterDto;
 import com.example.car.model.Car;
+import com.example.car.util.FilterForm1;
+import com.example.car.web.UserSession;
 import jakarta.persistence.PersistenceException;
+import lombok.extern.slf4j.Slf4j;
+import org.hibernate.ScrollMode;
+import org.hibernate.ScrollableResults;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
+@Slf4j
 public class CarStore extends CrudPersist<Car> {
+    private UserSession userSession;
 
-    public CarStore() {
+    public CarStore(final UserSession userSession) {
         super(Car.class);
+        this.userSession = userSession;
     }
 
     public Car merge(final Car car) {
@@ -143,8 +153,28 @@ public class CarStore extends CrudPersist<Car> {
                                 Car.class)
                         .list());
     }
-}
 
-//jakarta.persistence.PersistenceException:
-//Converting `org.hibernate.exception.ConstraintViolationException` to JPA `PersistenceException`
-// : JDBC exception executing
+    public List<Car> findByFilter(final FilterDto filterDto) {
+        FilterForm1 filterForm = userSession.getFilterForm();
+        filterForm.update(filterDto);
+        List<Car> carFiltered = tx(session -> {
+            Query<Car> query = session.createQuery(
+                    filterForm.makeQuery(),
+                    Car.class);
+            Query<Car> carQuery = filterForm.setParameters(query);
+            ScrollableResults<Car> scroll = carQuery.scroll(ScrollMode.SCROLL_INSENSITIVE);
+            scroll.last();
+            int rowNumber = scroll.getRowNumber() + 1;
+            scroll.close();
+            log.info("{}", rowNumber);
+
+            return carQuery
+                    .setFirstResult(0)
+                    .setMaxResults(2)
+                    .list();
+        });
+        return carFiltered;
+    }
+
+
+}
