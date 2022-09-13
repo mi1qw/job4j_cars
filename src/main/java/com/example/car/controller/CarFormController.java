@@ -104,7 +104,7 @@ public class CarFormController {
                         .description("aaa")
                         .price(BigDecimal.valueOf(1100L))
                         .yearPurchase((short) 2001)
-                        .odometer(0)
+                        .odometer((short) 0)
                         .build()
         );
 

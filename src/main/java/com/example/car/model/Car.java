@@ -27,9 +27,11 @@ public class Car {
     private LocalDateTime created;
     private String description;
     private BigDecimal price;
-    private int odometer;
+    private Short odometer;
     private Short year;
     private Short yearPurchase;
+    private Short power;
+    private Short engineDisplacement;
 
     @NotNull
     @Enumerated(EnumType.STRING)

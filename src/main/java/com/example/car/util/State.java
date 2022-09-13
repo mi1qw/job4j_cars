@@ -106,6 +106,8 @@ public class State {
         }
 
         newCar.setGenerations(generations);
+        newCar.setPower(generations.getModification().getPower());
+        newCar.setEngineDisplacement(generations.getModification().getEngineDisplacement());
 
         Color color = (Color) stepList.get(9).getValue();
         newCar.setColor(color);

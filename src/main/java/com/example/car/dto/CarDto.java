@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 @Builder
 public class CarDto implements Serializable {
     @NotNull(message = "Укажите пробег")
-    private Integer odometer;
+    private Short odometer;
 
     @Min(value = 1900, message = "Неверный год")
     @NotNull

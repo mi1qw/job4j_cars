@@ -24,7 +24,7 @@ class CarMapperTest {
     @Test
     void carToDto() {
         Car car = new Car();
-        car.setOdometer(100);
+        car.setOdometer((short) 100);
         car.setYearPurchase((short) 2000);
         car.setDescription("dddd");
         car.setPrice(BigDecimal.valueOf(1000L));
@@ -37,7 +37,7 @@ class CarMapperTest {
     @Test
     void dtoToCar() {
         Car car = new Car();
-        car.setOdometer(0);
+        car.setOdometer((short) 0);
         car.setYearPurchase((short) 1900);
         car.setDescription("aaa");
         car.setPrice(BigDecimal.valueOf(10L));
@@ -46,7 +46,7 @@ class CarMapperTest {
 
         CarDto carDto = CarDto.builder()
                 .images("A|C|B")
-                .odometer(200)
+                .odometer((short) 200)
                 .yearPurchase((short) 2000)
                 .description("description")
                 .price(BigDecimal.valueOf(1000L))
@@ -58,7 +58,7 @@ class CarMapperTest {
     @Test
     void dtoUpdateCar() {
         Car car = new Car();
-        car.setOdometer(0);
+        car.setOdometer((short) 0);
         car.setYearPurchase((short) 1900);
         car.setDescription("aaa");
         car.setPrice(BigDecimal.valueOf(10L));
@@ -69,7 +69,7 @@ class CarMapperTest {
 
         CarDto carDto = CarDto.builder()
                 .images("A|C|B")
-                .odometer(200)
+                .odometer((short) 200)
                 .yearPurchase((short) 2000)
                 .description("description")
                 .price(BigDecimal.valueOf(1000L))
