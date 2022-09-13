@@ -6,26 +6,44 @@
   <form th:action="@{/posts/}" th:object="${filter}" method="post">
     <!--<div th:text=""></div>-->
 
-    <input th:field="*{mark}">
-    <input th:field="*{model}">
+    <div class="grid-filter">
+      <!--      <div class="mark">mark</div>-->
+      <!--      <div class="model">model</div>-->
+      <!--      <div class="body">body</div>-->
+      <!--      <div class="gear">gear</div>-->
 
-    <input th:field="*{yearFrom}">
-    <input th:field="*{yearBefore}">
+      <input th:field="*{mark}" class="mark">
+      <input th:field="*{model}" class="model">
 
-    <input th:field="*{odometerFrom}">
-    <input th:field="*{odometerBefore}">
+      <input th:field="*{body}" class="body">
+      <input th:field="*{gearbox}" class="gear">
+      <input th:field="*{engine}" class="engine">
+      <input th:field="*{transmission}" class="transmission">
 
-    <input th:field="*{priceFrom}">
-    <input th:field="*{priceBefore}">
+      <input th:field="*{engine}" class="displacementFrom">
+      <input th:field="*{engine}" class="displacementBefore">
 
-    <input th:field="*{body}">
-    <input th:field="*{gearbox}">
-    <input th:field="*{engine}">
-    <input th:field="*{transmission}">
+      <input th:field="*{yearFrom}" class="yearFrom">
+      <input th:field="*{yearBefore}" class="yearBefore">
+
+      <input th:field="*{priceFrom}" class="priceFrom">
+      <input th:field="*{priceBefore}" class="priceBefore">
+
+<!--      <input th:field="*{odometerFrom}">-->
+<!--      <input th:field="*{odometerBefore}">-->
+
+    </div>
 
     <button type="submit" class="btn btn-primary m-3"></button>
 
   </form>
+
+  <!--  <div class="grid-filter">-->
+  <!--    <div class="mark">mark</div>-->
+  <!--    <div class="model">model</div>-->
+  <!--    <div class="body">body</div>-->
+  <!--    <div class="gear">gear</div>-->
+  <!--  </div>-->
 
 </div>
 

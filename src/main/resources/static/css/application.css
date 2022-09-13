@@ -432,6 +432,7 @@ body {
     height: 130px;
     width: 132px;
 }
+
 .PhotosAdd__addButton {
     /* background-color: #0c78ed1f; */
     /* border: none; */
@@ -439,6 +440,68 @@ body {
     font-size: 13px;
     line-height: 18px;
 }
+
 .display-none {
     display: none;
 }
+
+.grid-filter {
+    display: grid;
+    grid-template-areas: "mark mark  model model . . "
+    "body gear engine transmission displacementFrom displacementBefore"
+    "yearFrom yearBefore priceFrom priceBefore . .";
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: repeat(3, auto);
+    grid-gap: 0.5em;
+    max-width: 500px;
+    /*margin: 0 auto;*/
+}
+
+.mark {
+    grid-area: mark;
+}
+
+.model {
+    grid-area: model;
+}
+
+.body {
+    grid-area: body;
+}
+
+.gear {
+    grid-area: gear;
+}
+
+.engine {
+    grid-area: engine;
+}
+
+.transmission {
+    grid-area: transmission;
+}
+
+.displacementFrom {
+    grid-area: displacementFrom;
+}
+
+.displacementBefore {
+    grid-area: displacementBefore;
+}
+
+.yearFrom {
+    grid-area: yearFrom;
+}
+
+.yearBefore {
+    grid-area: yearBefore;
+}
+
+.priceFrom {
+    grid-area: priceFrom;
+}
+
+.priceBefore {
+    grid-area: priceBefore;
+}
+

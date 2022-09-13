@@ -56,7 +56,8 @@ public class PostsController {
 
         model.addAttribute("filter",
                 userSession.getFilterForm().getFilterDto());
-//        return new ResponseEntity<>(HttpStatus.OK);
+
+        //        return new ResponseEntity<>(HttpStatus.OK);
         return "posts";
     }
 }
