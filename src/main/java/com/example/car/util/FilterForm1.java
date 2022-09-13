@@ -47,8 +47,8 @@ public class FilterForm1 {
                 .mark(1)
                 .yearFrom((short) 2000)
                 .yearBefore((short) 2030)
-                .odometerFrom(20)
-                .odometerBefore(100)
+                .odometerFrom((short) 20)
+                .odometerBefore((short) 100)
                 .build();
     }
 
@@ -68,8 +68,11 @@ public class FilterForm1 {
         addFromParam("odometer", filter.getOdometerFrom());
         addBeforeParam("odometer", filter.getOdometerBefore());
 
-//        addFromParam("engineDisplacement", filter.getEngineDisplacementFrom());
-//        addBeforeParam("engineDisplacement", filter.getEngineDisplacementBefore());
+        addFromParam("engineDisplacement", filter.getEngineDisplacementFrom());
+        addBeforeParam("engineDisplacement", filter.getEngineDisplacementBefore());
+
+        addFromParam("power", filter.getPowerFrom());
+        addBeforeParam("power", filter.getPowerBefore());
 
         addFromParam("price", filter.getPriceFrom());
         addBeforeParam("price", filter.getPriceBefore());
@@ -78,6 +81,8 @@ public class FilterForm1 {
         addParam("gearbox", filter.getGearbox());
         addParam("engine", filter.getEngine());
         addParam("transmission", filter.getTransmission());
+
+        addParam("sort", filter.getSort());
     }
 
     public String makeQuery() {

@@ -17,11 +17,14 @@ public class FilterDto {
     private Short yearFrom;
     private Short yearBefore;
 
-    private Integer odometerFrom;
-    private Integer odometerBefore;
+    private Short odometerFrom;
+    private Short odometerBefore;
 
     private Short engineDisplacementFrom;
     private Short engineDisplacementBefore;
+
+    private Short powerFrom;
+    private Short powerBefore;
 
     private BigDecimal priceFrom;
     private BigDecimal priceBefore;
@@ -30,4 +33,6 @@ public class FilterDto {
     private Integer gearbox;
     private Integer engine;
     private Integer transmission;
+
+    private Integer sort;
 }
