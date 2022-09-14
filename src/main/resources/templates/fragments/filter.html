@@ -8,7 +8,8 @@
 
     <div class="grid-filter">
 
-      <input th:field="*{mark}" class="mark width-elm">
+      <!--      <input th:field="*{mark}" class="mark width-elm">-->
+      <div th:insert="::fieldSelect('Марка', 'mark', *{mark})"></div>
       <input th:field="*{model}" class="model width-elm">
 
       <input th:field="*{odometerFrom}" class="odometerFrom width-elm">
@@ -51,4 +52,34 @@
 
 </div>
 
+
+<!--          id="yearPurchase" -->
+<div th:fragment="fieldSelect(text, key, fieldID)">
+  <p th:text="|${key}  '{text}'|"></p>
+  <p th:text="|${fieldID}   '{fieldID}'|"></p>
+  <p th:text="|*{__${key}__}   '{ _ _ {text} __}'|"></p>
+
+  <p th:text="|${@appScope.filterMap.get(key).get(1L)}  'get(1L)'|"></p>
+<!--  <p th:text="|${@appScope.filterMap.get(key).get(T(java.lang.Long).parseLong(fieldID))}  'get(T)'|"></p>-->
+
+
+  <!--  <p th:each="option:${@appScope.filterMap.get(key)}" th:text="${option}"></p>-->
+
+  <select class="form-select" aria-label="Default select example"
+          th:id="${key}" th:value="${key}">
+    <!--          th:field="${text}"-->
+    <!--    <option selected th:text="${text}"></option>-->
+    <option th:if="${fieldID==null}" value="">Любой</option>
+    <option th:if="${fieldID!= null}" selected
+            th:value="${@appScope.filterMap.get(key).get(T(java.lang.Long).parseLong(fieldID)).id}"
+            th:text="${@appScope.filterMap.get(key).get(T(java.lang.Long).parseLong(fieldID)).name}"
+    ></option>
+
+    <option th:each="option:${@appScope.filterMap.get(key)}"
+            th:value="${option.getKey()}"
+            th:text="${option.getValue().name}"></option>
+
+  </select>
+
+</div>
 </html>

@@ -13,11 +13,16 @@ import java.util.concurrent.atomic.AtomicInteger;
 @SessionScope
 @Data
 public class UserSession {
-
+//    private final AppScope appScope;
     private CarState carState;
     private Car newCar;
     private AtomicInteger maxID;
     private AtomicInteger order = new AtomicInteger();
     private FilterForm1 filterForm = new FilterForm1();
     // TODO создавать при создании сессии
+
+//    public UserSession(final AppScope appScope) {
+//        this.appScope = appScope;
+//        this.filterForm = new FilterForm1();
+//    }
 }

@@ -36,15 +36,16 @@ public class FilterForm1 {
     private String baseQuery;
     private String query;
     private List<FilterFormIn> params = new ArrayList<>();
+//    private Map<String, Field> fieldMap = new HashMap<>();
 
     public FilterForm1() {
         // TODO  FilterDto можно хранить в бд и подставлять при создании сессии
 //        this.query = "select c from Car c";
         this.baseQuery = "from Car c join fetch c.gearbox "
-                     + "join fetch c.transmission";
+                         + "join fetch c.transmission";
 
         this.filterDto = FilterDto.builder()
-                .mark(1)
+//                .mark(1)
                 .yearFrom((short) 2000)
                 .yearBefore((short) 2030)
                 .odometerFrom((short) 20)
@@ -167,6 +168,12 @@ public class FilterForm1 {
             return query.setParameter(name, value);
         }
     }
+
+//    @RequiredArgsConstructor(staticName = "of")
+//    private static class Field<V, T> {
+//        private V value;
+//        private List<T> options;
+//    }
 }
 
 interface FilterFormIn<R> {
