@@ -13,6 +13,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @SessionScope
 @Data
 public class UserSession {
+
     private CarState carState;
     private Car newCar;
     private AtomicInteger maxID;

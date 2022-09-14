@@ -1,11 +1,7 @@
 package com.example.car.service;
 
-import com.example.car.config.StorageProperties;
 import com.example.car.model.Color;
-import com.example.car.model.Mark;
-import com.example.car.model.Model;
 import com.example.car.store.ColorStore;
-import com.example.car.store.ModelStore;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;

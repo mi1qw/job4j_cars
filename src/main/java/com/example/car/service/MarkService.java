@@ -3,7 +3,6 @@ package com.example.car.service;
 import com.example.car.model.Mark;
 import com.example.car.store.MarkStore;
 import lombok.Getter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
