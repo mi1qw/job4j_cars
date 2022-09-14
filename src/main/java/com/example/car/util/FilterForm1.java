@@ -145,6 +145,25 @@ public class FilterForm1 {
         return this;
     }
 
+
+    public FilterForm1 addSorting(final String name, final Object before) {
+        if (before != null) {
+            params.add(new ElementForm<>(name, before) {
+                @Override
+                public String getQuery() {
+                    return " c.".concat(name).concat(" < " + before);
+                }
+
+                @Override
+                public Query<Car> setParameter(final Query<Car> query) {
+                    return query;
+                }
+            });
+        }
+        return this;
+    }
+
+
     public FilterForm1 addParam(final String name, final Object value) {
         if (value != null) {
             params.add(ElementForm.of(name, value));

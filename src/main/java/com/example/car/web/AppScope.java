@@ -1,9 +1,6 @@
 package com.example.car.web;
 
-import com.example.car.service.BodyService;
-import com.example.car.service.GearboxService;
-import com.example.car.service.MarkService;
-import com.example.car.service.ModelService;
+import com.example.car.service.*;
 import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.ApplicationScope;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @Component
@@ -23,16 +21,21 @@ public class AppScope {
     private final ModelService modelService;
     private final BodyService bodyService;
     private final GearboxService gearboxService;
+    private final EngineService engineService;
+    private final TransmissionService transmissionService;
+    private final SortService sortService;
     private Map<String, Map<Long, ?>> filterMap;
 
     @PostConstruct
     public void init() {
-        Long.valueOf("0");
         this.filterMap = Map.of(
-                "mark", markService.findAllMap()
-//                "model", new ArrayList<>(),
-//                "body", bodyService.findAll(),
-//                "gearbox", gearboxService.findAll()
+                "mark", markService.findAllMap(),
+                "model", new HashMap<>(),
+                "body", bodyService.findAllMap(),
+                "gearbox", gearboxService.findAllMap(),
+                "engine", engineService.findAllMap(),
+                "transmission", transmissionService.findAllMap(),
+                "sort", sortService.findAllMap()
         );
 //        filterMap.get(1).get(1);
 

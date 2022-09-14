@@ -5,21 +5,26 @@ import com.example.car.store.GearboxStore;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Slf4j
 public class GearboxService {
     private final GearboxStore gearboxStore;
-    private List<Gearbox> gearList = new ArrayList<>();
+    private final Map<Long, Gearbox> gearboxMap = new HashMap<>();
 
     public GearboxService(final GearboxStore gearboxStore) {
         this.gearboxStore = gearboxStore;
-        gearList.addAll(gearboxStore.findAll());
+        gearboxStore.findAll().forEach(n -> gearboxMap.put(n.getId(), n));
     }
 
     public List<Gearbox> findAll() {
-        return gearList;
+        return gearboxMap.values().stream().toList();
+    }
+
+    public Map<Long, Gearbox> findAllMap() {
+        return gearboxMap;
     }
 }

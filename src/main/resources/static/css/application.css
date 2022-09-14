@@ -506,8 +506,7 @@ body {
     grid-area: priceBefore;
 }
 
-.powerFrom {
-    grid-area: powerFrom;
+     grid-area: powerFrom;
 }
 
 .powerBefore {
@@ -527,5 +526,5 @@ body {
 }
 
 .width-elm {
-    width: 70px;
+    width: 100px;
 }

@@ -17,7 +17,6 @@ public class ModelService {
     public ModelService(final ModelStore modelStore) {
         this.modelStore = modelStore;
         modelStore.findAll().forEach(n -> modelsMap.put(n.getId(), n));
-//        this.marks.addAll(findAll());
     }
 
     public List<Model> findAll() {
@@ -27,10 +26,6 @@ public class ModelService {
     public Map<Long, Model> findAllMap() {
         return modelsMap;
     }
-
-//    public Model findById(final Long id) {
-//        return modelStore.findById(id);
-//    }
 
     public Map<Long, Model> getModelsByMark(final Mark mark) {
         return modelStore.getModelsByMark(mark);

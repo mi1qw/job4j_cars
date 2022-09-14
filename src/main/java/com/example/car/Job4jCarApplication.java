@@ -133,7 +133,6 @@ public class Job4jCarApplication {
 
 
                 try {
-                    transmissionStore.add(new Transmission("Любой", "Любой"));
                     transmissionStore.add(new Transmission("Передний", "#forward-control"));
                     transmissionStore.add(new Transmission("Задний", "#rear-drive"));
                     transmissionStore.add(new Transmission("Полный", "#all-wheel-drive"));

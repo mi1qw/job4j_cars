@@ -1,10 +1,8 @@
 package com.example.car.service;
 
 import com.example.car.model.Generations;
-import com.example.car.model.Mark;
 import com.example.car.model.Model;
 import com.example.car.store.GenerationsStore;
-import com.example.car.util.CarState;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
