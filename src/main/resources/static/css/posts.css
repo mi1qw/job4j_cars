@@ -115,3 +115,29 @@ li.item-char {
     line-height: 20px;
     padding-top: 7px;
 }
+
+/*очистка полей*/
+.clearable-input {
+    position: relative;
+    display: inline-block;
+}
+
+.clearable-input > input {
+    padding-right: 1.4em;
+}
+
+.clearable-input > [data-clear-input] {
+    display: none;
+    position: absolute;
+    top: 3px;
+    right: 0;
+    /*font-weight: bold;*/
+    font-size: 1.5em;
+    padding: 0 0.2em;
+    line-height: 1em;
+    cursor: pointer;
+}
+
+.clearable-input > input::-ms-clear {
+    display: none;
+}

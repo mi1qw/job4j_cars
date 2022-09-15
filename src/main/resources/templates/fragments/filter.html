@@ -1,7 +1,7 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
-<div th:fragment="filterForm(filter)" class="py-5">
+<div th:fragment="filterForm(filter)" class="py-5 ps-4">
   <div th:text="*{filter}"></div>
   <form th:action="@{/posts/}" th:object="${filter}" method="post"
         id="form-filter">
@@ -15,8 +15,13 @@
       <!--      <input th:field="*{model}" class="model width-elm">-->
       <div th:insert="::fieldSelect('Модель', 'model', *{model})" class="model width-elm"></div>
 
-      <input th:field="*{odometerFrom}" class="odometerFrom width-elm">
-      <input th:field="*{odometerBefore}" class="odometerBefore width-elm">
+      <!--      <input th:field="*{odometerFrom}" class="odometerFrom width-elm">-->
+      <div th:insert="::fieldInput('Пробег от', 'odometerFrom', *{odometerFrom})"
+           class="odometerFrom width-elm"></div>
+<!--      <input th:field="*{odometerBefore}" class="odometerBefore width-elm">-->
+      <div th:insert="::fieldInput('до', 'odometerBefore', *{odometerBefore})"
+           class="odometerBefore width-elm"></div>
+
 
       <!--      <input th:field="*{body}" class="body width-elm">-->
       <div th:insert="::fieldSelect('Кузов', 'body', *{body})" class="body width-elm"></div>
@@ -34,29 +39,36 @@
 
 
       <!--      <input th:field="*{yearFrom}" class="yearFrom width-elm">-->
-      <div th:insert="::fieldInput('Год после', 'yearFrom', *{yearFrom})"
+      <div th:insert="::valueSelect('Год после', 'yearFrom', *{yearFrom})"
            class="yearFrom width-elm"></div>
-      <div th:insert="::fieldInput('Год до', 'yearBefore', *{yearBefore})"
+      <div th:insert="::valueSelect(' до', 'yearBefore', *{yearBefore})"
            class="yearBefore width-elm"></div>
+      <!--      <div th:insert="::fieldInput('Год до', 'yearBefore', *{yearBefore})"-->
+      <!--           class="yearBefore width-elm"></div>-->
 
-<!--      <input th:field="*{priceFrom}" class="priceFrom width-elm">-->
+      <!--      <input th:field="*{priceFrom}" class="priceFrom width-elm">-->
       <div th:insert="::fieldInput('Цена от', 'priceFrom', *{priceFrom})"
            class="priceFrom width-elm"></div>
-      <div th:insert="::fieldInput('Цена до', 'priceBefore', *{priceBefore})"
+      <div th:insert="::fieldInput(' до', 'priceBefore', *{priceBefore})"
            class="priceBefore width-elm"></div>
 
 
-<!--      <input th:field="*{engineDisplacementFrom}" class="displacementFrom width-elm">-->
-      <div th:insert="::fieldInput('Объём от', 'engineDisplacementFrom', *{engineDisplacementFrom})"
-           class="displacementFrom width-elm"></div>
-      <div th:insert="::fieldInput('Объём до', 'engineDisplacementFrom', *{engineDisplacementBefore})"
+      <!--      <input th:field="*{engineDisplacementFrom}" class="displacementFrom width-elm">-->
+      <!--      <div th:insert="::fieldInput('Объём от', 'engineDisplacementFrom', *{engineDisplacementFrom})"-->
+      <!--           class="displacementFrom width-elm"></div>-->
+      <div
+          th:insert="::valueSelect('Объём от', 'engineDisplacementFrom', *{engineDisplacementFrom})"
+          class="displacementFrom width-elm"></div>
+      <div th:insert="::valueSelect(' до', 'engineDisplacementBefore', *{engineDisplacementBefore})"
            class="displacementBefore width-elm"></div>
+      <!--      <div th:insert="::fieldInput('Объём до', 'engineDisplacementFrom', *{engineDisplacementBefore})"-->
+      <!--           class="displacementBefore width-elm"></div>-->
 
 
-      <input th:field="*{powerFrom}" class="powerFrom width-elm">
+      <!--      <input th:field="*{powerFrom}" class="powerFrom width-elm">-->
       <div th:insert="::fieldInput('Мощность от', 'powerFrom', *{powerFrom})"
            class="powerFrom width-elm"></div>
-      <div th:insert="::fieldInput('Мощность до', 'powerBefore', *{powerBefore})"
+      <div th:insert="::fieldInput(' до', 'powerBefore', *{powerBefore})"
            class="powerBefore width-elm"></div>
 
 
@@ -70,13 +82,6 @@
 
 
   </form>
-
-  <!--  <div class="grid-filter">-->
-  <!--    <div class="mark">mark</div>-->
-  <!--    <div class="model">model</div>-->
-  <!--    <div class="body">body</div>-->
-  <!--    <div class="gear">gear</div>-->
-  <!--  </div>-->
 
 </div>
 
@@ -111,21 +116,38 @@
 </div>
 
 
-<div th:fragment="fieldInput(text, key, fieldID)">
+<div th:fragment="valueSelect(text, key, fieldID)">
+  <select class="form-select" aria-label="Default select example"
+          th:id="${key}" th:name="${key}"
+          form="form-filter">
+    <option th:if="${fieldID==null}" value="" th:text="${text}"></option>
+    <option th:if="${fieldID!= null}" selected
+            th:value="${fieldID}"
+            th:text="${fieldID}"
+    ></option>
+    <option th:if="${fieldID!= null}" value="">Любой</option>
+  </select>
+</div>
+
+
+<div th:fragment="fieldInput(text, key, fieldID)"
+     class="clearable-input">
   <!--  <p th:text="|${key}  '{text}'|"></p>-->
   <!--  <p th:text="|${fieldID}   '{fieldID}'|"></p>-->
   <!--  <p th:text="|${@appScope.filterMap.get(key).get(1L)}  'get(1L)'|"></p>-->
   <!--  <p th:text="|${@appScope.filterMap.get(key).get(T(java.lang.Long).parseLong(fieldID))}  'get(T)'|"></p>-->
   <!--  <p th:each="option:${@appScope.filterMap.get(key)}" th:text="${option}"></p>-->
 
-  <input th:if="${fieldID==null}"
+  <input th:if="${fieldID==null}" style="width: 100px"
          th:id="${key}"
          th:name="${key}"
-         th:placeholder="${text}">
-  <input th:if="${fieldID!=null}"
+         th:placeholder="${text}" type="number" min="1">
+  <input th:if="${fieldID!=null}" style="width: 100px"
          th:id="${key}"
          th:name="${key}"
-         th:value="${fieldID}">
+         th:value="${fieldID}" type="number" min="1">
+  <span data-clear-input>&times;</span>
+  <!--    <span th:replace="::reset()"></span>-->
 </div>
 
 
@@ -149,5 +171,16 @@
             th:text="${option.getValue().name}"></option>
   </select>
 </div>
+
+
+<span th:fragment="reset()" class="Tags__tag tag_size mt-2">
+  <span style="color: #9b9b9b">
+    <svg class="IconSvg_size_18 EngineTypeField__icon"
+         style="margin-left: 0">
+      <use th:attr="'xlink:href'= '#clock'" fill="blue"></use>
+    </svg>
+  </span>
+</span>
+
 
 </html>
