@@ -33,23 +33,41 @@
            class="transmission width-elm"></div>
 
 
-      <input th:field="*{yearFrom}" class="yearFrom width-elm">
-      <input th:field="*{yearBefore}" class="yearBefore width-elm">
+      <!--      <input th:field="*{yearFrom}" class="yearFrom width-elm">-->
+      <div th:insert="::fieldInput('Год после', 'yearFrom', *{yearFrom})"
+           class="yearFrom width-elm"></div>
+      <div th:insert="::fieldInput('Год до', 'yearBefore', *{yearBefore})"
+           class="yearBefore width-elm"></div>
 
-      <input th:field="*{priceFrom}" class="priceFrom width-elm">
-      <input th:field="*{priceBefore}" class="priceBefore width-elm">
+<!--      <input th:field="*{priceFrom}" class="priceFrom width-elm">-->
+      <div th:insert="::fieldInput('Цена от', 'priceFrom', *{priceFrom})"
+           class="priceFrom width-elm"></div>
+      <div th:insert="::fieldInput('Цена до', 'priceBefore', *{priceBefore})"
+           class="priceBefore width-elm"></div>
 
-      <input th:field="*{engineDisplacementFrom}" class="displacementFrom width-elm">
-      <input th:field="*{engineDisplacementBefore}" class="displacementBefore width-elm">
+
+<!--      <input th:field="*{engineDisplacementFrom}" class="displacementFrom width-elm">-->
+      <div th:insert="::fieldInput('Объём от', 'engineDisplacementFrom', *{engineDisplacementFrom})"
+           class="displacementFrom width-elm"></div>
+      <div th:insert="::fieldInput('Объём до', 'engineDisplacementFrom', *{engineDisplacementBefore})"
+           class="displacementBefore width-elm"></div>
+
 
       <input th:field="*{powerFrom}" class="powerFrom width-elm">
-      <input th:field="*{powerBefore}" class="powerBefore width-elm">
+      <div th:insert="::fieldInput('Мощность от', 'powerFrom', *{powerFrom})"
+           class="powerFrom width-elm"></div>
+      <div th:insert="::fieldInput('Мощность до', 'powerBefore', *{powerBefore})"
+           class="powerBefore width-elm"></div>
 
-      <input th:field="*{sort}" class="sort width-elm">
+
+      <!--      <input th:field="*{sort}" class="sort width-elm">-->
+      <div th:insert="::sort('Сортировка', 'sort', *{sort})"
+           class="sort width-elm"></div>
 
     </div>
 
     <button type="submit" class="btn btn-primary m-3"></button>
+
 
   </form>
 
@@ -91,4 +109,45 @@
   </select>
 
 </div>
+
+
+<div th:fragment="fieldInput(text, key, fieldID)">
+  <!--  <p th:text="|${key}  '{text}'|"></p>-->
+  <!--  <p th:text="|${fieldID}   '{fieldID}'|"></p>-->
+  <!--  <p th:text="|${@appScope.filterMap.get(key).get(1L)}  'get(1L)'|"></p>-->
+  <!--  <p th:text="|${@appScope.filterMap.get(key).get(T(java.lang.Long).parseLong(fieldID))}  'get(T)'|"></p>-->
+  <!--  <p th:each="option:${@appScope.filterMap.get(key)}" th:text="${option}"></p>-->
+
+  <input th:if="${fieldID==null}"
+         th:id="${key}"
+         th:name="${key}"
+         th:placeholder="${text}">
+  <input th:if="${fieldID!=null}"
+         th:id="${key}"
+         th:name="${key}"
+         th:value="${fieldID}">
+</div>
+
+
+<div th:fragment="sort(text, key, fieldID)">
+  <!--  <p th:text="|${key}  '{text}'|"></p>-->
+  <!--  <p th:text="|${fieldID}   '{fieldID}'|"></p>-->
+  <!--  <p th:text="|${@appScope.filterMap.get(key).get(1L)}  'get(1L)'|"></p>-->
+  <!--  <p th:text="|${@appScope.filterMap.get(key).get(T(java.lang.Long).parseLong(fieldID))}  'get(T)'|"></p>-->
+  <!--  <p th:each="option:${@appScope.filterMap.get(key)}" th:text="${option}"></p>-->
+
+  <select class="form-select" aria-label="Default select example"
+          th:id="${key}" th:name="${key}"
+          form="form-filter">
+    <option th:if="${fieldID==null}" value="2" th:text="${text}"></option>
+    <option th:if="${fieldID!= null}" selected
+            th:value="${@appScope.filterMap.get(key).get(T(java.lang.Long).parseLong(fieldID)).id}"
+            th:text="${@appScope.filterMap.get(key).get(T(java.lang.Long).parseLong(fieldID)).name}"
+    ></option>
+    <option th:each="option:${@appScope.filterMap.get(key)}"
+            th:value="${option.getKey()}"
+            th:text="${option.getValue().name}"></option>
+  </select>
+</div>
+
 </html>

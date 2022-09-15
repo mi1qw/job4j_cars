@@ -506,7 +506,8 @@ body {
     grid-area: priceBefore;
 }
 
-     grid-area: powerFrom;
+.powerFrom {
+    grid-area: powerFrom;
 }
 
 .powerBefore {

@@ -1,6 +1,5 @@
 package com.example.car.dto;
 
-import com.example.car.model.*;
 import lombok.Builder;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +23,7 @@ public class FilterDto {
     private Short engineDisplacementBefore;
 
     private Short powerFrom;
-    private Short powerBefore;
+    private Integer powerBefore;
 
     private BigDecimal priceFrom;
     private BigDecimal priceBefore;

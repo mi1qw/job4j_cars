@@ -50,6 +50,8 @@ public class FilterForm1 {
                 .yearBefore((short) 2030)
                 .odometerFrom((short) 20)
                 .odometerBefore((short) 100)
+                .powerBefore((int) 22)
+                .sort(2)
                 .build();
     }
 
@@ -83,7 +85,7 @@ public class FilterForm1 {
         addParam("engine", filter.getEngine());
         addParam("transmission", filter.getTransmission());
 
-        addParam("sort", filter.getSort());
+//        addSorting("sort", filter.getSort());
     }
 
     public String makeQuery() {
@@ -101,6 +103,14 @@ public class FilterForm1 {
                     .concat(" and")
                     .concat(params.get(i).getQuery());
         }
+
+        String sort = switch (filterDto.getSort()) {
+            case 1 -> " ORDER BY c.price ASC";
+            case 2 -> " ORDER BY c.price DESC";
+            default -> " ORDER BY c.created DESC";
+        };
+        query = query.concat(sort);
+        log.info("{}", query);
         return query;
     }
 
@@ -146,12 +156,16 @@ public class FilterForm1 {
     }
 
 
-    public FilterForm1 addSorting(final String name, final Object before) {
-        if (before != null) {
-            params.add(new ElementForm<>(name, before) {
+    public FilterForm1 addSorting(final String name, final Object value) {
+        if (value != null) {
+            params.add(new ElementForm<>(name, value) {
                 @Override
                 public String getQuery() {
-                    return " c.".concat(name).concat(" < " + before);
+                    return query = switch (((int) value)) {
+                        case 1 -> " ORDER BY c.price ASC";
+                        case 2 -> " ORDER BY c.price DESC";
+                        default -> " ORDER BY c.created DESC";
+                    };
                 }
 
                 @Override
