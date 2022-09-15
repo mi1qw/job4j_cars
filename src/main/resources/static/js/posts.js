@@ -8,17 +8,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
 let inp = document.getElementById('fileElem');
 
 function addyears() {
-    ['.yearFrom select:last-child', '.yearBefore select:last-child'].forEach(n => {
-        let element = document.querySelector(n);
+    document.querySelectorAll('.yearFrom select:last-child').forEach(n => {
+        year(n);
         // console.log(element);
-        year(element);
     });
 }
 
 function addEngineDisplacement() {
-    ['.displacementFrom select:last-child', '.displacementBefore select:last-child'].forEach(n => {
-        let element = document.querySelector(n);
-        EngineDisplacement(element);
+    document.querySelectorAll('.displacementFrom select:last-child').forEach(n => {
+        EngineDisplacement(n);
+        // console.log(element);
     });
 }
 
