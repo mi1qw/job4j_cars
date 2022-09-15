@@ -150,12 +150,12 @@
   <!--  <p th:text="|${@appScope.filterMap.get(key).get(T(java.lang.Long).parseLong(fieldID))}  'get(T)'|"></p>-->
   <!--  <p th:each="option:${@appScope.filterMap.get(key)}" th:text="${option}"></p>-->
 
-  <input th:if="${fieldID==null}" style="width: 100%; padding-left: 0"
+  <input th:if="${fieldID==null}" style="width: 100%; padding-left: 12px"
          th:classappend="${class}"
          th:id="${key}"
          th:name="${key}"
          th:placeholder="${text}" type="number" min="1">
-  <input th:if="${fieldID!=null}" style="width: 100%; padding-left: 0"
+  <input th:if="${fieldID!=null}" style="width: 100%; padding-left: 12px"
          th:classappend="${class}"
          th:id="${key}"
          th:name="${key}"
