@@ -18,6 +18,7 @@ function filterSelect() {
                     n.classList.add('filter-select');
                 else
                     n.classList.remove('filter-select');
+
             });
         })
 }
