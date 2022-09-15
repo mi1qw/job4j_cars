@@ -14,13 +14,29 @@ function filterSelect() {
             n.addEventListener('change', (e) => {
                 // let t = this.options[this.selectedIndex].text;
                 console.log(e.target.selectedIndex, e.target.value, n.value);
-                if (n.value !== "")
-                    n.classList.add('filter-select');
-                else
-                    n.classList.remove('filter-select');
 
+                if (n.value == "" || n.value == "#") {
+                    n.classList.remove('filter-select');
+                    checkOptions(n.options);
+                    n.selectedIndex = 0;
+                } else {
+                    checkOptions(n.options);
+                    n.classList.add('filter-select');
+                    n.options.add(new Option('Сбросить', '#'));
+                }
             });
         })
+}
+
+function checkOptions(el) {
+    for (let i = 0; i < el.length; i++) {
+        console.log(el[i].value, el[i].index)
+        if (el[i].value == '#') {
+            el.remove(i)
+        }
+    }
+
+
 }
 
 let inp = document.getElementById('fileElem');

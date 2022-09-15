@@ -116,8 +116,10 @@
     <th:block th:if="${fieldID==null}">
       <option value="" th:text="${text}" selected></option>
     </th:block>
+
     <th:block th:if="${fieldID!=null}">
       <option value="" th:text="${text}"></option>
+      <option value="#">Сбросить</option>
       <option selected
               th:value="${@appScope.filterMap.get(key).get(T(java.lang.Long).parseLong(fieldID)).id}"
               th:text="${@appScope.filterMap.get(key).get(T(java.lang.Long).parseLong(fieldID)).name}"
@@ -130,10 +132,11 @@
     <!--            th:text="${@appScope.filterMap.get(key).get(T(java.lang.Long).parseLong(fieldID)).name}"-->
     <!--    ></option>-->
 
-    <option th:if="${fieldID!= null}" value="">Любой</option>
+    <!--    <option th:if="${fieldID!= null}" value="">Любой</option>-->
 
 
     <option th:each="option:${@appScope.filterMap.get(key)}"
+            th:if="${option.getKey() != fieldID}"
             th:value="${option.getKey()}"
             th:text="${option.getValue().name}"></option>
   </select>
