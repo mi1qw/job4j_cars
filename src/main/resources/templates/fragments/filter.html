@@ -155,10 +155,12 @@
          th:id="${key}"
          th:name="${key}"
          th:placeholder="${text}" type="number" min="1">
-  <input th:if="${fieldID!=null}" style="width: 100%; padding-left: 12px"
+  <input th:if="${fieldID!=null}"
+         style="width: 100%; padding-left: 12px; background-color: hsl(210deg 70% 95%);"
          th:classappend="${class}"
          th:id="${key}"
          th:name="${key}"
+         th:placeholder="${text}"
          th:value="${fieldID}" type="number" min="1">
   <span data-clear-input>&times;</span>
   <!--    <span th:replace="::reset()"></span>-->

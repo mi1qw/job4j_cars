@@ -3,7 +3,24 @@ document.addEventListener('DOMContentLoaded', (event) => {
     addyears();
     addEngineDisplacement();
     clearInput();
+    filterSelect();
 });
+
+// filter-select
+
+function filterSelect() {
+    document.querySelectorAll('select')
+        .forEach(n => {
+            n.addEventListener('change', (e) => {
+                // let t = this.options[this.selectedIndex].text;
+                console.log(e.target.selectedIndex, e.target.value, n.value);
+                if (n.value !== "")
+                    n.classList.add('filter-select');
+                else
+                    n.classList.remove('filter-select');
+            });
+        })
+}
 
 let inp = document.getElementById('fileElem');
 

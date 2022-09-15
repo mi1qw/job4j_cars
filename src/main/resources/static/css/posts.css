@@ -136,9 +136,13 @@ li.item-char {
     padding: 0 0.2em;
     line-height: 1.6em;
     cursor: pointer;
-    color: gray;
+    color: #b3b3b3;
 }
 
 .clearable-input > input::-ms-clear {
     display: none;
+}
+
+.filter-select {
+    background-color: hsl(210deg 70% 95%);
 }
