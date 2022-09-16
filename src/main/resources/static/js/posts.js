@@ -39,7 +39,7 @@ function checkOptions(el) {
 }
 
 function addyears() {
-    document.querySelectorAll('.yearFrom select:last-child').forEach(n => {
+    document.querySelectorAll('.yearFrom select').forEach(n => {
         year(n);
         // console.log(element);
     });
@@ -144,6 +144,7 @@ function clearSelect() {
         select.addEventListener('change', conditionallyHideClearIcon);
         el.querySelector('[data-clear-input]').addEventListener('click', function (e) {
             select.value = '';
+            select.classList.remove('filter-select');
             conditionallyHideClearIcon();
         });
 

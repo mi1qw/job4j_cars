@@ -467,7 +467,8 @@ input[type=number] {
     grid-template-rows: repeat(4, auto);
     grid-gap: 0.5em;
     column-gap: 15px;
-    max-width: 700px;
+    max-width: 860px;
+    /*max-width: 700px;*/
     /*margin: 0 auto;*/
 }
 

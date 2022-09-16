@@ -123,6 +123,7 @@ li.item-char {
 }
 
 .clearable-select {
+    width: 100%;
     position: relative;
     display: inline-block;
 }
@@ -150,9 +151,9 @@ li.item-char {
     top: 0px;
     right: 0;
     /*font-weight: bold;*/
-    font-size: 1.6em;
+    font-size: 1.5em;
     padding: 0 0.2em 0 0.2em;
-    margin-right: 1.3em;
+    margin-right: 0.8em;
     line-height: 1.65em;
     cursor: pointer;
     color: hsl(0deg 0% 30%);
@@ -164,4 +165,12 @@ li.item-char {
 
 .filter-select {
     background-color: hsl(210deg 70% 95%);
+    color: black !important;
+}
+
+/* filter */
+.form-select {
+    font-size: 0.9375rem;
+    color: hsl(0deg 0% 50%);
+    background-position: right .2rem center;
 }
