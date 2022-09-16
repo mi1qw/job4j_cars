@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     addyears();
     addEngineDisplacement();
     clearInput();
+    clearSelect();
     filterSelect();
 });
 
@@ -35,11 +36,7 @@ function checkOptions(el) {
             el.remove(i)
         }
     }
-
-
 }
-
-let inp = document.getElementById('fileElem');
 
 function addyears() {
     document.querySelectorAll('.yearFrom select:last-child').forEach(n => {
@@ -102,8 +99,6 @@ function EngineDisplacement(select) {
 }
 
 function clearInput() {
-
-
     Array.prototype.forEach.call(document.querySelectorAll('.clearable-input'), function (el) {
         var input = el.querySelector('input');
 
@@ -120,7 +115,6 @@ function clearInput() {
         }
     });
 
-
     // console.log("sss");
     // document.querySelectorAll('clearable-input').forEach((n) => {
     //     console.log(n);
@@ -135,11 +129,28 @@ function clearInput() {
     //
     //
     // });
-
-
 }
 
 function conditionallyHideClearIcon(e) {
     var target = (e && e.target) || input;
     target.nextElementSibling.style.display = target.value ? 'block' : 'none';
+}
+
+function clearSelect() {
+    Array.prototype.forEach.call(document.querySelectorAll('.clearable-select'), function (el) {
+        var select = el.querySelector('select');
+
+        conditionallyHideClearIcon();
+        select.addEventListener('change', conditionallyHideClearIcon);
+        el.querySelector('[data-clear-input]').addEventListener('click', function (e) {
+            select.value = '';
+            conditionallyHideClearIcon();
+        });
+
+        function conditionallyHideClearIcon(e) {
+            let target = select || (e && e.target);
+            target.nextElementSibling.style.display =
+                target.value ? 'block' : 'none';
+        }
+    });
 }
