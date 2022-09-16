@@ -142,7 +142,7 @@ li.item-char {
     padding: 0 0.2em;
     line-height: 1.6em;
     cursor: pointer;
-    color: #b3b3b3;
+    color: hsl(0deg 0% 70%);
 }
 
 .clearable-select > [data-clear-input] {
@@ -156,7 +156,7 @@ li.item-char {
     margin-right: 0.8em;
     line-height: 1.65em;
     cursor: pointer;
-    color: hsl(0deg 0% 30%);
+    color: hsl(0deg 0% 70%);
 }
 
 .clearable-input > input::-ms-clear {

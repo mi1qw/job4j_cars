@@ -120,7 +120,7 @@
 
     <th:block th:if="${fieldID!=null}">
       <option value="" th:text="${text}"></option>
-      <option value="#">Сбросить</option>
+      <!--      <option value="#">Сбросить</option>-->
       <option selected
               th:value="${@appScope.filterMap.get(key).get(T(java.lang.Long).parseLong(fieldID)).id}"
               th:text="${@appScope.filterMap.get(key).get(T(java.lang.Long).parseLong(fieldID)).name}"
@@ -150,12 +150,20 @@
   <select class="form-select " aria-label="Default select example" th:classappend="${class}"
           th:id="${key}" th:name="${key}"
           form="form-filter">
-    <option th:if="${fieldID==null}" value="" th:text="${text}"></option>
+
+    <option value="" th:text="${text}"></option>
+
+    <!--    <th:block th:if="${fieldID==null}">-->
+    <!--      <option value="" th:text="${text}"></option>-->
+    <!--    </th:block>-->
+
+
+    <!--    <option th:if="${fieldID==null}" value="" th:text="${text}"></option>-->
     <option th:if="${fieldID!= null}" selected
             th:value="${fieldID}"
             th:text="${fieldID}"
     ></option>
-    <option th:if="${fieldID!= null}" value="">Любой</option>
+    <!--    <option th:if="${fieldID!= null}" value="">Любой</option>-->
   </select>
   <span data-clear-input>&times;</span>
 </div>
@@ -169,13 +177,14 @@
   <!--  <p th:text="|${@appScope.filterMap.get(key).get(T(java.lang.Long).parseLong(fieldID))}  'get(T)'|"></p>-->
   <!--  <p th:each="option:${@appScope.filterMap.get(key)}" th:text="${option}"></p>-->
 
-  <input th:if="${fieldID==null}" style="width: 100%; padding-left: 12px"
+  <input th:if="${fieldID==null}"
+         style="width: 100%; padding-left: 12px"
          th:classappend="${class}"
          th:id="${key}"
          th:name="${key}"
          th:placeholder="${text}" type="number" min="1">
   <input th:if="${fieldID!=null}"
-         style="width: 100%; padding-left: 12px; background-color: hsl(210deg 70% 95%);"
+         style="width: 100%; padding-left: 12px"
          th:classappend="${class}"
          th:id="${key}"
          th:name="${key}"
@@ -202,6 +211,7 @@
             th:text="${@appScope.filterMap.get(key).get(T(java.lang.Long).parseLong(fieldID)).name}"
     ></option>
     <option th:each="option:${@appScope.filterMap.get(key)}"
+            th:if="${option.getKey() != fieldID}"
             th:value="${option.getKey()}"
             th:text="${option.getValue().name}"></option>
   </select>

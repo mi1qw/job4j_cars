@@ -51,7 +51,7 @@ public class FilterForm1 {
                 .odometerFrom((short) 20)
                 .odometerBefore((short) 100)
                 .powerBefore((int) 22)
-                .sort(2)
+                .sort(3)
                 .build();
     }
 
@@ -110,7 +110,7 @@ public class FilterForm1 {
             default -> " ORDER BY c.created DESC";
         };
         query = query.concat(sort);
-        log.info("{}", query);
+        log.info("{} - ", query);
         return query;
     }
 

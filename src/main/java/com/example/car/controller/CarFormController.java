@@ -6,11 +6,14 @@ import com.example.car.dto.FileImageDto;
 import com.example.car.exception.StorageException;
 import com.example.car.model.Car;
 import com.example.car.model.Generations;
+import com.example.car.model.Mark;
 import com.example.car.service.CarService;
 import com.example.car.service.FileService;
 import com.example.car.service.MarkService;
+import com.example.car.service.ModelService;
 import com.example.car.util.CarState;
 import com.example.car.util.ImageUtil;
+import com.example.car.util.JsonUtil;
 import com.example.car.util.State;
 import com.example.car.validation.ValidationGroupSequence;
 import com.example.car.web.UserSession;
@@ -34,6 +37,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Controller
@@ -46,6 +50,8 @@ public class CarFormController {
     private final CarService carService;
     private final FileService fileService;
     private final CarMapper carMapper;
+    private final ModelService modelService;
+    private final JsonUtil jsonUtil;
 
     @PostMapping("/reorder")
     public ResponseEntity<?> reorder(final @RequestParam("value") String name) {
@@ -303,5 +309,26 @@ public class CarFormController {
 //        final Model model){
 
         return "addCar";
+    }
+
+    /**
+     * Get models in Json.
+     * http://127.0.0.1:8080/cars/models?id=1
+     *
+     * @param id id
+     * @return string
+     */
+    @GetMapping("/models")
+    @ResponseBody
+    public String getModels(final @RequestParam Long id) {
+        Mark mark = new Mark();
+        mark.setId(id);
+        Map<Long, String> collect = modelService.getModelsByMark(mark)
+                .values().stream()
+                .collect(Collectors.toMap(
+                        com.example.car.model.Model::getId,
+                        com.example.car.model.Model::getName)
+                );
+        return jsonUtil.mapToJson(collect);
     }
 }

@@ -38,7 +38,7 @@
             <AppenderRef ref="ConsoleAppenderON"/>
         </Logger>
 
-        <Root level="DEBUG" additivity="false">
+        <Root level="INFO" additivity="false">
             <AppenderRef ref="ConsoleAppenderON"/>
         </Root>
     </Loggers>

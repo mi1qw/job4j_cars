@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.*;
 
-@Slf4j
 @Component
+@Slf4j
 @AllArgsConstructor
 public class State {
     private final MarkService markService;

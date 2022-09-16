@@ -4,39 +4,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
     addEngineDisplacement();
     clearInput();
     clearSelect();
-    filterSelect();
+    addModels();
 });
-
-// filter-select
-
-function filterSelect() {
-    document.querySelectorAll('select')
-        .forEach(n => {
-            n.addEventListener('change', (e) => {
-                // let t = this.options[this.selectedIndex].text;
-                console.log(e.target.selectedIndex, e.target.value, n.value);
-
-                if (n.value == "" || n.value == "#") {
-                    n.classList.remove('filter-select');
-                    checkOptions(n.options);
-                    n.selectedIndex = 0;
-                } else {
-                    checkOptions(n.options);
-                    n.classList.add('filter-select');
-                    n.options.add(new Option('Сбросить', '#'));
-                }
-            });
-        })
-}
-
-function checkOptions(el) {
-    for (let i = 0; i < el.length; i++) {
-        console.log(el[i].value, el[i].index)
-        if (el[i].value == '#') {
-            el.remove(i)
-        }
-    }
-}
+var elementMark;
+var elementModel;
 
 function addyears() {
     document.querySelectorAll('.yearFrom select').forEach(n => {
@@ -46,29 +17,50 @@ function addyears() {
 }
 
 function addEngineDisplacement() {
-    document.querySelectorAll('.displacementFrom select:last-child').forEach(n => {
+    document.querySelectorAll('.displacementFrom select').forEach(n => {
         EngineDisplacement(n);
         // console.log(element);
     });
 }
 
-function sendClick(value, url, callback) {
-    var url = url
+function addModels() {
+    elementModel = document.querySelector('.model select');
+    elementMark = document.querySelector('.mark select');
+    elementMark.addEventListener('change', (e) => {
+        if (elementMark.value) {
+            sendClick('id', elementMark.value,
+                '/cars/models?id=' + elementMark.value,
+                (e) => {
+                    while (elementModel.options.length > 1) {
+                        elementModel.remove(1);
+                    }
+                    var models = JSON.parse(e.target.response);
+                    var map = new Map(Object.entries(models));
+                    map.forEach((k, v) => {
+                        elementModel.appendChild(new Option(k, v));
+                    })
+                }
+            );
+
+        }
+    })
+
+}
+
+function sendClick(nameValue, value, url, callback) {
     var xhr = new XMLHttpRequest()
     var formData = new FormData()
-    xhr.open('POST', url, true)
+    xhr.open('GET', url, true)
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
-
     xhr.addEventListener('readystatechange', function (e) {
         if (xhr.readyState == 4 && xhr.status == 200) {
-            callback();
+            callback(e);
         } else if (xhr.readyState == 4 && xhr.status != 200) {
             // Error. Inform the user
             console.log("Error sendClick");
         }
     })
-
-    formData.append('value', value)
+    // formData.append(nameValue, value)
     xhr.send(formData)
 }
 
@@ -112,6 +104,11 @@ function clearInput() {
         function conditionallyHideClearIcon(e) {
             let target = input || (e && e.target);
             target.nextElementSibling.style.display = target.value ? 'block' : 'none';
+            if (target.value) {
+                input.classList.add('filter-select');
+            } else {
+                input.classList.remove('filter-select');
+            }
         }
     });
 
@@ -131,11 +128,6 @@ function clearInput() {
     // });
 }
 
-function conditionallyHideClearIcon(e) {
-    var target = (e && e.target) || input;
-    target.nextElementSibling.style.display = target.value ? 'block' : 'none';
-}
-
 function clearSelect() {
     Array.prototype.forEach.call(document.querySelectorAll('.clearable-select'), function (el) {
         var select = el.querySelector('select');
@@ -144,6 +136,7 @@ function clearSelect() {
         select.addEventListener('change', conditionallyHideClearIcon);
         el.querySelector('[data-clear-input]').addEventListener('click', function (e) {
             select.value = '';
+            select.selectedIndex = 0;
             select.classList.remove('filter-select');
             conditionallyHideClearIcon();
         });
@@ -152,6 +145,13 @@ function clearSelect() {
             let target = select || (e && e.target);
             target.nextElementSibling.style.display =
                 target.value ? 'block' : 'none';
+
+            if (target.value == "") {
+                target.classList.remove('filter-select');
+                target.selectedIndex = 0;
+            } else {
+                target.classList.add('filter-select');
+            }
         }
     });
 }

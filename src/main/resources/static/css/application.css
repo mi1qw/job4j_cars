@@ -603,7 +603,8 @@ input[type=number] {
 
 
 input::placeholder {
-    color: black;
+    /*color: black;*/
+    color: gray;
     font-size: 1rem;
     padding: .375rem 2.25rem .375rem 0rem;
     -moz-padding-start: calc(0.75rem - 3px);

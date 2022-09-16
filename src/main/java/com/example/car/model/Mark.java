@@ -4,12 +4,14 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
+
+@Entity
+@Table(name = "mark")
 @Data
 @EqualsAndHashCode(of = "id")
 @NoArgsConstructor
-@Entity
-@Table(name = "mark")
 public class Mark {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
