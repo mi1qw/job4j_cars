@@ -37,12 +37,12 @@ class JsonUtilTest {
         String s = jsonUtil.mapToJson(map);
         log.info("{}", s);
 
-        Mark mark = markService.findById(1L);
+        Mark mark = markService.findById(2L);
         Map<Long, Model> models = modelService.getModelsByMark(mark);
         Map<Long, String> longStringMap = models.values().stream()
                 .collect(Collectors.toMap(
                         Model::getId,
-                        Model::getName)
+                        (n)->n.getName())
                 );
         log.info("{}", jsonUtil.mapToJson(longStringMap));
     }

@@ -1,13 +1,16 @@
 // ************************ Start ***************** //
+var elementMark;
+var elementModel;
 document.addEventListener('DOMContentLoaded', (event) => {
+    elementModel = document.querySelector('.model select');
+    elementMark = document.querySelector('.mark select');
     addyears();
     addEngineDisplacement();
     clearInput();
     clearSelect();
     addModels();
 });
-var elementMark;
-var elementModel;
+
 
 function addyears() {
     document.querySelectorAll('.yearFrom select').forEach(n => {
@@ -24,16 +27,12 @@ function addEngineDisplacement() {
 }
 
 function addModels() {
-    elementModel = document.querySelector('.model select');
-    elementMark = document.querySelector('.mark select');
     elementMark.addEventListener('change', (e) => {
         if (elementMark.value) {
             sendClick('id', elementMark.value,
                 '/cars/models?id=' + elementMark.value,
                 (e) => {
-                    while (elementModel.options.length > 1) {
-                        elementModel.remove(1);
-                    }
+                    cleanModels()
                     var models = JSON.parse(e.target.response);
                     var map = new Map(Object.entries(models));
                     map.forEach((k, v) => {
@@ -41,10 +40,16 @@ function addModels() {
                     })
                 }
             );
-
+        } else {
+            cleanModels();
         }
     })
+}
 
+function cleanModels() {
+    while (elementModel.options.length > 1) {
+        elementModel.remove(1);
+    }
 }
 
 function sendClick(nameValue, value, url, callback) {
@@ -139,6 +144,9 @@ function clearSelect() {
             select.selectedIndex = 0;
             select.classList.remove('filter-select');
             conditionallyHideClearIcon();
+            if (select == elementMark) {
+                cleanModels();
+            }
         });
 
         function conditionallyHideClearIcon(e) {

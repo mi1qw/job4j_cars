@@ -318,7 +318,7 @@ public class CarFormController {
      * @param id id
      * @return string
      */
-    @GetMapping("/models")
+    @GetMapping(value = "/models", produces = "application/json; charset=utf-8")
     @ResponseBody
     public String getModels(final @RequestParam Long id) {
         Mark mark = new Mark();
