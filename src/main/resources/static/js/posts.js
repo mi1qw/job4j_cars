@@ -47,6 +47,7 @@ function addModels() {
 }
 
 function cleanModels() {
+    elementModel.classList.remove('filter-select');
     while (elementModel.options.length > 1) {
         elementModel.remove(1);
     }
