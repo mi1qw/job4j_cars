@@ -1,5 +1,6 @@
 package com.example.car.web;
 
+import com.example.car.model.Account;
 import com.example.car.model.Car;
 import com.example.car.util.CarState;
 import com.example.car.util.FilterForm1;
@@ -13,7 +14,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 @SessionScope
 @Data
 public class UserSession {
-//    private final AppScope appScope;
+    //    private final AppScope appScope;
+    private Account account;
     private CarState carState;
     private Car newCar;
     private AtomicInteger maxID;

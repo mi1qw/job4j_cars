@@ -1,8 +1,9 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
-<div th:fragment="filterForm(filter)" class="py-5 ps-4">
-  <div th:text="*{filter}"></div>
+<div th:fragment="filterForm(filter)"
+     class="d-flex justify-content-center mt-3 mb-4">
+  <!--  <div th:text="*{filter}"></div>-->
   <form th:action="@{/posts/}" th:object="${filter}" method="post"
         id="form-filter">
     <!--<div th:text=""></div>-->
@@ -88,11 +89,8 @@
       <div th:insert="::sort('Сортировка', 'sort', *{sort})"
            class="sort width-elm"></div>
 
+      <button type="submit" class="btn btn-primary findBtn">Найти</button>
     </div>
-
-    <button type="submit" class="btn btn-primary m-3"></button>
-
-
   </form>
 
 </div>

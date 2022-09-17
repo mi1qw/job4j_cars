@@ -5,13 +5,17 @@
 .main-ticket-photo {
     width: 300px;
     height: 200px;
+    /*width: 430px;*/
+    /*height: 320px;*/
     object-fit: cover;
     border-radius: 5px;
 }
 
 .content-post {
     min-height: 200px;
-    margin-left: 315px;
+    /*min-height: 320px;*/
+    margin-left: 325px;
+    /*margin-left: 435px;*/
     display: block;
     width: auto;
     padding: 0;
@@ -24,6 +28,7 @@
 
 .post-item {
     width: 700px;
+    /*width: 850px;*/
     border-bottom: 1px solid #e0e3e4;
     margin-bottom: 20px;
     padding-bottom: 20px;
