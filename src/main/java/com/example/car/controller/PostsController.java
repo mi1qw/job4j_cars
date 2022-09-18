@@ -23,7 +23,7 @@ public class PostsController {
     private final CarService carService;
     private final UserSession userSession;
 
-    @GetMapping("/")
+    @GetMapping("")
     String posts(final Model model) {
 
 //        FilterDto filter = FilterDto.builder()
@@ -45,7 +45,7 @@ public class PostsController {
     }
 
     //    ResponseEntity<?>
-    @PostMapping("/")
+    @PostMapping("")
     String filterForm(final @ModelAttribute(name = "filter") FilterDto filterDto,
                       final Model model) {
         log.info("{}", filterDto);

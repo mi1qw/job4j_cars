@@ -37,7 +37,7 @@
       </form>
     </div>
     <div th:if="${@userSession.getAccount()!=null}">
-      <span class="pe-3" th:text="${@userSession.getAccount().getName()}"></span>
+      <span class="pe-3" th:text="${@userSession.getAccount().getFirstName()}"></span>
       <a class="text-decoration-none pe-5"
          th:href="@{/logout}">LogOut</a>
     </div>

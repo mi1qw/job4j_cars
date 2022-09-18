@@ -10,7 +10,7 @@
          th:placeholder="${placeholder}"
          class="form-control"
          th:field="*{__${fieldName}__}"
-         th:classappend="${account.name!=null} ?
+         th:classappend="${account['__${fieldName}__']!=null} ?
           (${#fields.hasErrors('__${fieldName}__')} ? ' is-invalid')"
   >
   <div class="text-danger"
