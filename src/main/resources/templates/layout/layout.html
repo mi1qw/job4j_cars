@@ -5,8 +5,7 @@
       lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
-  <!--  <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">Taming Thymeleaf</title>-->
+  <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">Car market</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
@@ -18,11 +17,11 @@
           integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
           crossorigin="anonymous"></script>
   <link rel='stylesheet' th:href="@{/css/application.css}">
+  <th:block layout:fragment="css"></th:block>
   <link rel="shortcut icon" type="image/png" th:href="@{/images/favicon.ico}"/>
 </head>
 <body>
 <div class="container">
-
 
 
   <div th:replace="fragments/loginSigin::logInsignIn()"></div>
