@@ -11,9 +11,18 @@ function addCheckboxes() {
     document.querySelectorAll('table input[type="checkbox"]')
         .forEach(n => {
             n.addEventListener('change', (e) => {
+                if (n.checked){
+                    n.setAttribute("checked", "checked")
+                    n.classList.add('checkboxStatus');
+                }
+                else{
+                    n.removeAttribute("checked");
+                    n.classList.remove('checkboxStatus');
+                }
+
                 sendClick("", '/myposts/status?id=' + n.id + '&value=' + n.checked,
                     () => {
-                        console.log("checkbox status car id",n.id, n.checked)
+                        console.log("checkbox status car id", n.id, n.checked)
                     });
             })
         })
