@@ -2,7 +2,9 @@ package com.example.car.store;
 
 import com.example.car.dto.FileImageDto;
 import com.example.car.dto.FilterDto;
+import com.example.car.model.Account;
 import com.example.car.model.Car;
+import com.example.car.model.Status;
 import com.example.car.util.FilterForm1;
 import com.example.car.web.UserSession;
 import jakarta.persistence.PersistenceException;
@@ -176,5 +178,20 @@ public class CarStore extends CrudPersist<Car> {
         return carFiltered;
     }
 
+    public List<Car> findMyCar(final Account account) {
+        return tx(session ->
+                session.createQuery("from Car c where c.account=:account", Car.class)
+                        .setParameter("account", account)
+                        .list()
+        );
+    }
 
+    public boolean changeStatus(final Long id, final Status status) {
+        Integer res = tx(session ->
+                session.createQuery("update Car c set c.status=:status where c.id=:id")
+                        .setParameter("id", id)
+                        .setParameter("status", status)
+                        .executeUpdate());
+        return res != 0;
+    }
 }

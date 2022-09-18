@@ -4,12 +4,6 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
-/*@Slf4j
-public enum Sort {
-    timeNewToOld,
-    priceExpensiveToCheap,
-    priceCheapToExpensive
-}*/
 @ToString
 @RequiredArgsConstructor(staticName = "of")
 @Data

@@ -1,0 +1,36 @@
+.main-ticket-photo {
+    width: 150px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.IconSvg_size_18 {
+    width: 18px;
+    height: 18px;
+}
+
+.edit-btn {
+    padding: 0.1em 0.5em 0.1em 0.5em;
+    color: white;
+    background-color: #02a55d;
+    border-color: #02a55d;
+    font-size: smaller;
+}
+
+.checkboxStatus {
+    background-color: hsl(153deg 98% 29%) !important;
+    border-color: hsl(153deg 98% 29%) !important;
+}
+
+.delete-btn {
+    padding: 0.1em 0.5em 0.1em 0.5em;
+    color: white;
+    background-color: #a50202;
+    border-color: #a50202;
+}
+
+.carName {
+    font-weight: bold;
+    color: slategrey;
+}

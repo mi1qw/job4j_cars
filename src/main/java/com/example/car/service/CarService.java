@@ -3,7 +3,9 @@ package com.example.car.service;
 import com.example.car.dto.CarMapper;
 import com.example.car.dto.FileImageDto;
 import com.example.car.dto.FilterDto;
+import com.example.car.model.Account;
 import com.example.car.model.Car;
+import com.example.car.model.Status;
 import com.example.car.store.CarStore;
 import com.example.car.util.State;
 import com.example.car.web.UserSession;
@@ -66,5 +68,17 @@ public class CarService {
 
     public List<Car> filterForm(final FilterDto filterDto) {
         return carStore.findByFilter(filterDto);
+    }
+
+    public List<Car> findMyCar() {
+        Account account = userSession.getAccount();
+        return carStore.findMyCar(account);
+    }
+
+    public boolean chageStatus(final Long id, final boolean status) {
+        if (status) {
+            return carStore.changeStatus(id, Status.onSale);
+        }
+        return carStore.changeStatus(id, Status.notActive);
     }
 }

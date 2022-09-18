@@ -11,6 +11,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -54,6 +55,8 @@ public class Account {
             groups = ValidationGroupOne.class)
     private String phoneNumber;
 
+    @Column(updatable = false)
+    @CreationTimestamp
     private LocalDateTime created;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
