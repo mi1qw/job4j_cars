@@ -144,6 +144,8 @@ public class CarFormController {
     @GetMapping("/edit/{id}")
     public String edit(final @PathVariable long id, final Model model) {
         Car car = carService.getCar(id);
+        userSession.setNewCar(car);
+        userSession.getOrder().set(car.getImages().size());
         CarDto carDto = carMapper.carToDto(car);
         model.addAttribute("carform", carDto);
 
@@ -308,7 +310,7 @@ public class CarFormController {
 //        final @ModelAttribute(name = "carform") CarDto carDto,
 //        final Model model){
 
-        return "addCar";
+        return "redirect:/myposts";
     }
 
     /**

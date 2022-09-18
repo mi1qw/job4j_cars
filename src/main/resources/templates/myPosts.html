@@ -383,6 +383,10 @@
     <div th:text="*{post.id}"></div>
   </div>
 
+  <a th:href="|/cars|" style="margin-right: 20px;">
+    <button type="button" class="btn edit-btn">добавить объявление</button>
+  </a>
+
   <table class="table caption-top">
     <caption>Объявления</caption>
     <thead class="table-light">
@@ -420,14 +424,14 @@
           <span th:text="${item.name}" class="carName"></span>
           <div class="d-flex justify-content-between align-items-center mt-3">
             <div th:insert="fragments/postCar::clockSVG(*{item.created})" class="me-2"></div>
-            <a th:href="@{|/item/${item.id}/edit|}" style="margin-right: 20px;">
+            <a th:href="@{|/cars/edit/${item.id}|}" style="margin-right: 20px;">
               <button type="button" class="btn edit-btn">редактировать</button>
             </a>
           </div>
         </div>
       </td>
       <td class="position-relative p-4">
-        <a th:href="@{|/item/${item.id}/edit|}"
+        <a th:href="@{|/cars/edit/${item.id}|}"
            class="position-absolute top-50 start-50 translate-middle">
           <button type="button" class="btn delete-btn">X</button>
         </a>
