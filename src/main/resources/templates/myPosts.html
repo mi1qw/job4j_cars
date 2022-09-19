@@ -6,9 +6,9 @@
       lang="en">
 <head>
   <title>Мои объявления</title>
-  <th:block layout:fragment="css">
-    <link rel='stylesheet' th:href="@{/css/myposts.css}">
-  </th:block>
+  <!--  <th:block layout:fragment="css">-->
+  <link rel='stylesheet' th:href="@{/css/myposts.css}">
+  <!--  </th:block>-->
 </head>
 <body>
 <div layout:fragment="page-content">
@@ -435,7 +435,7 @@
         </div>
       </td>
       <td class="position-relative p-4">
-        <a th:href="@{|/cars/edit/${item.id}|}"
+        <a th:href="@{|/myposts/deleteCar/${item.id}|}"
            class="position-absolute top-50 start-50 translate-middle">
           <button type="button" class="btn delete-btn">X</button>
         </a>

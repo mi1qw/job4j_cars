@@ -47,7 +47,7 @@ public class State {
                 .getStepList()
                 .get(8)
                 .getValue();
-        log.info("{}", genMod);
+
 
         int[] filtered = {0};
         Generations generations = carState.getGenerations().stream()

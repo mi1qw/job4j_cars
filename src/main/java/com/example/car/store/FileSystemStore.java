@@ -19,8 +19,8 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.stream.Stream;
 
-@Slf4j
 @Repository
+@Slf4j
 public class FileSystemStore implements StorageService {
     private final Path rootLocation;
 

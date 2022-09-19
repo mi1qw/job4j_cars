@@ -2,6 +2,11 @@ storage.location: uploadPosts
 
 logging.level:
   root: info
+  org:
+    hibernate:
+      SQL: error
+      orm.jdbc.bind: error
+
 
 spring:
   sql.init.mode: always

@@ -7,6 +7,7 @@ import com.example.car.exception.StorageException;
 import com.example.car.model.Car;
 import com.example.car.model.Generations;
 import com.example.car.model.Mark;
+import com.example.car.model.Status;
 import com.example.car.service.CarService;
 import com.example.car.service.FileService;
 import com.example.car.service.MarkService;
@@ -131,7 +132,8 @@ public class CarFormController {
 
         Car newCar = userSession.getNewCar();
         if (newCar == null) {
-            Car car = carService.addCar();
+//            Car car = carService.addCar();
+            Car car = carService.createAccountCar();
             userSession.setNewCar(car);
             newCar = car;
         }
@@ -305,6 +307,7 @@ public class CarFormController {
         Car newCar = state.getResultCar();
 //        Car newCar = userSession.getNewCar();
         carMapper.updateCar(carDto, newCar);
+        newCar.setStatus(Status.onSale);
         carService.merge(newCar);
 //        log.info("{}", newCar);
 //        final @ModelAttribute(name = "carform") CarDto carDto,

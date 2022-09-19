@@ -22,6 +22,7 @@ public class CarService {
     private final CarMapper carMapper;
     private final State state;
     private final UserSession userSession;
+//    private final FileService fileService;
 
     public Car addCar() {
         Account account = userSession.getAccount();
@@ -78,10 +79,19 @@ public class CarService {
         return carStore.findMyCar(account);
     }
 
+    public Car createAccountCar() {
+        Account account = userSession.getAccount();
+        return carStore.createAccountCar(account);
+    }
+
     public boolean chageStatus(final Long id, final boolean status) {
         if (status) {
             return carStore.changeStatus(id, Status.onSale);
         }
         return carStore.changeStatus(id, Status.notActive);
+    }
+
+    public boolean deleteCar(final Long id) {
+        return carStore.deleteCar(id);
     }
 }

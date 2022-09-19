@@ -2,28 +2,39 @@ package com.example.car.store;
 
 import com.example.car.dto.FileImageDto;
 import com.example.car.dto.FilterDto;
+import com.example.car.exception.StorageException;
 import com.example.car.model.Account;
 import com.example.car.model.Car;
 import com.example.car.model.Status;
+import com.example.car.service.FileService;
 import com.example.car.util.FilterForm1;
 import com.example.car.web.UserSession;
 import jakarta.persistence.PersistenceException;
+import lombok.AccessLevel;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.ScrollMode;
 import org.hibernate.ScrollableResults;
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.ForkJoinPool;
 
 @Repository
 @Slf4j
 public class CarStore extends CrudPersist<Car> {
-    private UserSession userSession;
+    private final UserSession userSession;
+    private final FileService fileService;
 
-    public CarStore(final UserSession userSession) {
+    public CarStore(final UserSession userSession, @Lazy final FileService fileService) {
         super(Car.class);
         this.userSession = userSession;
+        this.fileService = fileService;
     }
 
     public Car merge(final Car car) {
@@ -186,6 +197,28 @@ public class CarStore extends CrudPersist<Car> {
         );
     }
 
+    public Car createAccountCar(final Account account) {
+        return tx(session -> {
+                    List<Car> cars = session.createQuery(
+                                    "from Car c where c.account=:account and c.status=:status",
+                                    Car.class)
+                            .setParameter("account", account)
+                            .setParameter("status", Status.newItem)
+                            .list();
+                    if (!cars.isEmpty()) {
+                        while (cars.size() > 1) {
+                            session.remove(cars.get(1));
+                        }
+                        return cars.get(0);
+                    }
+                    Car car = new Car();
+                    car.setAccount(account);
+                    session.persist(car);
+                    return car;
+                }
+        );
+    }
+
     public boolean changeStatus(final Long id, final Status status) {
         Integer res = tx(session ->
                 session.createQuery("update Car c set c.status=:status where c.id=:id")
@@ -193,5 +226,28 @@ public class CarStore extends CrudPersist<Car> {
                         .setParameter("status", status)
                         .executeUpdate());
         return res != 0;
+    }
+
+    public boolean deleteCar(final Long id) {
+        List<String> images = new ArrayList<>();
+        txv(session -> {
+            Car car = session.find(Car.class, id);
+            images.addAll(car.getImages());
+            session.remove(car);
+        });
+        ForkJoinPool.commonPool().execute(() -> {
+            images.forEach(n -> {
+                fileService.deleteByName(n);
+            });
+        });
+        return true;
+//        try {
+//            fileService.deleteByName(name);
+//            car = carService.deleteImageByName(car, name);
+//            userSession.setNewCar(car);
+//        } catch (StorageException e) {
+//        }
+
+//        return delete(id);
     }
 }
