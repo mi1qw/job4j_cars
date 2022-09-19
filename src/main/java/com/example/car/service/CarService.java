@@ -24,7 +24,10 @@ public class CarService {
     private final UserSession userSession;
 
     public Car addCar() {
-        return carStore.add(new Car());
+        Account account = userSession.getAccount();
+        Car car = new Car();
+        car.setAccount(account);
+        return carStore.add(car);
     }
 
     public Car merge(final Car car) {

@@ -310,6 +310,11 @@ public class CarFormController {
 //        final @ModelAttribute(name = "carform") CarDto carDto,
 //        final Model model){
 
+
+        userSession.setCarState(null);
+        userSession.setNewCar(null);
+
+
         return "redirect:/myposts";
     }
 
