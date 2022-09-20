@@ -221,9 +221,11 @@ public class CarStore extends CrudPersist<Car> {
 
     public boolean changeStatus(final Long id, final Status status) {
         Integer res = tx(session ->
-                session.createQuery("update Car c set c.status=:status where c.id=:id")
+                session.createQuery("update Car c set c.status=:status where c.id=:id and c"
+                                    + ".status!=:newItem")
                         .setParameter("id", id)
                         .setParameter("status", status)
+                        .setParameter("newItem", Status.newItem)
                         .executeUpdate());
         return res != 0;
     }

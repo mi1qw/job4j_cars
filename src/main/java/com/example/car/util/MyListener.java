@@ -57,10 +57,12 @@ public class MyListener extends RequestContextListener {
             if (newCar != null) {
                 Long id = newCar.getId();
                 Status status = newCar.getStatus();
-                Mark mark = newCar.getMark();
+                String markID = newCar.getMark() != null
+                        ? String.valueOf(newCar.getMark().getId())
+                        : "";
                 newCarStr = newCarStr
                         .concat(String.valueOf(id)).concat(", ")
-                        .concat(String.valueOf(mark.getId())).concat(", ")
+                        .concat(markID).concat(", ")
                         .concat(status.name());
             }
 

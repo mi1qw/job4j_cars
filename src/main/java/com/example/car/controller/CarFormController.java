@@ -114,7 +114,7 @@ public class CarFormController {
                         .odometer((short) 0)
                         .build()
         );
-
+        log.info("{}", "\"/add\"");
         CarState state = userSession.getCarState();
         if (state == null) {
             CarState carState = this.state.createCarState();
@@ -130,13 +130,14 @@ public class CarFormController {
         // TODO упростить в один метод
         //  как проверить что в сесии ошибка наличия файлов
 
-        Car newCar = userSession.getNewCar();
-        if (newCar == null) {
-//            Car car = carService.addCar();
-            Car car = carService.createAccountCar();
-            userSession.setNewCar(car);
-            newCar = car;
-        }
+        Car newCar;
+//        Car newCar = userSession.getNewCar();
+//        if (newCar == null) {
+        Car car = carService.createCarAccount();
+        userSession.setNewCar(car);
+        newCar = car;
+//        }
+
 //        log.info("{}", newCar);
         // надо начинать не 0, со следующего List/size image
         userSession.getOrder().set(newCar.getImages().size());
@@ -147,6 +148,9 @@ public class CarFormController {
     public String edit(final @PathVariable long id, final Model model) {
         Car car = carService.getCar(id);
         userSession.setNewCar(car);
+        if (car.getStatus().equals(Status.newItem)) {
+            return "redirect:/cars/add";
+        }
         userSession.getOrder().set(car.getImages().size());
         CarDto carDto = carMapper.carToDto(car);
         model.addAttribute("carform", carDto);
@@ -194,21 +198,6 @@ public class CarFormController {
         }
 //        return "addCar";
         return "redirect:/cars/add";
-
-/*        CarState.State<?, ?> stepPrev;
-//        CarState.State<?, ?> stepNext;
-//        if (stateID == 0) {
-//            return "addCar";
-//        }
-//        stepPrev = state.getStateList().get(stateID - 1);
-        if (stateID + 1 < state.getStateList().size()) {
-            stepNext = state.getStateList().get(stateID + 1);
-            stepNext.makeOptions(optionByID);
-        }
-
-        log.info("stateID-{}  id-{}  value-{}  status-{}", stateID, id, step.getValue(),
-                step.isStatus());
-        return "addCar";*/
     }
 
     @GetMapping("/resetState")
