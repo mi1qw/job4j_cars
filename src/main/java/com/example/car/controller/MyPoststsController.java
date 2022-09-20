@@ -1,6 +1,7 @@
 package com.example.car.controller;
 
 import com.example.car.model.Car;
+import com.example.car.model.Status;
 import com.example.car.service.CarService;
 import com.example.car.web.UserSession;
 import lombok.AllArgsConstructor;
@@ -11,7 +12,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/myposts")
@@ -24,7 +29,10 @@ public class MyPoststsController {
     @GetMapping("")
     String posts(final Model model) {
         List<Car> cars = carService.findMyCar();
+        Map<Status, List<Car>> statusMap = cars.stream()
+                .collect(Collectors.groupingBy(Car::getStatus));
         model.addAttribute("posts", cars);
+        model.addAttribute("statusMap", statusMap);
         return "myPosts";
     }
 
