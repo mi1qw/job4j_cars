@@ -52,6 +52,7 @@ public class MyPoststsController {
     @GetMapping("/deleteCar/{id}")
     String deleteCar(final @PathVariable("id") Long id) {
         carService.deleteCar(id);
+        userSession.setNewCar(null);
         return "redirect:/myposts";
     }
 
