@@ -4,8 +4,8 @@ logging.level:
   root: info
   org:
     hibernate:
-      SQL: error
-      orm.jdbc.bind: error
+      SQL: warn
+      orm.jdbc.bind: warn
 
 
 spring:

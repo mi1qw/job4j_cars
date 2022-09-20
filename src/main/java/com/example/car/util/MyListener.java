@@ -2,10 +2,8 @@ package com.example.car.util;
 
 import com.example.car.model.Account;
 import com.example.car.model.Car;
-import com.example.car.model.Mark;
 import com.example.car.model.Status;
 import com.example.car.web.UserSession;
-import jakarta.annotation.PostConstruct;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletRequestEvent;
 import jakarta.servlet.annotation.WebListener;
@@ -14,10 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.context.request.RequestContextListener;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Configuration

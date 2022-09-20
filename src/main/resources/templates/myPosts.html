@@ -391,16 +391,18 @@
     <caption>Объявления</caption>
     <thead class="table-light">
     <tr>
+      <!--      <th scope="col"></th>-->
+      <th class="position-relative" scope="col" style="font-size: 0.8em;">
+        <span class="position-absolute top-50 translate-middle-y">Активировать</span>
+      </th>
       <th scope="col"></th>
-      <th scope="col" style="font-size: 0.8em;">активировать</th>
-      <th scope="col"></th>
-      <!--      <th scope="col">Created</th>-->
-      <th scope="col">Описание</th>
+      <th scope="col" style="font-size: 0.8em;">Описание</th>
+      <th scope="col" style="font-size: 0.8em;">Удалить</th>
     </tr>
     </thead>
     <tbody>
     <tr class="select-item" th:each="item,iterStat :*{posts}">
-      <th scope="row" th:text="${iterStat.count}">0</th>
+      <!--      <th scope="row" th:text="${iterStat.count}">0</th>-->
       <td class="position-relative p-3" style="width: 4rem">
         <div class="form-check form-switch position-absolute top-50 start-50 translate-middle">
           <input
@@ -434,20 +436,21 @@
           </div>
         </div>
       </td>
-      <td class="position-relative p-4">
+      <td class="position-relative p-4" style="width: 3rem;">
         <a th:href="@{|/myposts/deleteCar/${item.id}|}"
            class="position-absolute top-50 start-50 translate-middle">
           <button type="button" class="btn delete-btn">X</button>
         </a>
       </td>
     </tr>
-    <th:block layout:fragment="page-scripts">
-      <script th:src="@{/js/myPosts.js}"></script>
-    </th:block>
+
     </tbody>
   </table>
 
 
 </div>
+<th:block layout:fragment="page-scripts">
+  <script th:src="@{/js/myPosts.js}"></script>
+</th:block>
 </body>
 </html>
