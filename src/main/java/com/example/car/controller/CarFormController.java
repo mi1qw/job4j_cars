@@ -106,37 +106,48 @@ public class CarFormController {
 
     @GetMapping("/add")
     public String add(final Model model) {
-        model.addAttribute("carform",
-                CarDto.builder()
-                        .description("aaa")
-                        .price(BigDecimal.valueOf(1100L))
-                        .yearPurchase((short) 2001)
-                        .odometer((short) 0)
-                        .build()
-        );
-        log.info("{}", "\"/add\"");
+
+        //        Car newCar;
+        Car newCar = userSession.getNewCar();
+        if (newCar == null || !newCar.getStatus().equals(Status.newItem)) {
+            newCar = carService.createCarAccount();
+            userSession.setNewCar(newCar);
+            userSession.setCarState(null);
+        }
+
+
+        CarDto carDto = null;
         CarState state = userSession.getCarState();
         if (state == null) {
             CarState carState = this.state.createCarState();
             userSession.setCarState(carState);
-            CarState.State<?, ?> step0 = carState.getStepList().get(0);
-            step0.makeOptions();
+            carState.getStepList().get(0).makeOptions();
         } else {
-            CarState.State<?, ?> state0 = state.getStepList().get(0);
-            if (state0.getOptions().isEmpty()) {
-                state0.makeOptions();
+            if (state.isDone()) {
+                carDto = carMapper.carToDto(newCar);
             }
         }
+        model.addAttribute("carform", carDto);
+
+//        model.addAttribute("carform",
+//                CarDto.builder()
+//                        .description("aaa")
+//                        .price(BigDecimal.valueOf(1100L))
+//                        .yearPurchase((short) 2001)
+//                        .odometer((short) 0)
+//                        .build()
+//        );
+
+//        else {
+//            CarState.State<?, ?> state0 = state.getStepList().get(0);
+//            if (state0.getOptions().isEmpty()) {
+//                state0.makeOptions();
+//            }
+//        }
+
         // TODO упростить в один метод
         //  как проверить что в сесии ошибка наличия файлов
 
-        Car newCar;
-//        Car newCar = userSession.getNewCar();
-//        if (newCar == null) {
-        Car car = carService.createCarAccount();
-        userSession.setNewCar(car);
-        newCar = car;
-//        }
 
 //        log.info("{}", newCar);
         // надо начинать не 0, со следующего List/size image
