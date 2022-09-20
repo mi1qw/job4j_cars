@@ -2,11 +2,16 @@ package com.example.car;
 
 import com.example.car.model.*;
 import com.example.car.store.*;
+import jakarta.servlet.ServletContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.context.request.RequestContextListener;
+import org.springframework.web.filter.RequestContextFilter;
 
 import java.util.List;
 
@@ -37,6 +42,27 @@ public class Job4jCarApplication {
 
     public static void main(final String[] args) {
         SpringApplication.run(Job4jCarApplication.class, args);
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(RequestContextListener.class)
+    public RequestContextListener requestContextListener() {
+
+        return new RequestContextListener();
+    }
+
+    @Bean
+    public ServletListenerRegistrationBean<RequestContextListener> listenerRegistration3() {
+        return new ServletListenerRegistrationBean<>(
+                new RequestContextListener());
+    }
+
+    @Bean
+    public RequestContextFilter requestContextFilter(ServletContext servletContext) {
+        RequestContextFilter requestContextFilter = new RequestContextFilter();
+        requestContextFilter.setServletContext(servletContext);
+        requestContextFilter.setThreadContextInheritable(false);
+        return requestContextFilter;
     }
 
     @Bean

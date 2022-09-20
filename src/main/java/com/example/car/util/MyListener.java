@@ -6,8 +6,13 @@ import com.example.car.model.Mark;
 import com.example.car.model.Status;
 import com.example.car.web.UserSession;
 import jakarta.annotation.PostConstruct;
-import lombok.AllArgsConstructor;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletRequestEvent;
+import jakarta.servlet.annotation.WebListener;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.context.request.RequestContextListener;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -15,16 +20,24 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@Configuration
+@WebListener
 @Slf4j
-@AllArgsConstructor
-public class Debug {
-    private final UserSession userSession;
+public class MyListener extends RequestContextListener {
+    @Autowired
+    private UserSession userSession;
 
-    @PostConstruct
+    @Override
+    public void requestInitialized(final ServletRequestEvent requestEvent) {
+        ServletRequest servletRequest = requestEvent.getServletRequest();
+        //        super.requestInitialized(requestEvent);
+        userSessionLog();
+
+    }
+
+
     public void userSessionLog() {
-        ScheduledExecutorService threadPool = Executors.newScheduledThreadPool(2);
-        ScheduledFuture<?> fixedRate = threadPool.scheduleAtFixedRate(() -> {
-
+        try {
             Account account = userSession.getAccount();
             String accountStr = "account ";
             if (account != null) {
@@ -46,8 +59,8 @@ public class Debug {
                 Status status = newCar.getStatus();
                 Mark mark = newCar.getMark();
                 newCarStr = newCarStr
-                        .concat(String.valueOf(id))
-                        .concat(mark.getName())
+                        .concat(String.valueOf(id)).concat(", ")
+                        .concat(String.valueOf(mark.getId())).concat(", ")
                         .concat(status.name());
             }
 
@@ -68,12 +81,14 @@ public class Debug {
             FilterForm1 filterForm = userSession.getFilterForm();
             String filterFormStr = "filterForm ";
             if (filterForm != null) {
-                filterForm.getQuery();
-                filterFormStr = filterFormStr
-                        .concat(filterForm.getQuery());
+//                filterFormStr = filterFormStr
+//                        .concat(filterForm.getQuery());
             }
-            log.info("{}  {}  {}  {}  {}  \n{}", accountStr, carStateStr, newCarStr, maxIDStr,
+            log.info("{}   {}   {}   {}   {}   \n{}", accountStr, carStateStr, newCarStr, maxIDStr,
                     orderStr, filterFormStr);
-        }, 0, 5, TimeUnit.SECONDS);
+        } catch (Throwable e) {
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+        }
     }
 }
