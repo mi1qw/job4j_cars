@@ -76,9 +76,9 @@ public class MyListener extends RequestContextListener {
 
             FilterForm filterForm = userSession.getFilterForm();
             String filterFormStr = "filterForm ";
-            if (filterForm != null) {
-//                filterFormStr = filterFormStr
-//                        .concat(filterForm.getQuery());
+            if (filterForm != null && filterForm.getQuery() != null) {
+                filterFormStr = filterFormStr
+                        .concat(filterForm.getQuery());
             }
             log.info("{}   {}   {}   {}   {}   \n{}", accountStr, carStateStr, newCarStr, maxIDStr,
                     orderStr, filterFormStr);

@@ -11,6 +11,10 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * FilterForm for main paige.
+ * По умолчанию только сортировка "Сначала новые"=3.
+ */
 @Slf4j
 @Data
 public class FilterForm {
@@ -46,13 +50,14 @@ public class FilterForm {
 
         this.filterDto = FilterDto.builder()
 //                .mark(1)
-                .yearFrom((short) 2000)
-                .yearBefore((short) 2030)
-                .odometerFrom((short) 20)
-                .odometerBefore((short) 100)
-                .powerBefore((int) 22)
+//                .yearFrom((short) 2000)
+//                .yearBefore((short) 2030)
+//                .odometerFrom((short) 20)
+//                .odometerBefore((short) 100)
+//                .powerBefore((int) 22)
                 .sort(3)
                 .build();
+
     }
 
     public FilterForm(final String query) {
@@ -114,7 +119,7 @@ public class FilterForm {
             default -> " ORDER BY c.created DESC";
         };
         query = query.concat(sort);
-        log.info("{} - ", query);
+//        log.info("{}", query);
         return query;
     }
 
