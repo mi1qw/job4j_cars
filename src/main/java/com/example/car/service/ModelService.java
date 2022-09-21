@@ -7,16 +7,25 @@ import com.example.car.store.ModelStore;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class ModelService {
     private final ModelStore modelStore;
 
     private final Map<Long, Model> modelsMap = new HashMap<>();
-
+    private final Map<Mark, List<Model>> modelsByMark;
+    private final Map<Mark, List<Model>> modelsByMarkMap;
     public ModelService(final ModelStore modelStore) {
         this.modelStore = modelStore;
         modelStore.findAll().forEach(n -> modelsMap.put(n.getId(), n));
+        this.modelsByMark = modelsMap.values().stream()
+                .collect(Collectors.groupingBy(Model::getMark));
+
+        Map<Mark, Map<Long, String>> collect = modelsMap.values().stream()
+                .collect(Collectors.groupingBy(Model::getMark,
+                        Collectors.toMap(Model::getId, Model::getName)));
     }
 
     public List<Model> findAll() {

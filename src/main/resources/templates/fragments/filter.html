@@ -133,11 +133,20 @@
 
     <!--    <option th:if="${fieldID!= null}" value="">Любой</option>-->
 
+    <th:block th:if="${#strings.equals(key,'model')}">
+      <option th:each="option:${@modelService.getModelsByMark()}"
+              th:if="${option.getKey() != fieldID}"
+              th:value="${option.getKey()}"
+              th:text="${option.getValue().name}"></option>
+    </th:block>
 
-    <option th:each="option:${@appScope.filterMap.get(key)}"
-            th:if="${option.getKey() != fieldID}"
-            th:value="${option.getKey()}"
-            th:text="${option.getValue().name}"></option>
+
+    <th:block th:if="${!#strings.equals(key,'model')}">
+      <option th:each="option:${@appScope.filterMap.get(key)}"
+              th:if="${option.getKey() != fieldID}"
+              th:value="${option.getKey()}"
+              th:text="${option.getValue().name}"></option>
+    </th:block>
   </select>
   <span data-clear-input>&times;</span>
 </div>

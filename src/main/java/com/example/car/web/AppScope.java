@@ -30,7 +30,7 @@ public class AppScope {
     public void init() {
         this.filterMap = Map.of(
                 "mark", markService.findAllMap(),
-                "model", new HashMap<>(),
+                "model", modelService.findAllMap(),
                 "body", bodyService.findAllMap(),
                 "gearbox", gearboxService.findAllMap(),
                 "engine", engineService.findAllMap(),
