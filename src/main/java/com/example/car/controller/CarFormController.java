@@ -330,15 +330,8 @@ public class CarFormController {
      */
     @GetMapping(value = "/models", produces = "application/json; charset=utf-8")
     @ResponseBody
-    public String getModels(final @RequestParam Long id) {
-        Mark mark = new Mark();
-        mark.setId(id);
-        Map<Long, String> collect = modelService.getModelsByMark(mark)
-                .values().stream()
-                .collect(Collectors.toMap(
-                        com.example.car.model.Model::getId,
-                        com.example.car.model.Model::getName)
-                );
-        return jsonUtil.mapToJson(collect);
+    public String getModels(final @RequestParam Integer id) {
+        Map<Long, String> namesByMarkId = modelService.getModelNamesByMarkId(id);
+        return jsonUtil.mapToJson(namesByMarkId);
     }
 }

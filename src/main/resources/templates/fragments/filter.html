@@ -93,6 +93,9 @@
     </div>
   </form>
 
+<!--    <p th:text="*{model.getValue()}"></p>-->
+<!--    <p th:text="*{model}"></p>-->
+  </div>
 </div>
 
 
@@ -104,6 +107,7 @@
   <!--  <p th:text="|${@appScope.filterMap.get(key).get(1L)}  'get(1L)'|"></p>-->
   <!--  <p th:text="|${@appScope.filterMap.get(key).get(T(java.lang.Long).parseLong(fieldID))}  'get(T)'|"></p>-->
   <!--  <p th:each="option:${@appScope.filterMap.get(key)}" th:text="${option}"></p>-->
+
 
   <select class="form-select" aria-label="Default select example"
           th:id="${key}" th:name="${key}"
@@ -133,13 +137,13 @@
 
     <!--    <option th:if="${fieldID!= null}" value="">Любой</option>-->
 
+
     <th:block th:if="${#strings.equals(key,'model')}">
-      <option th:each="option:${@modelService.getModelsByMark()}"
+      <option th:each="option:${@modelService.getModelNamesByMarkId(__*{mark}__)}"
               th:if="${option.getKey() != fieldID}"
               th:value="${option.getKey()}"
-              th:text="${option.getValue().name}"></option>
+              th:text="${option.getValue()}"></option>
     </th:block>
-
 
     <th:block th:if="${!#strings.equals(key,'model')}">
       <option th:each="option:${@appScope.filterMap.get(key)}"
