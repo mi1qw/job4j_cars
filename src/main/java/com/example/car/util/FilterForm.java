@@ -13,7 +13,7 @@ import java.util.List;
 
 @Slf4j
 @Data
-public class FilterForm1 {
+public class FilterForm {
     private Mark mark;
     private Model model;
 
@@ -38,7 +38,7 @@ public class FilterForm1 {
     private List<FilterFormIn> params = new ArrayList<>();
 //    private Map<String, Field> fieldMap = new HashMap<>();
 
-    public FilterForm1() {
+    public FilterForm() {
         // TODO  FilterDto можно хранить в бд и подставлять при создании сессии
 //        this.query = "select c from Car c";
         this.baseQuery = "from Car c join fetch c.gearbox "
@@ -55,7 +55,7 @@ public class FilterForm1 {
                 .build();
     }
 
-    public FilterForm1(final String query) {
+    public FilterForm(final String query) {
         this.baseQuery = query;
     }
 
@@ -121,7 +121,7 @@ public class FilterForm1 {
         return query;
     }
 
-    public FilterForm1 addFromParam(final String name, final Object from) {
+    public FilterForm addFromParam(final String name, final Object from) {
         if (from != null) {
             params.add(new ElementForm<>(name, from) {
                 @Override
@@ -138,7 +138,7 @@ public class FilterForm1 {
         return this;
     }
 
-    public FilterForm1 addBeforeParam(final String name, final Object before) {
+    public FilterForm addBeforeParam(final String name, final Object before) {
         if (before != null) {
             params.add(new ElementForm<>(name, before) {
                 @Override
@@ -156,7 +156,7 @@ public class FilterForm1 {
     }
 
 
-    public FilterForm1 addSorting(final String name, final Object value) {
+    public FilterForm addSorting(final String name, final Object value) {
         if (value != null) {
             params.add(new ElementForm<>(name, value) {
                 @Override
@@ -178,7 +178,7 @@ public class FilterForm1 {
     }
 
 
-    public FilterForm1 addParam(final String name, final Object value) {
+    public FilterForm addParam(final String name, final Object value) {
         if (value != null) {
             params.add(ElementForm.of(name, value));
         }

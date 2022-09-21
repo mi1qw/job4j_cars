@@ -2,26 +2,21 @@ package com.example.car.store;
 
 import com.example.car.dto.FileImageDto;
 import com.example.car.dto.FilterDto;
-import com.example.car.exception.StorageException;
 import com.example.car.model.Account;
 import com.example.car.model.Car;
 import com.example.car.model.Status;
 import com.example.car.service.FileService;
-import com.example.car.util.FilterForm1;
+import com.example.car.util.FilterForm;
 import com.example.car.web.UserSession;
 import jakarta.persistence.PersistenceException;
-import lombok.AccessLevel;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.ScrollMode;
 import org.hibernate.ScrollableResults;
 import org.hibernate.query.Query;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ForkJoinPool;
 
@@ -168,7 +163,7 @@ public class CarStore extends CrudPersist<Car> {
     }
 
     public List<Car> findByFilter(final FilterDto filterDto) {
-        FilterForm1 filterForm = userSession.getFilterForm();
+        FilterForm filterForm = userSession.getFilterForm();
         filterForm.update(filterDto);
         List<Car> carFiltered = tx(session -> {
             Query<Car> query = session.createQuery(

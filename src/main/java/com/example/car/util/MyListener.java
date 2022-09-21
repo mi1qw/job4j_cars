@@ -74,7 +74,7 @@ public class MyListener extends RequestContextListener {
                         .concat(String.valueOf(order.get()));
             }
 
-            FilterForm1 filterForm = userSession.getFilterForm();
+            FilterForm filterForm = userSession.getFilterForm();
             String filterFormStr = "filterForm ";
             if (filterForm != null) {
 //                filterFormStr = filterFormStr

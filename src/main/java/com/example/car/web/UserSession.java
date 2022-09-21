@@ -3,7 +3,7 @@ package com.example.car.web;
 import com.example.car.model.Account;
 import com.example.car.model.Car;
 import com.example.car.util.CarState;
-import com.example.car.util.FilterForm1;
+import com.example.car.util.FilterForm;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
@@ -20,7 +20,7 @@ public class UserSession {
     private Car newCar;
     private AtomicInteger maxID;
     private AtomicInteger order = new AtomicInteger();
-    private FilterForm1 filterForm = new FilterForm1();
+    private FilterForm filterForm = new FilterForm();
     // TODO создавать при создании сессии
 
 //    public UserSession(final AppScope appScope) {

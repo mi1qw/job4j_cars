@@ -22,7 +22,7 @@ class FilterFormTest implements SessionStore {
 
     @Test
     void emptyParam() {
-        FilterForm1 carC = new FilterForm1("select c from Car c");
+        FilterForm carC = new FilterForm("select c from Car c");
         List<Car> tx = tx(session ->
                 session.createQuery(carC.makeQuery(), Car.class)
                         .list());
@@ -33,7 +33,7 @@ class FilterFormTest implements SessionStore {
     @Test
     void addParam() {
         Color color = colorService.findById(11L);
-        FilterForm1 carC = new FilterForm1("select c from Car c");
+        FilterForm carC = new FilterForm("select c from Car c");
         carC
 //                .addParam("year", 2021)
 //                .addParam("color", color);
