@@ -49,15 +49,10 @@ public class PostsController {
     String filterForm(final @ModelAttribute(name = "filter") FilterDto filterDto,
                       final Model model) {
         log.info("{}", filterDto);
-
         List<Car> cars = carService.filterForm(filterDto);
         model.addAttribute("posts", cars);
-
-
         model.addAttribute("filter",
                 userSession.getFilterForm().getFilterDto());
-
-        //        return new ResponseEntity<>(HttpStatus.OK);
         return "posts";
     }
 }

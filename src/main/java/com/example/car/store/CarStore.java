@@ -178,7 +178,7 @@ public class CarStore extends CrudPersist<Car> {
 
             return carQuery
                     .setFirstResult(0)
-                    .setMaxResults(2)
+                    .setMaxResults(20)
                     .list();
         });
         return carFiltered;

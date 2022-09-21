@@ -62,8 +62,11 @@ public class FilterForm {
     public void update(final FilterDto filter) {
         this.filterDto = filter;
         params.clear();
-        addParam("mark", filter.getMark());
-        addParam("model", filter.getModel());
+
+        addParam("status", Status.onSale);
+
+        addParamID("mark", filter.getMark());
+        addParamID("model", filter.getModel());
 
         addFromParam("year", filter.getYearFrom());
         addBeforeParam("year", filter.getYearBefore());
@@ -80,29 +83,30 @@ public class FilterForm {
         addFromParam("price", filter.getPriceFrom());
         addBeforeParam("price", filter.getPriceBefore());
 
-        addParam("body", filter.getBody());
-        addParam("gearbox", filter.getGearbox());
-        addParam("engine", filter.getEngine());
-        addParam("transmission", filter.getTransmission());
+        addParamID("body", filter.getBody());
+        addParamID("gearbox", filter.getGearbox());
+        addParamID("engine", filter.getEngine());
+        addParamID("transmission", filter.getTransmission());
 
 //        addSorting("sort", filter.getSort());
     }
 
     public String makeQuery() {
-        if (params.isEmpty()) {
-            return query;
-        }
+//        if (params.isEmpty()) {
+//            return query;
+//        }
         this.query = baseQuery
                 .concat(" where")
                 .concat(params.get(0).getQuery());
-        if (params.size() == 1) {
-            return query;
-        }
+//        if (params.size() == 1) {
+//            return query;
+//        }
         for (int i = 1; i < params.size(); i++) {
             this.query = query
                     .concat(" and")
                     .concat(params.get(i).getQuery());
         }
+
 
         String sort = switch (filterDto.getSort()) {
             case 1 -> " ORDER BY c.price ASC";
@@ -178,13 +182,29 @@ public class FilterForm {
     }
 
 
-    public FilterForm addParam(final String name, final Object value) {
+    public FilterForm addParamID(final String name, final Object value) {
         if (value != null) {
             params.add(ElementForm.of(name, value));
         }
         return this;
     }
 
+    public FilterForm addParam(final String name, final Object value) {
+        if (value != null) {
+            params.add(new ElementForm<>(name, value) {
+                @Override
+                public String getQuery() {
+                    return " c.".concat(name).concat("=:").concat(name);
+                }
+
+                @Override
+                public Query<Car> setParameter(final Query<Car> query) {
+                    return query.setParameter(name, value);
+                }
+            });
+        }
+        return this;
+    }
 
     @RequiredArgsConstructor(staticName = "of")
     private static class ElementForm<T> implements FilterFormIn<Car> {
