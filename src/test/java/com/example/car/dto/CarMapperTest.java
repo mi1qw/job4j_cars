@@ -3,6 +3,7 @@ package com.example.car.dto;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.example.car.model.Car;
+import com.example.car.service.CarService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ import static org.assertj.core.api.Assertions.*;
 class CarMapperTest {
     @Autowired
     CarMapper carMapper;
+    @Autowired
+    CarService carService;
 
     @Test
     void carToDto() {
@@ -76,5 +79,14 @@ class CarMapperTest {
                 .build();
         carMapper.updateCar(carDto, car);
         log.info("{}", car);
+    }
+
+    @Test
+    void carToPostDto() {
+        // TODO переделать на получение конкретного id как-то
+        Car car = carService.finAll().get(0);
+        PostDto postDto = carMapper.carToPostDto(car);
+        log.info("{}", postDto.getMark());
+        log.info("{}", postDto);
     }
 }

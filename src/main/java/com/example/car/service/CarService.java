@@ -114,4 +114,13 @@ public class CarService {
     public boolean deleteCar(final Long id) {
         return carStore.deleteCar(id);
     }
+
+    public Car findCarPost(final Long id) {
+        Car carPost = carStore.findCarPost(id);
+        Engine engn = carPost.getEngine();
+        Engine engine = engineService.findById(engn.getId());
+        carPost.setEngine(engine);
+
+        return carPost;
+    }
 }

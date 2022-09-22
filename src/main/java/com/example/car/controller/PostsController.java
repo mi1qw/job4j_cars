@@ -42,6 +42,12 @@ public class PostsController {
         return "posts";
     }
 
+    @GetMapping("id")
+    String carPost(final @PathVariable("id") Long id,
+                   final Model model) {
+        carService.findMyCar();
+        return "carPost";
+    }
 
 //    @PostMapping("")
 //    String filterForm(final @ModelAttribute(name = "filter") FilterDto filterDto,

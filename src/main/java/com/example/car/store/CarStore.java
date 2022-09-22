@@ -247,4 +247,16 @@ public class CarStore extends CrudPersist<Car> {
 
 //        return delete(id);
     }
+
+
+    public Car findCarPost(final Long id) {
+        tx(session ->
+                session.createQuery("from Car c join fetch c.gearbox "
+                                    + "join fetch c.transmission",
+                                Car.class)
+                        .list());
+        return null;
+    }
+
+
 }
