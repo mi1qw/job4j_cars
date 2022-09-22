@@ -27,4 +27,8 @@ public class GearboxService {
     public Map<Long, Gearbox> findAllMap() {
         return gearboxMap;
     }
+
+    public Gearbox findById(final Long id) {
+        return gearboxMap.get(id);
+    }
 }

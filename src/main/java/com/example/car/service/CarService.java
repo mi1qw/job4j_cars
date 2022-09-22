@@ -3,9 +3,7 @@ package com.example.car.service;
 import com.example.car.dto.CarMapper;
 import com.example.car.dto.FileImageDto;
 import com.example.car.dto.FilterDto;
-import com.example.car.model.Account;
-import com.example.car.model.Car;
-import com.example.car.model.Status;
+import com.example.car.model.*;
 import com.example.car.store.CarStore;
 import com.example.car.util.State;
 import com.example.car.web.UserSession;
@@ -22,6 +20,9 @@ public class CarService {
     private final CarMapper carMapper;
     private final State state;
     private final UserSession userSession;
+    private final GearboxService gearboxService;
+    private final TransmissionService transmissionService;
+    private final EngineService engineService;
 //    private final FileService fileService;
 
     public Car addCar() {
@@ -70,8 +71,27 @@ public class CarService {
         return carStore.finCarsWithEngineGearFILTR();
     }
 
+    /**
+     * выборка согласно фильтру.
+     * А не быстрее ли выбирать с Join в самой БД, без использования "кэша" в java
+     *
+     * @param filterDto filterDto
+     * @return cars
+     */
     public List<Car> filterForm(final FilterDto filterDto) {
-        return carStore.findByFilter(filterDto);
+        List<Car> cars = carStore.findByFilter(filterDto);
+        cars.forEach(n -> {
+            Gearbox gbx = n.getGearbox();
+            Gearbox gearbox = gearboxService.findById(gbx.getId());
+            n.setGearbox(gearbox);
+            Transmission trnsm = n.getTransmission();
+            Transmission transmission = transmissionService.findById(trnsm.getId());
+            n.setTransmission(transmission);
+            Engine engn = n.getEngine();
+            Engine engine = engineService.findById(engn.getId());
+            n.setEngine(engine);
+        });
+        return cars;
     }
 
     public List<Car> findMyCar() {

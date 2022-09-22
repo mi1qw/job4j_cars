@@ -1,6 +1,7 @@
 package com.example.car.service;
 
 import com.example.car.model.Engine;
+import com.example.car.model.Gearbox;
 import com.example.car.store.EngineStore;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -27,5 +28,9 @@ public class EngineService {
 
     public Map<Long, Engine> findAllMap() {
         return engineMap;
+    }
+
+    public Engine findById(final Long id) {
+        return engineMap.get(id);
     }
 }

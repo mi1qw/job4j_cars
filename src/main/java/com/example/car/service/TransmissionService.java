@@ -1,5 +1,6 @@
 package com.example.car.service;
 
+import com.example.car.model.Gearbox;
 import com.example.car.model.Transmission;
 import com.example.car.store.TransmissionStore;
 import lombok.extern.slf4j.Slf4j;
@@ -26,5 +27,9 @@ public class TransmissionService {
 
     public Map<Long, Transmission> findAllMap() {
         return transmissionMap;
+    }
+
+    public Transmission findById(final Long id) {
+        return transmissionMap.get(id);
     }
 }
