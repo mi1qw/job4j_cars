@@ -44,9 +44,9 @@ public class FilterForm {
 
     public FilterForm() {
         // TODO  FilterDto можно хранить в бд и подставлять при создании сессии
-//        this.query = "select c from Car c";
-        this.baseQuery = "from Car c join fetch c.gearbox "
-                         + "join fetch c.transmission";
+        this.baseQuery = "select c from Car c";
+//        this.baseQuery = "from Car c join fetch c.gearbox "
+//                         + "join fetch c.transmission";
 
         this.filterDto = FilterDto.builder()
 //                .mark(1)
