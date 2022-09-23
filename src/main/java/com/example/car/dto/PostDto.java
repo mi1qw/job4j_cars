@@ -1,34 +1,23 @@
 package com.example.car.dto;
 
 import com.example.car.model.*;
-import com.example.car.service.MarkService;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import lombok.*;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import lombok.Builder;
+import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
-@ToString
-@Slf4j
-
 
 @Builder
-
+@Data
 public class PostDto {
-    @Autowired
-    private MarkService markService;
+//    @Autowired
+//    private MarkService markService;
 
     private Long id;
-    @Getter(lazy = true)
-    private final Mark mark = markService.findById(1L);
+    //    @Getter(lazy = true)
+//    private final Mark mark = markService.findById(1L);
+    private Mark mark;
     private Model model;
     private Short year;
 

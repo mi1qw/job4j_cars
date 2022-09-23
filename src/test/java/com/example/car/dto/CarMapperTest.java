@@ -22,6 +22,8 @@ class CarMapperTest {
     @Autowired
     CarMapper carMapper;
     @Autowired
+    PostMapper postMapper;
+    @Autowired
     CarService carService;
 
     @Test
@@ -88,5 +90,13 @@ class CarMapperTest {
         PostDto postDto = carMapper.carToPostDto(car);
         log.info("{}", postDto.getMark());
         log.info("{}", postDto);
+    }
+    @Test
+    void PostMapper() {
+        // TODO переделать на получение конкретного id как-то
+        Car car = carService.finAll().get(0);
+        PostDto postDto = postMapper.carToPostDto(car);
+//        log.info("{}", postDto.getMark());
+        log.info("{}", postDto.getDescription());
     }
 }
