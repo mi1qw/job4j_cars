@@ -116,11 +116,6 @@ public class CarService {
     }
 
     public Car findCarPost(final Long id) {
-        Car carPost = carStore.findCarPost(id);
-        Engine engn = carPost.getEngine();
-        Engine engine = engineService.findById(engn.getId());
-        carPost.setEngine(engine);
-
-        return carPost;
+        return carStore.findCarPost(id);
     }
 }

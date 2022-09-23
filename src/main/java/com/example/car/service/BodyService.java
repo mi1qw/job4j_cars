@@ -1,6 +1,7 @@
 package com.example.car.service;
 
 import com.example.car.model.Body;
+import com.example.car.model.Model;
 import com.example.car.store.BodyStore;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,7 @@ public class BodyService {
     public BodyService(final BodyStore bodyStore) {
         this.bodyStore = bodyStore;
         bodyStore.findAll().forEach(n -> bodyMap.put(n.getId(), n));
-            }
+    }
 
     public List<Body> findAll() {
         return bodyMap.values().stream().toList();
@@ -26,5 +27,9 @@ public class BodyService {
 
     public Map<Long, Body> findAllMap() {
         return bodyMap;
+    }
+
+    public Body findById(final Long id) {
+        return bodyMap.get(id);
     }
 }

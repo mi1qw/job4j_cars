@@ -1,8 +1,8 @@
 package com.example.car.dto;
 
 import com.example.car.model.Car;
-import com.example.car.service.AccountService;
-import com.example.car.service.MarkService;
+import com.example.car.model.Mark;
+import com.example.car.service.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +18,21 @@ public abstract class PostMapper {
     private MarkService markService;
     @Autowired
     private AccountService accountService;
+    @Autowired
+    private ModelService modelService;
+    @Autowired
+    private BodyService bodyService;
+    @Autowired
+    private GearboxService gearboxService;
+    @Autowired
+    private EngineService engineService;
+    @Autowired
+    private TransmissionService transmissionService;
+    @Autowired
+    private ColorService colorService;
+//    @Autowired
+//    private ModelService  modelService;
+
 
 //    public PostMapper(final MarkService markService) {
 //        this.markService = markService;
@@ -26,14 +41,35 @@ public abstract class PostMapper {
 
     @BeforeMapping
     protected void before(final Car car) {
-        System.out.println(markService.findById(car.getMark().getId()) + "   markService");
-        System.out.println(markService + "   markService");
+//        System.out.println(markService.findById(car.getMark().getId()) + "   markService");
+//        System.out.println(markService + "   markService");
 
-        car.setDescription("kkkkkkkkkkk");
+//        car.setDescription("kkkkkkkkkkk");
 
-        // System.out.println(car.getId() + "  car.getId()");
-        // I would call my entity manager's flush() method here to make sure my entity
-        // is populated with the right @Version before I let it map into the DTO
+        Long id = car.getMark().getId();
+        car.setMark(markService.findById(id));
+
+        id = car.getModel().getId();
+        car.setModel(modelService.findById(id));
+
+        id = car.getBody().getId();
+        car.setBody(bodyService.findById(id));
+
+        id = car.getGearbox().getId();
+        car.setGearbox(gearboxService.findById(id));
+
+        id = car.getEngine().getId();
+        car.setEngine(engineService.findById(id));
+
+        id = car.getTransmission().getId();
+        car.setTransmission(transmissionService.findById(id));
+
+        // TODO аккаунт из БД тянуть
+//        id = car.getAccount().getId();
+//        car.setAccount(accountService.findById(id));
+
+        id = car.getColor().getId();
+        car.setColor(colorService.findById(id));
     }
 
     @AfterMapping
