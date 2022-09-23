@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import com.example.car.model.Car;
 import com.example.car.service.CarService;
+import com.example.car.util.CarModfctn;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,12 +92,14 @@ class CarMapperTest {
         log.info("{}", postDto.getMark());
         log.info("{}", postDto);
     }
+
     @Test
     void PostMapper() {
         // TODO переделать на получение конкретного id как-то
         Car car = carService.finAll().get(0);
-        PostDto postDto = postMapper.carToPostDto(car);
-//        log.info("{}", postDto.getMark());
+        CarModfctn carModfctn = carService.findCarPost(car.getId());
+        PostDto postDto = postMapper.carToPostDto(carModfctn.car(), carModfctn.modification());
+
         log.info("{}", postDto.getDescription());
     }
 }

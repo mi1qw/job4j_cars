@@ -1,16 +1,16 @@
 package com.example.car.dto;
 
 import com.example.car.model.Car;
-import com.example.car.model.Mark;
+import com.example.car.model.Modification;
 import com.example.car.service.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.mapstruct.*;
+import org.mapstruct.AfterMapping;
+import org.mapstruct.BeforeMapping;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-//@Component
+
 @Slf4j
 @Mapper(componentModel = "spring")
 public abstract class PostMapper {
@@ -88,11 +88,13 @@ public abstract class PostMapper {
 //    работает но толку с Car
 //    protected void after(final Car car) {
 
-//    работает, но нет PostDto
+    //    работает, но нет PostDto
 //    @AfterMapping
 //    protected void after() {
 //        System.out.println("!qqqqqqqqqq");
 //    }
-
-    public abstract PostDto carToPostDto(Car car);
+    @Mapping(source = "car.id", target = "id")
+    @Mapping(source = "modification.engineDisplacement", target = "engineDisplacement")
+    @Mapping(source = "modification.power", target = "power")
+    public abstract PostDto carToPostDto(Car car, Modification modification);
 }

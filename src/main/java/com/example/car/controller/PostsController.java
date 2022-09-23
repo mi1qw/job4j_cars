@@ -1,8 +1,10 @@
 package com.example.car.controller;
 
 import com.example.car.dto.FilterDto;
+import com.example.car.dto.PostMapper;
 import com.example.car.model.Car;
 import com.example.car.service.CarService;
+import com.example.car.util.CarModfctn;
 import com.example.car.web.UserSession;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +21,7 @@ import java.util.List;
 public class PostsController {
     private final CarService carService;
     private final UserSession userSession;
+    private final PostMapper postMapper;
 
     @GetMapping("")
     String posts(final @ModelAttribute(name = "filter") FilterDto filterDto,
@@ -45,7 +48,7 @@ public class PostsController {
     @GetMapping("id")
     String carPost(final @PathVariable("id") Long id,
                    final Model model) {
-        carService.findMyCar();
+        CarModfctn carPost = carService.findCarPost(id);
         return "carPost";
     }
 

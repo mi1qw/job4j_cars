@@ -4,15 +4,21 @@ import com.example.car.dto.FileImageDto;
 import com.example.car.dto.FilterDto;
 import com.example.car.model.Account;
 import com.example.car.model.Car;
+import com.example.car.model.Modification;
 import com.example.car.model.Status;
 import com.example.car.service.FileService;
+import com.example.car.util.CarModfctn;
 import com.example.car.util.FilterForm;
 import com.example.car.web.UserSession;
 import jakarta.persistence.PersistenceException;
+import jakarta.persistence.Tuple;
+import javassist.compiler.ast.ASTree;
+import javassist.compiler.ast.Pair;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.ScrollMode;
 import org.hibernate.ScrollableResults;
 import org.hibernate.query.Query;
+import org.hibernate.transform.AliasToEntityMapResultTransformer;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
 
@@ -249,14 +255,19 @@ public class CarStore extends CrudPersist<Car> {
     }
 
 
-    public Car findCarPost(final Long id) {
-        tx(session ->
-                session.createQuery("from Car c join fetch c.account "
-                                    + "join fetch c.modification",
-                                Car.class)
-                        .list());
-        return null;
+    public CarModfctn findCarPost(final Long id) {
+        return tx(session ->
+                session.createQuery("""
+                                select c, m, a from Car c, Account a, 
+                                Modification m where c.account= a and c.id=:id and 
+                                c.modification=m.id.nameId and c.year=m.id.yearId 
+                                and c.mark=m.id.markId""", Object[].class)
+                        .setParameter("id", id)
+                        .setTupleTransformer((tuple, aliases) ->
+                                new CarModfctn(
+                                        (Car) tuple[0],
+                                        (Modification) tuple[1],
+                                        ((Account) tuple[2])))
+                        .getSingleResult());
     }
-
-
 }

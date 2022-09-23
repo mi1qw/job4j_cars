@@ -28,6 +28,8 @@ public class PostDto {
     private Engine engine;
     private Transmission transmission;
 
+    private byte numberOfCylinders;
+    private String positionOfCylinders;
 
     private final String name;
     private LocalDateTime created;

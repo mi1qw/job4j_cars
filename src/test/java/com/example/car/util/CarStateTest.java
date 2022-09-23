@@ -1,5 +1,7 @@
 package com.example.car.util;
 
+import com.example.car.model.Car;
+import com.example.car.service.CarService;
 import com.example.car.service.MarkService;
 import com.example.car.web.UserSession;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +20,8 @@ class CarStateTest {
     MarkService markService;
     @Autowired
     State state;
+    @Autowired
+    CarService carService;
 
     @Test
     void isFalse() {
@@ -38,14 +42,13 @@ class CarStateTest {
     }*/
 
     @Test
-    void isDone() {
-
+    void findCarPost() {
+        CarModfctn carModfctn = carService.findCarPost(20L);
     }
 
     @Test
     void getSteps() {
     }
-
 
 
     @Test

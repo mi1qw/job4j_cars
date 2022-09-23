@@ -5,6 +5,7 @@ import com.example.car.dto.FileImageDto;
 import com.example.car.dto.FilterDto;
 import com.example.car.model.*;
 import com.example.car.store.CarStore;
+import com.example.car.util.CarModfctn;
 import com.example.car.util.State;
 import com.example.car.web.UserSession;
 import lombok.AllArgsConstructor;
@@ -115,7 +116,7 @@ public class CarService {
         return carStore.deleteCar(id);
     }
 
-    public Car findCarPost(final Long id) {
+    public CarModfctn findCarPost(final Long id) {
         return carStore.findCarPost(id);
     }
 }
