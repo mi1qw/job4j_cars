@@ -1,6 +1,7 @@
 package com.example.car.controller;
 
 import com.example.car.dto.FilterDto;
+import com.example.car.dto.PostDto;
 import com.example.car.dto.PostMapper;
 import com.example.car.model.Car;
 import com.example.car.service.CarService;
@@ -45,10 +46,12 @@ public class PostsController {
         return "posts";
     }
 
-    @GetMapping("id")
+    @GetMapping("/{id}")
     String carPost(final @PathVariable("id") Long id,
                    final Model model) {
-        CarModfctn carPost = carService.findCarPost(id);
+        CarModfctn carModfctn = carService.findCarPost(id);
+        PostDto postDto = postMapper.carToPostDto(carModfctn.car(), carModfctn.modification());
+        model.addAttribute("post", postDto);
         return "carPost";
     }
 
