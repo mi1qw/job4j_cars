@@ -7,6 +7,8 @@
 <head>
   <title>Объявление</title>
   <link rel='stylesheet' th:href="@{/css/posts.css}">
+  <link rel='stylesheet' th:href="@{/css/lightbox.css}">
+  <link rel='stylesheet' th:href="@{/css/verticalscroll.css}">
 </head>
 <body>
 
@@ -404,7 +406,27 @@
         </div>
       </div>
 
+      <!--      <div class="slides">-->
+      <!--        <div th:each="postIMG:*{images}">-->
+      <!--          <img th:src="@{|/cars/img/${postIMG}|}">-->
+      <!--        </div>-->
+      <!--      </div>-->
 
+
+      <div class="gallery-container">
+        <div class="thumbnails"></div>
+        <div class="scrollbar">
+          <div class="thumb"></div>
+        </div>
+        <div class="slides">
+          <div th:each="postIMG:*{images}">
+            <img th:src="@{|/cars/img/${postIMG}|}">
+          </div>
+        </div>
+      </div>
+
+
+      <p>0000</p>
 
 
       <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
@@ -419,16 +441,19 @@
             <img src="..." class="d-block w-100" alt="...">
           </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+        <button class="carousel-control-prev" type="button"
+                data-bs-target="#carouselExampleControls" data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+        <button class="carousel-control-next" type="button"
+                data-bs-target="#carouselExampleControls" data-bs-slide="next">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Next</span>
         </button>
       </div>
 
+      <!--      <div th:replace="fragments/lightbox::lightbox(*{images})"></div>-->
 
 
     </div>
@@ -437,6 +462,10 @@
 
 </div>
 
+<th:block layout:fragment="page-scripts">
+  <script th:src="@{/js/lightbox.css}"></script>
+  <script th:src="@{/js/verticalscroll.js}"></script>
 
+</th:block>
 </body>
 </html>
