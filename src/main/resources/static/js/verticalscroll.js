@@ -28,3 +28,16 @@ document.querySelectorAll('.thumbnails img').forEach(el => {
 slideGallery.addEventListener('scroll', e => scrollThumb());
 
 scrollThumb();
+
+
+// Open the Modal
+function openModal() {
+    console.log("modal-dialog", document.getElementById('modal-dialog'))
+    document.getElementById('modal-dialog').style.display = "block";
+}
+
+// Close the Modal
+function closeModal() {
+    console.log("modal-dialog", document.getElementById('modal-dialog'))
+    document.getElementById('modal-dialog').style.display = "none";
+}
