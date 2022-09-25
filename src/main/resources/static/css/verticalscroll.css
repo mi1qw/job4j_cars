@@ -7,20 +7,49 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
+    height: 90vh;
+    overflow-y: auto;
+
+    white-space: nowrap;
+    -ms-overflow-style: none; /* IE 10+ */
+    scrollbar-width: none; /* Firefox */
+}
+
+::-webkit-scrollbar { /* chrome based */
+    width: 0px; /* ширина scrollbar'a */
+    background: transparent; /* опционально */
 }
 
 .thumbnails img {
     /*width: 40px;*/
     height: 80px;
     cursor: pointer;
+
+    border: 2px solid transparent; /* Прозрачная рамка */
 }
+
+.thumbnails-active {
+    border: 2px solid transparent; /* Прозрачная рамка */
+}
+
+.thumbnail-border {
+    border: 2px solid #e6e6e6 !important; /* Цветная рамка */
+    border-radius: 0.375rem;
+}
+
+.thumbnails img:hover {
+    border: 2px solid #00af64; /* Цветная рамка */
+    border-radius: 0.375rem;
+}
+
 
 .scrollbar {
     width: 1px;
-    height: 720px;
+    /*height: 720px;*/
     background: #ccc;
     display: block;
     margin: 0 0 0 8px;
+    height: 90vh;
 }
 
 .thumb {
@@ -47,7 +76,7 @@
 }
 
 .slides > div {
-    scroll-snap-align: start;
+    /*scroll-snap-align: start;*/
 }
 
 .slides img {

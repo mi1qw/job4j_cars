@@ -431,12 +431,8 @@
             </div>
           </div>
         </div>
-
       </div>
 
-
-      <p>0000</p>
-      <!--          style="height: 300px; max-width: 600px;"-->
 
       <div class="d-flex justify-content-start align-items-start">
         <div>
@@ -446,49 +442,19 @@
         <div>
           <div>
             <img th:src="@{|/cars/img/*{images[0]}|}"
+                 onclick="openModal(0)"
                  class="ImageGalleryDesktop__image">
           </div>
           <div class="d-flex justify-content-start flex-wrap">
-            <div th:each="postIMG,iterStat:*{images}" style="height: 80px"
-                 onclick="openModal()">
-              <!--                   th:unless="${iterStat.index>3}"-->
-              <img th:if="${!iterStat.first and iterStat.index<4}"
+            <div th:each="postIMG,iterStat:*{images}" style="height: 80px">
+              <img th:if="${!iterStat.first and iterStat.index<5}"
                    th:src="@{|/cars/img/${postIMG}|}"
                    th:onclick="|openModal(${iterStat.index})|"
                    class="ImageGallery__thumb">
-              <span th:text="${iterStat}"></span>
             </div>
           </div>
         </div>
       </div>
-
-
-      <!--      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">-->
-      <!--        <div class="carousel-inner">-->
-      <!--          <div class="carousel-item active">-->
-      <!--            <img src="..." class="d-block w-100" alt="...">-->
-      <!--          </div>-->
-      <!--          <div class="carousel-item">-->
-      <!--            <img src="..." class="d-block w-100" alt="...">-->
-      <!--          </div>-->
-      <!--          <div class="carousel-item">-->
-      <!--            <img src="..." class="d-block w-100" alt="...">-->
-      <!--          </div>-->
-      <!--        </div>-->
-      <!--        <button class="carousel-control-prev" type="button"-->
-      <!--                data-bs-target="#carouselExampleControls" data-bs-slide="prev">-->
-      <!--          <span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
-      <!--          <span class="visually-hidden">Previous</span>-->
-      <!--        </button>-->
-      <!--        <button class="carousel-control-next" type="button"-->
-      <!--                data-bs-target="#carouselExampleControls" data-bs-slide="next">-->
-      <!--          <span class="carousel-control-next-icon" aria-hidden="true"></span>-->
-      <!--          <span class="visually-hidden">Next</span>-->
-      <!--        </button>-->
-      <!--      </div>-->
-
-
-      <!--      <div th:replace="fragments/lightbox::lightbox(*{images})"></div>-->
 
 
     </div>
