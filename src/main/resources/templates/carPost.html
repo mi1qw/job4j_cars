@@ -451,9 +451,12 @@
           <div class="d-flex justify-content-start flex-wrap">
             <div th:each="postIMG,iterStat:*{images}" style="height: 80px"
                  onclick="openModal()">
-              <img th:if="${!iterStat.first}" th:unless="${iterStat.index>3}"
+              <!--                   th:unless="${iterStat.index>3}"-->
+              <img th:if="${!iterStat.first and iterStat.index<4}"
                    th:src="@{|/cars/img/${postIMG}|}"
+                   th:onclick="|openModal(${iterStat.index})|"
                    class="ImageGallery__thumb">
+              <span th:text="${iterStat}"></span>
             </div>
           </div>
         </div>
