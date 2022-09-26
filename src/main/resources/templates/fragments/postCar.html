@@ -63,6 +63,16 @@
   </span>
 </span>
 
+<span th:fragment="bodySVG(value)" class="Tags__tag tag_size">
+  <span class="Button__content">
+    <svg class="IconSvg_size_18 EngineTypeField__icon"
+         style="margin-left: 0; scale: 1.2;">
+      <use th:attr="'xlink:href'= '#body'"></use>
+    </svg>
+    <div class="EngineTypeField" th:text="${value.name}"></div>
+  </span>
+</span>
+
 <!-- проверить и удалить-->
 <span th:fragment="textValue(text, value)" class="Tags__tag tag_size">
   <span class="Button__content">

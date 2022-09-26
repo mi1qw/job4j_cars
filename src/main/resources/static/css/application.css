@@ -247,82 +247,98 @@ input[type=number] {
 .choose-color-silver {
     background: linear-gradient(to bottom, #f0f0f0, #c1c1c1);
     border-color: #c1c1c1;
+    box-shadow: hsl(222deg 7% 47% / 39%) 1px 3px 2px
 }
 
 .choose-color-black {
     background: #000000;
     border-color: #000000;
+    box-shadow: hsl(222deg 7% 47% / 39%) 1px 3px 2px
 }
 
 .choose-color-white {
     background: #ffffff;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12);
+    /*box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12);*/
     border-color: rgba(0, 0, 0, 0.12);
+    box-shadow: hsl(222deg 7% 47% / 39%) 1px 3px 2px
 }
 
 .choose-color-gray {
     background: #9c9999;
     border-color: #9c9999;
+    box-shadow: hsl(222deg 7% 47% / 39%) 1px 3px 2px
 }
 
 .choose-color-blue {
     background: #334dff;
     border-color: #334dff;
+    box-shadow: hsl(222deg 7% 47% / 39%) 1px 3px 2px
 }
 
 .choose-color-red {
     background: #fc4829;
     border-color: #fc4829;
+    box-shadow: hsl(222deg 7% 47% / 39%) 1px 3px 2px
 }
 
 .choose-color-green {
     background: #35ba2b;
     border-color: #35ba2b;
+    box-shadow: hsl(222deg 7% 47% / 39%) 1px 3px 2px
 }
 
 .choose-color-brown {
     background: #926547;
     border-color: #926547;
+    box-shadow: hsl(222deg 7% 47% / 39%) 1px 3px 2px
 }
 
 .choose-color-beige {
     background: #f1d9b2;
     border-color: #f1d9b2;
+    box-shadow: hsl(222deg 7% 47% / 39%) 1px 3px 2px
 }
 
 .choose-color-sky {
     background: #36a1ff;
     border-color: #36a1ff;
+    box-shadow: hsl(222deg 7% 47% / 39%) 1px 3px 2px
 }
 
 .choose-color-gold {
     background: linear-gradient(to bottom, #ffed02, #fd9c00);
     border-color: #fabe00;
+    box-shadow: hsl(222deg 7% 47% / 39%) 1px 3px 2px
 }
 
 .choose-color-magenta {
     background: #c5172d;
     border-color: #c5172d;
+    box-shadow: hsl(222deg 7% 47% / 39%) 1px 3px 2px
 }
 
 .choose-color-purple {
     background: #9966cc;
     border-color: #9966cc;
+    box-shadow: hsl(222deg 7% 47% / 39%) 1px 3px 2px
 }
 
 .choose-color-yellow {
     background: #fde90f;
     border-color: #fde90f;
+    box-shadow: hsl(222deg 7% 47% / 39%) 1px 3px 2px
 }
 
 .choose-color-orange {
     background: #ff9966;
     border-color: #ff9966;
+    box-shadow: hsl(222deg 7% 47% / 39%) 1px 3px 2px
 }
 
 .choose-color-pink {
     background: #ffc0cb;
     border-color: #ffc0cb;
+    box-shadow: hsl(222deg 7% 47% / 39%) 1px 3px 2px
 }
 
 .ColorField__item {
@@ -478,3 +494,31 @@ input::placeholder {
     background-position: center;
 }
 
+.badge-banner {
+    background-color: #208097;
+    color: #fff;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.badge-banner .container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+.badge-banner__text {
+    color: #fff;
+    font-weight: 400;
+    font-size: 14px;
+    margin: 0;
+    text-align: center;
+}
+
+/*.badge-banner{*/
+/*    font-size: 14px;*/
+/*    font-weight:400 ;*/
+/*}*/
