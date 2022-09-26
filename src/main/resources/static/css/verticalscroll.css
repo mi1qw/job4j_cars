@@ -146,6 +146,12 @@
 /*List of characteristicks*/
 .item-post {
     margin-bottom: 1rem;
+    /*width: 120px;*/
+    display: flex;
+}
+
+.item-post > span:first-child {
+    width: 120px;
 }
 
 h3.under-head {

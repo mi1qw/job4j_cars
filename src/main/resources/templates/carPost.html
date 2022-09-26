@@ -424,10 +424,10 @@
 
       <div class="d-flex justify-content-start align-items-start">
         <div>
-          <div class="mt-4" style="    width: 10.4rem;">
-
+          <div class="mt-4 me-4">
+            <!--            style="width: 10.4rem;"-->
             <div class="d-flex justify-content-between flex-column"
-                 style="height: 85px; margin-top: 100px; margin-bottom: 85px">
+                 style="height: 75px; margin-top: 30px; margin-bottom: 37px">
               <div>
                 <div class="text-black-50">Продавец</div>
                 <div th:text="*{account.firstName}" class="fw-bolder fs-5"></div>
@@ -440,28 +440,61 @@
 
 
             <ul class="unstyle characteristic">
-              <li class="item-post">
-                <span th:replace="fragments/postCar::odometerSVG(*{odometer})"></span>
+
+              <li layout:replace="~{layout/liTextValue::liTextTag('Год выпуска')}">
+                <th:block layout:fragment="tag">
+                  <span class="IconSvg_size_18 EngineTypeField__icon"></span>
+                  <span th:text="*{year}"></span>
+                </th:block>
               </li>
-              <li class="item-post">
-                <span th:replace="fragments/postCar::tagSVG(*{gearbox})"></span>
+
+              <li layout:replace="~{layout/liTextValue::liTextTag('Кузов')}">
+                <th:block layout:fragment="tag">
+                  <span class="IconSvg_size_18 EngineTypeField__icon"></span>
+                  <span th:text="*{body.name}"></span>
+                </th:block>
               </li>
-              <li class="item-post">
-                <span th:replace="fragments/postCar::tagSVG(*{engine})"></span>
+
+              <li layout:replace="~{layout/liTextValue::liTextTag('Цвет')}">
+                <th:block layout:fragment="tag">
+                  <div class="ColorField__item EngineTypeField__icon"
+                       th:classappend="|choose-color-*{color.color}|"
+                       style="width: 18px;height: 18px;margin-left: 0 !important;"></div>
+                  <span th:text="*{color.name}"></span>
+                </th:block>
               </li>
-              <li class="item-post">
-                <span th:replace="fragments/postCar::tagSVG(*{transmission})"></span>
+
+              <li layout:replace="~{layout/liTextValue::liTextTag('Пробег')}">
+                <th:block layout:fragment="tag">
+                  <span th:replace="fragments/postCar::odometerSVG(*{odometer})"></span>
+                </th:block>
               </li>
-              <li class="item-post">
-                <span th:replace="fragments/postCar::textValue('кузов', *{body.name})"></span>
+
+              <li layout:replace="~{layout/liTextValue::liTextTag('Коробка')}">
+                <th:block layout:fragment="tag">
+                  <span th:replace="fragments/postCar::tagSVG(*{gearbox})"></span>
+                </th:block>
               </li>
-              <li class="item-post">
-                <span th:replace="fragments/postCar::textValue('цвет', *{color.name})"></span>
+
+              <li layout:replace="~{layout/liTextValue::liTextTag('Привод')}">
+                <th:block layout:fragment="tag">
+                  <span th:replace="fragments/postCar::tagSVG(*{transmission})"></span>
+                </th:block>
               </li>
+
+              <li layout:replace="~{layout/liTextValue::liTextTag('Двигатель')}">
+                <th:block layout:fragment="tag">
+                  <span th:replace="fragments/postCar::tagSVG(*{engine})"></span>
+                </th:block>
+              </li>
+
+
+
+
             </ul>
           </div>
         </div>
-        <div style="width: 590px">
+        <div style="width: 580px">
           <div>
             <img th:src="@{|/cars/img/*{images[0]}|}"
                  onclick="openModal(0)"

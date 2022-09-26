@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<body>
+<!--/*@thymesVar id="type" type="java.lang.String"*/-->
+<li layout:fragment="liTextTag(text)" class="item-post">
+  <span th:text="${text}"></span>
+  <span layout:fragment="tag"></span>
+</li>
+</body>
+</html>
