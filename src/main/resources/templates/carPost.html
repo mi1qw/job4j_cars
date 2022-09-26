@@ -438,6 +438,22 @@
         <div>
           <div>description1</div>
           <div>description2</div>
+          <div>
+            <ul class="unstyle characteristic">
+              <li class="item-char">
+                <span th:replace="fragments/postCar::odometerSVG(*{odometer})"></span>
+              </li>
+              <li class="item-char">
+                <span th:replace="fragments/postCar::tagSVG(*{gearbox})"></span>
+              </li>
+              <li class="item-char">
+<!--                <span th:replace="fragments/postCar::tagSVG(*{engine})"></span>-->
+              </li>
+              <li class="item-char">
+<!--                <span th:replace="fragments/postCar::tagSVG(*{transmission})"></span>-->
+              </li>
+            </ul>
+          </div>
         </div>
         <div>
           <div>

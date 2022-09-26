@@ -44,9 +44,9 @@
   <span class="Button__content">
     <svg class="IconSvg_size_18 EngineTypeField__icon"
          style="margin-left: 0">
-      <use th:attr="'xlink:href'= *{value.image}"></use>
+      <use th:attr="'xlink:href'= ${value.image}"></use>
     </svg>
-    <div class="EngineTypeField" th:text="*{value.name}"></div>
+    <div class="EngineTypeField" th:text="${value.name}"></div>
   </span>
 </span>
 
