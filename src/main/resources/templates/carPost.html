@@ -379,31 +379,26 @@
     </svg>
   </div>
 
-  <div class="container" style="width: 890px">
-<!--    <div th:text="${post}"></div>-->
+  <div class="container mt-5" style="width: 890px">
+    <!--    <div th:text="${post}"></div>-->
     <div th:object="${post}">
 
-      <div style="width: 700px">
+      <div style="width: 600px">
         <div class="d-flex justify-content-between">
           <div class="ticket-title ticket-item">
-            <span class="blue bold fs-2" th:text="*{name}" style="font-weight: bold;"></span>
+            <span class="bold bold-700-s22" th:text="*{name}"
+                  style="font-weight: bold;"></span>
           </div>
           <div class="price-ticket ticket-item">
-        <span class="bold-700 size22 green fs-3"
-              th:text="${#numbers.formatDecimal(post.price, 0, 'DEFAULT', 0, 'DEFAULT')}"
-              style="font-weight: 800"></span>
-            <span class="bold-700 size22 green" style="font-weight: 800">$</span>
+            <span class="bold-700-s22 green"
+                  th:text="${#numbers.formatDecimal(post.price, 0, 'DEFAULT', 0, 'DEFAULT')}"></span>
+            <span class="bold-700-s22 green">$</span>
           </div>
         </div>
+        <h3 class="under-head bold" th:text="*{modification}"></h3>
 
         <div th:replace="fragments/postCar::clockSVG(*{created})"></div>
       </div>
-
-      <!--      <div class="slides">-->
-      <!--        <div th:each="postIMG:*{images}">-->
-      <!--          <img th:src="@{|/cars/img/${postIMG}|}">-->
-      <!--        </div>-->
-      <!--      </div>-->
 
 
       <div id="modal-dialog" class="modal"
@@ -439,10 +434,10 @@
               </div>
               <div>
                 <span class="text-black-50">тел.</span>
-                <span th:text="*{account.phoneNumber}" class="bold-700 size22 green"></span>
+                <span th:text="*{account.phoneNumber}" class="fw-bolder size22 green"></span>
               </div>
-
             </div>
+
 
             <ul class="unstyle characteristic">
               <li class="item-post">
@@ -466,17 +461,19 @@
             </ul>
           </div>
         </div>
-        <div>
+        <div style="width: 590px">
           <div>
             <img th:src="@{|/cars/img/*{images[0]}|}"
                  onclick="openModal(0)"
                  class="ImageGalleryDesktop__image">
           </div>
           <div class="d-flex justify-content-start flex-wrap">
-            <div th:each="postIMG,iterStat:*{images}" style="height: 80px">
-              <img th:if="${!iterStat.first and iterStat.index<5}"
-                   th:src="@{|/cars/img/${postIMG}|}"
+            <div th:each="postIMG,iterStat:*{images}"
+                 th:if="${!iterStat.first and iterStat.index<5}"
+                 style="height: 80px; margin-right: 3px;margin-top: 3px;">
+              <img th:src="@{|/cars/img/${postIMG}|}"
                    th:onclick="|openModal(${iterStat.index})|"
+                   style="border-radius: 2px"
                    class="ImageGallery__thumb">
             </div>
           </div>

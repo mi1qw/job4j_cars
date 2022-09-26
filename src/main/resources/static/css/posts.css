@@ -76,8 +76,9 @@ body {
     font-size: 22px;
 }
 
-.bold-700 {
+.bold-700-s22 {
     font-weight: 700;
+    font-size: 30px;
 }
 
 .green {
