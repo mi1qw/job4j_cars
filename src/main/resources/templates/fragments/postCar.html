@@ -63,6 +63,15 @@
   </span>
 </span>
 
+
+<span th:fragment="textValue(text, value)" class="Tags__tag tag_size">
+  <span class="Button__content">
+       [[${text}]]
+    <div class="EngineTypeField"
+         th:text="${value}"></div>
+  </span>
+</span>
+
 <span th:fragment="clockSVG(value)" class="Tags__tag tag_size mt-2">
   <span class="Button__content" style="color: #9b9b9b">
     <svg class="IconSvg_size_18 EngineTypeField__icon"

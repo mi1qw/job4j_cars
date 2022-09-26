@@ -380,30 +380,23 @@
   </div>
 
   <div class="container" style="width: 890px">
-    <div th:text="${post}"></div>
+<!--    <div th:text="${post}"></div>-->
     <div th:object="${post}">
 
       <div style="width: 700px">
         <div class="d-flex justify-content-between">
           <div class="ticket-title ticket-item">
-            <span class="blue bold fs-2" th:text="*{name}"></span>
+            <span class="blue bold fs-2" th:text="*{name}" style="font-weight: bold;"></span>
           </div>
           <div class="price-ticket ticket-item">
         <span class="bold-700 size22 green fs-3"
-              th:text="${#numbers.formatDecimal(post.price, 0, 'DEFAULT', 0, 'DEFAULT')}"></span>
-            <span class="bold-700 size22 green">$</span>
+              th:text="${#numbers.formatDecimal(post.price, 0, 'DEFAULT', 0, 'DEFAULT')}"
+              style="font-weight: 800"></span>
+            <span class="bold-700 size22 green" style="font-weight: 800">$</span>
           </div>
         </div>
 
         <div th:replace="fragments/postCar::clockSVG(*{created})"></div>
-
-        <div style="width: 250px" class="d-flex justify-content-between mt-3">
-          <div>
-            <div class="text-black-50">Продавец</div>
-            <div th:text="*{account.firstName}" class="fw-bolder fs-5"></div>
-          </div>
-          <div th:text="*{account.phoneNumber}" class="bold-700 size22 green"></div>
-        </div>
       </div>
 
       <!--      <div class="slides">-->
@@ -436,21 +429,39 @@
 
       <div class="d-flex justify-content-start align-items-start">
         <div>
-          <div>description1</div>
-          <div>description2</div>
-          <div>
+          <div class="mt-4" style="    width: 10.4rem;">
+
+            <div class="d-flex justify-content-between flex-column"
+                 style="height: 85px; margin-top: 100px; margin-bottom: 85px">
+              <div>
+                <div class="text-black-50">Продавец</div>
+                <div th:text="*{account.firstName}" class="fw-bolder fs-5"></div>
+              </div>
+              <div>
+                <span class="text-black-50">тел.</span>
+                <span th:text="*{account.phoneNumber}" class="bold-700 size22 green"></span>
+              </div>
+
+            </div>
+
             <ul class="unstyle characteristic">
-              <li class="item-char">
+              <li class="item-post">
                 <span th:replace="fragments/postCar::odometerSVG(*{odometer})"></span>
               </li>
-              <li class="item-char">
+              <li class="item-post">
                 <span th:replace="fragments/postCar::tagSVG(*{gearbox})"></span>
               </li>
-              <li class="item-char">
-<!--                <span th:replace="fragments/postCar::tagSVG(*{engine})"></span>-->
+              <li class="item-post">
+                <span th:replace="fragments/postCar::tagSVG(*{engine})"></span>
               </li>
-              <li class="item-char">
-<!--                <span th:replace="fragments/postCar::tagSVG(*{transmission})"></span>-->
+              <li class="item-post">
+                <span th:replace="fragments/postCar::tagSVG(*{transmission})"></span>
+              </li>
+              <li class="item-post">
+                <span th:replace="fragments/postCar::textValue('кузов', *{body.name})"></span>
+              </li>
+              <li class="item-post">
+                <span th:replace="fragments/postCar::textValue('цвет', *{color.name})"></span>
               </li>
             </ul>
           </div>

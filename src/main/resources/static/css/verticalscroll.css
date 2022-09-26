@@ -142,3 +142,8 @@
     font-family: none;
     /*font-weight: bold;*/
 }
+
+/*List of characteristicks*/
+.item-post {
+    margin-bottom: 1rem;
+}
