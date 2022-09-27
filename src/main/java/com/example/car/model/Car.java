@@ -38,6 +38,9 @@ public class Car {
     private Status status = Status.newItem;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    private City city;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     private Account account;
 
     @ManyToOne(fetch = FetchType.LAZY)

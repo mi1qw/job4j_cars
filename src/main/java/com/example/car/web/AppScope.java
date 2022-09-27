@@ -23,6 +23,7 @@ public class AppScope {
     private final GearboxService gearboxService;
     private final EngineService engineService;
     private final TransmissionService transmissionService;
+    private final CityService cityService;
     private final SortService sortService;
     private Map<String, Map<Long, ?>> filterMap;
 
@@ -35,7 +36,8 @@ public class AppScope {
                 "gearbox", gearboxService.findAllMap(),
                 "engine", engineService.findAllMap(),
                 "transmission", transmissionService.findAllMap(),
-                "sort", sortService.findAllMap()
+                "sort", sortService.findAllMap(),
+                "city", cityService.findAllMap()
         );
 //        filterMap.get(1).get(1);
 

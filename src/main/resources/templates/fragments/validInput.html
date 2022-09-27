@@ -1,7 +1,7 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<div class="pt-3"
-     th:fragment="inputfield(labelText,fieldName)"
+
+<div th:fragment="inputfield(labelText,fieldName)" class="pt-3"
      th:with="inputType=${inputType?:'text'},placeholder=${placeholder?:''}">
   <label style="font-family:Muli, Arial, sans-serif;"
          th:for="${fieldName}" th:text="${labelText}">Имя</label>
@@ -19,6 +19,61 @@
   >
   </div>
 </div>
+
+<!--th:classappend="${class}"-->
+<!--th:id="${key}" th:name="${key}"-->
+<!--th:field="${__${fieldName}__}"-->
+
+<div th:fragment="selectfield(labelText, fieldName, fieldID)" class="pt-3">
+  <p text="${fieldID}"></p>
+  <label style="font-family:Muli, Arial, sans-serif;"
+         th:for="${fieldName}" th:text="${labelText}"></label>
+  <select class="form-select" aria-label="Default select example"
+          th:id="${fieldName}"
+          th:name="${fieldName}"
+  >
+    <!--  <p th:text="${labelText}"></p>—-->
+    <!--  <p th:text="${fieldName}"></p>-->
+    <th:block th:if="${fieldID!=null}">
+      <option selected
+              th:value="${fieldID}"
+              th:text="${@appScope.getFilterMap().get(fieldName).get(fieldID).name}">
+      </option>
+      <option th:each="option:${@appScope.getFilterMap().get(fieldName)}"
+              th:if="${fieldID!=option.getKey()}"
+              th:value="${option.getKey()}"
+              th:text="${option.getValue().name}"
+      ></option>
+    </th:block>
+
+    <th:block th:if="${fieldID==null}">
+      <option selected value="">выбрать</option>
+      <option th:each="option:${@appScope.getFilterMap().get(fieldName)}"
+              th:value="${option.getKey()}"
+              th:text="${option.getValue().name}"
+      ></option>
+    </th:block>
+
+
+    <!--    <option value="" th:text="${text}"></option>-->
+
+    <!--    <th:block th:if="${fieldID==null}">-->
+    <!--      <option value="" th:text="${text}"></option>-->
+    <!--    </th:block>-->
+
+    <!--    <option th:if="${fieldID==null}" value="" th:text="${text}"></option>-->
+
+    <!--    <option th:if="${fieldID!= null}" selected-->
+    <!--            th:value="${fieldID}"-->
+    <!--            th:text="${fieldID}"-->
+    <!--    ></option>-->
+
+  </select>
+  <div class="text-danger"
+       th:if="${#fields.hasErrors('__${fieldName}__')}"
+       th:text="${#strings.listJoin(#fields.errors('__${fieldName}__'),', ')}"
+  >
+  </div>
 </html>
 
 

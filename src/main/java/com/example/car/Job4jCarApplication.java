@@ -1,6 +1,7 @@
 package com.example.car;
 
 import com.example.car.model.*;
+import com.example.car.service.CityService;
 import com.example.car.store.*;
 import jakarta.servlet.ServletContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,8 @@ public class Job4jCarApplication {
     private ModificationStore modificationStore;
     @Autowired
     private ColorStore colorStore;
+    @Autowired
+    private CityStore cityStore;
     @Autowired
     private FileSystemStore fileSystemStore;
 
@@ -174,6 +177,19 @@ public class Job4jCarApplication {
                 } catch (Exception ignored) {
                 }
 
+                try {
+                    cityStore.add(new City("Татуин"));
+                    cityStore.add(new City("Набу"));
+                    cityStore.add(new City("Камино"));
+                    cityStore.add(new City("Эндор"));
+                    cityStore.add(new City("Джеонозис"));
+                    cityStore.add(new City("Скариф"));
+                    cityStore.add(new City("Джакку"));
+                    cityStore.add(new City("Кашиик"));
+                    cityStore.add(new City("Корусант"));
+                    cityStore.add(new City("Дагоба"));
+                } catch (Exception ignored) {
+                }
 
                 try {
                     ModificationId id = new ModificationId("3.5 CVT 299 л.с", (short) 2018,

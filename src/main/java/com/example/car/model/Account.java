@@ -6,6 +6,7 @@ import com.example.car.validation.ValidationGroupOne;
 import com.example.car.validation.ValidationGroupTwo;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
@@ -59,7 +60,8 @@ public class Account {
     @CreationTimestamp
     private LocalDateTime created;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @NotNull(message = "Выберите город", groups = ValidationGroupOne.class)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "city_id")
     private City city;
 

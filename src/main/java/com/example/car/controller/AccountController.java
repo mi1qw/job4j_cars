@@ -42,6 +42,7 @@ public class AccountController {
         if (bindingResult.hasErrors()) {
             return "signin";
         }
+        log.info("{}", account);
         Account newAccount = accountService.add(account);
         newAccount.setLogin(null);
         newAccount.setPassword(null);
