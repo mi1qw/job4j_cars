@@ -67,5 +67,20 @@
     </div>
   </div>
 </div>
+
+<th:block layout:fragment="page-scripts">
+  <script>
+      document.querySelectorAll('select').forEach(n => {
+          n.classList.add(n.value == '' ? 'select-grey' : '');
+          n.addEventListener('change', (e) => {
+                  if (n.value == '') {
+                      n.classList.add('select-grey');
+                  } else
+                      n.classList.remove('select-grey');
+              }
+          )
+      })
+  </script>
+</th:block>
 </body>
 </html>

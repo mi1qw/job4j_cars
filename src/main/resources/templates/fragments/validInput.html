@@ -31,9 +31,10 @@
   <select class="form-select" aria-label="Default select example"
           th:id="${fieldName}"
           th:name="${fieldName}"
+          th:classappend="${(#fields.hasErrors('__${fieldName}__') ? ' is-invalid':'')}"
   >
-    <!--  <p th:text="${labelText}"></p>—-->
-    <!--  <p th:text="${fieldName}"></p>-->
+    <!--    th:classappend="${(value==null ? ' select-grey':'')}"-->
+
     <th:block th:if="${fieldID!=null}">
       <option selected
               th:value="${fieldID}"
@@ -42,38 +43,24 @@
       <option th:each="option:${@appScope.getFilterMap().get(fieldName)}"
               th:if="${fieldID!=option.getKey()}"
               th:value="${option.getKey()}"
-              th:text="${option.getValue().name}"
-      ></option>
+              th:text="${option.getValue().name}">
+      </option>
     </th:block>
 
     <th:block th:if="${fieldID==null}">
-      <option selected value="">выбрать</option>
+      <option selected value="" class="text-black-50">выбрать</option>
       <option th:each="option:${@appScope.getFilterMap().get(fieldName)}"
               th:value="${option.getKey()}"
-              th:text="${option.getValue().name}"
-      ></option>
+              th:text="${option.getValue().name}">
+      </option>
     </th:block>
-
-
-    <!--    <option value="" th:text="${text}"></option>-->
-
-    <!--    <th:block th:if="${fieldID==null}">-->
-    <!--      <option value="" th:text="${text}"></option>-->
-    <!--    </th:block>-->
-
-    <!--    <option th:if="${fieldID==null}" value="" th:text="${text}"></option>-->
-
-    <!--    <option th:if="${fieldID!= null}" selected-->
-    <!--            th:value="${fieldID}"-->
-    <!--            th:text="${fieldID}"-->
-    <!--    ></option>-->
 
   </select>
   <div class="text-danger"
        th:if="${#fields.hasErrors('__${fieldName}__')}"
-       th:text="${#strings.listJoin(#fields.errors('__${fieldName}__'),', ')}"
-  >
+       th:text="${#strings.listJoin(#fields.errors('__${fieldName}__'),', ')}">
   </div>
+</div>
 </html>
 
 
