@@ -20,6 +20,7 @@ public class PostDto {
     private Mark mark;
     private Model model;
     private Short year;
+    private City city;
 
     private short engineDisplacement;
     private BigDecimal price;

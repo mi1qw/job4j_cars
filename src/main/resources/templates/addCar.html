@@ -508,6 +508,10 @@
             </select>
 
 
+            <div
+                th:replace="fragments/validInput::selectfield(labelText='Город',fieldName='city',fieldID= *{city?.id}, formId='carform')"></div>
+
+
             <!-- <div class="mb-3">
                <label for="Title" class="form-label">Пробег</label>
                <input type="text" class="form-control" id="Title"
@@ -520,9 +524,10 @@
 
             <div class="pt-4">
               <div class="form-floating">
-          <textarea th:field="*{description}" form="carform"
-                    class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
-                    style="height: 100px"></textarea>
+                <textarea th:field="*{description}" form="carform"
+                          class="form-control" placeholder="Leave a comment here"
+                          id="floatingTextarea2"
+                          style="height: 100px"></textarea>
                 <label for="floatingTextarea2">Описание</label>
               </div>
             </div>

@@ -20,11 +20,10 @@
   </div>
 </div>
 
-<!--th:classappend="${class}"-->
-<!--th:id="${key}" th:name="${key}"-->
-<!--th:field="${__${fieldName}__}"-->
 
-<div th:fragment="selectfield(labelText, fieldName, fieldID)" class="pt-3">
+<div th:fragment="selectfield(labelText, fieldName, fieldID)" class="pt-3"
+     th:with="formId=${formId?:''}">
+
   <p text="${fieldID}"></p>
   <label style="font-family:Muli, Arial, sans-serif;"
          th:for="${fieldName}" th:text="${labelText}"></label>
@@ -32,9 +31,9 @@
           th:id="${fieldName}"
           th:name="${fieldName}"
           th:classappend="${(#fields.hasErrors('__${fieldName}__') ? ' is-invalid':'')}"
+          th:form="${formId}"
   >
-    <!--    th:classappend="${(value==null ? ' select-grey':'')}"-->
-
+<!--    th:form="${formId!=null?formId:''}"-->
     <th:block th:if="${fieldID!=null}">
       <option selected
               th:value="${fieldID}"

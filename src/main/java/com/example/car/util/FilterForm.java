@@ -70,6 +70,8 @@ public class FilterForm {
 
         addParam("status", Status.onSale);
 
+        addParamID("city", filter.getCity());
+
         addParamID("mark", filter.getMark());
         addParamID("model", filter.getModel());
 

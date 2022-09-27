@@ -15,7 +15,6 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addFormatters(final FormatterRegistry registry) {
         registry.addFormatter(cityFormatter());
-//        registry.addFormatter(accountFormatter());
     }
 
     @Bean

@@ -14,6 +14,7 @@
         <span class="bold-700-s22 size22 green"
               th:text="${#numbers.formatDecimal(post.price, 0, 'DEFAULT', 0, 'DEFAULT')}"></span>
         <span class="bold-700-s22 size22 green">$</span>
+        <span th:text="*{post.city.name}" class="ms-5"></span>
       </div>
       <div>
         <ul class="unstyle characteristic">

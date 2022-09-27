@@ -17,6 +17,9 @@
       <div th:insert="::fieldSelect('Модель', 'model', *{model})" class="model width-elm"></div>
 
 
+      <div th:insert="::fieldSelect('Город', 'city', *{city})" class="city width-elm"></div>
+
+
       <div class="odometerFrom">
         <!--      <input th:field="*{odometerFrom}" class="odometerFrom width-elm">-->
         <div th:insert="::fieldInput('Пробег от', 'odometerFrom', *{odometerFrom},'left-group')"

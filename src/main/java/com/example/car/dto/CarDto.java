@@ -1,5 +1,10 @@
 package com.example.car.dto;
 
+import com.example.car.model.City;
+import com.example.car.validation.ValidationGroupOne;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -19,6 +24,9 @@ public class CarDto implements Serializable {
     @Min(value = 1900, message = "Неверный год")
     @NotNull
     private Short yearPurchase;
+
+    @NotNull(message = "Выберите город")
+    private City city;
 
     private String description;
 

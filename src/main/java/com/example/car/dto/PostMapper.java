@@ -30,6 +30,8 @@ public abstract class PostMapper {
     private TransmissionService transmissionService;
     @Autowired
     private ColorService colorService;
+    @Autowired
+    private CityService cityService;
 //    @Autowired
 //    private ModelService  modelService;
 
@@ -67,6 +69,9 @@ public abstract class PostMapper {
         // TODO аккаунт из БД тянуть
 //        id = car.getAccount().getId();
 //        car.setAccount(accountService.findById(id));
+
+        id = car.getCity().getId();
+        car.setCity(cityService.findById(id));
 
         id = car.getColor().getId();
         car.setColor(colorService.findById(id));

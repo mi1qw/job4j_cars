@@ -33,5 +33,6 @@ public class FilterDto {
     private Integer engine;
     private Integer transmission;
 
+    private Integer city;
     private Integer sort;
 }

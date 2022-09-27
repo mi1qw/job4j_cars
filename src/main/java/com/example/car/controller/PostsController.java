@@ -5,6 +5,7 @@ import com.example.car.dto.PostDto;
 import com.example.car.dto.PostMapper;
 import com.example.car.model.Car;
 import com.example.car.service.CarService;
+import com.example.car.service.CityService;
 import com.example.car.util.CarModfctn;
 import com.example.car.web.UserSession;
 import lombok.AllArgsConstructor;
@@ -23,6 +24,7 @@ public class PostsController {
     private final CarService carService;
     private final UserSession userSession;
     private final PostMapper postMapper;
+    private final CityService cityService;
 
     @GetMapping("")
     String posts(final @ModelAttribute(name = "filter") FilterDto filterDto,
@@ -35,6 +37,7 @@ public class PostsController {
         }
 
         List<Car> cars = carService.filterForm(filterDto1);
+        cars.forEach(n -> n.setCity(cityService.findById(n.getCity().getId())));
         model.addAttribute("posts", cars);
         model.addAttribute("filter", filterDto1);
 
