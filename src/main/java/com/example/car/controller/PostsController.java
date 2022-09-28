@@ -72,9 +72,9 @@ public class PostsController {
 //        return "posts";
 //    }
 
-    @GetMapping("/back")
-    public String back() {
-        pathForm.make();
+    @GetMapping("/find/{nameFilter}")
+    public String back(final @PathVariable("nameFilter") String nameFilter) {
+        pathForm.make(nameFilter);
         return "redirect:/posts";
     }
 }

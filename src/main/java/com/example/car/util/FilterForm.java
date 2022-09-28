@@ -70,10 +70,10 @@ public class FilterForm {
 
         addParam("status", Status.onSale);
 
-        addParamID("city", filter.getCity());
+        addParamID("city", filter.getCity(), true);
 
-        addParamID("mark", filter.getMark());
-        addParamID("model", filter.getModel());
+        addParamID("mark", filter.getMark(), true);
+        addParamID("model", filter.getModel(), true);
 
         addFromParam("year", filter.getYearFrom());
         addBeforeParam("year", filter.getYearBefore());
@@ -90,10 +90,10 @@ public class FilterForm {
         addFromParam("price", filter.getPriceFrom());
         addBeforeParam("price", filter.getPriceBefore());
 
-        addParamID("body", filter.getBody());
-        addParamID("gearbox", filter.getGearbox());
-        addParamID("engine", filter.getEngine());
-        addParamID("transmission", filter.getTransmission());
+        addParamID("body", filter.getBody(), true);
+        addParamID("gearbox", filter.getGearbox(), false);
+        addParamID("engine", filter.getEngine(), true);
+        addParamID("transmission", filter.getTransmission(), false);
 
 //        addSorting("sort", filter.getSort());
     }
@@ -134,7 +134,7 @@ public class FilterForm {
 
     public FilterForm addFromParam(final String name, final Object from) {
         if (from != null) {
-            params.add(new ElementForm<>(name, from) {
+            params.add(new ElementForm<>(name, from, false) {
                 @Override
                 public String getQuery() {
                     return " c.".concat(name).concat(" > " + from);
@@ -151,7 +151,7 @@ public class FilterForm {
 
     public FilterForm addBeforeParam(final String name, final Object before) {
         if (before != null) {
-            params.add(new ElementForm<>(name, before) {
+            params.add(new ElementForm<>(name, before, false) {
                 @Override
                 public String getQuery() {
                     return " c.".concat(name).concat(" < " + before);
@@ -169,7 +169,7 @@ public class FilterForm {
 
     public FilterForm addSorting(final String name, final Object value) {
         if (value != null) {
-            params.add(new ElementForm<>(name, value) {
+            params.add(new ElementForm<>(name, value, false) {
                 @Override
                 public String getQuery() {
                     return query = switch (((int) value)) {
@@ -189,16 +189,16 @@ public class FilterForm {
     }
 
 
-    public FilterForm addParamID(final String name, final Object value) {
+    public FilterForm addParamID(final String name, final Object value, final boolean path) {
         if (value != null) {
-            params.add(ElementForm.of(name, value));
+            params.add(ElementForm.of(name, value, path));
         }
         return this;
     }
 
     public FilterForm addParam(final String name, final Object value) {
         if (value != null) {
-            params.add(new ElementForm<>(name, value) {
+            params.add(new ElementForm<>(name, value, false) {
                 @Override
                 public String getQuery() {
                     return " c.".concat(name).concat("=:").concat(name);
@@ -217,6 +217,7 @@ public class FilterForm {
     private static class ElementForm<T> implements FilterFormIn<Car> {
         private final String name;
         private final T value;
+        private final boolean path;
 
         @Override
         public String getQuery() {

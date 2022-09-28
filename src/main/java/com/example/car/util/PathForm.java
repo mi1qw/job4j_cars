@@ -26,17 +26,21 @@ public class PathForm {
 
     public List<Item> add() {
         List<Item> list = new ArrayList<>();
-
-        Item<?> mark = Item.of("mark", (t, f) -> f.setMark(Math.toIntExact(t)),
-                (car) -> car.getMark().getId());
-        list.add(mark);
+        list.add(Item.of("city", (t, f) -> f.setCity(Math.toIntExact(t)),
+                (car) -> car.getCity().getId()));
+        list.add(Item.of("mark", (t, f) -> f.setMark(Math.toIntExact(t)),
+                (car) -> car.getMark().getId()));
         list.add(Item.of("model", (t, f) -> f.setModel(Math.toIntExact(t)),
                 (car) -> car.getModel().getId()));
+        list.add(Item.of("body", (t, f) -> f.setBody(Math.toIntExact(t)),
+                (car) -> car.getBody().getId()));
+        list.add(Item.of("engine", (t, f) -> f.setEngine(Math.toIntExact(t)),
+                (car) -> car.getEngine().getId()));
         return list;
     }
 
     //    public void make(final List<Item> list) {
-    public void make() {
+    public void make(final String nameFilter) {
         Car car = userSession.getNewCar();
         FilterDto filterDto = userSession.getFilterForm().getFilterDto();
         log.info("{}", filterDto);
@@ -47,12 +51,9 @@ public class PathForm {
         log.info("{}", filterDto);
     }
 
-    protected static class Itm {
-
-    }
 
     @RequiredArgsConstructor(staticName = "of")
-    public static class Item<T> extends Itm {
+    public static class Item<T> {
         private final String name;
         private final BiConsumer<T, FilterDto> construct;
         private final Function<Car, T> getterSup;
