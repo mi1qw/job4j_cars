@@ -60,10 +60,10 @@ public class PostsController {
         model.addAttribute("post", postDto);
         userSession.setNewCar(carModfctn.car());
 
-        FilterForm filterForm = userSession.getFilterForm();
-        if (filterForm.isEmpty()) {
-            pathForm.carToFilterDto(carModfctn.car());
-        }
+        //        if (filterForm.isEmpty()) {
+        FilterDto filterDto = pathForm.carToFilterDto(carModfctn.car());
+//        }
+        userSession.setBreadcrumb(new FilterForm(filterDto));
         return "carPost";
     }
 
@@ -80,7 +80,10 @@ public class PostsController {
 
     @GetMapping("/slice/{nameFilter}")
     public String back(final @PathVariable("nameFilter") String nameFilter) {
-        userSession.getFilterForm().sliceFilter(nameFilter);
+//        Car car = userSession.getNewCar();
+//        pathForm.
+        FilterForm filterForm = userSession.getBreadcrumb().sliceFilter(nameFilter);
+        userSession.setFilterForm(filterForm);
         return "redirect:/posts";
     }
 }

@@ -21,6 +21,7 @@ public class UserSession {
     private AtomicInteger maxID;
     private AtomicInteger order = new AtomicInteger();
     private FilterForm filterForm = new FilterForm();
+    private FilterForm breadcrumb;
     // TODO создавать при создании сессии
 
 //    public UserSession(final AppScope appScope) {

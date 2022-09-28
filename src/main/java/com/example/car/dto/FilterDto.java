@@ -11,9 +11,9 @@ import java.math.BigDecimal;
 @Data
 @Builder
 //@NoArgsConstructor
-public class FilterDto {
-    private Integer mark;
-    private Integer model;
+public class FilterDto implements Cloneable {
+    private Long mark;
+    private Long model;
 
     private Short yearFrom;
     private Short yearBefore;
@@ -30,14 +30,20 @@ public class FilterDto {
     private BigDecimal priceFrom;
     private BigDecimal priceBefore;
 
-    private Integer body;
-    private Integer gearbox;
-    private Integer engine;
-    private Integer transmission;
+    private Long body;
+    private Long gearbox;
+    private Long engine;
+    private Long transmission;
 
-    private Integer city;
+    private Long city;
     private Integer sort;
 
-//    public FilterDto() {
-//    }
+    @Override
+    public FilterDto clone() {
+        try {
+            return (FilterDto) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
+    }
 }

@@ -62,6 +62,11 @@ public class FilterForm {
 
     }
 
+    public FilterForm(final FilterDto filterDto) {
+        this.baseQuery = "select c from Car c";
+        this.filterDto = filterDto;
+    }
+
     // TODO в тестах используется, удалить
     public FilterForm(final String query) {
         this.baseQuery = query;
@@ -105,7 +110,7 @@ public class FilterForm {
 //        addSorting("sort", filter.getSort());
     }
 
-    public void sliceFilter(final String element) {
+    public FilterForm sliceFilter(final String element) {
         boolean flag = true;
         Iterator<ElementForm> iterator = params.iterator();
         while (iterator.hasNext()) {
@@ -118,6 +123,7 @@ public class FilterForm {
                 }
             }
         }
+        return this;
     }
 
     public String makeQuery() {
