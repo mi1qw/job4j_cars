@@ -2,6 +2,7 @@ package com.example.car.dto;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.math.BigDecimal;
@@ -9,6 +10,7 @@ import java.math.BigDecimal;
 @Slf4j
 @Data
 @Builder
+//@NoArgsConstructor
 public class FilterDto {
     private Integer mark;
     private Integer model;
@@ -35,4 +37,7 @@ public class FilterDto {
 
     private Integer city;
     private Integer sort;
+
+    public FilterDto() {
+    }
 }
