@@ -80,7 +80,7 @@ public class PostsController {
 
     @GetMapping("/find/{nameFilter}")
     public String back(final @PathVariable("nameFilter") String nameFilter) {
-
+        userSession.getFilterForm().sliceFilter(nameFilter);
         return "redirect:/posts";
     }
 }

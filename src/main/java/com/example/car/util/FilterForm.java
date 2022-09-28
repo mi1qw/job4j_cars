@@ -2,6 +2,7 @@ package com.example.car.util;
 
 import com.example.car.dto.FilterDto;
 import com.example.car.model.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -9,6 +10,7 @@ import org.hibernate.query.Query;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -39,7 +41,7 @@ public class FilterForm {
     private FilterDto filterDto;
     private String baseQuery;
     private String query;
-    private List<FilterFormIn> params = new ArrayList<>();
+    private List<ElementForm> params = new ArrayList<>();
 //    private Map<String, Field> fieldMap = new HashMap<>();
 
     public FilterForm() {
@@ -60,12 +62,13 @@ public class FilterForm {
 
     }
 
+    // TODO в тестах используется, удалить
     public FilterForm(final String query) {
         this.baseQuery = query;
     }
 
     public boolean isEmpty() {
-        return query.isEmpty();
+        return query == null;
     }
 
     public void update(final FilterDto filter) {
@@ -102,6 +105,21 @@ public class FilterForm {
 //        addSorting("sort", filter.getSort());
     }
 
+    public void sliceFilter(final String element) {
+        boolean flag = true;
+        Iterator<ElementForm> iterator = params.iterator();
+        while (iterator.hasNext()) {
+            ElementForm<?> param = iterator.next();
+            if (param.isSliced()) {
+                if (flag) {
+                    flag = !param.name.equals(element);
+                } else {
+                    iterator.remove();
+                }
+            }
+        }
+    }
+
     public String makeQuery() {
 //        if (params.isEmpty()) {
 //            return query;
@@ -136,7 +154,7 @@ public class FilterForm {
         return query;
     }
 
-    public FilterForm addFromParam(final String name, final Object from) {
+    public <T> FilterForm addFromParam(final String name, final T from) {
         if (from != null) {
             params.add(new ElementForm<>(name, from, false) {
                 @Override
@@ -153,7 +171,7 @@ public class FilterForm {
         return this;
     }
 
-    public FilterForm addBeforeParam(final String name, final Object before) {
+    public <T> FilterForm addBeforeParam(final String name, final T before) {
         if (before != null) {
             params.add(new ElementForm<>(name, before, false) {
                 @Override
@@ -193,32 +211,51 @@ public class FilterForm {
     }
 
 
-    public FilterForm addParamID(final String name, final Object value, final boolean path) {
+    public <T> FilterForm addParamID(final String name, final T value, final boolean path) {
         if (value != null) {
-            params.add(ElementForm.of(name, value, path));
+            params.add(new ElementForm<>(name, value, path));
         }
         return this;
     }
 
-    public FilterForm addParam(final String name, final Object value) {
+    public <T> FilterForm addParam(final String name, final T value) {
         if (value != null) {
             params.add(new ElementForm<>(name, value, false) {
                 @Override
                 public String getQuery() {
                     return " c.".concat(name).concat("=:").concat(name);
                 }
-
-                @Override
-                public Query<Car> setParameter(final Query<Car> query) {
-                    return query.setParameter(name, value);
-                }
             });
         }
         return this;
     }
 
+    @Data
+    @AllArgsConstructor
+    private static class ElementForm<T> {
+        private final String name;
+        private final T value;
+        private final boolean isSliced;
+
+        public String getQuery() {
+            return " c.".concat(name).concat(".id").concat("=:").concat(name);
+        }
+
+        public Query<Car> setParameter(final Query<Car> query) {
+            return query.setParameter(name, value);
+        }
+
+    }
+
+//    private static class ElementForm1<T> extends Element<T> {
+//
+//        private ElementForm1(String name, T value, boolean path) {
+//            super(name, value, path);
+//        }
+//    }
+
     @RequiredArgsConstructor(staticName = "of")
-    private static class ElementForm<T> implements FilterFormIn<Car> {
+    private static class ElementForm1<T> implements FilterFormIn<Car> {
         private final String name;
         private final T value;
         private final boolean path;
@@ -231,6 +268,11 @@ public class FilterForm {
         @Override
         public Query<Car> setParameter(final Query<Car> query) {
             return query.setParameter(name, value);
+        }
+
+        @Override
+        public boolean isSliced() {
+            return path;
         }
     }
 
@@ -245,4 +287,6 @@ interface FilterFormIn<R> {
     String getQuery();
 
     Query<R> setParameter(Query<R> query);
+
+    boolean isSliced();
 }
