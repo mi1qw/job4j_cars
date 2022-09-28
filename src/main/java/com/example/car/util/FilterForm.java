@@ -12,6 +12,12 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Consumer;
+
+@FunctionalInterface
+interface ResetField {
+    void reset();
+}
 
 /**
  * FilterForm for main paige.
@@ -65,6 +71,7 @@ public class FilterForm {
     public FilterForm(final FilterDto filterDto) {
         this.baseQuery = "select c from Car c";
         this.filterDto = filterDto;
+        update(filterDto);
     }
 
     // TODO в тестах используется, удалить
@@ -80,32 +87,35 @@ public class FilterForm {
         this.filterDto = filter;
         params.clear();
 
-        addParam("status", Status.onSale);
+        addParam("status", Status.onSale, (n) -> {
+        });
 
-        addParamID("city", filter.getCity(), true);
+        addParamID("city", filter.getCity(), true, (n) -> n.setCity(null));
 
-        addParamID("mark", filter.getMark(), true);
-        addParamID("model", filter.getModel(), true);
+        addParamID("mark", filter.getMark(), true, (n) -> n.setMark(null));
+        addParamID("model", filter.getModel(), true, (n) -> n.setModel(null));
 
-        addFromParam("year", filter.getYearFrom());
-        addBeforeParam("year", filter.getYearBefore());
+        addFromParam("year", filter.getYearFrom(), (n) -> n.setYearFrom(null));
+        addBeforeParam("year", filter.getYearBefore(), (n) -> n.setYearBefore(null));
 
-        addFromParam("odometer", filter.getOdometerFrom());
-        addBeforeParam("odometer", filter.getOdometerBefore());
+        addFromParam("odometer", filter.getOdometerFrom(), (n) -> n.setOdometerFrom(null));
+        addBeforeParam("odometer", filter.getOdometerBefore(), (n) -> n.setOdometerBefore(null));
 
-        addFromParam("engineDisplacement", filter.getEngineDisplacementFrom());
-        addBeforeParam("engineDisplacement", filter.getEngineDisplacementBefore());
+        addFromParam("engineDisplacement", filter.getEngineDisplacementFrom(),
+                (n) -> n.setEngineDisplacementFrom(null));
+        addBeforeParam("engineDisplacement", filter.getEngineDisplacementBefore(),
+                (n) -> n.setEngineDisplacementBefore(null));
 
-        addFromParam("power", filter.getPowerFrom());
-        addBeforeParam("power", filter.getPowerBefore());
+        addFromParam("power", filter.getPowerFrom(), (n) -> n.setPowerFrom(null));
+        addBeforeParam("power", filter.getPowerBefore(), (n) -> n.setPowerBefore(null));
 
-        addFromParam("price", filter.getPriceFrom());
-        addBeforeParam("price", filter.getPriceBefore());
+        addFromParam("price", filter.getPriceFrom(), (n) -> n.setPriceFrom(null));
+        addBeforeParam("price", filter.getPriceBefore(), (n) -> n.setPriceBefore(null));
 
-        addParamID("body", filter.getBody(), true);
-        addParamID("gearbox", filter.getGearbox(), false);
-        addParamID("engine", filter.getEngine(), true);
-        addParamID("transmission", filter.getTransmission(), false);
+        addParamID("body", filter.getBody(), true, (n) -> n.setBody(null));
+        addParamID("gearbox", filter.getGearbox(), false, (n) -> n.setGearbox(null));
+        addParamID("engine", filter.getEngine(), true, (n) -> n.setEngine(null));
+        addParamID("transmission", filter.getTransmission(), false, (n) -> n.setTransmission(null));
 
 //        addSorting("sort", filter.getSort());
     }
@@ -119,9 +129,16 @@ public class FilterForm {
                 if (flag) {
                     flag = !param.name.equals(element);
                 } else {
+                    param.field.accept(filterDto);
                     iterator.remove();
                 }
             }
+//            else {
+//                if (!flag) {
+//                    param.field.accept(filterDto);
+//                    iterator.remove();
+//                }
+//            }
         }
         return this;
     }
@@ -160,9 +177,10 @@ public class FilterForm {
         return query;
     }
 
-    public <T> FilterForm addFromParam(final String name, final T from) {
+    public <T> FilterForm addFromParam(final String name, final T from,
+                                       final Consumer<FilterDto> resetField) {
         if (from != null) {
-            params.add(new ElementForm<>(name, from, false) {
+            params.add(new ElementForm<>(name, from, false, resetField) {
                 @Override
                 public String getQuery() {
                     return " c.".concat(name).concat(" > " + from);
@@ -177,9 +195,10 @@ public class FilterForm {
         return this;
     }
 
-    public <T> FilterForm addBeforeParam(final String name, final T before) {
+    public <T> FilterForm addBeforeParam(final String name, final T before,
+                                         final Consumer<FilterDto> resetField) {
         if (before != null) {
-            params.add(new ElementForm<>(name, before, false) {
+            params.add(new ElementForm<>(name, before, false, resetField) {
                 @Override
                 public String getQuery() {
                     return " c.".concat(name).concat(" < " + before);
@@ -195,9 +214,10 @@ public class FilterForm {
     }
 
 
-    public FilterForm addSorting(final String name, final Object value) {
+    public <T> FilterForm addSorting(final String name, final T value,
+                                     final Consumer<FilterDto> resetField) {
         if (value != null) {
-            params.add(new ElementForm<>(name, value, false) {
+            params.add(new ElementForm<>(name, value, false, resetField) {
                 @Override
                 public String getQuery() {
                     return query = switch (((int) value)) {
@@ -217,16 +237,18 @@ public class FilterForm {
     }
 
 
-    public <T> FilterForm addParamID(final String name, final T value, final boolean path) {
+    public <T> FilterForm addParamID(final String name, final T value, final boolean path,
+                                     final Consumer<FilterDto> resetField) {
         if (value != null) {
-            params.add(new ElementForm<>(name, value, path));
+            params.add(new ElementForm<>(name, value, path, resetField));
         }
         return this;
     }
 
-    public <T> FilterForm addParam(final String name, final T value) {
+    public <T> FilterForm addParam(final String name, final T value,
+                                   final Consumer<FilterDto> resetField) {
         if (value != null) {
-            params.add(new ElementForm<>(name, value, false) {
+            params.add(new ElementForm<>(name, value, false, resetField) {
                 @Override
                 public String getQuery() {
                     return " c.".concat(name).concat("=:").concat(name);
@@ -242,6 +264,7 @@ public class FilterForm {
         private final String name;
         private final T value;
         private final boolean isSliced;
+        private final Consumer<FilterDto> field;
 
         public String getQuery() {
             return " c.".concat(name).concat(".id").concat("=:").concat(name);

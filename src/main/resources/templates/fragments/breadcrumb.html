@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <div th:fragment="breadcrumb()" class=" mt-3">
-  <div th:each="element:${@userSession.getFilterForm().params}"
+  <div th:each="element:${@userSession.getBreadcrumb().params}"
        th:if="*{element.isSliced()}">
     <a th:href="@{|/posts/slice/*{element.name}|}">
       <span th:text="*{element.name}"></span>

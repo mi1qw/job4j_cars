@@ -37,7 +37,8 @@ class FilterFormTest implements SessionStore {
         carC
 //                .addParam("year", 2021)
 //                .addParam("color", color);
-                .addParamID("color", 11,true);
+                .addParamID("color", 11, true, (n) -> {
+                });
 //                .addParam("id", 8)
 //                .addFromParam("odometer", 25)
 //                .addBeforeParam("odometer", 60);
