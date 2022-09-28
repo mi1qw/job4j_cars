@@ -64,6 +64,10 @@ public class FilterForm {
         this.baseQuery = query;
     }
 
+    public boolean isEmpty() {
+        return query.isEmpty();
+    }
+
     public void update(final FilterDto filter) {
         this.filterDto = filter;
         params.clear();

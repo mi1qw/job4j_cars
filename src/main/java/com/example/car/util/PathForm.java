@@ -3,7 +3,6 @@ package com.example.car.util;
 import com.example.car.dto.FilterDto;
 import com.example.car.model.Car;
 import com.example.car.web.UserSession;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -21,27 +20,27 @@ public class PathForm {
 
     public PathForm(final UserSession userSession) {
         this.userSession = userSession;
-        this.list = add();
+        this.list = mapFields();
     }
 
-    public List<Item> add() {
+    public List<Item> mapFields() {
         List<Item> list = new ArrayList<>();
-        list.add(Item.of("city", (t, f) -> f.setCity(Math.toIntExact(t)),
+        list.add(new Item<>("city", (t, f) -> f.setCity(Math.toIntExact(t)),
                 (car) -> car.getCity().getId()));
-        list.add(Item.of("mark", (t, f) -> f.setMark(Math.toIntExact(t)),
+        list.add(new Item<>("mark", (t, f) -> f.setMark(Math.toIntExact(t)),
                 (car) -> car.getMark().getId()));
-        list.add(Item.of("model", (t, f) -> f.setModel(Math.toIntExact(t)),
+        list.add(new Item<>("model", (t, f) -> f.setModel(Math.toIntExact(t)),
                 (car) -> car.getModel().getId()));
-        list.add(Item.of("body", (t, f) -> f.setBody(Math.toIntExact(t)),
+        list.add(new Item<>("body", (t, f) -> f.setBody(Math.toIntExact(t)),
                 (car) -> car.getBody().getId()));
-        list.add(Item.of("engine", (t, f) -> f.setEngine(Math.toIntExact(t)),
+        list.add(new Item<>("engine", (t, f) -> f.setEngine(Math.toIntExact(t)),
                 (car) -> car.getEngine().getId()));
         return list;
     }
 
-    //    public void make(final List<Item> list) {
-    public void make(final String nameFilter) {
-        Car car = userSession.getNewCar();
+
+    public void carToFilterDto(final Car car) {
+//        Car car = userSession.getNewCar();
         FilterDto filterDto = userSession.getFilterForm().getFilterDto();
         log.info("{}", filterDto);
         list.forEach(n -> {
@@ -51,11 +50,8 @@ public class PathForm {
         log.info("{}", filterDto);
     }
 
-
-    @RequiredArgsConstructor(staticName = "of")
-    public static class Item<T> {
-        private final String name;
-        private final BiConsumer<T, FilterDto> construct;
-        private final Function<Car, T> getterSup;
+    public record Item<T>(String name,
+                          BiConsumer<T, FilterDto> construct,
+                          Function<Car, T> getterSup) {
     }
 }
