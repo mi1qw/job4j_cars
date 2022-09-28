@@ -38,6 +38,6 @@ public class FilterDto {
     private Integer city;
     private Integer sort;
 
-    public FilterDto() {
-    }
+//    public FilterDto() {
+//    }
 }

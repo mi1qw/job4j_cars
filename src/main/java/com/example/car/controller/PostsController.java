@@ -7,6 +7,7 @@ import com.example.car.model.Car;
 import com.example.car.service.CarService;
 import com.example.car.service.CityService;
 import com.example.car.util.CarModfctn;
+import com.example.car.util.PathForm;
 import com.example.car.web.UserSession;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +26,7 @@ public class PostsController {
     private final UserSession userSession;
     private final PostMapper postMapper;
     private final CityService cityService;
+    private final PathForm pathForm;
 
     @GetMapping("")
     String posts(final @ModelAttribute(name = "filter") FilterDto filterDto,
@@ -55,6 +57,7 @@ public class PostsController {
         CarModfctn carModfctn = carService.findCarPost(id);
         PostDto postDto = postMapper.carToPostDto(carModfctn.car(), carModfctn.modification());
         model.addAttribute("post", postDto);
+        userSession.setNewCar(carModfctn.car());
         return "carPost";
     }
 
@@ -68,4 +71,10 @@ public class PostsController {
 //                userSession.getFilterForm().getFilterDto());
 //        return "posts";
 //    }
+
+    @GetMapping("/back")
+    public String back() {
+        pathForm.make();
+        return "redirect:/posts";
+    }
 }
