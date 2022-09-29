@@ -4,5 +4,9 @@ import com.example.car.model.Car;
 
 import java.util.List;
 
-public record PaginationDto(List<Car> cars, int rowNumber) {
+public record PaginationDto(List<Car> cars, int pages) {
+//public int getPages(){
+//
+//}
+
 }

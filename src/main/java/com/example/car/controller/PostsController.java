@@ -7,6 +7,7 @@ import com.example.car.dto.PostMapper;
 import com.example.car.model.Car;
 import com.example.car.service.CarService;
 import com.example.car.service.CityService;
+import com.example.car.service.dto.PaginationDto;
 import com.example.car.util.CarModfctn;
 import com.example.car.util.FilterForm;
 import com.example.car.util.Pagination;
@@ -48,13 +49,14 @@ public class PostsController {
         Pagination pagination = Pagination.of(page, postsConfig.getPageSize());
 
 
-        List<Car> cars = carService.filterForm(filterDto1, pagination);
-        cars.forEach(n -> n.setCity(cityService.findById(n.getCity().getId())));
-        model.addAttribute("posts", cars);
+        PaginationDto paginationDto = carService.filterForm(filterDto1, pagination);
+//        cars.forEach(n -> n.setCity(cityService.findById(n.getCity().getId())));
+        model.addAttribute("posts", paginationDto.cars());
+        model.addAttribute("totalPages", paginationDto.pages());
         model.addAttribute("filter", filterDto1);
 
 
-        cars.forEach(n -> log.info("{}", n.getId()));
+        paginationDto.cars().forEach(n -> log.info("{}", n.getId()));
 
         //        List<Car> cars = carService.finCarsWithEngineGearFILTR();
 //        model.addAttribute("posts", cars);

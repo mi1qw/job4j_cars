@@ -186,7 +186,7 @@ public class CarStore extends CrudPersist<Car> {
                     .setMaxResults(pagination.getSize())
                     .list();
         });
-        return new PaginationDto(carFiltered, rowNumber[0]);
+        return new PaginationDto(carFiltered, pagination.getTotalPages(rowNumber[0]));
     }
 
     public List<Car> findMyCar(final Account account) {

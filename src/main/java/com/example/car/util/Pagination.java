@@ -28,6 +28,10 @@ public class Pagination {
         return page * size;
     }
 
+    public int getTotalPages(final int rows) {
+        return rows / size;
+    }
+
     public boolean hasPrevious() {
         return page > 0;
     }
