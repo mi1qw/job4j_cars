@@ -6,8 +6,8 @@ import org.springframework.context.annotation.Configuration;
 
 @Data
 @Configuration
-@ConfigurationProperties("storage")
-public class StorageProperties {
+@ConfigurationProperties("car.storage")
+public class StorageConfig {
 
     /**
      * Folder location for storing files.

@@ -1,6 +1,6 @@
 package com.example.car.store;
 
-import com.example.car.config.StorageProperties;
+import com.example.car.config.StorageConfig;
 import com.example.car.exception.StorageException;
 import com.example.car.exception.StorageFileNotFoundException;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +24,7 @@ import java.util.stream.Stream;
 public class FileSystemStore implements StorageService {
     private final Path rootLocation;
 
-    public FileSystemStore(final StorageProperties properties) {
+    public FileSystemStore(final StorageConfig properties) {
         this.rootLocation = Paths.get(properties.getLocation());
     }
 

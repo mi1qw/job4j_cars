@@ -7,18 +7,15 @@ import com.example.car.model.Car;
 import com.example.car.model.Modification;
 import com.example.car.model.Status;
 import com.example.car.service.FileService;
+import com.example.car.service.dto.PaginationDto;
 import com.example.car.util.CarModfctn;
 import com.example.car.util.FilterForm;
 import com.example.car.web.UserSession;
 import jakarta.persistence.PersistenceException;
-import jakarta.persistence.Tuple;
-import javassist.compiler.ast.ASTree;
-import javassist.compiler.ast.Pair;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.ScrollMode;
 import org.hibernate.ScrollableResults;
 import org.hibernate.query.Query;
-import org.hibernate.transform.AliasToEntityMapResultTransformer;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
 
@@ -168,9 +165,10 @@ public class CarStore extends CrudPersist<Car> {
                         .list());
     }
 
-    public List<Car> findByFilter(final FilterDto filterDto) {
+    public PaginationDto findByFilter(final FilterDto filterDto, final int pageSize) {
         FilterForm filterForm = userSession.getFilterForm();
         filterForm.update(filterDto);
+        int[] rowNumber = {0};
         List<Car> carFiltered = tx(session -> {
             Query<Car> query = session.createQuery(
                     filterForm.makeQuery(),
@@ -178,16 +176,16 @@ public class CarStore extends CrudPersist<Car> {
             query = filterForm.setParameters(query);
             ScrollableResults<Car> scroll = query.scroll(ScrollMode.SCROLL_INSENSITIVE);
             scroll.last();
-            int rowNumber = scroll.getRowNumber() + 1;
+            rowNumber[0] = scroll.getRowNumber() + 1;
             scroll.close();
-            log.info("{}", rowNumber);
+            log.info("{}", rowNumber[0]);
 
             return query
                     .setFirstResult(0)
-                    .setMaxResults(20)
+                    .setMaxResults(pageSize)
                     .list();
         });
-        return carFiltered;
+        return new PaginationDto(carFiltered, rowNumber[0]);
     }
 
     public List<Car> findMyCar(final Account account) {

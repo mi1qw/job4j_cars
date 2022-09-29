@@ -1,5 +1,6 @@
 package com.example.car.controller;
 
+import com.example.car.config.PostsConfig;
 import com.example.car.dto.FilterDto;
 import com.example.car.dto.PostDto;
 import com.example.car.dto.PostMapper;
@@ -28,9 +29,12 @@ public class PostsController {
     private final PostMapper postMapper;
     private final CityService cityService;
     private final PathForm pathForm;
+    private final PostsConfig postsConfig;
 
     @GetMapping("")
     String posts(final @ModelAttribute(name = "filter") FilterDto filterDto,
+                 final @RequestParam(value = "page", defaultValue = "1",
+                         required = false) int page,
                  final Model model) {
         FilterDto filterDto1;
         if (filterDto.getSort() == null) {

@@ -1,5 +1,6 @@
 package com.example.car.service;
 
+import com.example.car.config.PostsConfig;
 import com.example.car.dto.CarMapper;
 import com.example.car.dto.FileImageDto;
 import com.example.car.dto.FilterDto;
@@ -9,6 +10,7 @@ import com.example.car.util.CarModfctn;
 import com.example.car.util.State;
 import com.example.car.web.UserSession;
 import lombok.AllArgsConstructor;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -24,6 +26,7 @@ public class CarService {
     private final GearboxService gearboxService;
     private final TransmissionService transmissionService;
     private final EngineService engineService;
+    private final PostsConfig postsConfig;
 //    private final FileService fileService;
 
     public Car addCar() {
@@ -80,7 +83,8 @@ public class CarService {
      * @return cars
      */
     public List<Car> filterForm(final FilterDto filterDto) {
-        List<Car> cars = carStore.findByFilter(filterDto);
+        int pageSize = postsConfig.getPageSize();
+        List<Car> cars = carStore.findByFilter(filterDto, pageSize);
         cars.forEach(n -> {
             Gearbox gbx = n.getGearbox();
             Gearbox gearbox = gearboxService.findById(gbx.getId());
