@@ -10,6 +10,7 @@ import com.example.car.service.FileService;
 import com.example.car.service.dto.PaginationDto;
 import com.example.car.util.CarModfctn;
 import com.example.car.util.FilterForm;
+import com.example.car.util.Pagination;
 import com.example.car.web.UserSession;
 import jakarta.persistence.PersistenceException;
 import lombok.extern.slf4j.Slf4j;
@@ -165,7 +166,7 @@ public class CarStore extends CrudPersist<Car> {
                         .list());
     }
 
-    public PaginationDto findByFilter(final FilterDto filterDto, final int pageSize) {
+    public PaginationDto findByFilter(final FilterDto filterDto, final Pagination pagination) {
         FilterForm filterForm = userSession.getFilterForm();
         filterForm.update(filterDto);
         int[] rowNumber = {0};
@@ -181,8 +182,8 @@ public class CarStore extends CrudPersist<Car> {
             log.info("{}", rowNumber[0]);
 
             return query
-                    .setFirstResult(0)
-                    .setMaxResults(pageSize)
+                    .setFirstResult(pagination.getOffset())
+                    .setMaxResults(pagination.getSize())
                     .list();
         });
         return new PaginationDto(carFiltered, rowNumber[0]);

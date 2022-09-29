@@ -9,10 +9,12 @@ import com.example.car.service.CarService;
 import com.example.car.service.CityService;
 import com.example.car.util.CarModfctn;
 import com.example.car.util.FilterForm;
+import com.example.car.util.Pagination;
 import com.example.car.util.PathForm;
 import com.example.car.web.UserSession;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -33,7 +35,7 @@ public class PostsController {
 
     @GetMapping("")
     String posts(final @ModelAttribute(name = "filter") FilterDto filterDto,
-                 final @RequestParam(value = "page", defaultValue = "1",
+                 final @RequestParam(value = "page", defaultValue = "0",
                          required = false) int page,
                  final Model model) {
         FilterDto filterDto1;
@@ -43,7 +45,10 @@ public class PostsController {
             filterDto1 = filterDto;
         }
 
-        List<Car> cars = carService.filterForm(filterDto1);
+        Pagination pagination = Pagination.of(page, postsConfig.getPageSize());
+
+
+        List<Car> cars = carService.filterForm(filterDto1, pagination);
         cars.forEach(n -> n.setCity(cityService.findById(n.getCity().getId())));
         model.addAttribute("posts", cars);
         model.addAttribute("filter", filterDto1);

@@ -5,11 +5,15 @@ import com.example.car.dto.CarMapper;
 import com.example.car.dto.FileImageDto;
 import com.example.car.dto.FilterDto;
 import com.example.car.model.*;
+import com.example.car.service.dto.PaginationDto;
 import com.example.car.store.CarStore;
 import com.example.car.util.CarModfctn;
+import com.example.car.util.Pagination;
 import com.example.car.util.State;
 import com.example.car.web.UserSession;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.NonNull;
 import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.stereotype.Service;
 
@@ -79,13 +83,13 @@ public class CarService {
      * выборка согласно фильтру.
      * А не быстрее ли выбирать с Join в самой БД, без использования "кэша" в java
      *
-     * @param filterDto filterDto
+     * @param filterDto  filterDto
+     * @param pagination pagination
      * @return cars
      */
-    public List<Car> filterForm(final FilterDto filterDto) {
-        int pageSize = postsConfig.getPageSize();
-        List<Car> cars = carStore.findByFilter(filterDto, pageSize);
-        cars.forEach(n -> {
+    public List<Car> filterForm(final FilterDto filterDto, final Pagination pagination) {
+        PaginationDto paginationDto = carStore.findByFilter(filterDto, pagination);
+        paginationDto.cars().forEach(n -> {
             Gearbox gbx = n.getGearbox();
             Gearbox gearbox = gearboxService.findById(gbx.getId());
             n.setGearbox(gearbox);
@@ -96,7 +100,7 @@ public class CarService {
             Engine engine = engineService.findById(engn.getId());
             n.setEngine(engine);
         });
-        return cars;
+        return paginationDto.cars();
     }
 
     public List<Car> findMyCar() {
