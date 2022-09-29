@@ -1,43 +1,45 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <div th:fragment="post(post)">
-  <div class="post-item">
-    <div class="ticket-photo">
-      <img th:src="@{|/cars/img/*{post.images[0]}|}" class="main-ticket-photo"/>
+  <a th:href="@{|/posts/${post.id}|}">
+    <div class="post-item">
+      <div class="ticket-photo">
+        <img th:src="@{|/cars/img/*{post.images[0]}|}" class="main-ticket-photo"/>
+      </div>
+      <div class="content-post">
+        <div class="ticket-title ticket-item">
+          <span class="blue bold" th:text="*{post.name}"></span>
+        </div>
+        <div class="price-ticket ticket-item" style="margin-top: 7px">
+          <!--        <span class="bold-700 size22 green" th:text="${#numbers.formatCurrency(post.price)}"></span>-->
+          <span class="bold-700-s22 size22 green"
+                th:text="${#numbers.formatDecimal(post.price, 0, 'DEFAULT', 0, 'DEFAULT')}"></span>
+          <span class="bold-700-s22 size22 green">$</span>
+          <span th:text="*{post.city.name}" class="ms-5"></span>
+        </div>
+        <div>
+          <ul class="unstyle characteristic">
+            <li class="item-char">
+              <span th:replace="::odometerSVG(*{post.odometer})"></span>
+            </li>
+            <li class="item-char">
+              <span th:replace="::tagSVG(*{post.gearbox})"></span>
+            </li>
+            <li class="item-char">
+              <span th:replace="::tagSVG(*{post.engine})"></span>
+            </li>
+            <li class="item-char">
+              <span th:replace="::tagSVG(*{post.transmission})"></span>
+            </li>
+          </ul>
+        </div>
+        <div th:text="*{post.modification}"></div>
+        <div th:text="${#strings.abbreviate(post.description, 40)}"
+             class="pt-2"></div>
+        <span th:replace="::clockSVG(*{post.created})"></span>
+      </div>
     </div>
-    <div class="content-post">
-      <div class="ticket-title ticket-item">
-        <span class="blue bold" th:text="*{post.name}"></span>
-      </div>
-      <div class="price-ticket ticket-item">
-        <!--        <span class="bold-700 size22 green" th:text="${#numbers.formatCurrency(post.price)}"></span>-->
-        <span class="bold-700-s22 size22 green"
-              th:text="${#numbers.formatDecimal(post.price, 0, 'DEFAULT', 0, 'DEFAULT')}"></span>
-        <span class="bold-700-s22 size22 green">$</span>
-        <span th:text="*{post.city.name}" class="ms-5"></span>
-      </div>
-      <div>
-        <ul class="unstyle characteristic">
-          <li class="item-char">
-            <span th:replace="::odometerSVG(*{post.odometer})"></span>
-          </li>
-          <li class="item-char">
-            <span th:replace="::tagSVG(*{post.gearbox})"></span>
-          </li>
-          <li class="item-char">
-            <span th:replace="::tagSVG(*{post.engine})"></span>
-          </li>
-          <li class="item-char">
-            <span th:replace="::tagSVG(*{post.transmission})"></span>
-          </li>
-        </ul>
-      </div>
-      <div th:text="*{post.modification}"></div>
-      <div th:text="${#strings.abbreviate(post.description, 40)}"
-           class="pt-2"></div>
-      <span th:replace="::clockSVG(*{post.created})"></span>
-    </div>
-  </div>
+  </a>
 </div>
 
 

@@ -30,8 +30,19 @@
     width: 700px;
     /*width: 850px;*/
     border-bottom: 1px solid #e0e3e4;
-    margin-bottom: 20px;
-    padding-bottom: 20px;
+    /*margin-bottom: 20px;*/
+    /*padding-bottom: 20px;*/
+
+    background: #fff;
+    padding: 15px 16px;
+    position: relative;
+}
+
+.post-item:hover {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px 0 #0000001a;
+    z-index: 1;
 }
 
 .ticket-item {
@@ -68,7 +79,7 @@ body {
 }
 
 .ticket-item {
-    margin-top: 7px;
+    /*margin-top: 7px;*/
     /*overflow: hidden;*/
 }
 

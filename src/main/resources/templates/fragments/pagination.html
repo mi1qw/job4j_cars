@@ -12,9 +12,23 @@
           <a class="page-link" th:href="@{|/posts?page=*{page-1}|}">Previous</a>
         </li>
 
-        <th:block th:each="ip:${#numbers.sequence(1,totalPages)}">
-          <li class="page-item" th:classappend="${#strings.equals(page, ip)}?'active':''"
-              th:attr="aria-current=${#strings.equals(page, ip)}?'page':''">
+
+        <th:block th:each="ip:${#numbers.sequence(page-1-3,page-1)}"
+                  th:if="*{ip>=1}">
+          <li class="page-item">
+            <a class="page-link" th:href="@{|/posts?page=*{ip}|}" th:text="*{ip}"></a>
+          </li>
+        </th:block>
+
+
+          <li class="page-item active" aria-current='page'>
+            <a class="page-link" th:href="@{|/posts?page=*{page}|}" th:text="*{page}"></a>
+          </li>
+
+
+        <th:block th:each="ip:${#numbers.sequence(page+1,page+1+3)}"
+                  th:if="*{ip<=totalPages}">
+          <li class="page-item">
             <a class="page-link" th:href="@{|/posts?page=*{ip}|}" th:text="*{ip}"></a>
           </li>
         </th:block>
