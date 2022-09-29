@@ -387,6 +387,9 @@
     <div th:replace="fragments/postCar::post(*{post})"></div>
   </div>
 
+
+  <div th:replace="fragments/pagination::pagination(${page},${totalPages})"></div>
+
 </div>
 
 <th:block layout:fragment="page-scripts">

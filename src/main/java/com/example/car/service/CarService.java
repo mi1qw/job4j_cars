@@ -94,17 +94,8 @@ public class CarService {
             Gearbox gbx = n.getGearbox();
             Gearbox gearbox = gearboxService.findById(gbx.getId());
             n.setGearbox(gearbox);
-//            Transmission trnsm = n.getTransmission();
-//            Transmission transmission = transmissionService.findById(trnsm.getId());
-//            n.setTransmission(transmission);
             n.setTransmission(transmissionService.findById(n.getTransmission().getId()));
-//            Engine engn = n.getEngine();
-//            Engine engine = engineService.findById(engn.getId());
-//            n.setEngine(engine);
             n.setEngine(engineService.findById(n.getEngine().getId()));
-//            City nCity = n.getCity();
-//            City city = cityService.findById(nCity.getId());
-//            n.setCity(city);
             n.setCity(cityService.findById(n.getCity().getId()));
         });
         return paginationDto;

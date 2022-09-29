@@ -1,0 +1,32 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+
+<nav th:fragment="pagination(page,totalPages)" class=" mt-3"
+     aria-label="Page navigation">
+
+  <th:block th:if="${totalPages>1}">
+    <nav>
+      <ul class="pagination justify-content-center">
+        <li class="page-item " th:classappend="${#strings.equals(page,'1')}?' disabled':''">
+          <a class="page-link" th:href="@{|/posts?page=*{page-1}|}">Previous</a>
+        </li>
+
+        <th:block th:each="ip:${#numbers.sequence(1,totalPages)}">
+          <li class="page-item" th:classappend="${#strings.equals(page, ip)}?'active':''"
+              th:attr="aria-current=${#strings.equals(page, ip)}?'page':''">
+            <a class="page-link" th:href="@{|/posts?page=*{ip}|}" th:text="*{ip}"></a>
+          </li>
+        </th:block>
+
+        <li class="page-item" th:classappend="${#strings.equals(totalPages, page)}?'disabled':''">
+          <a class="page-link" th:href="@{|/posts?page=*{page+1}|}">Next</a>
+        </li>
+      </ul>
+    </nav>
+  </th:block>
+
+</nav>
+
+
+</html>
