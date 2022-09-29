@@ -237,10 +237,10 @@ public class FilterForm {
     }
 
 
-    public <T> FilterForm addParamID(final String name, final T value, final boolean path,
+    public <T> FilterForm addParamID(final String name, final T value, final boolean isSliced,
                                      final Consumer<FilterDto> resetField) {
         if (value != null) {
-            params.add(new ElementForm<>(name, value, path, resetField));
+            params.add(new ElementForm<>(name, value, isSliced, resetField));
         }
         return this;
     }

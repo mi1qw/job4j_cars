@@ -15,7 +15,7 @@ import java.util.function.Function;
 @Slf4j
 public class PathForm {
     private final UserSession userSession;
-    private final List<Item> list = new ArrayList<>();
+    private final List<Field> list = new ArrayList<>();
 
 
     public PathForm(final UserSession userSession) {
@@ -23,12 +23,12 @@ public class PathForm {
         mapFields();
     }
 
-    public List<Item> mapFields() {
-        list.add(new Item<>("city", (t, f) -> f.setCity(t), (car) -> car.getCity().getId()));
-        list.add(new Item<>("mark", (t, f) -> f.setMark(t), (car) -> car.getMark().getId()));
-        list.add(new Item<>("model", (t, f) -> f.setModel(t), (car) -> car.getModel().getId()));
-        list.add(new Item<>("body", (t, f) -> f.setBody(t), (car) -> car.getBody().getId()));
-        list.add(new Item<>("engine", (t, f) -> f.setEngine(t), (car) -> car.getEngine().getId()));
+    public List<Field> mapFields() {
+        list.add(new Field<>("city", (t, f) -> f.setCity(t), (car) -> car.getCity().getId()));
+        list.add(new Field<>("mark", (t, f) -> f.setMark(t), (car) -> car.getMark().getId()));
+        list.add(new Field<>("model", (t, f) -> f.setModel(t), (car) -> car.getModel().getId()));
+        list.add(new Field<>("body", (t, f) -> f.setBody(t), (car) -> car.getBody().getId()));
+        list.add(new Field<>("engine", (t, f) -> f.setEngine(t), (car) -> car.getEngine().getId()));
         return list;
     }
 
@@ -37,8 +37,8 @@ public class PathForm {
 
         log.info("{}", filterDto);
         list.forEach(n -> {
-            Object id = n.getterSup.apply(car);
-            n.construct.accept(id, filterDto);
+            Object id = n.getter.apply(car);
+            n.setter.accept(id, filterDto);
         });
         log.info("{}", filterDto);
         return filterDto;
@@ -47,8 +47,8 @@ public class PathForm {
     public void makeBreadcrumb() {
     }
 
-    private record Item<T>(String name,
-                           BiConsumer<T, FilterDto> construct,
-                           Function<Car, T> getterSup) {
+    private record Field<T>(String name,
+                            BiConsumer<T, FilterDto> setter,
+                            Function<Car, T> getter) {
     }
 }

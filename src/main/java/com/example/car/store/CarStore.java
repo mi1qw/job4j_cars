@@ -175,14 +175,14 @@ public class CarStore extends CrudPersist<Car> {
             Query<Car> query = session.createQuery(
                     filterForm.makeQuery(),
                     Car.class);
-            Query<Car> carQuery = filterForm.setParameters(query);
-            ScrollableResults<Car> scroll = carQuery.scroll(ScrollMode.SCROLL_INSENSITIVE);
+            query = filterForm.setParameters(query);
+            ScrollableResults<Car> scroll = query.scroll(ScrollMode.SCROLL_INSENSITIVE);
             scroll.last();
             int rowNumber = scroll.getRowNumber() + 1;
             scroll.close();
             log.info("{}", rowNumber);
 
-            return carQuery
+            return query
                     .setFirstResult(0)
                     .setMaxResults(20)
                     .list();

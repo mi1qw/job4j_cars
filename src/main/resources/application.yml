@@ -1,4 +1,5 @@
 storage.location: uploadPosts
+car.posts.pageSize: 5
 
 logging.level:
   root: info
