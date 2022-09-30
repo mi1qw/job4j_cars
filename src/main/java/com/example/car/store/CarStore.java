@@ -232,17 +232,30 @@ public class CarStore extends CrudPersist<Car> {
 
     public boolean deleteCar(final Long id) {
         List<String> images = new ArrayList<>();
-        txv(session -> {
-            Car car = session.find(Car.class, id);
-            images.addAll(car.getImages());
-            session.remove(car);
-        });
-        ForkJoinPool.commonPool().execute(() -> {
-            images.forEach(n -> {
-                fileService.deleteByName(n);
+        Account account = userSession.getAccount();
+        Boolean resBoolean = false;
+        try {
+            resBoolean = tx(session -> {
+                Car car = session.find(Car.class, id);
+                if (car.getAccount().equals(account)) {
+                    images.addAll(car.getImages());
+                    session.remove(car);
+                    return true;
+                }
+                return false;
             });
-        });
-        return true;
+
+            if (resBoolean) {
+                ForkJoinPool.commonPool().execute(() -> {
+                    images.forEach(n -> {
+                        fileService.deleteByName(n);
+                    });
+                });
+            }
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
+        return resBoolean;
 //        try {
 //            fileService.deleteByName(name);
 //            car = carService.deleteImageByName(car, name);
