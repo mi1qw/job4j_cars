@@ -65,15 +65,21 @@ public class CarStore extends CrudPersist<Car> {
         return tx(session -> session.merge(car));
     }
 
+    //нужно
     public Car deleteImageByName(final Car car, final String name) {
+        Account account = userSession.getAccount();
         return tx(session -> {
             Car car1 = session.find(Car.class, car.getId());
+            if (!car1.getAccount().getId().equals(account.getId())) {
+                return null;
+            }
             car1.getImages().remove(name);
 //            Car merge = session.merge(car1);
             return car1;
         });
     }
 
+    // нужный
     public Car getCar(final Long id) {
         return tx(session -> {
             Car car = session.find(Car.class, id);
@@ -220,12 +226,16 @@ public class CarStore extends CrudPersist<Car> {
     }
 
     public boolean changeStatus(final Long id, final Status status) {
+        Account account = userSession.getAccount();
         Integer res = tx(session ->
-                session.createQuery("update Car c set c.status=:status where c.id=:id and c"
-                                    + ".status!=:newItem")
+                session.createQuery("""
+                                update Car c set c.status=:status where c.id=:id 
+                                and c.status!=:newItem
+                                and c.account=:account""")
                         .setParameter("id", id)
-                        .setParameter("status", status)
                         .setParameter("newItem", Status.newItem)
+                        .setParameter("status", status)
+                        .setParameter("account", account)
                         .executeUpdate());
         return res != 0;
     }
@@ -237,7 +247,7 @@ public class CarStore extends CrudPersist<Car> {
         try {
             resBoolean = tx(session -> {
                 Car car = session.find(Car.class, id);
-                if (car.getAccount().equals(account)) {
+                if (car.getAccount().getId().equals(account.getId())) {
                     images.addAll(car.getImages());
                     session.remove(car);
                     return true;

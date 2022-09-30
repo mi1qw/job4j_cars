@@ -4,10 +4,7 @@ import com.example.car.dto.CarDto;
 import com.example.car.dto.CarMapper;
 import com.example.car.dto.FileImageDto;
 import com.example.car.exception.StorageException;
-import com.example.car.model.Car;
-import com.example.car.model.Generations;
-import com.example.car.model.Mark;
-import com.example.car.model.Status;
+import com.example.car.model.*;
 import com.example.car.service.CarService;
 import com.example.car.service.FileService;
 import com.example.car.service.MarkService;
@@ -67,11 +64,14 @@ public class CarFormController {
     public ResponseEntity<?> removeImg(final @RequestParam("value") String name) {
         Car car = userSession.getNewCar();
         try {
-            fileService.deleteByName(name);
             log.info("{}", car.getImages());
             car = carService.deleteImageByName(car, name);
+            if (car == null) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
             userSession.setNewCar(car);
             log.info("{}", userSession.getNewCar().getImages());
+            fileService.deleteByName(name);
         } catch (StorageException e) {
             log.error(e.getMessage(), e);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -158,6 +158,10 @@ public class CarFormController {
     @GetMapping("/edit/{id}")
     public String edit(final @PathVariable long id, final Model model) {
         Car car = carService.getCar(id);
+        Account account = userSession.getAccount();
+        if (!car.getAccount().getId().equals(account.getId())) {
+            return "redirect:/posts";
+        }
         userSession.setNewCar(car);
         if (car.getStatus().equals(Status.newItem)) {
             return "redirect:/cars/add";
