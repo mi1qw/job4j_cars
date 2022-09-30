@@ -1,6 +1,6 @@
 car:
   storage.location: uploadPosts
-  posts.pageSize: 3
+  posts.pageSize: 1
 
 logging.level:
   root: info

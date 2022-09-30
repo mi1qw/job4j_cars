@@ -548,3 +548,13 @@ a:hover {
     text-decoration: none;
     cursor: pointer;
 }
+
+.pagination-dots {
+    display: inline-block;
+    min-width: 16px;
+    padding: 7px 8px;
+    line-height: 20px;
+    text-decoration: none;
+    box-sizing: content-box;
+    text-align: center;
+}
