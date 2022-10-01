@@ -10,9 +10,10 @@
 </head>
 <body>
 
-<div layout:fragment="breadcrumb">
-  <span th:replace="fragments/breadcrumb::breadSingleName('поиск объявлений')"></span>
-</div>
+<th:block layout:fragment="breadcrumb">
+  <nav layout:replace="~{layout/breadcrumbs::breadcrumb('поиск объявлений')}"></nav>
+</th:block>
+
 
 <div layout:fragment="page-content">
 

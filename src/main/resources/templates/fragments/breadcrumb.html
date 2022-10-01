@@ -18,20 +18,7 @@
       </a>
     </li>
     <li class="breadcrumb-item active" aria-current="page"
-        th:text="*{crntName}">Library
-    </li>
-  </ol>
-</nav>
-
-
-<nav th:fragment="breadSingleName(name)" class=" mt-3"
-     aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item">
-      <a class="bread-link" th:href="@{/posts}">Home</a>
-    </li>
-    <li class="breadcrumb-item active" aria-current="page"
-        th:text="*{name}">Library
+        th:text="*{crntName}">
     </li>
   </ol>
 </nav>
