@@ -198,7 +198,7 @@ li.item-char {
     grid-template-areas: "mark mark model model odometerFrom odometerFrom"
     "body gear engine transmission displacementFrom displacementFrom"
     "yearFrom yearFrom powerFrom powerFrom priceFrom priceFrom"
-    "city . . findBtn sort sort";
+    "city . resetBtn findBtn sort sort";
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: repeat(4, auto);
     grid-gap: 0.5em;
@@ -247,14 +247,14 @@ li.item-char {
     border: 1px solid #ced4da;
     border-radius: .375rem 0 0 .375rem;
     height: 2.32rem;
-    color: black;
+    /*color: black;*/
 }
 
 .right-group {
     border: 1px solid #ced4da;
     border-radius: 0 .375rem .375rem 0;
     height: 2.32rem;
-    color: black;
+    /*color: black;*/
 }
 
 .mark {
@@ -337,6 +337,9 @@ li.item-char {
 
 .findBtn {
     grid-area: findBtn;
+}
+.resetBtn {
+    grid-area: resetBtn;
 }
 
 .width-elm {

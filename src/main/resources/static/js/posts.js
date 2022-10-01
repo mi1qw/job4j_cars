@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     clearInput();
     clearSelect();
     addModels();
+    resetBtn();
 });
 
 
@@ -81,7 +82,6 @@ function year(select) {
 }
 
 function EngineDisplacement(select) {
-    let yearNow = new Date().getFullYear();
     for (let i = 200; i < 3000; i += 200) {
         let option = document.createElement('option');
         option.value = i;
@@ -163,4 +163,15 @@ function clearSelect() {
             }
         }
     });
+}
+
+resetBtn = () => {
+    console.log('resetBtn')
+    document.querySelector('.resetBtn').addEventListener('click',
+        (e => {
+            console.log('reset')
+            document.querySelectorAll('.clearable-select *[data-clear-input], .clearable-input' +
+                ' *[data-clear-input]')
+                .forEach(n => n.click())
+        }));
 }
