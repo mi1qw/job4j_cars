@@ -528,7 +528,7 @@ option:not(:first-of-type) {
 
 .bread-link {
     text-decoration: none;
-    color: #208097;
+    color: #208097 !important;
     /*color: gray;*/
 }
 

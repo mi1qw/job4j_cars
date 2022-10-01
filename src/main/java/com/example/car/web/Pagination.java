@@ -1,4 +1,4 @@
-package com.example.car.util;
+package com.example.car.web;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;

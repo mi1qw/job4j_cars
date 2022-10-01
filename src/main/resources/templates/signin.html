@@ -26,6 +26,11 @@
   <title>Регистрация</title>
 </head>
 <body>
+
+<div layout:fragment="breadcrumb">
+  <span th:replace="fragments/breadcrumb::breadSingleName('регистрация')"></span>
+</div>
+
 <div layout:fragment="page-content">
   <div class="container pt-5 px-5">
     <div class="row justify-content-center">

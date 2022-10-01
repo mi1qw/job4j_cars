@@ -8,13 +8,10 @@ import com.example.car.model.*;
 import com.example.car.service.dto.PaginationDto;
 import com.example.car.store.CarStore;
 import com.example.car.util.CarModfctn;
-import com.example.car.util.Pagination;
+import com.example.car.web.Pagination;
 import com.example.car.util.State;
 import com.example.car.web.UserSession;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
-import lombok.NonNull;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;

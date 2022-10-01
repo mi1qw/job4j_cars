@@ -23,18 +23,18 @@
         <!--        </li>-->
 
         <!-- ... -->
-        <th:block th:if="${(page-2)>3}">
+        <th:block th:if="${(page-2)>2}">
           <li class="page-item">
             <span class="pagination-dots">...</span>
           </li>
         </th:block>
 
         <!--2-->
-        <th:block th:if="*{page==5}">
-          <li class="page-item">
-            <a class="page-link" th:href="@{|/posts?page=2|}">2</a>
-          </li>
-        </th:block>
+<!--        <th:block th:if="*{page==5}">-->
+<!--          <li class="page-item">-->
+<!--            <a class="page-link" th:href="@{|/posts?page=2|}">2</a>-->
+<!--          </li>-->
+<!--        </th:block>-->
 
         <!--234-->
         <th:block th:if="*{page>1}">

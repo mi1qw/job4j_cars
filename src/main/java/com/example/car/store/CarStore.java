@@ -10,7 +10,7 @@ import com.example.car.service.FileService;
 import com.example.car.service.dto.PaginationDto;
 import com.example.car.util.CarModfctn;
 import com.example.car.util.FilterForm;
-import com.example.car.util.Pagination;
+import com.example.car.web.Pagination;
 import com.example.car.web.UserSession;
 import jakarta.persistence.PersistenceException;
 import lombok.extern.slf4j.Slf4j;

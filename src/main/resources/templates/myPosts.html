@@ -9,6 +9,11 @@
   <link rel='stylesheet' th:href="@{/css/myposts.css}">
 </head>
 <body>
+
+<div layout:fragment="breadcrumb">
+  <span th:replace="fragments/breadcrumb::breadSingleName('мои объявления')"></span>
+</div>
+
 <div layout:fragment="page-content">
 
   <div class="svg-sprites" style="position:absolute;top:-9999px;left:-9999px">

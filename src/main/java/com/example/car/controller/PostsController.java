@@ -4,23 +4,18 @@ import com.example.car.config.PostsConfig;
 import com.example.car.dto.FilterDto;
 import com.example.car.dto.PostDto;
 import com.example.car.dto.PostMapper;
-import com.example.car.model.Car;
 import com.example.car.service.CarService;
-import com.example.car.service.CityService;
 import com.example.car.service.dto.PaginationDto;
 import com.example.car.util.CarModfctn;
 import com.example.car.util.FilterForm;
-import com.example.car.util.Pagination;
+import com.example.car.web.Pagination;
 import com.example.car.util.PathForm;
 import com.example.car.web.UserSession;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/posts")
