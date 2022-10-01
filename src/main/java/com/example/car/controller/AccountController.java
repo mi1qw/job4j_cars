@@ -3,6 +3,7 @@ package com.example.car.controller;
 import com.example.car.model.Account;
 import com.example.car.service.AccountService;
 import com.example.car.validation.ValidationGroupSequence;
+import com.example.car.web.ReqSqope;
 import com.example.car.web.UserSession;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +24,7 @@ import java.util.Optional;
 public class AccountController {
     private final AccountService accountService;
     private final UserSession session;
+    private final ReqSqope reqSqope;
 
 
     @GetMapping("/signPage")
@@ -43,26 +45,18 @@ public class AccountController {
             return "signin";
         }
         log.info("{}", account);
-        Account newAccount = accountService.add(account);
-        newAccount.setLogin(null);
-        newAccount.setPassword(null);
-        session.setAccount(newAccount);
+        reqSqope.register(account);
         return "redirect:/posts";
     }
 
     @PostMapping("/logIn")
     public String login(final @ModelAttribute Account account) {
-        Optional<Account> userDb = accountService.findUserByLoginAndPwd(
-                account.getLogin(), account.getPassword()
-        );
-        if (userDb.isEmpty()) {
+        boolean isLogin = reqSqope.login(account);
+        if (isLogin) {
+            return "redirect:/posts";
+        } else {
             return "redirect:/posts?fail=true";
         }
-        Account user = userDb.get();
-        user.setPassword(null);
-        user.setLogin(null);
-        session.setAccount(user);
-        return "redirect:/posts";
     }
 
     @GetMapping("/logout")
