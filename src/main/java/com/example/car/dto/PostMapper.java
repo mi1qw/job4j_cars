@@ -32,22 +32,10 @@ public abstract class PostMapper {
     private ColorService colorService;
     @Autowired
     private CityService cityService;
-//    @Autowired
-//    private ModelService  modelService;
-
-
-//    public PostMapper(final MarkService markService) {
-//        this.markService = markService;
-//    }
 
 
     @BeforeMapping
     protected void before(final Car car) {
-//        System.out.println(markService.findById(car.getMark().getId()) + "   markService");
-//        System.out.println(markService + "   markService");
-
-//        car.setDescription("kkkkkkkkkkk");
-
         Long id = car.getMark().getId();
         car.setMark(markService.findById(id));
 
@@ -81,12 +69,6 @@ public abstract class PostMapper {
 //    protected PostDto after(final @MappingTarget   postDto) {
     protected void after(final Car car) {
 //        log.info("{}", "!qqqqqqqqqq");
-        System.out.println("!qqqqqqqqqq");
-        int a = 10;
-
-//        System.out.println(postDto.getMark().getId());
-//        postDto.setDescription("wwwwwwwww");
-//        return postDto;
     }
 
 

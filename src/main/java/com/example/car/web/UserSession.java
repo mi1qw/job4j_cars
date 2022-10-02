@@ -14,7 +14,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 @SessionScope
 @Data
 public class UserSession {
-    //    private final AppScope appScope;
     private Account account;
     private CarState carState;
     private Car newCar;
@@ -22,10 +21,4 @@ public class UserSession {
     private AtomicInteger order = new AtomicInteger();
     private FilterForm filterForm = new FilterForm();
     private FilterForm breadcrumb = new FilterForm();
-    // TODO создавать при создании сессии
-
-//    public UserSession(final AppScope appScope) {
-//        this.appScope = appScope;
-//        this.filterForm = new FilterForm1();
-//    }
 }

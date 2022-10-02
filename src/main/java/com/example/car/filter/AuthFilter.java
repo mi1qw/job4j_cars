@@ -21,16 +21,13 @@ public class AuthFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
         String uri = req.getRequestURI();
-        log.info("{}", uri);
+//        log.info("{}", uri);
         if (uri.equals("/")
-//            || uri.startsWith("/cars")
             || uri.endsWith(".css")
             || uri.endsWith(".js")
             || uri.startsWith("/posts")
             || uri.startsWith("/cars/img")
             || uri.startsWith("/cars/models")
-
-//            || uri.endsWith("models")
             || uri.endsWith("logIn")
             || uri.endsWith("favicon.ico")
             || uri.endsWith("signPage")

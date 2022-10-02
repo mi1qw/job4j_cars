@@ -185,8 +185,6 @@ public class CarStore extends CrudPersist<Car> {
             scroll.last();
             rowNumber[0] = scroll.getRowNumber() + 1;
             scroll.close();
-            log.info("{}", rowNumber[0]);
-
             return query
                     .setFirstResult(pagination.getOffset())
                     .setMaxResults(pagination.getSize())
@@ -229,7 +227,7 @@ public class CarStore extends CrudPersist<Car> {
         Account account = userSession.getAccount();
         Integer res = tx(session ->
                 session.createQuery("""
-                                update Car c set c.status=:status where c.id=:id 
+                                update Car c set c.status=:status where c.id=:id
                                 and c.status!=:newItem
                                 and c.account=:account""")
                         .setParameter("id", id)
@@ -256,33 +254,22 @@ public class CarStore extends CrudPersist<Car> {
             });
 
             if (resBoolean) {
-                ForkJoinPool.commonPool().execute(() -> {
-                    images.forEach(n -> {
-                        fileService.deleteByName(n);
-                    });
-                });
+                ForkJoinPool.commonPool().execute(() ->
+                        images.forEach(fileService::deleteByName));
             }
         } catch (Exception e) {
             log.error(e.getMessage(), e);
         }
         return resBoolean;
-//        try {
-//            fileService.deleteByName(name);
-//            car = carService.deleteImageByName(car, name);
-//            userSession.setNewCar(car);
-//        } catch (StorageException e) {
-//        }
-
-//        return delete(id);
     }
 
 
     public CarModfctn findCarPost(final Long id) {
         return tx(session ->
                 session.createQuery("""
-                                select c, m, a from Car c, Account a, 
-                                Modification m where c.account= a and c.id=:id and 
-                                c.modification=m.id.nameId and c.year=m.id.yearId 
+                                select c, m, a from Car c, Account a,
+                                Modification m where c.account= a and c.id=:id and
+                                c.modification=m.id.nameId and c.year=m.id.yearId
                                 and c.mark=m.id.markId""", Object[].class)
                         .setParameter("id", id)
                         .setTupleTransformer((tuple, aliases) ->

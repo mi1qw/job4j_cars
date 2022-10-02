@@ -59,7 +59,6 @@ public class FileSystemStore implements StorageService {
         } catch (IOException e) {
             throw new StorageException("Failed to read stored files", e);
         }
-
     }
 
     @Override
@@ -108,6 +107,4 @@ public class FileSystemStore implements StorageService {
             throw new StorageException("Could not initialize storage", e);
         }
     }
-
-
 }

@@ -30,7 +30,6 @@ public class Pagination {
 
     public int getTotalPages(final int rows) {
         double pages = Math.ceil(rows / (double) size);
-//        return pages == 0 ? 1 : (int) pages;
         return (int) pages;
     }
 

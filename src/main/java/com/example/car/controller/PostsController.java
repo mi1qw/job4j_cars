@@ -39,21 +39,12 @@ public class PostsController {
         } else {
             filterDto1 = filterDto;
         }
-
         Pagination pagination = Pagination.of(page - 1, postsConfig.getPageSize());
-
-
         PaginationDto paginationDto = carService.filterForm(filterDto1, pagination);
-//        cars.forEach(n -> n.setCity(cityService.findById(n.getCity().getId())));
         model.addAttribute("posts", paginationDto.cars());
         model.addAttribute("page", page);
         model.addAttribute("totalPages", paginationDto.pages());
         model.addAttribute("filter", filterDto1);
-
-        paginationDto.cars().forEach(n -> log.info("{}", n.getId()));
-
-        //        List<Car> cars = carService.finCarsWithEngineGearFILTR();
-//        model.addAttribute("posts", cars);
         return "posts";
     }
 
@@ -64,20 +55,13 @@ public class PostsController {
         PostDto postDto = postMapper.carToPostDto(carModfctn.car(), carModfctn.modification());
         model.addAttribute("post", postDto);
         userSession.setNewCar(carModfctn.car());
-
-        //        if (filterForm.isEmpty()) {
         FilterDto filterDto = pathForm.carToFilterDto(carModfctn.car());
-//        }
         userSession.setBreadcrumb(new FilterForm(filterDto));
         return "carPost";
     }
 
-    // TODO при редактировании появляются другие данные, что-то в контексте
-
     @GetMapping("/slice/{nameFilter}")
     public String back(final @PathVariable("nameFilter") String nameFilter) {
-//        Car car = userSession.getNewCar();
-//        pathForm.
         FilterForm filterForm = userSession.getBreadcrumb().sliceFilter(nameFilter);
         userSession.setFilterForm(filterForm);
         return "redirect:/posts";

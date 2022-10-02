@@ -248,14 +248,6 @@ public class CarFormController {
         if (newCar == null || !ImageUtil.isValid(filename)) {
             return new ResponseEntity<>("Wrong image type.", HttpStatus.BAD_REQUEST);
         }
-//        TabOrder tabOrder = session.getTabOrder();
-//        if (tabOrder == null) {
-//            System.out.println("tabOrder == null");
-//            tabOrder = new TabOrder(totalFiles);
-//            session.setTabOrder(tabOrder);
-//        }
-
-
         AtomicInteger maxID = userSession.getMaxID();
         if (maxID == null) {
             int maxIDa = ImageUtil.findMaxID(newCar);

@@ -1,9 +1,7 @@
 package com.example.car.store;
 
 import com.example.car.model.Generations;
-import com.example.car.model.Mark;
 import com.example.car.model.Model;
-import com.example.car.util.CarState;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -25,12 +23,12 @@ public class GenerationsStore extends CrudPersist<Generations> {
 
     public List<Generations> getGenerationsByYearByModel(final Short year, final Model model) {
         return tx(session ->
-                session.createQuery(
-                                "from Generations g join fetch g.body "
-                                + "join fetch g.engine "
-                                + "join fetch g.gearbox "
-                                + "join fetch g.transmission where"
-                                + " g.model=:model and g.year=:year",
+                session.createQuery(""" 
+                                        from Generations g join fetch g.body 
+                                        join fetch g.engine 
+                                        join fetch g.gearbox 
+                                        join fetch g.transmission where
+                                         g.model=:model and g.year=:year""",
                                 Generations.class)
                         .setParameter("model", model)
                         .setParameter("year", year)

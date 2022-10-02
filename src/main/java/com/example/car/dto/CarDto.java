@@ -1,16 +1,11 @@
 package com.example.car.dto;
 
 import com.example.car.model.City;
-import com.example.car.validation.ValidationGroupOne;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Data;
-import org.springframework.format.annotation.NumberFormat;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -31,7 +26,6 @@ public class CarDto implements Serializable {
     private String description;
 
     @NotNull(message = "Укажите цену")
-//    @NumberFormat(style = NumberFormat.Style.CURRENCY)
     private BigDecimal price;
 
     @NotNull
