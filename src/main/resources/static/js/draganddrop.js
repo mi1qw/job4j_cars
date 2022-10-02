@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     yearBuy();
 });
 
-// let inp = document.getElementById('fileElemEmpty');
 let inp = document.getElementById('fileElem');
 let emp = document.getElementById('emptyArea');
 
@@ -94,84 +93,15 @@ function updateProgress(fileNumber, percent) {
 }
 
 function handleFiles(files) {
-    if (files.length!==0){
+    if (files.length !== 0) {
         files = [...files]
         totalFiles = files.length
         initializeProgress(files.length)
         files.forEach(uploadFile)
-        // files.forEach(previewFile)
         isExistImages();
     }
 }
 
-function previewFile(file) {
-    let reader = new FileReader()
-    reader.readAsDataURL(file)
-
-    reader.addEventListener("load", function () {
-        var image = new Image();
-        image.onload = function () {
-            console.log(this.width + " " + this.height, " image.onload");
-        };
-
-        image.addEventListener("load", function () {
-            var imageInfo = file.name + ' ' +
-                // image.width + '×' +
-                // image.height + ' ' +
-                file.type + ' ' +
-                Math.round(file.size / 1024) + 'KB';
-
-            console.log(imageInfo, " image.addEventListener")
-            // Show image and info
-            // elPreview.appendChild( this );
-            // elPreview.insertAdjacentHTML("beforeend", imageInfo +'<br>');
-            //
-            // if (useBlob) {
-            //     // Free some memory
-            //     window.URL.revokeObjectURL(image.src);
-            // }
-        });
-        // image.src = useBlob ? window.URL.createObjectURL(file) : reader.result;
-    });
-
-    reader.onloadend = function () {
-
-        var imageInfo = file.name + ' ' +
-            // image.width + '×' +
-            // image.height + ' ' +
-            file.type + ' ' +
-            Math.round(file.size / 1024) + 'KB';
-
-        console.log(imageInfo, " reader.onloadend")
-
-
-        let img = document.createElement('img')
-        img.src = reader.result
-
-        // let btn = document.createElement('button');
-        let div = document.createElement('div');
-        div.className += " MdsPhoto MdsPhotos__item"
-        let btn = document.createElement('div');
-        btn.innerHTML = "<svg class=\"IconSvg IconSvg_trash IconSvg_size_24 MdsPhoto__icon MdsPhoto__icon_right\"><use xlink:href=\"#trash\"></use></svg>"
-        // btn.className += " MdsPhoto__icon MdsPhoto__icon_right IconSvg_size_24"
-        btn.onclick = () => {
-            // this.element.removeChild(describeEl);
-            console.log(this + " " + img.naturalWidth, "  btn.onclick");
-        };
-
-        div.appendChild(btn)
-        document.getElementById('gallery')
-            .appendChild(div)
-            .appendChild(img)
-        // document.getElementById('gallery').appendChild(btn)
-        // .appendChild(btn)
-        // document.getElementById('gallery').append(btn)
-
-        img.onload = function () {
-            console.log(img.naturalHeight + " " + img.naturalWidth, " img.onload");
-        };
-    }
-}
 
 function uploadFile(file, i, arr) {
     var url = '/cars/upload'
@@ -191,9 +121,6 @@ function uploadFile(file, i, arr) {
 
             // arr[i] = xhr.responseText;
             // file = xhr.responseText;
-
-            // console.log("SUCCESS : ", this.getAllResponseHeaders());
-            // console.log("SUCCESS : ", this.getResponseHeader("content-disposition"));
 
             updateProgress(i, 100) // <- Add this
 
@@ -223,8 +150,6 @@ function previewFileWithName(file, name) {
 
         image.addEventListener("load", function () {
             var imageInfo = file.name + ' ' +
-                // image.width + '×' +
-                // image.height + ' ' +
                 file.type + ' ' +
                 Math.round(file.size / 1024) + 'KB';
 
@@ -246,24 +171,15 @@ function previewFileWithName(file, name) {
         var imageInfo = file.name + ' ' +
             file.type + ' ' +
             Math.round(file.size / 1024) + 'KB';
-        // console.log(imageInfo, " reader.onloadend")
-
 
         let img = document.createElement('img')
         img.src = reader.result
 
-        // let btn = document.createElement('button');
         let div = document.createElement('div');
         div.className += " MdsPhoto MdsPhotos__item"
         div.setAttribute('data-img', name);
 
         let btn = document.createElement('div');
-        // btn.innerHTML = "<svg class=\"IconSvg IconSvg_trash IconSvg_size_24 MdsPhoto__icon MdsPhoto__icon_right\"><use xlink:href=\"#trash\"></use></svg>"
-
-        // btn.innerHTML = "<a href = \"javascript:void(0)\" onClick = \"aClick(this)\">" +
-        // "<svg className = \"IconSvg IconSvg_trash IconSvg_size_24 MdsPhoto__icon" +
-        //     " MdsPhoto__icon_right\"><use xlink:href = \"#trash\" >< /use></svg></a>"
-
         btn.innerHTML = "<a\n" +
             "                href=\"javascript:void(0)\"\n" +
             "                onclick=\"aClick(this)\"\n" +
@@ -274,14 +190,8 @@ function previewFileWithName(file, name) {
             "              </svg>\n" +
             "            </a>";
 
-        // btn.onclick = () => {
-        //     // this.element.removeChild(describeEl);
-        //     console.log(this + " " + img.naturalWidth, "  btn.onclick");
-        // };
-
         div.appendChild(btn)
         div.appendChild(img)
-
 
         var lastElem = gallery.lastElementChild;
         var isExistAddImgButton = lastElem?.hasAttribute('data-empty');
@@ -294,15 +204,6 @@ function previewFileWithName(file, name) {
             addImgButton();
         }
 
-        // addImgButton();
-
-
-        // div.appendChild(btn)
-        // document.getElementById('gallery')
-        //     .appendChild(div)
-        //     .appendChild(img)
-
-
         img.onload = function () {
             console.log(img.naturalHeight + " " + img.naturalWidth, " img.onload");
         };
@@ -310,22 +211,6 @@ function previewFileWithName(file, name) {
 }
 
 
-// todo проверить порядок добавления картинок по номеру
-//  что если картинку добавили чуть позже
-//  что если форму не сохранили, сохранённые картинки надо удалять,
-//  перед закрытием сессии проверить или юзер нажал Cancel
-
-
-// var gridDemo = document.getElementById('gridDemo');
-//
-// // Grid demo
-// new Sortable(gridDemo, {
-//     animation: 150,
-//     ghostClass: 'blue-background-class'
-// });
-
-
-// var gallery = document.getElementById('gallery');
 new Sortable(gallery, {
     animation: 150,
     ghostClass: 'blue-background-class'
@@ -361,9 +246,6 @@ function getCountImages() {
 }
 
 
-// return gallery.children?.length > 0;
-
-
 function submitForm() {
 
     // уточнить порядок снимков
@@ -397,7 +279,6 @@ function aClick(dataImg) {
 }
 
 function isExistImages() {
-    // if (totalFiles > 0)
     if (totalFiles > 0 || getCountImages()) {
         hideElement(emp);
         return true;
@@ -439,8 +320,6 @@ function yearBuy() {
 }
 
 function addImgButton() {
-
-
     var lastElem = gallery.lastElementChild;
     var isExistAddImgButton = lastElem?.hasAttribute('data-empty');
     if (isExistAddImgButton) {
@@ -449,18 +328,10 @@ function addImgButton() {
         return;
     }
 
-
-    // return;
-    // let btn = document.createElement('button');
     let div = document.createElement('div');
     div.className += "PhotosAdd__wrapper PhotosAdd__withPhotos MdsPhotos__addButton PhotosAdd"
     div.setAttribute('data-empty', 'empty');
     div.addEventListener('click', () => inp.click());
-    // div.click = function (){
-    //     inp.click();
-    // };
-
-    let btn = document.createElement('div');
 
     div.innerHTML = " <div class=\"PhotosAdd__title\">\n" +
         "    <div class=\"PhotosAdd__icon\">\n" +
@@ -471,16 +342,5 @@ function addImgButton() {
         "    <div class=\"PhotosAdd__addButton\">Добавить фото</div>\n" +
         "  </div>";
 
-    // btn.onclick = () => {
-    //     // this.element.removeChild(describeEl);
-    //     console.log(this + " " + img.naturalWidth, "  btn.onclick");
-    // };
-
-    // div.appendChild(btn)
-    // document.getElementById('gallery')
     gallery.appendChild(div)
-    // .appendChild(img)
-
 }
-
-// parent.insertBefore(child, parent.firstChild);

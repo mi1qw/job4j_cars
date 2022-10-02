@@ -3,92 +3,64 @@
 
 <div th:fragment="filterForm(filter)"
      class="d-flex justify-content-center mt-3 mb-4">
-  <!--  <div th:text="*{filter}"></div>-->
   <form th:action="@{/posts}" th:object="${filter}" method="get"
         id="form-filter">
-    <!--<div th:text=""></div>-->
-
     <div class="grid-filter">
 
-      <!--      <input th:field="*{mark}" class="mark width-elm">-->
       <div th:insert="::fieldSelect('Марка', 'mark', *{mark})" class="mark width-elm"></div>
 
-      <!--      <input th:field="*{model}" class="model width-elm">-->
       <div th:insert="::fieldSelect('Модель', 'model', *{model})" class="model width-elm"></div>
-
 
       <div th:insert="::fieldSelect('Город', 'city', *{city})" class="city width-elm"></div>
 
-
       <div class="odometerFrom">
-        <!--      <input th:field="*{odometerFrom}" class="odometerFrom width-elm">-->
         <div th:insert="::fieldInput('Пробег от', 'odometerFrom', *{odometerFrom},'left-group')"
              class="child"></div>
-        <!--      <input th:field="*{odometerBefore}" class="odometerBefore width-elm">-->
         <div th:insert="::fieldInput('до', 'odometerBefore', *{odometerBefore},'right-group')"
              class="child"></div>
       </div>
 
-
-      <!--      <input th:field="*{body}" class="body width-elm">-->
       <div th:insert="::fieldSelect('Кузов', 'body', *{body})" class="body width-elm"></div>
 
-      <!--      <input th:field="*{gearbox}" class="gear width-elm">-->
       <div th:insert="::fieldSelect('Коробка', 'gearbox', *{gearbox})" class="gear width-elm"></div>
 
-      <!--      <input th:field="*{engine}" class="engine width-elm">-->
       <div th:insert="::fieldSelect('Двигатель', 'engine', *{engine})"
            class="engine width-elm"></div>
 
-      <!--      <input th:field="*{transmission}" class="transmission width-elm">-->
       <div th:insert="::fieldSelect('Привод', 'transmission', *{transmission})"
            class="transmission width-elm"></div>
 
       <div class="yearFrom">
-        <!--      <input th:field="*{yearFrom}" class="yearFrom width-elm">-->
         <div th:insert="::valueSelect('Год после', 'yearFrom', *{yearFrom},'left-group')"
              class="child"></div>
         <div th:insert="::valueSelect('до', 'yearBefore', *{yearBefore},'right-group')"
              class="child"></div>
-        <!--      <div th:insert="::fieldInput('Год до', 'yearBefore', *{yearBefore})"-->
-        <!--           class="yearBefore width-elm"></div>-->
       </div>
 
 
       <div class="priceFrom">
-        <!--      <input th:field="*{priceFrom}" class="priceFrom width-elm">-->
         <div th:insert="::fieldInput('Цена от', 'priceFrom', *{priceFrom},'left-group')"
              class="child"></div>
         <div th:insert="::fieldInput('до', 'priceBefore', *{priceBefore},'right-group')"
              class="child"></div>
       </div>
 
-
       <div class="displacementFrom">
-        <!--      <input th:field="*{engineDisplacementFrom}" class="displacementFrom width-elm">-->
-        <!--      <div th:insert="::fieldInput('Объём от', 'engineDisplacementFrom', *{engineDisplacementFrom})"-->
-        <!--           class="displacementFrom width-elm"></div>-->
         <div
             th:insert="::valueSelect('Объём от', 'engineDisplacementFrom', *{engineDisplacementFrom},'left-group')"
             class="child"></div>
         <div
             th:insert="::valueSelect('до', 'engineDisplacementBefore', *{engineDisplacementBefore},'right-group')"
             class="child"></div>
-        <!--      <div th:insert="::fieldInput('Объём до', 'engineDisplacementFrom', *{engineDisplacementBefore})"-->
-        <!--           class="displacementBefore width-elm"></div>-->
       </div>
 
-
       <div class="powerFrom">
-        <!--      <input th:field="*{powerFrom}" class="powerFrom width-elm">-->
         <div th:insert="::fieldInput('Мощн. от', 'powerFrom', *{powerFrom},'left-group')"
              class="child"></div>
         <div th:insert="::fieldInput('до', 'powerBefore', *{powerBefore},'right-group')"
              class="child"></div>
       </div>
 
-
-      <!--      <input th:field="*{sort}" class="sort width-elm">-->
       <div th:insert="::sort('Сортировка', 'sort', *{sort})"
            class="sort width-elm"></div>
 
@@ -97,21 +69,11 @@
     </div>
   </form>
 
-<!--    <p th:text="*{model.getValue()}"></p>-->
-<!--    <p th:text="*{model}"></p>-->
-  </div>
 </div>
 
 
-<!--          id="yearPurchase" -->
 <div th:fragment="fieldSelect(text, key, fieldID)"
      class="clearable-select">
-  <!--  <p th:text="|${key}  '{text}'|"></p>-->
-  <!--  <p th:text="|${fieldID}   '{fieldID}'|"></p>-->
-  <!--  <p th:text="|${@appScope.filterMap.get(key).get(1L)}  'get(1L)'|"></p>-->
-  <!--  <p th:text="|${@appScope.filterMap.get(key).get(T(java.lang.Long).parseLong(fieldID))}  'get(T)'|"></p>-->
-  <!--  <p th:each="option:${@appScope.filterMap.get(key)}" th:text="${option}"></p>-->
-
 
   <select class="form-select" aria-label="Default select example"
           th:id="${key}" th:name="${key}"
@@ -123,14 +85,11 @@
 
     <th:block th:if="${fieldID!=null}">
       <option value="" th:text="${text}"></option>
-      <!--      <option value="#">Сбросить</option>-->
       <option selected
               th:value="${@appScope.filterMap.get(key).get(T(java.lang.Long).parseLong(fieldID)).id}"
               th:text="${@appScope.filterMap.get(key).get(T(java.lang.Long).parseLong(fieldID)).name}"
       ></option>
     </th:block>
-
-    <!--    <option th:if="${fieldID!= null}" value="">Любой</option>-->
 
 
     <th:block th:if="${#strings.equals(key,'model')}">
@@ -156,20 +115,10 @@
   <select class="form-select " aria-label="Default select example" th:classappend="${class}"
           th:id="${key}" th:name="${key}"
           form="form-filter">
-
     <option value="" th:text="${text}"></option>
-
-    <!--    <th:block th:if="${fieldID==null}">-->
-    <!--      <option value="" th:text="${text}"></option>-->
-    <!--    </th:block>-->
-
-
-    <!--    <option th:if="${fieldID==null}" value="" th:text="${text}"></option>-->
     <option th:if="${fieldID!= null}" selected
             th:value="${fieldID}"
-            th:text="${fieldID}"
-    ></option>
-    <!--    <option th:if="${fieldID!= null}" value="">Любой</option>-->
+            th:text="${fieldID}"></option>
   </select>
   <span data-clear-input>&times;</span>
 </div>
@@ -177,12 +126,6 @@
 
 <div th:fragment="fieldInput(text, key, fieldID, class)"
      class="clearable-input">
-  <!--  <p th:text="|${key}  '{text}'|"></p>-->
-  <!--  <p th:text="|${fieldID}   '{fieldID}'|"></p>-->
-  <!--  <p th:text="|${@appScope.filterMap.get(key).get(1L)}  'get(1L)'|"></p>-->
-  <!--  <p th:text="|${@appScope.filterMap.get(key).get(T(java.lang.Long).parseLong(fieldID))}  'get(T)'|"></p>-->
-  <!--  <p th:each="option:${@appScope.filterMap.get(key)}" th:text="${option}"></p>-->
-
   <input th:if="${fieldID==null}"
          style="width: 100%; padding-left: 12px"
          th:classappend="${class}"
@@ -197,17 +140,10 @@
          th:placeholder="${text}"
          th:value="${fieldID}" type="number" min="1">
   <span data-clear-input>&times;</span>
-  <!--    <span th:replace="::reset()"></span>-->
 </div>
 
 
 <div th:fragment="sort(text, key, fieldID)">
-  <!--  <p th:text="|${key}  '{text}'|"></p>-->
-  <!--  <p th:text="|${fieldID}   '{fieldID}'|"></p>-->
-  <!--  <p th:text="|${@appScope.filterMap.get(key).get(1L)}  'get(1L)'|"></p>-->
-  <!--  <p th:text="|${@appScope.filterMap.get(key).get(T(java.lang.Long).parseLong(fieldID))}  'get(T)'|"></p>-->
-  <!--  <p th:each="option:${@appScope.filterMap.get(key)}" th:text="${option}"></p>-->
-
   <select class="form-select" aria-label="Default select example"
           th:id="${key}" th:name="${key}"
           form="form-filter">

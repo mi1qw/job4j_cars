@@ -1,9 +1,5 @@
 // ************************ Start ***************** //
-var elementMark;
-var elementModel;
 document.addEventListener('DOMContentLoaded', (event) => {
-    // elementModel = document.querySelector('.model select');
-    // elementMark = document.querySelector('.mark select');
     addCheckboxes();
 });
 

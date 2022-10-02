@@ -11,10 +11,7 @@
         th:each="element:${@userSession.getBreadcrumb().params}"
         th:if="*{element.isSliced()}">
       <a th:href="@{|/posts/slice/*{element.name}|}" class="bread-link">
-        <!--        <span th:text="*{element.name}"></span>-->
-        <!--        <br>-->
         <span th:text="*{@appScope.filterMap.get(element.name).get(element.value).name}"></span>
-        <!--        <span th:text="*{@appScope.filterMap.get(element.name)}"></span>-->
       </a>
     </li>
     <li class="breadcrumb-item active" aria-current="page"
