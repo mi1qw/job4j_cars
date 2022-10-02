@@ -381,15 +381,8 @@
     </svg>
   </div>
 
-  <!--  margin-top: 2rem; margin-left: 10rem-->
   <div class="d-flex justify-content-center align-items-center mt-4 mb-2"
        style="width:700px;height: 50px">
-    <a th:href="@{/posts}" class="me-4">
-      <button type="button" class="btn btn-light"
-              style="padding: 0.2em 0.6em 0.2em 0.6em;font-size: smaller;">
-        на главную
-      </button>
-    </a>
     <a th:href="@{/cars/add}">
       <button type="button" class="btn btn-dark"
               style="padding: 0.2em 0.6em 0.2em 0.6em;font-size: smaller;color: white">
@@ -398,12 +391,10 @@
     </a>
   </div>
 
-
   <table class="table caption-top" style="width: 700px">
     <caption style="font-size: smaller;">Мои объявления</caption>
     <thead class="table-light">
     <tr>
-      <!--      <th scope="col"></th>-->
       <th scope="col" class="position-relative" style="font-size: 0.8em;">
         <span class="position-absolute top-50 translate-middle-y">Активировать</span>
       </th>
@@ -415,7 +406,6 @@
     <tbody>
 
     <tr class="select-item" th:each="item,iterStat :${newItem}">
-      <!--      <th scope="row" th:text="${iterStat.count}">0</th>-->
       <td class="position-relative p-3">
         <div class="form-check form-switch position-absolute top-50 start-50 translate-middle">
         </div>
@@ -443,16 +433,11 @@
         </div>
       </td>
     </tr>
-
-
     <tr th:replace="fragments/postCar::myPosts(*{onSale})"></tr>
     <tr th:replace="fragments/postCar::myPosts(*{notActive})"></tr>
     <tr th:replace="fragments/postCar::myPosts(*{bought})"></tr>
-
     </tbody>
   </table>
-
-
 </div>
 <th:block layout:fragment="page-scripts">
   <script th:src="@{/js/myPosts.js}"></script>

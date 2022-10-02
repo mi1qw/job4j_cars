@@ -11,12 +11,10 @@
          class="form-control"
          th:field="*{__${fieldName}__}"
          th:classappend="${account['__${fieldName}__']!=null} ?
-          (${#fields.hasErrors('__${fieldName}__')} ? ' is-invalid')"
-  >
+          (${#fields.hasErrors('__${fieldName}__')} ? ' is-invalid')">
   <div class="text-danger"
        th:if="${#fields.hasErrors('__${fieldName}__')}"
-       th:text="${#strings.listJoin(#fields.errors('__${fieldName}__'),', ')}"
-  >
+       th:text="${#strings.listJoin(#fields.errors('__${fieldName}__'),', ')}">
   </div>
 </div>
 
@@ -31,9 +29,7 @@
           th:id="${fieldName}"
           th:name="${fieldName}"
           th:classappend="${(#fields.hasErrors('__${fieldName}__') ? ' is-invalid':'')}"
-          th:form="${formId}"
-  >
-<!--    th:form="${formId!=null?formId:''}"-->
+          th:form="${formId}"  >
     <th:block th:if="${fieldID!=null}">
       <option selected
               th:value="${fieldID}"
@@ -61,5 +57,3 @@
   </div>
 </div>
 </html>
-
-

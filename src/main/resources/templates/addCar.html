@@ -382,12 +382,6 @@
 
   <div class="container mt-5">
 
-    <!--  <p th:each="status:${@userSession.getCarState().getStateList()}"-->
-    <!--     th:text="|status=*{status.status}|"></p>-->
-    <!--  <p th:text="|isDone ${@userSession.getCarState().isDone()}|"></p>-->
-
-    <!--  <img class="h-auto w-auto"-->
-    <!--       th:src="@{/img/application-logo.jpg}" alt="Application Logo"/>-->
     <div class="numbering fw-bolder">1</div>
     <div class="fw-bolder ps-5">Основная информация</div>
     <div th:each="state:${@userSession.getCarState().getStepList()}"
@@ -415,30 +409,12 @@
           <div class="numbering fw-bolder">2</div>
           <div class="fw-bolder ps-5">Добавить фотографии</div>
 
-
-          <!--    <div class="mb-3 mt-3 ps-5" style="max-width: 600px">-->
-          <!--      &lt;!&ndash;      <label for="formFile" class="form-label">Default file input example</label>&ndash;&gt;-->
-          <!--      <input class="form-control" type="file" id="formFile">-->
-          <!--    </div>-->
-
-
-          <!--    <input style="display: none;"-->
-          <!--           type="file" multiple accept="image/*"-->
-          <!--           onchange="handleFiles(this.files)-->
-          <!--               role="file-input">-->
-
-
           <!--    <p>Upload multiple files with the file dialog or by dragging and dropping images onto the-->
           <!--      dashed region</p>-->
           <div id="drop-area" class="ms-5">
-
-            <!--          th:if="${@userSession.getNewCar().getImages().isEmpty()}"-->
             <div id="emptyArea">
               <div class="d-flex justify-content-center"
                    style="height: 220px;cursor: pointer;">
-                <!--          <input style="display: none;"-->
-                <!--                 id="fileElemEmpty" type=file multiple accept="image/*"-->
-                <!--                 onchange="handleFiles(this.files)">-->
                 <div class="PhotosAdd__title">
                   <div class="PhotosAdd__icon">
                     <svg class="IconSvg IconSvg_photo IconSvg_size_32">
@@ -500,31 +476,14 @@
               <label for="odometer">Пробег км.</label>
             </div>
 
-            <!--    style="width: 21em"-->
             <label class="small-label mt-2" for="yearPurchase">год покупки</label>
             <select class="form-select" aria-label="Default select example"
                     id="yearPurchase" style="width: 8.7em"
                     th:field="*{yearPurchase}" form="carform">
-              <!--          <option th:if="*{yearPurchase!= unde}" selected-->
-              <!--                  th:value="*{yearPurchase}"-->
-              <!--                  th:text="*{yearPurchase}"></option>-->
-              <!--          <option th:if="*{yearPurchase==null}" selected value="0">Укажите год</option>-->
             </select>
-
 
             <div
                 th:replace="fragments/validInput::selectfield(labelText='Город',fieldName='city',fieldID= *{city?.id}, formId='carform')"></div>
-
-
-            <!-- <div class="mb-3">
-               <label for="Title" class="form-label">Пробег</label>
-               <input type="text" class="form-control" id="Title"
-                      th:value="*{title}" name="title">
-               &lt;!&ndash;              <div class="text-danger"&ndash;&gt;
-               &lt;!&ndash;                   th:if="${#fields.hasErrors('title')}"&ndash;&gt;
-               &lt;!&ndash;                   th:text="${#strings.listJoin(#fields.errors('title'),', ')}"&ndash;&gt;
-               &lt;!&ndash;              ></div>&ndash;&gt;
-             </div>-->
 
             <div class="pt-4">
               <div class="form-floating">
@@ -535,7 +494,6 @@
                 <label for="floatingTextarea2">Описание</label>
               </div>
             </div>
-
 
             <div class="pt-4">
               <div class="form-floating" style="width: 8em">
@@ -549,32 +507,6 @@
               </div>
             </div>
 
-
-            <div class="mb-3">
-              <!-- <label for="descriptionText" class="form-label">Description</label>
-               <textarea class="form-control" id="descriptionText" rows="3"
-                         form="usrform" name="description"
-                         th:field="*{description}"
-               ></textarea>-->
-            </div>
-
-
-            <!--            <div class="d-flex justify-content-end p-2 smaller">-->
-            <!--              <span class="text-black-50">Created:&nbsp;&nbsp; </span>-->
-            <!--              <span th:text="*{#dates.format(created, 'dd-MM-yyyy HH:mm')}"-->
-            <!--                    class="fw-bolder text-black-50"></span>-->
-            <!--            </div>-->
-
-            <!--    <select id="categories" class="form-select form-select-sm mb-3 w-50" multiple
-                        aria-label="multiple select example"
-                        size="4"
-                        th:field="*{categories}">
-                  <option th:each="category:${@categoryService.getAllCategories()}"
-                          th:value="${{category}}"
-                          th:text="${category.name}"
-                  ></option>
-                </select>-->
-
             <div class="d-flex pt-3">
               <div class="pe-3">
                 <button type="submit" class="btn btn-light btn-block py-1"
@@ -587,18 +519,10 @@
             </div>
           </div>
         </div>
-
-
       </form>
     </div>
-
   </div>
-
-
 </div>
-
-<!--<span onclick="this.parentElement.style.display = 'none';">x</span>-->
-<!--application/json-->
 
 
 <th:block layout:fragment="page-scripts">
@@ -606,7 +530,6 @@
   <script th:src="@{/js/draganddrop.js}"></script>
   <script>
       var e = document.getElementById("select-models");
-
       function onChange() {
           var value = e.value;
           var text = e.options[e.selectedIndex].text;
@@ -614,26 +537,8 @@
 
           window.location.href = '/cars/addState?stateID=1&id=' + value;
       }
-
       e.onchange = onChange;
   </script>
 </th:block>
 </body>
 </html>
-
-
-<!--
-
-<ul>
-  <li class="MarkFieldTile position-relative"
-      th:each="mark:*{state.getOptions().values()}"
-      style="width: 127px" th:href="@{|/cars/add|}"
-  >
-    <img class="h-auto w-auto card-img "
-         style="height: 48px !important;width: 48px !important;"
-         th:src="@{|/img/*{mark.image}|}"/>
-    <div class="MarkFieldTile__name text-decoration-none" th:text="*{mark.name}"></div>
-    <a class="stretched-link"
-       th:href="@{|/cars/addState?stateID=*{state.step}&id=*{mark.id}|}"></a>
-  </li>
-</ul>-->
