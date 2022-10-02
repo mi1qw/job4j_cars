@@ -28,10 +28,15 @@
                  name="password">
         </div>
         <div class="col-auto">
-          <button type="submit" class="btn btn-primary btn-sm">LogIn</button>
+          <button type="submit" class="btn btn-outline-danger btn-sm"
+                  style="--bs-btn-color: #414141;border-width: 2px;--bs-btn-border-radius: 15px;"
+          >LogIn
+          </button>
         </div>
         <div class="col-auto">
-          <a th:href="@{/signPage}" class="btn btn-primary btn-sm">SignIn</a>
+          <a th:href="@{/signPage}" class="btn btn-outline-danger btn-sm"
+             style="--bs-btn-color: #414141;border-width: 2px;--bs-btn-border-radius: 15px;"
+          >SignIn</a>
         </div>
       </form>
     </div>
@@ -40,8 +45,10 @@
         Мои объявления
       </a>
       <span class="pe-3" th:text="${@userSession.getAccount().getFirstName()}"></span>
-      <a class="text-decoration-none text-muted pe-5"
-         th:href="@{/logout}">LogOut</a>
+      <a class="text-decoration-none me-5 btn btn-outline-danger btn-sm"
+         th:href="@{/logout}"
+         style="--bs-btn-color: #414141;border-width: 2px;--bs-btn-border-radius: 15px;"
+      >LogOut</a>
     </div>
   </div>
 </div>

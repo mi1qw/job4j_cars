@@ -1,15 +1,18 @@
 // ************************ Start ***************** //
 var elementMark;
 var elementModel;
+var elementResetBtn;
 document.addEventListener('DOMContentLoaded', (event) => {
-    elementModel = document.querySelector('.model select');
     elementMark = document.querySelector('.mark select');
+    elementModel = document.querySelector('.model select');
+    elementResetBtn = document.querySelector('.resetBtn');
     addyears();
     addEngineDisplacement();
     clearInput();
     clearSelect();
     addModels();
     resetBtn();
+    clearResetBtn();
 });
 
 
@@ -30,6 +33,7 @@ function addEngineDisplacement() {
 function addModels() {
     elementMark.addEventListener('change', (e) => {
         if (elementMark.value) {
+            clearResetBtn();
             sendClick('id', elementMark.value,
                 '/cars/models?id=' + elementMark.value,
                 (e) => {
@@ -115,23 +119,9 @@ function clearInput() {
             } else {
                 input.classList.remove('filter-select');
             }
+            clearResetBtn();
         }
     });
-
-    // console.log("sss");
-    // document.querySelectorAll('clearable-input').forEach((n) => {
-    //     console.log(n);
-    //     let input = n.querySelector('input');
-    //     console.log(input);
-    //     input.addEventListener('input', conditionallyHideClearIcon);
-    //     n.querySelector('[data-clear-input]')
-    //         .addEventListener('click', function (e) {
-    //             n.value = '';
-    //             conditionallyHideClearIcon();
-    //         });
-    //
-    //
-    // });
 }
 
 function clearSelect() {
@@ -161,17 +151,67 @@ function clearSelect() {
             } else {
                 target.classList.add('filter-select');
             }
+            clearResetBtn();
         }
     });
 }
 
+
 resetBtn = () => {
-    console.log('resetBtn')
     document.querySelector('.resetBtn').addEventListener('click',
-        (e => {
-            console.log('reset')
+        e => {
             document.querySelectorAll('.clearable-select *[data-clear-input], .clearable-input' +
                 ' *[data-clear-input]')
-                .forEach(n => n.click())
-        }));
+                .forEach(n => n.click());
+
+            document.getElementById('form-filter').reset();
+
+            document.querySelectorAll('.clearable-select select')
+                .forEach(n => {
+                    // console.log('selectedIndex', n.options.selectedIndex);
+                    n.options[n.selectedIndex].removeAttribute('selected');
+                });
+
+
+            document.querySelectorAll('.clearable-input input')
+                .forEach(n => {
+                    n.setAttribute('value', '');
+                });
+            clearResetBtn();
+        });
+
+};
+
+isCheckedFields = () => {
+    let flag = false;
+    let nodeListOf = document.querySelectorAll('.clearable-select select');
+    Array.from(nodeListOf)
+        .every(n => {
+            if (n.selectedIndex != 0) {
+                flag = true;
+                return false;
+            }
+            return true;
+        });
+    if (!flag) {
+        nodeListOf = document.querySelectorAll('.clearable-input input');
+        Array.from(nodeListOf)
+            .every(n => {
+                if (n.value) {
+                    flag = true;
+                    return false;
+                }
+                return true;
+            });
+    }
+    return flag;
+}
+
+
+function clearResetBtn() {
+    if (isCheckedFields()) {
+        elementResetBtn.classList.remove('display-none');
+    } else {
+        elementResetBtn.classList.add('display-none');
+    }
 }

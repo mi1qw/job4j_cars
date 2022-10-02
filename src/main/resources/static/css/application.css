@@ -558,3 +558,68 @@ a:hover {
     box-sizing: content-box;
     text-align: center;
 }
+
+:root {
+    --bd-btn-main: #2a92c6;
+    --bs-btn-hover-bg: #1b6e82;
+}
+
+
+.pagination {
+    /*--bs-pagination-padding-x: 0.75rem;*/
+    /*--bs-pagination-padding-y: 0.375rem;*/
+    /*--bs-pagination-font-size: 1rem;*/
+    /*--bs-pagination-color: var(--bs-link-color);*/
+    /*--bs-pagination-bg: #fff;*/
+    /*--bs-pagination-border-width: 1px;*/
+    --bs-pagination-border-color: #ffffff;
+    /*--bs-pagination-border-radius: 0.375rem;*/
+    --bs-pagination-hover-color: var(--bd-btn-main);
+    --bs-pagination-hover-bg: #e9ecef;
+    --bs-pagination-hover-border-color: #dee2e6;
+    --bs-pagination-focus-color: var(--bd-btn-main);
+    --bs-pagination-focus-bg: #e9ecef;
+    --bs-pagination-focus-box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    --bs-pagination-active-color: #fff;
+    --bs-pagination-active-bg: var(--bd-btn-main);
+    --bs-pagination-active-border-color: var(--bd-btn-main);
+    --bs-pagination-disabled-color: #6c757d7a;
+    /*--bs-pagination-disabled-bg: #fff;*/
+    --bs-pagination-disabled-border-color: #ffffff;
+    /*display: flex;*/
+    /*padding-left: 0;*/
+    /*list-style: none;*/
+}
+
+
+.btn-primary-bd {
+    --bs-btn-font-weight: 600;
+    --bs-btn-color: var(--bs-white);
+    --bs-btn-bg: var(--bd-btn-main);
+    --bs-btn-border-color: var(--bd-btn-main);
+    /*--bs-btn-border-radius: .5rem;*/
+    --bs-btn-hover-color: var(--bs-white);
+    --bs-btn-hover-bg: #{shade-color($bd-violet, 10%)};
+    --bs-btn-hover-border-color: #{shade-color($bd-violet, 10%)};
+    --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+    --bs-btn-active-color: var(--bs-btn-hover-color);
+    --bs-btn-active-bg: #{shade-color($bd-violet, 20%)};
+    --bs-btn-active-border-color: #{shade-color($bd-violet, 20%)};
+}
+
+.btn-primary {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: var(--bd-btn-main);
+    --bs-btn-border-color: var(--bd-btn-main);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: var(--bd-btn-main);
+    --bs-btn-hover-border-color: var(--bd-btn-main);
+    --bs-btn-focus-shadow-rgb: 49, 132, 253;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: var(--bd-btn-main);
+    --bs-btn-active-border-color: var(--bd-btn-main);
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: var(--bd-btn-main);
+    --bs-btn-disabled-border-color: var(--bd-btn-main);
+}
