@@ -608,3 +608,16 @@ a:hover {
     --bs-btn-disabled-bg: var(--bd-btn-main);
     --bs-btn-disabled-border-color: var(--bd-btn-main);
 }
+
+
+.page-link {
+    /*position: relative;*/
+    /*display: block;*/
+    /*padding: var(--bs-pagination-padding-y) var(--bs-pagination-padding-x);*/
+    /*font-size: var(--bs-pagination-font-size);*/
+    color: rgb(65, 65, 65);
+    /*text-decoration: none;*/
+    /*background-color: var(--bs-pagination-bg);*/
+    /*border: var(--bs-pagination-border-width) solid var(--bs-pagination-border-color);*/
+    /*transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;*/
+}

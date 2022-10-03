@@ -4,7 +4,10 @@ import com.example.car.dto.CarDto;
 import com.example.car.dto.CarMapper;
 import com.example.car.dto.FileImageDto;
 import com.example.car.exception.StorageException;
-import com.example.car.model.*;
+import com.example.car.model.Account;
+import com.example.car.model.Car;
+import com.example.car.model.Generations;
+import com.example.car.model.Status;
 import com.example.car.service.CarService;
 import com.example.car.service.FileService;
 import com.example.car.service.MarkService;
@@ -31,11 +34,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.thymeleaf.util.StringUtils;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Controller
@@ -76,16 +77,8 @@ public class CarFormController {
             log.error(e.getMessage(), e);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        // сбросить счётчик первого order,
-        // надо начинать не 0, со следующего List/size
-//        session.getTabOrder().setPrevTotal(car.getImages().size());
-
         userSession.getOrder().set(car.getImages().size());
-
         return new ResponseEntity<>(HttpStatus.OK);
-//      return   ResponseEntity.ok()
-//                .headers(new HttpHeaders())
-//                .build();
     }
 
     @GetMapping("/img/{img}")
@@ -106,15 +99,12 @@ public class CarFormController {
 
     @GetMapping("/add")
     public String add(final Model model) {
-
-        //        Car newCar;
         Car newCar = userSession.getNewCar();
         if (newCar == null || !newCar.getStatus().equals(Status.newItem)) {
             newCar = carService.createCarAccount();
             userSession.setNewCar(newCar);
             userSession.setCarState(null);
         }
-
 
         CarDto carDto = null;
         CarState state = userSession.getCarState();
@@ -129,28 +119,9 @@ public class CarFormController {
         }
         model.addAttribute("carform", carDto);
 
-//        model.addAttribute("carform",
-//                CarDto.builder()
-//                        .description("aaa")
-//                        .price(BigDecimal.valueOf(1100L))
-//                        .yearPurchase((short) 2001)
-//                        .odometer((short) 0)
-//                        .build()
-//        );
-
-//        else {
-//            CarState.State<?, ?> state0 = state.getStepList().get(0);
-//            if (state0.getOptions().isEmpty()) {
-//                state0.makeOptions();
-//            }
-//        }
-
         // TODO упростить в один метод
         //  как проверить что в сесии ошибка наличия файлов
 
-
-//        log.info("{}", newCar);
-        // надо начинать не 0, со следующего List/size image
         userSession.getOrder().set(newCar.getImages().size());
         return "addCar";
     }
@@ -169,8 +140,6 @@ public class CarFormController {
         userSession.getOrder().set(car.getImages().size());
         CarDto carDto = carMapper.carToDto(car);
         model.addAttribute("carform", carDto);
-
-//        CarState carState = state.createCarState();
         CarState state = this.state.fillList(car);
         userSession.setCarState(state);
         return "addCar";
@@ -184,7 +153,6 @@ public class CarFormController {
         if (state == null) {
             return "addCar";
         }
-
         // TODO упростить в один метод
         CarState.State<?, ?> step = state.getStepList().get(stateID);
         Object optionByID = step.getOptionByID(id);
@@ -211,7 +179,6 @@ public class CarFormController {
             stepNext.setValue(optionByID);
             stepNext.setStatus(true);
         }
-//        return "addCar";
         return "redirect:/cars/add";
     }
 
@@ -305,15 +272,8 @@ public class CarFormController {
         carMapper.updateCar(carDto, newCar);
         newCar.setStatus(Status.onSale);
         carService.merge(newCar);
-//        log.info("{}", newCar);
-//        final @ModelAttribute(name = "carform") CarDto carDto,
-//        final Model model){
-
-
         userSession.setCarState(null);
         userSession.setNewCar(null);
-
-
         return "redirect:/myposts";
     }
 

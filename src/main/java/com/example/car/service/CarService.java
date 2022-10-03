@@ -29,14 +29,6 @@ public class CarService {
     private final EngineService engineService;
     private final CityService cityService;
     private final PostsConfig postsConfig;
-//    private final FileService fileService;
-
-    public Car addCar() {
-        Account account = userSession.getAccount();
-        Car car = new Car();
-        car.setAccount(account);
-        return carStore.add(car);
-    }
 
     public Car merge(final Car car) {
         LocalDateTime created = car.getCreated();
@@ -44,13 +36,6 @@ public class CarService {
         car.setCreated(created);
         return carStore.merge(car);
     }
-
-//    public Car mergeCar(final Car car) {
-//        LocalDateTime created = car.getCreated();
-//        created = created == null ? LocalDateTime.now() : created;
-//        LocalDateTime created1 = car.getCreated();
-//        return carStore.merge(car);
-//    }
 
     public boolean addImage(final Car car, final FileImageDto imageDto) {
         return carStore.addImage(car, imageDto);
@@ -68,14 +53,11 @@ public class CarService {
         return carStore.reorderImg(car.getId(), names);
     }
 
+    // только в тестах, скорее всегда удалить
     public List<Car> finAll() {
         return carStore.findAll();
     }
 
-    // TODO фильтр добавить
-    public List<Car> finCarsWithEngineGearFILTR() {
-        return carStore.finCarsWithEngineGearFILTR();
-    }
 
     /**
      * выборка согласно фильтру.
