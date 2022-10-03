@@ -28,10 +28,6 @@ public class GenerationsService {
         return modelsMap;
     }
 
-//    public Model findById(final Long id) {
-//        return modelStore.findById(id);
-//    }
-
     public Map<Long, Short> getYearsByModel(final Model model) {
         return generationsStore.getYearsByModel(model).stream()
                 .collect(Collectors.toMap(Short::longValue, Function.identity(),

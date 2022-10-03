@@ -31,9 +31,6 @@ public class ModelService {
 
     @PostConstruct
     public void init() {
-//        this.modelsByMark = modelsMap.values().stream()
-//                .collect(Collectors.groupingBy(Model::getMark));
-//
         this.namesByMarkIdMap = modelsMap.values().stream()
                 .collect(Collectors.groupingBy(
                         n -> n.getMark().getId(),
