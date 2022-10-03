@@ -18,16 +18,6 @@ import java.util.stream.Collectors;
 public class GenerationsService {
     private final GenerationsStore generationsStore;
 
-    private final Map<Long, Model> modelsMap = new HashMap<>();
-
-    public List<Model> findAll() {
-        return modelsMap.values().stream().toList();
-    }
-
-    public Map<Long, Model> findAllMap() {
-        return modelsMap;
-    }
-
     public Map<Long, Short> getYearsByModel(final Model model) {
         return generationsStore.getYearsByModel(model).stream()
                 .collect(Collectors.toMap(Short::longValue, Function.identity(),
