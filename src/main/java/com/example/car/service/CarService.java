@@ -80,12 +80,12 @@ public class CarService {
         return paginationDto;
     }
 
-    public List<Car> findMyCar() {
+    public List<Car> findMyCars() {
         Account account = userSession.getAccount();
-        return carStore.findMyCar(account);
+        return carStore.findMyCars(account);
     }
 
-    public Car createCarAccount() {
+    public Car createCarWithAccount() {
         Account account = userSession.getAccount();
         return carStore.createAccountCar(account);
     }

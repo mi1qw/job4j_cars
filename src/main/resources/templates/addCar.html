@@ -405,6 +405,58 @@
             class="pt-4">
 
 
+        <div th:each="optDto:${@userSession.getCarState().optionsDto}">
+          <div th:text="${optDto.getKey()}" class="mt-3 mb-1"></div>
+          <th:block th:each="optIsRest:${optDto.getValue().get(false)}">
+            <th:block th:each="opt:${optIsRest.getValue()}">
+              <div th:replace="fragments/stepaddingcar::options(${opt},${opt.isOn()}, true)"></div>
+            </th:block>
+          </th:block>
+
+          <th:block th:each="optIsRest:${optDto.getValue().get(true)}">
+            <th:block th:each="opt:${optIsRest.getValue()}">
+              <div th:replace="fragments/stepaddingcar::options(${opt},${opt.isOn()}, false)"></div>
+            </th:block>
+          </th:block>
+        </div>
+
+
+        <!--        <div>-->
+        <!--          <div th:each="optDto:${@userSession.getCarState().optionsDtoByCategory}">-->
+        <!--            <div th:text="${optDto.getKey()}" class="mt-3 mb-1"></div>-->
+
+        <!--            <th:block th:each="opt:${optDto.getValue().get(false)}">-->
+        <!--              &lt;!&ndash;              <div th:text="${opt}"></div>&ndash;&gt;-->
+        <!--              <div class="form-check">-->
+        <!--                &lt;!&ndash;                                <p th:text="*{options}"></p>&ndash;&gt;-->
+        <!--                <input type="checkbox" name="options" th:value="${opt.options().id}"-->
+        <!--                       th:id="|options${opt.options().id}|"-->
+        <!--                       class="form-check-input" checked/>-->
+
+        <!--                <label th:for="|options${opt.options().id}|"-->
+        <!--                       th:text="${opt.options().name}"-->
+        <!--                       class="form-check-label"></label>-->
+        <!--              </div>-->
+        <!--            </th:block>-->
+
+
+        <!--            <th:block th:each="opt:${optDto.getValue().get(true)}">-->
+        <!--              &lt;!&ndash;              <div th:text="${opt}"></div>&ndash;&gt;-->
+        <!--              <div class="form-check">-->
+        <!--                &lt;!&ndash;                                <p th:text="*{options}"></p>&ndash;&gt;-->
+        <!--                <input type="checkbox" name="options" th:value="${opt.options().id}"-->
+        <!--                       th:id="|options${opt.options().id}|"-->
+        <!--                       class="form-check-input"/>-->
+
+        <!--                <label th:for="|options${opt.options().id}|"-->
+        <!--                       th:text="${opt.options().name}"-->
+        <!--                       class="form-check-label"></label>-->
+        <!--              </div>-->
+        <!--            </th:block>-->
+        <!--          </div>-->
+        <!--        </div>-->
+
+
         <div class="pt-5">
           <div class="numbering fw-bolder">2</div>
           <div class="fw-bolder ps-5">Добавить фотографии</div>
@@ -530,6 +582,7 @@
   <script th:src="@{/js/draganddrop.js}"></script>
   <script>
       var e = document.getElementById("select-models");
+
       function onChange() {
           var value = e.value;
           var text = e.options[e.selectedIndex].text;
@@ -537,6 +590,7 @@
 
           window.location.href = '/cars/addState?stateID=1&id=' + value;
       }
+
       e.onchange = onChange;
   </script>
 </th:block>

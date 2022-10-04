@@ -286,4 +286,20 @@
   </div>
 </div>
 
+
+<div th:fragment="options(opt, isOn, isDisabled)">
+<!--  <div th:text="${opt}" class="mt-3 mb-1"></div>-->
+  <div class="form-check">
+    <input type="checkbox" name="options" th:value="${opt.options().id}"
+           th:id="|options${opt.options().id}|"
+           class="form-check-input"
+           th:checked="${isOn}"
+           th:disabled="${isDisabled}"
+    />
+    <label th:for="|options${opt.options().id}|"
+           th:text="${opt.options().name}"
+           class="form-check-label"></label>
+  </div>
+</div>
+
 </html>

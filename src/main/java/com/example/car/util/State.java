@@ -1,16 +1,16 @@
 package com.example.car.util;
 
+import com.example.car.dto.OptionsDto;
 import com.example.car.model.*;
-import com.example.car.service.ColorService;
-import com.example.car.service.GenerationsService;
-import com.example.car.service.MarkService;
-import com.example.car.service.ModelService;
+import com.example.car.service.*;
 import com.example.car.web.UserSession;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
+
+import static java.util.stream.Collectors.*;
 
 @Component
 @Slf4j
@@ -21,6 +21,7 @@ public class State {
     private final GenerationsService generationsService;
     private final ColorService colorService;
     private final UserSession userSession;
+    private final OptionsService optionsService;
 
     public CarState createCarState() {
         CarState state = new CarState();
@@ -117,6 +118,9 @@ public class State {
                        + generationName + " "
                        + year.toString());
 
+//        log.info("{}", newCar.getOptions());
+
+
         return newCar;
     }
 
@@ -189,6 +193,44 @@ public class State {
         Color color = car.getColor();
         makeStep(color.getId(), 9);
 
+
+//        CarState.GenMod genMod = (CarState.GenMod) state
+//                .getStepList()
+//                .get(8)
+//                .getValue();
+
+
+//        int[] filtered = {0};
+//        Generations generations = state.getGenerations().stream()
+//                .filter(n -> n.getId().equals(genMod.id()))
+//                .peek(n -> ++filtered[0])
+//                .findAny()
+//                .orElseThrow(IllegalStateException::new);
+//        if (filtered[0] > 1) {
+//            log.error("filtered List > 1");
+//        }
+
+
+//        Set<OptionsDto> optionsDtoSet = new HashSet<>();
+//        Set<Options> options = optionsService.findGenerationOptionsById(id);
+//        options.forEach(n -> optionsDtoSet.add(new OptionsDto(n, false)));
+//        log.info("options {}", options);
+//
+//        Set<Options> restOfOptions = optionsService.getRestOfOptions(options);
+//        restOfOptions.forEach(n -> optionsDtoSet.add(new OptionsDto(n, true)));
+//        log.info("restOfOptions {}", restOfOptions);
+//
+//        Map<String, Map<Boolean, List<OptionsDto>>> optionsDtoByCategory
+//                = optionsDtoSet.stream()
+//                .collect(groupingBy(n -> n.options().getNameCategory(),
+//                        partitioningBy(OptionsDto::isRestOption, toList())));
+//        log.info("{}", optionsDtoByCategory);
+//        carState.setOptionsDtoByCategory(optionsDtoByCategory);
+
+//        Car car = userSession.getNewCar();
+        Map<String, Map<Boolean, Map<Boolean, List<OptionsDto>>>> optionsDto
+                = optionsService.getOptionsDto(car.getOptions(), car.getGenerations().getId());
+        carState.setOptionsDto(optionsDto);
         return carState;
     }
 

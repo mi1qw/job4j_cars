@@ -1,19 +1,22 @@
 package com.example.car.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
-@NoArgsConstructor
-@EqualsAndHashCode(of = "id")
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "generations",
         uniqueConstraints = @UniqueConstraint(columnNames =
                 {"name", "year", "body_id", "engine_id", "gearbox_id", "model_id", "mark_id",
                         "name_id", "year_id", "transmission_id"})
 )
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(of = "id")
 public class Generations {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,6 +48,10 @@ public class Generations {
             @JoinColumn(name = "year_id", referencedColumnName = "year_id")
     })
     private Modification modification;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JoinTable(name = "generations_options")
+    private Set<Options> options = new HashSet<>();
 
     public Generations(final String name, final String image, final Short year,
                        final Mark mark, final Model model,

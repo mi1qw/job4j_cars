@@ -1,6 +1,7 @@
 package com.example.car.config;
 
 import com.example.car.util.CityFormatter;
+import com.example.car.util.OptionsFormatter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
@@ -15,6 +16,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addFormatters(final FormatterRegistry registry) {
         registry.addFormatter(cityFormatter());
+        registry.addFormatter(optionsFormatter());
     }
 
     @Bean
@@ -22,6 +24,10 @@ public class WebConfig implements WebMvcConfigurer {
         return new CityFormatter();
     }
 
+    @Bean
+    public OptionsFormatter optionsFormatter() {
+        return new OptionsFormatter();
+    }
 
     @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {

@@ -70,16 +70,19 @@ public class Car {
 
     private String modification;
 
-    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-    private Set<Category> categories = new HashSet<>();
+//    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+//    private Set<Category> categories = new HashSet<>();
+//
+//    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+//    @JoinTable(name = "history_owner",
+//            joinColumns = {
+//                    @JoinColumn(name = "car_id", nullable = false, updatable = false)},
+//            inverseJoinColumns = {
+//                    @JoinColumn(name = "driver_id", nullable = false, updatable = false)})
+//    private Set<Driver> drivers = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-    @JoinTable(name = "history_owner",
-            joinColumns = {
-                    @JoinColumn(name = "car_id", nullable = false, updatable = false)},
-            inverseJoinColumns = {
-                    @JoinColumn(name = "driver_id", nullable = false, updatable = false)})
-    private Set<Driver> drivers = new HashSet<>();
+    private Set<Options> options = new HashSet<>();
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "image")

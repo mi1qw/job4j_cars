@@ -1,5 +1,6 @@
 package com.example.car.util;
 
+import com.example.car.dto.OptionsDto;
 import com.example.car.model.*;
 import com.example.car.service.GenerationsService;
 import com.example.car.service.MarkService;
@@ -7,10 +8,7 @@ import com.example.car.service.ModelService;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Function;
@@ -25,6 +23,9 @@ public class CarState {
     private boolean isDone = false;
     private int[] steps = {0};
     private List<Generations> generations;
+    private Map<String, Map<Boolean, List<OptionsDto>>> optionsDtoByCategory;
+    private Map<String, Map<Boolean, Map<Boolean, List<OptionsDto>>>> optionsDto;
+    private Set<Options> optionsGeneration;
 
     public void addStep(final String name, final Supplier<Map<?, ?>> supplier) {
         stepList.add(new State(steps, name, supplier));
@@ -132,10 +133,6 @@ public class CarState {
     }
 
     public record GenMod(Long id, String name) {
-    }
-
-    public void getResultCar() {
-
     }
 
     public static <T> Predicate<T> distinctByKey(final Function<? super T, ?> keyExtractor) {

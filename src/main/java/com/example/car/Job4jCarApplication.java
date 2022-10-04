@@ -15,6 +15,7 @@ import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.filter.RequestContextFilter;
 
 import java.util.List;
+import java.util.Set;
 
 @SpringBootApplication
 public class Job4jCarApplication {
@@ -42,6 +43,8 @@ public class Job4jCarApplication {
     private CityStore cityStore;
     @Autowired
     private FileSystemStore fileSystemStore;
+    @Autowired
+    private OptionsStore optionsStore;
 
     public static void main(final String[] args) {
         SpringApplication.run(Job4jCarApplication.class, args);
@@ -191,6 +194,24 @@ public class Job4jCarApplication {
                 } catch (Exception ignored) {
                 }
 
+
+                try {
+                    optionsStore.add(new Options("Обзор", "Светодиодные фары"));
+                    optionsStore.add(new Options("Обзор", "Противотуманные фары"));
+                    optionsStore.add(new Options("Обзор", "Дневные ходовые огни"));
+                    optionsStore.add(new Options("Комфорт", "Бортовой компьютер"));
+                    optionsStore.add(new Options("Комфорт", "Система доступа без ключа"));
+                    optionsStore.add(new Options("Защита от угона", "Центральный замок"));
+                    optionsStore.add(new Options("Защита от угона", "Иммобилайзер"));
+                    optionsStore.add(new Options("Мультимедиа", "Навигационная система"));
+                    optionsStore.add(
+                            new Options("Мультимедиа", "Мультимедиа система с ЖК-экраном"));
+                    optionsStore.add(new Options("Салон", "Люк"));
+                    optionsStore.add(new Options("Салон", "Обогрев рулевого колеса"));
+                } catch (Exception ignored) {
+                }
+
+
                 try {
                     ModificationId id = new ModificationId("3.5 CVT 299 л.с", (short) 2018,
                             markStore.findByName("Toyota").get(0));
@@ -249,23 +270,43 @@ public class Job4jCarApplication {
                 } catch (Exception ignored) {
                 }
 
-//                Mark toyota1 = markStore.findByName("Toyota").get(0);
-//                Modification cvt = modificationStore.findByName("CVT").get(0);
 
                 /* Седан */
                 /*реальн*/
                 try {
                     generationsStore.add(
-                            new Generations("XV (S220)", "CrownXV(S220).jpg",
-                                    (short) 2018,
-                                    markStore.findByName("Toyota").get(0),
-                                    modelStore.findByName("Crown").get(0),
-                                    bodyStore.findByName("Седан").get(0),
-                                    engineStore.findByName("Гибрид").get(0),
-                                    transmissionStore.findByName("Задний").get(0),
-                                    gearboxStore.findByName("Вариатор").get(0),
-                                    modificationStore.findByName("2.5 CVT 184 л.с").get(0))
+                            Generations.builder()
+                                    .name("XV (S220)")
+                                    .image("CrownXV(S220).jpg")
+                                    .year(((short) 2018))
+                                    .model(modelStore.findByName("Crown").get(0))
+                                    .body(bodyStore.findByName("Седан").get(0))
+                                    .engine(engineStore.findByName("Гибрид").get(0))
+                                    .transmission(transmissionStore.findByName("Задний").get(0))
+                                    .gearbox(gearboxStore.findByName("Вариатор").get(0))
+                                    .modification(
+                                            modificationStore.findByName("2.5 CVT 184 л.с").get(0))
+                                    .options(Set.of(
+                                            optionsStore.findByName("Светодиодные фары").get(0),
+                                            optionsStore.findByName(
+                                                    "Система доступа без ключа").get(0),
+                                            optionsStore.findByName(
+                                                    "Мультимедиа система с ЖК-экраном").get(0)
+                                    ))
+                                    .build()
                     );
+
+//                    generationsStore.add(
+//                            new Generations("XV (S220)", "CrownXV(S220).jpg",
+//                                    (short) 2018,
+//                                    markStore.findByName("Toyota").get(0),
+//                                    modelStore.findByName("Crown").get(0),
+//                                    bodyStore.findByName("Седан").get(0),
+//                                    engineStore.findByName("Гибрид").get(0),
+//                                    transmissionStore.findByName("Задний").get(0),
+//                                    gearboxStore.findByName("Вариатор").get(0),
+//                                    modificationStore.findByName("2.5 CVT 184 л.с").get(0))
+//                    );
                     // новый реальный
                     generationsStore.add(
                             new Generations("XV (S220)", "CrownXV(S220).jpg",

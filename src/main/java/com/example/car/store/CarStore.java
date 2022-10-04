@@ -81,12 +81,14 @@ public class CarStore extends CrudPersist<Car> {
 
     // нужный
     public Car getCar(final Long id) {
-        return tx(session -> {
-            Car car = session.find(Car.class, id);
+        return tx(session ->
+//            Car car = session.find(Car.class, id);
 //            List<String> images = car.getImages();
-//            System.out.println(images + "  System.out.println(images");
-            return car;
-        });
+                session.createQuery("""
+                                from Car c left join fetch c.options o where c.id=:id
+                                """, Car.class)
+                        .setParameter("id", id)
+                        .uniqueResult());
     }
 
     public Car reorderImg(final Long id, final String[] names) {
@@ -193,7 +195,7 @@ public class CarStore extends CrudPersist<Car> {
         return new PaginationDto(carFiltered, pagination.getTotalPages(rowNumber[0]));
     }
 
-    public List<Car> findMyCar(final Account account) {
+    public List<Car> findMyCars(final Account account) {
         return tx(session ->
                 session.createQuery("from Car c where c.account=:account", Car.class)
                         .setParameter("account", account)

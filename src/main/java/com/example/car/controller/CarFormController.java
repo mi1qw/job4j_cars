@@ -3,15 +3,10 @@ package com.example.car.controller;
 import com.example.car.dto.CarDto;
 import com.example.car.dto.CarMapper;
 import com.example.car.dto.FileImageDto;
+import com.example.car.dto.OptionsDto;
 import com.example.car.exception.StorageException;
-import com.example.car.model.Account;
-import com.example.car.model.Car;
-import com.example.car.model.Generations;
-import com.example.car.model.Status;
-import com.example.car.service.CarService;
-import com.example.car.service.FileService;
-import com.example.car.service.MarkService;
-import com.example.car.service.ModelService;
+import com.example.car.model.*;
+import com.example.car.service.*;
 import com.example.car.util.CarState;
 import com.example.car.util.ImageUtil;
 import com.example.car.util.JsonUtil;
@@ -34,9 +29,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.thymeleaf.util.StringUtils;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import static java.util.stream.Collectors.*;
 
 @Slf4j
 @Controller
@@ -51,6 +47,7 @@ public class CarFormController {
     private final CarMapper carMapper;
     private final ModelService modelService;
     private final JsonUtil jsonUtil;
+    private final OptionsService optionsService;
 
     @PostMapping("/reorder")
     public ResponseEntity<?> reorder(final @RequestParam("value") String name) {
@@ -101,7 +98,7 @@ public class CarFormController {
     public String add(final Model model) {
         Car newCar = userSession.getNewCar();
         if (newCar == null || !newCar.getStatus().equals(Status.newItem)) {
-            newCar = carService.createCarAccount();
+            newCar = carService.createCarWithAccount();
             userSession.setNewCar(newCar);
             userSession.setCarState(null);
         }
@@ -115,6 +112,8 @@ public class CarFormController {
         } else {
             if (state.isDone()) {
                 carDto = carMapper.carToDto(newCar);
+//                carDto.setOptions(Set.of(optionsService.findById(1L),
+//                        optionsService.findById(2L)));
             }
         }
         model.addAttribute("carform", carDto);
@@ -129,6 +128,7 @@ public class CarFormController {
     @GetMapping("/edit/{id}")
     public String edit(final @PathVariable long id, final Model model) {
         Car car = carService.getCar(id);
+//        car.setOptions(null);
         Account account = userSession.getAccount();
         if (!car.getAccount().getId().equals(account.getId())) {
             return "redirect:/posts";
@@ -178,6 +178,50 @@ public class CarFormController {
             optionByID = options.values().iterator().next();
             stepNext.setValue(optionByID);
             stepNext.setStatus(true);
+        }
+
+        log.info("step1 {} - {}", step1, state.getStepList().get(9).isStatus());
+        if (state.getStepList().get(9).isStatus()) {
+
+            CarState.GenMod genMod = (CarState.GenMod) state
+                    .getStepList()
+                    .get(8)
+                    .getValue();
+
+
+            int[] filtered = {0};
+            Generations generations = state.getGenerations().stream()
+                    .filter(n -> n.getId().equals(genMod.id()))
+                    .peek(n -> ++filtered[0])
+                    .findAny()
+                    .orElseThrow(IllegalStateException::new);
+            if (filtered[0] > 1) {
+                log.error("filtered List > 1");
+            }
+
+
+            Set<OptionsDto> optionsDtoSet = new HashSet<>();
+            Set<Options> options = optionsService.findGenerationOptionsById(
+                    generations.getId());
+//            options.forEach(n -> optionsDtoSet.add(new OptionsDto(n, false)));
+            log.info("options {}", options);
+
+            Set<Options> restOfOptions = optionsService.getRestOfOptions(options);
+//            restOfOptions.forEach(n -> optionsDtoSet.add(new OptionsDto(n, true)));
+            log.info("restOfOptions {}", restOfOptions);
+
+            Map<String, Map<Boolean, List<OptionsDto>>> optionsDtoByCategory
+                    = optionsDtoSet.stream()
+                    .collect(groupingBy(n -> n.options().getNameCategory(),
+                            partitioningBy(OptionsDto::isRestOption, toList())));
+            log.info("{}", optionsDtoByCategory);
+            state.setOptionsDtoByCategory(optionsDtoByCategory);
+
+
+            Map<String, Map<Boolean, Map<Boolean, List<OptionsDto>>>> optionsDto
+                    = optionsService.getOptionsDto(new HashSet<Options>(), generations.getId());
+            state.setOptionsDto(optionsDto);
+
         }
         return "redirect:/cars/add";
     }
@@ -251,12 +295,13 @@ public class CarFormController {
                            @ModelAttribute("carform") CarDto carDto,
                            final BindingResult bindingResult,
                            final Model model) {
+        CarState carState = userSession.getCarState();
         log.info("{}", carDto);
 
-        userSession.getCarState().getStepList()
+        carState.getStepList()
                 .forEach(n -> log.info("{}", n.getValue()));
         System.out.println();
-        List<Long> generationsListID = userSession.getCarState()
+        List<Long> generationsListID = carState
                 .getGenerations().stream()
                 .map(Generations::getId)
                 .toList();
@@ -267,8 +312,16 @@ public class CarFormController {
             return "addCar";
         }
 
+
+        Set<Options> options = carDto.getOptions();
+        if (options == null) {
+            HashSet<Options> set = new HashSet<>();
+            carDto.setOptions(set);
+            options = set;
+        }
+        options.addAll(carState.getOptionsGeneration());
+
         Car newCar = state.getResultCar();
-//        Car newCar = userSession.getNewCar();
         carMapper.updateCar(carDto, newCar);
         newCar.setStatus(Status.onSale);
         carService.merge(newCar);

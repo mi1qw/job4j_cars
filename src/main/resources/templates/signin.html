@@ -8,9 +8,9 @@
 </head>
 <body>
 
-<div layout:fragment="breadcrumb">
-  <span th:replace="fragments/breadcrumb::breadSingleName('регистрация')"></span>
-</div>
+<th:block layout:fragment="breadcrumb">
+  <nav layout:replace="~{layout/breadcrumbs::breadcrumb('регистрация')}"></nav>
+</th:block>
 
 <div layout:fragment="page-content">
   <div class="container pt-5 px-5">

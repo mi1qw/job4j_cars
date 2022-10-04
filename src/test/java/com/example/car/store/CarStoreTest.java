@@ -28,17 +28,17 @@ class CarStoreTest {
         carStore.add(car);
     }
 
-    @Test
-    void addCarWithDriver() {
-        Driver ann = driverStore.add(new Driver("Ann"));
-        Engine engine = engineStore.add(new Engine("engine-B"));
-        Car car = new Car("car-B", engine);
-        car.getDrivers().add(ann);
-        carStore.add(car);
-        assertThat(carStore.findById(car.getId()))
-                .satisfies(n -> assertThat(n.getName()).isEqualTo("car-B"))
-                .satisfies(n -> assertThat(n.getEngine().getName()).isEqualTo("engine-B"));
-    }
+//    @Test
+//    void addCarWithDriver() {
+//        Driver ann = driverStore.add(new Driver("Ann"));
+//        Engine engine = engineStore.add(new Engine("engine-B"));
+//        Car car = new Car("car-B", engine);
+//        car.getDrivers().add(ann);
+//        carStore.add(car);
+//        assertThat(carStore.findById(car.getId()))
+//                .satisfies(n -> assertThat(n.getName()).isEqualTo("car-B"))
+//                .satisfies(n -> assertThat(n.getEngine().getName()).isEqualTo("engine-B"));
+//    }
 
     @Test
     void addImages() {
