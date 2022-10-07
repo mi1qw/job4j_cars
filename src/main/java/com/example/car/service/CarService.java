@@ -28,7 +28,6 @@ public class CarService {
     private final TransmissionService transmissionService;
     private final EngineService engineService;
     private final CityService cityService;
-    private final PostsConfig postsConfig;
 
     public Car merge(final Car car) {
         LocalDateTime created = car.getCreated();
@@ -57,7 +56,6 @@ public class CarService {
     public List<Car> finAll() {
         return carStore.findAll();
     }
-
 
     /**
      * выборка согласно фильтру.

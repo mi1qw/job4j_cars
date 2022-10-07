@@ -2,13 +2,16 @@ package com.example.car.dto;
 
 import com.example.car.model.Car;
 import com.example.car.model.Modification;
+import com.example.car.model.Options;
 import com.example.car.service.*;
 import lombok.extern.slf4j.Slf4j;
-import org.mapstruct.AfterMapping;
-import org.mapstruct.BeforeMapping;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+import org.mapstruct.*;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 
 @Slf4j
@@ -65,12 +68,11 @@ public abstract class PostMapper {
         car.setColor(colorService.findById(id));
     }
 
-    @AfterMapping
-//    protected PostDto after(final @MappingTarget   postDto) {
-    protected void after(final Car car) {
-//        log.info("{}", "!qqqqqqqqqq");
-    }
 
+    protected Map<String, List<Options>> optionsToMap(final Set<Options> options) {
+        return options.stream().collect(
+                Collectors.groupingBy(Options::getNameCategory));
+    }
 
 //    работает но толку с Car
 //    protected void after(final Car car) {
@@ -80,6 +82,7 @@ public abstract class PostMapper {
 //    protected void after() {
 //        System.out.println("!qqqqqqqqqq");
 //    }
+    @Mapping(target = "optionsMap", expression = "java( optionsToMap(car.getOptions()) )")
     @Mapping(source = "car.id", target = "id")
     @Mapping(source = "modification.engineDisplacement", target = "engineDisplacement")
     @Mapping(source = "modification.power", target = "power")

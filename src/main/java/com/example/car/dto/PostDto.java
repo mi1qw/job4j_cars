@@ -7,6 +7,8 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @Builder
 @Data
@@ -33,5 +35,6 @@ public class PostDto {
     private Account account;
     private Color color;
     private String modification;
+    private Map<String, List<Options>> optionsMap;
     private List<String> images;
 }

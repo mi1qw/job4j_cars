@@ -23,9 +23,10 @@ public class CarState {
     private boolean isDone = false;
     private int[] steps = {0};
     private List<Generations> generations;
-    private Map<String, Map<Boolean, List<OptionsDto>>> optionsDtoByCategory;
+//    private Map<String, Map<Boolean, List<OptionsDto>>> optionsDtoByCategory;
     private Map<String, Map<Boolean, Map<Boolean, List<OptionsDto>>>> optionsDto;
     private Set<Options> optionsGeneration;
+    private Long generationID;
 
     public void addStep(final String name, final Supplier<Map<?, ?>> supplier) {
         stepList.add(new State(steps, name, supplier));
@@ -119,10 +120,7 @@ public class CarState {
         generations = generations.stream()
                 .filter(n -> n.getGearbox().equals(gearbox))
                 .collect(Collectors.toList());
-//        AtomicLong id = new AtomicLong();
         return generations.stream()
-//                .map(Generations::getModification)
-//                .distinct()
                 .collect(Collectors.toMap(Generations::getId,
                         (n) -> new GenMod(
                                 n.getId(),
@@ -165,7 +163,6 @@ public class CarState {
         public Map<Long, R> makeOptions() {
             if (options.isEmpty()) {
                 options.putAll(optionsSup.get());
-//                options..addAll(optionsSup.apply(t));
             }
             return options;
         }
@@ -188,20 +185,15 @@ public class CarState {
         public void resetStatusGen(final List<Generations> generations) {
             this.value = null;
             status = false;
-
             if (prevGenerations != null) {
                 generations.clear();
                 generations.addAll(prevGenerations);
             }
-//            options.clear();
         }
 
         public void resetStatus() {
             this.value = null;
             status = false;
         }
-//        public boolean isStatus() {
-//            return status;
-//        }
     }
 }

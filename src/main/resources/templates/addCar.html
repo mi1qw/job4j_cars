@@ -421,42 +421,6 @@
         </div>
 
 
-        <!--        <div>-->
-        <!--          <div th:each="optDto:${@userSession.getCarState().optionsDtoByCategory}">-->
-        <!--            <div th:text="${optDto.getKey()}" class="mt-3 mb-1"></div>-->
-
-        <!--            <th:block th:each="opt:${optDto.getValue().get(false)}">-->
-        <!--              &lt;!&ndash;              <div th:text="${opt}"></div>&ndash;&gt;-->
-        <!--              <div class="form-check">-->
-        <!--                &lt;!&ndash;                                <p th:text="*{options}"></p>&ndash;&gt;-->
-        <!--                <input type="checkbox" name="options" th:value="${opt.options().id}"-->
-        <!--                       th:id="|options${opt.options().id}|"-->
-        <!--                       class="form-check-input" checked/>-->
-
-        <!--                <label th:for="|options${opt.options().id}|"-->
-        <!--                       th:text="${opt.options().name}"-->
-        <!--                       class="form-check-label"></label>-->
-        <!--              </div>-->
-        <!--            </th:block>-->
-
-
-        <!--            <th:block th:each="opt:${optDto.getValue().get(true)}">-->
-        <!--              &lt;!&ndash;              <div th:text="${opt}"></div>&ndash;&gt;-->
-        <!--              <div class="form-check">-->
-        <!--                &lt;!&ndash;                                <p th:text="*{options}"></p>&ndash;&gt;-->
-        <!--                <input type="checkbox" name="options" th:value="${opt.options().id}"-->
-        <!--                       th:id="|options${opt.options().id}|"-->
-        <!--                       class="form-check-input"/>-->
-
-        <!--                <label th:for="|options${opt.options().id}|"-->
-        <!--                       th:text="${opt.options().name}"-->
-        <!--                       class="form-check-label"></label>-->
-        <!--              </div>-->
-        <!--            </th:block>-->
-        <!--          </div>-->
-        <!--        </div>-->
-
-
         <div class="pt-5">
           <div class="numbering fw-bolder">2</div>
           <div class="fw-bolder ps-5">Добавить фотографии</div>
@@ -559,7 +523,7 @@
               </div>
             </div>
 
-            <div class="d-flex pt-3">
+            <div class="d-flex pt-3 pb-5">
               <div class="pe-3">
                 <button type="submit" class="btn btn-light btn-block py-1"
                         form="carform">Save

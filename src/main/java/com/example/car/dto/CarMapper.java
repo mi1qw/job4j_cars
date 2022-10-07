@@ -18,6 +18,6 @@ public interface CarMapper {
 
     @InheritConfiguration
     void updateCar(CarDto carDto, @MappingTarget Car car);
-    
+
     PostDto carToPostDto(Car car);
 }

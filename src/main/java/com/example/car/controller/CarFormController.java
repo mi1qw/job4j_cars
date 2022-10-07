@@ -54,7 +54,6 @@ public class CarFormController {
         String[] array = StringUtils.split(name, "|");
         Car car = userSession.getNewCar();
         userSession.setNewCar(carService.reorderImg(car, array));
-        // TODO возможно лучше сразу не сохранять в базу, а целиком вместе с формой !
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -62,13 +61,11 @@ public class CarFormController {
     public ResponseEntity<?> removeImg(final @RequestParam("value") String name) {
         Car car = userSession.getNewCar();
         try {
-            log.info("{}", car.getImages());
             car = carService.deleteImageByName(car, name);
             if (car == null) {
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
             userSession.setNewCar(car);
-            log.info("{}", userSession.getNewCar().getImages());
             fileService.deleteByName(name);
         } catch (StorageException e) {
             log.error(e.getMessage(), e);
@@ -84,7 +81,6 @@ public class CarFormController {
         try {
             Resource resource = fileService.download(img);
             return ResponseEntity.ok()
-//                .header("Content-Disposition", "attachment; filename=" + img)
                     .headers(new HttpHeaders())
                     .contentLength(resource.contentLength())
                     .contentType(MediaType.parseMediaType("application/octet-stream"))
@@ -102,33 +98,15 @@ public class CarFormController {
             userSession.setNewCar(newCar);
             userSession.setCarState(null);
         }
-
-        CarDto carDto = null;
-        CarState state = userSession.getCarState();
-        if (state == null) {
-            CarState carState = this.state.createCarState();
-            userSession.setCarState(carState);
-            carState.getStepList().get(0).makeOptions();
-        } else {
-            if (state.isDone()) {
-                carDto = carMapper.carToDto(newCar);
-//                carDto.setOptions(Set.of(optionsService.findById(1L),
-//                        optionsService.findById(2L)));
-            }
-        }
+        CarDto carDto = getCarDtoAndState(newCar);
         model.addAttribute("carform", carDto);
-
-        // TODO упростить в один метод
-        //  как проверить что в сесии ошибка наличия файлов
-
-        userSession.getOrder().set(newCar.getImages().size());
         return "addCar";
     }
+
 
     @GetMapping("/edit/{id}")
     public String edit(final @PathVariable long id, final Model model) {
         Car car = carService.getCar(id);
-//        car.setOptions(null);
         Account account = userSession.getAccount();
         if (!car.getAccount().getId().equals(account.getId())) {
             return "redirect:/posts";
@@ -146,84 +124,26 @@ public class CarFormController {
     }
 
     @GetMapping("/addState")
-    public String add(final @RequestParam(name = "id") long id,
-                      final @RequestParam(name = "stateID") int stateID,
+    public String add(final @RequestParam(name = "id", required = false) Long id,
+                      final @RequestParam(name = "stateID", required = false) Integer stateID,
                       final Model model) {
-        CarState state = userSession.getCarState();
-        if (state == null) {
+        CarState carState = userSession.getCarState();
+        if (carState == null) {
             return "addCar";
         }
-        // TODO упростить в один метод
-        CarState.State<?, ?> step = state.getStepList().get(stateID);
-        Object optionByID = step.getOptionByID(id);
-        step.setValue(optionByID);
-
-        step.setPrevGenerations(state.getGenerations());
-
-        int step1 = stateID;
-        CarState.State<?, ?> stepNext;
-
-        while (step1 + 1 < state.getStepList().size()) {
-            ++step1;
-            stepNext = state.getStepList().get(step1);
-            stepNext.setPrevGenerations(state.getGenerations());
-            Map<Long, ?> options = stepNext.makeOptions();
-            if (options.size() > 1) {
-                break;
-            }
-            if (options.size() == 0) {
-                log.error(step.getName() + "  options.size() ==0");
-                break;
-            }
-            optionByID = options.values().iterator().next();
-            stepNext.setValue(optionByID);
-            stepNext.setStatus(true);
+        if (id != null && stateID != null) {
+            state.makeSteps(id, stateID);
         }
-
-        log.info("step1 {} - {}", step1, state.getStepList().get(9).isStatus());
-        if (state.getStepList().get(9).isStatus()) {
-
-            CarState.GenMod genMod = (CarState.GenMod) state
-                    .getStepList()
-                    .get(8)
-                    .getValue();
-
-
-            int[] filtered = {0};
-            Generations generations = state.getGenerations().stream()
-                    .filter(n -> n.getId().equals(genMod.id()))
-                    .peek(n -> ++filtered[0])
-                    .findAny()
-                    .orElseThrow(IllegalStateException::new);
-            if (filtered[0] > 1) {
-                log.error("filtered List > 1");
-            }
-
-
-            Set<OptionsDto> optionsDtoSet = new HashSet<>();
-            Set<Options> options = optionsService.findGenerationOptionsById(
-                    generations.getId());
-//            options.forEach(n -> optionsDtoSet.add(new OptionsDto(n, false)));
-            log.info("options {}", options);
-
-            Set<Options> restOfOptions = optionsService.getRestOfOptions(options);
-//            restOfOptions.forEach(n -> optionsDtoSet.add(new OptionsDto(n, true)));
-            log.info("restOfOptions {}", restOfOptions);
-
-            Map<String, Map<Boolean, List<OptionsDto>>> optionsDtoByCategory
-                    = optionsDtoSet.stream()
-                    .collect(groupingBy(n -> n.options().getNameCategory(),
-                            partitioningBy(OptionsDto::isRestOption, toList())));
-            log.info("{}", optionsDtoByCategory);
-            state.setOptionsDtoByCategory(optionsDtoByCategory);
-
-
+        if (carState.isDone()) {
+            Long genID = carState.getGenerationID();
             Map<String, Map<Boolean, Map<Boolean, List<OptionsDto>>>> optionsDto
-                    = optionsService.getOptionsDto(new HashSet<Options>(), generations.getId());
-            state.setOptionsDto(optionsDto);
+                    = optionsService.getOptionsDto(new HashSet<>(), genID);
+            carState.setOptionsDto(optionsDto);
 
+            CarDto carDto = getCarDtoAndState(userSession.getNewCar());
+            model.addAttribute("carform", carDto);
         }
-        return "redirect:/cars/add";
+        return "addCar";
     }
 
     @GetMapping("/resetState")
@@ -231,21 +151,17 @@ public class CarFormController {
                              final Model model) {
         CarState state = userSession.getCarState();
         if (state == null) {
-            // TODO куда перенаправить
-            return "cars/add";
+            return "addCar";
         }
-        CarState.State<?, ?> step = state.getStepList().get(stateID);
         if (stateID < 9) {
-            List<Generations> generations = state.getGenerations();
             state.getStepList().get(stateID).resetStatusGen(state.getGenerations());
-            int step1 = stateID + 1;
             for (int i = stateID + 1; i < 9; i++) {
                 state.getStepList().get(i).resetOption();
             }
         } else {
             state.getStepList().get(stateID).resetStatus();
         }
-        return "redirect:/cars/add";
+        return "redirect:/cars/addState";
     }
 
 
@@ -265,29 +181,15 @@ public class CarFormController {
             maxID = new AtomicInteger(maxIDa);
             userSession.setMaxID(maxID);
         }
-
-
-//        int tabOrder = session.getTabOrder()
-//                .getOrder(order, totalFiles);
         int tabOrder = userSession.getOrder().getAndIncrement();
-
         filename = ImageUtil.rename(filename, maxID.incrementAndGet(), newCar);
         FileImageDto imageDto = new FileImageDto(filename, tabOrder);
-
-        log.info("totalFiles={}  order={}  tabOrder={}  filename={}",
-                totalFiles, order, tabOrder, filename);
-
 
         boolean upload = fileService.upload(file, imageDto);
         if (!upload) {
             return new ResponseEntity<>(filename, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
-//        return new ResponseEntity<>("Successfully uploaded", HttpStatus.OK);
         return new ResponseEntity<>(filename, HttpStatus.OK);
-//        return ResponseEntity.ok()
-//                .header("Content-Disposition", "attachment; filename=" + filename)
-//                .build();
     }
 
     @PostMapping("/add")
@@ -295,30 +197,17 @@ public class CarFormController {
                            @ModelAttribute("carform") CarDto carDto,
                            final BindingResult bindingResult,
                            final Model model) {
-        CarState carState = userSession.getCarState();
-        log.info("{}", carDto);
-
-        carState.getStepList()
-                .forEach(n -> log.info("{}", n.getValue()));
-        System.out.println();
-        List<Long> generationsListID = carState
-                .getGenerations().stream()
-                .map(Generations::getId)
-                .toList();
-        log.info("{}", generationsListID);
-
         if (bindingResult.hasErrors()) {
             log.error("{}", bindingResult);
             return "addCar";
         }
-
-
         Set<Options> options = carDto.getOptions();
         if (options == null) {
             HashSet<Options> set = new HashSet<>();
             carDto.setOptions(set);
             options = set;
         }
+        CarState carState = userSession.getCarState();
         options.addAll(carState.getOptionsGeneration());
 
         Car newCar = state.getResultCar();
@@ -342,5 +231,22 @@ public class CarFormController {
     public String getModels(final @RequestParam Integer id) {
         Map<Long, String> namesByMarkId = modelService.getModelNamesByMarkId(id);
         return jsonUtil.mapToJson(namesByMarkId);
+    }
+
+
+    private CarDto getCarDtoAndState(final Car newCar) {
+        CarDto carDto = null;
+        CarState state = userSession.getCarState();
+        if (state == null) {
+            CarState carState = this.state.createCarState();
+            userSession.setCarState(carState);
+            carState.getStepList().get(0).makeOptions();
+        } else {
+            if (state.isDone()) {
+                carDto = carMapper.carToDto(newCar);
+                userSession.getOrder().set(newCar.getImages().size());
+            }
+        }
+        return carDto;
     }
 }

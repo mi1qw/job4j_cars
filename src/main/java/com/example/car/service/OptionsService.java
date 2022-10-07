@@ -1,8 +1,6 @@
 package com.example.car.service;
 
 import com.example.car.dto.OptionsDto;
-import com.example.car.model.Car;
-import com.example.car.model.Generations;
 import com.example.car.model.Options;
 import com.example.car.store.OptionsStore;
 import com.example.car.web.UserSession;
@@ -11,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.*;
@@ -47,7 +44,6 @@ public class OptionsService {
         return optionsMap.values().stream()
                 .filter(n -> !carOpts.contains(n))
                 .collect(Collectors.toSet());
-//                .collect(Collectors.toMap(Options::getId, Function.identity()));
     }
 
 
@@ -59,30 +55,16 @@ public class OptionsService {
         return options;
     }
 
-//    public Map<Long, Options> findGenerationOptionsById(final Long id) {
-//        Set<Options> options = new HashSet<>();
-//        optionsStore.findGenerationOptionsById(id)
-//                .forEach(n -> options.add(optionsMap.get(n)));
-//        return options;
-//    }
 
     public Map<String, Map<Boolean, Map<Boolean, List<OptionsDto>>>>
     getOptionsDto(final Set<Options> carOptions, final long id) {
-//    getOptionsDto(final Car car) {
-//        final Set<Options> carOptions, final long id
-
-//        long id = car.getGenerations().getId();
         Map<Long, OptionsDto> options = new HashMap<>();
-//        optionsMap.forEach((k, v) -> options.add(new OptionsDto(v, true, false)));
-//        carOptions.forEach(n->options.add(new OptionsDto(n,n)));
         findGenerationOptionsById(id)
                 .forEach(n -> options.put(
                         n.getId(),
                         new OptionsDto(n, false, true)
                 ));
 
-//        Set<Options> carOptions = car.getOptions();
-//        car.getOptions()
         carOptions.forEach(n -> options.putIfAbsent(
                 n.getId(),
                 new OptionsDto(n, true, true)

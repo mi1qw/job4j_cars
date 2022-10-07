@@ -117,10 +117,7 @@ public class State {
                        + model.getName() + " "
                        + generationName + " "
                        + year.toString());
-
-//        log.info("{}", newCar.getOptions());
-
-
+        newCar.setOptions(null);
         return newCar;
     }
 
@@ -128,19 +125,12 @@ public class State {
         CarState carState = createCarState();
         userSession.setCarState(carState);
         Long generationID = car.getGenerations().getId();
+        carState.setGenerationID(generationID);
         Generations generation;
 
         List<CarState.State<?, ?>> stepList = carState.getStepList();
         CarState.State<?, ?> step = stepList.get(0);
-//        step.setValue(generation.getModification().getId().getMarkId());
-//        step.setStatus(true);
         step.makeOptions();
-
-//        for (int i = 0; i < stepList.size(); i++) {
-//            makeStep(1, i);
-//        }
-
-//        Mark mark = generation.getModification().getId().getMarkId();
 
         Mark mark = car.getMark();
         makeStep(mark.getId(), 0);
@@ -193,41 +183,6 @@ public class State {
         Color color = car.getColor();
         makeStep(color.getId(), 9);
 
-
-//        CarState.GenMod genMod = (CarState.GenMod) state
-//                .getStepList()
-//                .get(8)
-//                .getValue();
-
-
-//        int[] filtered = {0};
-//        Generations generations = state.getGenerations().stream()
-//                .filter(n -> n.getId().equals(genMod.id()))
-//                .peek(n -> ++filtered[0])
-//                .findAny()
-//                .orElseThrow(IllegalStateException::new);
-//        if (filtered[0] > 1) {
-//            log.error("filtered List > 1");
-//        }
-
-
-//        Set<OptionsDto> optionsDtoSet = new HashSet<>();
-//        Set<Options> options = optionsService.findGenerationOptionsById(id);
-//        options.forEach(n -> optionsDtoSet.add(new OptionsDto(n, false)));
-//        log.info("options {}", options);
-//
-//        Set<Options> restOfOptions = optionsService.getRestOfOptions(options);
-//        restOfOptions.forEach(n -> optionsDtoSet.add(new OptionsDto(n, true)));
-//        log.info("restOfOptions {}", restOfOptions);
-//
-//        Map<String, Map<Boolean, List<OptionsDto>>> optionsDtoByCategory
-//                = optionsDtoSet.stream()
-//                .collect(groupingBy(n -> n.options().getNameCategory(),
-//                        partitioningBy(OptionsDto::isRestOption, toList())));
-//        log.info("{}", optionsDtoByCategory);
-//        carState.setOptionsDtoByCategory(optionsDtoByCategory);
-
-//        Car car = userSession.getNewCar();
         Map<String, Map<Boolean, Map<Boolean, List<OptionsDto>>>> optionsDto
                 = optionsService.getOptionsDto(car.getOptions(), car.getGenerations().getId());
         carState.setOptionsDto(optionsDto);
@@ -256,7 +211,8 @@ public class State {
         CarState state = userSession.getCarState();
         CarState.State<?, ?> step = state.getStepList().get(stateID);
         Object optionByID = step.getOptionByID(id);
-        step.setValue(optionByID);
+//        step.setValue(optionByID);
+        setValue(step, optionByID);
 
         step.setPrevGenerations(state.getGenerations());
 
@@ -276,8 +232,18 @@ public class State {
                 break;
             }
             optionByID = options.values().iterator().next();
-            stepNext.setValue(optionByID);
+//            stepNext.setValue(optionByID);
+            setValue(stepNext, optionByID);
             stepNext.setStatus(true);
+        }
+    }
+
+    private void setValue(final CarState.State<?, ?> step,
+                          final Object value) {
+        step.setValue(value);
+        if (step.getStep() == 8) {
+            Long id = ((CarState.GenMod) value).id();
+            userSession.getCarState().setGenerationID(id);
         }
     }
 }

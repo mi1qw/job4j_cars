@@ -2,10 +2,7 @@ package com.example.car.store;
 
 import com.example.car.dto.FileImageDto;
 import com.example.car.dto.FilterDto;
-import com.example.car.model.Account;
-import com.example.car.model.Car;
-import com.example.car.model.Modification;
-import com.example.car.model.Status;
+import com.example.car.model.*;
 import com.example.car.service.FileService;
 import com.example.car.service.dto.PaginationDto;
 import com.example.car.util.CarModfctn;
@@ -22,6 +19,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ForkJoinPool;
 
 @Repository
@@ -85,7 +83,7 @@ public class CarStore extends CrudPersist<Car> {
 //            Car car = session.find(Car.class, id);
 //            List<String> images = car.getImages();
                 session.createQuery("""
-                                from Car c left join fetch c.options o where c.id=:id
+                                from Car c left join fetch c.options where c.id=:id
                                 """, Car.class)
                         .setParameter("id", id)
                         .uniqueResult());
@@ -267,18 +265,22 @@ public class CarStore extends CrudPersist<Car> {
 
 
     public CarModfctn findCarPost(final Long id) {
-        return tx(session ->
-                session.createQuery("""
-                                select c, m, a from Car c, Account a,
-                                Modification m where c.account= a and c.id=:id and
-                                c.modification=m.id.nameId and c.year=m.id.yearId
-                                and c.mark=m.id.markId""", Object[].class)
-                        .setParameter("id", id)
-                        .setTupleTransformer((tuple, aliases) ->
-                                new CarModfctn(
-                                        (Car) tuple[0],
-                                        (Modification) tuple[1],
-                                        ((Account) tuple[2])))
-                        .getSingleResult());
+        return tx(session -> {
+                    CarModfctn modfctn = session.createQuery("""
+                                    select c, m, a from Car c, Account a,
+                                    Modification m where c.account= a and c.id=:id and
+                                    c.modification=m.id.nameId and c.year=m.id.yearId
+                                    and c.mark=m.id.markId""", Object[].class)
+                            .setParameter("id", id)
+                            .setTupleTransformer((tuple, aliases) ->
+                                    new CarModfctn(
+                                            (Car) tuple[0],
+                                            (Modification) tuple[1],
+                                            ((Account) tuple[2])))
+                            .getSingleResult();
+                    modfctn.car().getOptions().size();
+                    return modfctn;
+                }
+        );
     }
 }
