@@ -21,8 +21,6 @@ import java.util.List;
 @AllArgsConstructor
 public class CarService {
     private final CarStore carStore;
-    private final CarMapper carMapper;
-    private final State state;
     private final UserSession userSession;
     private final GearboxService gearboxService;
     private final TransmissionService transmissionService;
@@ -52,7 +50,6 @@ public class CarService {
         return carStore.reorderImg(car.getId(), names);
     }
 
-    // только в тестах, скорее всегда удалить
     public List<Car> finAll() {
         return carStore.findAll();
     }

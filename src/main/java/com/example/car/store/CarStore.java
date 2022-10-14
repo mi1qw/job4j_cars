@@ -40,17 +40,6 @@ public class CarStore extends CrudPersist<Car> {
         return tx(session -> session.merge(car));
     }
 
-    // TODO порядок может не совпадать, достаточно переместить картинку на фронте
-    public Car deleteImage(final Car car, final FileImageDto imageDto) {
-        car.getImages().remove(imageDto.getOrder());
-        return tx(session -> session.merge(car));
-    }
-
-    public Car deleteImageByOrder(final Car car, final int order) {
-        car.getImages().remove(order);
-        return tx(session -> session.merge(car));
-    }
-
     //нужно
     public Car deleteImageByName(final Car car, final String name) {
         Account account = userSession.getAccount();
@@ -67,8 +56,6 @@ public class CarStore extends CrudPersist<Car> {
     // нужный
     public Car getCar(final Long id) {
         return tx(session ->
-//            Car car = session.find(Car.class, id);
-//            List<String> images = car.getImages();
                 session.createQuery("""
                                 from Car c left join fetch c.options where c.id=:id
                                 """, Car.class)
@@ -88,44 +75,6 @@ public class CarStore extends CrudPersist<Car> {
         });
 
     }
-
-//    public Car findByIdWithImages(final Long id) {
-//        return tx(session -> {
-//            session.find(Car.class, id)
-//        });
-//    }
-
-//    public void addim(final String im){
-//        txv(session -> {
-//           session.createQuery(ins)
-//        })
-//    }
-
-//    public boolean addImagesSQL(final Car car, final List<String> images) {
-//        try {
-//            txv(session -> {
-//                List<String> listImg = car.getImages();
-//                int[] size = {listImg.size()};
-//                int[] res = {0};
-//                images.forEach(n -> {
-//                    int i = session.createNativeQuery(
-//                                    "insert into image values (:carId,:filename,:order)")
-//                            .setParameter("carId", car.getId())
-//                            .setParameter("filename", n)
-//                            .setParameter("order", size[0]++)
-//                            .executeUpdate();
-//
-//                    if (i == 0) {
-////                        ++res[0];
-//                        return false;
-//                    }
-//                    listImg.add(n);
-//                });
-//            });
-//        } catch (Throwable e) {
-//            throw new PersistenceException();
-//        }
-//    }
 
 
     public boolean addImage(final Car car, final FileImageDto imageDto) {
@@ -150,14 +99,6 @@ public class CarStore extends CrudPersist<Car> {
         return true;
     }
 
-    // TODO удалить
-    public List<Car> finCarsWithEngineGearFILTR() {
-        return tx(session ->
-                session.createQuery("from Car c join fetch c.gearbox "
-                                    + "join fetch c.transmission",
-                                Car.class)
-                        .list());
-    }
 
     public PaginationDto findByFilter(final FilterDto filterDto, final Pagination pagination) {
         FilterForm filterForm = userSession.getFilterForm();

@@ -59,10 +59,10 @@ class CarStoreTest {
     @Test
     void addAndgetImages() {
 
-        Car car = carStore.getCar(116L);
-        log.info("car={}", car);
-        carStore.deleteImageByOrder(car, 16);
-        log.info("car={}", car);
+//        Car car = carStore.getCar(116L);
+//        log.info("car={}", car);
+//        carStore.deleteImageByOrder(car, 16);
+//        log.info("car={}", car);
     }
 //    @Test
 //    void addImagesSQL() {

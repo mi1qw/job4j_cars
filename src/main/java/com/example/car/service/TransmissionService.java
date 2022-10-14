@@ -1,6 +1,5 @@
 package com.example.car.service;
 
-import com.example.car.model.Gearbox;
 import com.example.car.model.Transmission;
 import com.example.car.store.TransmissionStore;
 import lombok.extern.slf4j.Slf4j;

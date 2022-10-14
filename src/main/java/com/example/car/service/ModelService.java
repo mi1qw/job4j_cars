@@ -25,8 +25,6 @@ public class ModelService {
         this.modelStore = modelStore;
         this.userSession = userSession;
         modelStore.findAll().forEach(n -> modelsMap.put(n.getId(), n));
-
-
     }
 
     @PostConstruct
