@@ -29,7 +29,6 @@
         <mapping class="com.example.car.model.Account"/>
         <mapping class="com.example.car.model.Body"/>
         <mapping class="com.example.car.model.Car"/>
-        <mapping class="com.example.car.model.Category"/>
         <mapping class="com.example.car.model.City"/>
         <mapping class="com.example.car.model.Color"/>
         <mapping class="com.example.car.model.Driver"/>

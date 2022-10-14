@@ -24,7 +24,7 @@ public class GenerationsStore extends CrudPersist<Generations> {
     public List<Generations> getGenerationsByYearByModel(final Short year, final Model model) {
         return tx(session ->
                 session.createQuery(""" 
-                                        from Generations g join fetch g.body 
+                                        from Generations g join fetch g.body
                                         join fetch g.engine 
                                         join fetch g.gearbox 
                                         join fetch g.transmission where

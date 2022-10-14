@@ -1,7 +1,6 @@
 package com.example.car;
 
 import com.example.car.model.*;
-import com.example.car.service.CityService;
 import com.example.car.store.*;
 import jakarta.servlet.ServletContext;
 import org.springframework.beans.factory.annotation.Autowired;

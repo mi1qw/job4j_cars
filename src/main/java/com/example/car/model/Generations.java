@@ -10,8 +10,7 @@ import java.util.Set;
 @Table(name = "generations",
         uniqueConstraints = @UniqueConstraint(columnNames =
                 {"name", "year", "body_id", "engine_id", "gearbox_id", "model_id", "mark_id",
-                        "name_id", "year_id", "transmission_id"})
-)
+                        "name_id", "year_id", "transmission_id"}))
 @Data
 @Builder
 @AllArgsConstructor

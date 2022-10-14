@@ -20,8 +20,6 @@ public abstract class PostMapper {
     @Autowired
     private MarkService markService;
     @Autowired
-    private AccountService accountService;
-    @Autowired
     private ModelService modelService;
     @Autowired
     private BodyService bodyService;
@@ -57,10 +55,6 @@ public abstract class PostMapper {
         id = car.getTransmission().getId();
         car.setTransmission(transmissionService.findById(id));
 
-        // TODO аккаунт из БД тянуть
-//        id = car.getAccount().getId();
-//        car.setAccount(accountService.findById(id));
-
         id = car.getCity().getId();
         car.setCity(cityService.findById(id));
 
@@ -74,14 +68,6 @@ public abstract class PostMapper {
                 Collectors.groupingBy(Options::getNameCategory));
     }
 
-//    работает но толку с Car
-//    protected void after(final Car car) {
-
-    //    работает, но нет PostDto
-//    @AfterMapping
-//    protected void after() {
-//        System.out.println("!qqqqqqqqqq");
-//    }
     @Mapping(target = "optionsMap", expression = "java( optionsToMap(car.getOptions()) )")
     @Mapping(source = "car.id", target = "id")
     @Mapping(source = "modification.engineDisplacement", target = "engineDisplacement")

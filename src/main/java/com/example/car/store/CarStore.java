@@ -2,7 +2,10 @@ package com.example.car.store;
 
 import com.example.car.dto.FileImageDto;
 import com.example.car.dto.FilterDto;
-import com.example.car.model.*;
+import com.example.car.model.Account;
+import com.example.car.model.Car;
+import com.example.car.model.Modification;
+import com.example.car.model.Status;
 import com.example.car.service.FileService;
 import com.example.car.service.dto.PaginationDto;
 import com.example.car.util.CarModfctn;
@@ -19,7 +22,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.concurrent.ForkJoinPool;
 
 @Repository
@@ -35,21 +37,7 @@ public class CarStore extends CrudPersist<Car> {
     }
 
     public Car merge(final Car car) {
-        return tx(session -> {
-            Car merge = session.merge(car);
-            return merge;
-        });
-
-
-//        List<String> carImages = car.getImages();
-//        Car tx = tx(session -> {
-//            Car car2 = session.get(Car.class, car.getId());
-//            List<String> images = car2.getImages();
-//            images.addAll(carImages);
-////            images.add("aaaaaaaaaaaaaa");
-//            return car2;
-//        });
-//        return tx;
+        return tx(session -> session.merge(car));
     }
 
     // TODO порядок может не совпадать, достаточно переместить картинку на фронте
@@ -72,7 +60,6 @@ public class CarStore extends CrudPersist<Car> {
                 return null;
             }
             car1.getImages().remove(name);
-//            Car merge = session.merge(car1);
             return car1;
         });
     }

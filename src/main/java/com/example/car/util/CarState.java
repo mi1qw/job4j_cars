@@ -23,7 +23,6 @@ public class CarState {
     private boolean isDone = false;
     private int[] steps = {0};
     private List<Generations> generations;
-//    private Map<String, Map<Boolean, List<OptionsDto>>> optionsDtoByCategory;
     private Map<String, Map<Boolean, Map<Boolean, List<OptionsDto>>>> optionsDto;
     private Set<Options> optionsGeneration;
     private Long generationID;
@@ -33,15 +32,7 @@ public class CarState {
     }
 
     public boolean isDone() {
-//        boolean allMatch1 = stateList.stream()
-//                .allMatch(n -> {
-//                    log.info("{}  {}", n.status, n.name);
-//                    return n.status;
-//                });
-        return stepList.stream()
-                .allMatch(n -> n.status);
-//        log.info("allMatch {}   allMatch1 {}", allMatch, allMatch1);
-//        return allMatch;
+        return stepList.stream().allMatch(n -> n.status);
     }
 
     public Map<Long, Mark> getMarks(final MarkService markService) {
