@@ -40,7 +40,6 @@ public class CarStore extends CrudPersist<Car> {
         return tx(session -> session.merge(car));
     }
 
-    //нужно
     public Car deleteImageByName(final Car car, final String name) {
         Account account = userSession.getAccount();
         return tx(session -> {
@@ -53,7 +52,6 @@ public class CarStore extends CrudPersist<Car> {
         });
     }
 
-    // нужный
     public Car getCar(final Long id) {
         return tx(session ->
                 session.createQuery("""
@@ -76,7 +74,6 @@ public class CarStore extends CrudPersist<Car> {
 
     }
 
-
     public boolean addImage(final Car car, final FileImageDto imageDto) {
         try {
             List<String> images = car.getImages();
@@ -98,7 +95,6 @@ public class CarStore extends CrudPersist<Car> {
         }
         return true;
     }
-
 
     public PaginationDto findByFilter(final FilterDto filterDto, final Pagination pagination) {
         FilterForm filterForm = userSession.getFilterForm();
@@ -190,7 +186,6 @@ public class CarStore extends CrudPersist<Car> {
         }
         return resBoolean;
     }
-
 
     public CarModfctn findCarPost(final Long id) {
         return tx(session -> {

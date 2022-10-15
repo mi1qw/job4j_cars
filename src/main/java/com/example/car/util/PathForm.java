@@ -44,9 +44,6 @@ public class PathForm {
         return filterDto;
     }
 
-    public void makeBreadcrumb() {
-    }
-
     private record Field<T>(String name,
                             BiConsumer<T, FilterDto> setter,
                             Function<Car, T> getter) {

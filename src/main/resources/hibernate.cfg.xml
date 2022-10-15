@@ -31,7 +31,6 @@
         <mapping class="com.example.car.model.Car"/>
         <mapping class="com.example.car.model.City"/>
         <mapping class="com.example.car.model.Color"/>
-        <mapping class="com.example.car.model.Driver"/>
         <mapping class="com.example.car.model.Engine"/>
         <mapping class="com.example.car.model.Gearbox"/>
         <mapping class="com.example.car.model.Generations"/>

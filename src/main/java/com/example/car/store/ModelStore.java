@@ -18,7 +18,8 @@ public class ModelStore extends CrudPersist<Model> {
     public Map<Long, Model> getModelsByMark(final Mark mark) {
         HashMap<Long, Model> map = new HashMap<>();
 
-        List<Model> mark1 = tx(session -> session.createQuery("from Model m where m.mark=:mark")
+        List<Model> mark1 = tx(session -> session.createQuery("from Model m where m.mark=:mark",
+                        Model.class)
                 .setParameter("mark", mark)
                 .list());
         mark1.forEach(n -> map.put(n.getId(), n));

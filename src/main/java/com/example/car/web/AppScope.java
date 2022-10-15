@@ -39,12 +39,5 @@ public class AppScope {
                 "sort", sortService.findAllMap(),
                 "city", cityService.findAllMap()
         );
-//        filterMap.get(1).get(1);
-
-//        this.filterMap = Map.of(
-//                "mark", new Fieild<>(null, markService.findAll()),
-//                "model", new Fieild<>(null, new ArrayList<>()),
-//                "body", new Fieild<>(null, bodyService.findAll())
-//        );
     }
 }

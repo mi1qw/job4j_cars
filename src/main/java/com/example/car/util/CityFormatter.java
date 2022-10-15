@@ -24,6 +24,6 @@ public class CityFormatter implements Formatter<City> {
 
     @Override
     public String print(final City object, final Locale locale) {
-        return (object != null ? object.getId().toString() : "");
+        return object != null ? object.getId().toString() : "";
     }
 }

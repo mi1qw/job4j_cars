@@ -148,9 +148,6 @@ public class State {
                 .filter(n -> n.getId().equals(generationID))
                 .findFirst()
                 .orElseThrow(IllegalStateException::new);
-        // TODO  из базы generations findById  имя поколения, а можно ведь напрямую сохранить
-//        Generations gen = generationsService.findById(car.getGenerations().getId());
-//        String genName = car.getGenerations().getName();
         String genName = generation.getName();
         Collection<CarState.Img> collection = (Collection<CarState.Img>) stepList
                 .get(4).getOptions().values();
@@ -169,7 +166,6 @@ public class State {
         Gearbox gearbox = car.getGearbox();
         makeStep(gearbox.getId(), 7);
 
-        // TODO same
         String modification = car.getModification();
         Collection<CarState.GenMod> genMods = (Collection<CarState.GenMod>) stepList
                 .get(8).getOptions().values();
@@ -178,7 +174,6 @@ public class State {
                 .findFirst().orElseThrow(IllegalStateException::new)
                 .id();
         makeStep(id, 8);
-
 
         Color color = car.getColor();
         makeStep(color.getId(), 9);
@@ -194,9 +189,7 @@ public class State {
         CarState.State<?, ?> step = state.getStepList().get(stateID);
         Object optionByID = step.getOptionByID(id);
         step.setValue(optionByID);
-
         step.setPrevGenerations(state.getGenerations());
-
         if (stateID + 1 < state.getStepList().size()) {
             CarState.State<?, ?> stepNext = state.getStepList().get(stateID + 1);
             stepNext.setPrevGenerations(state.getGenerations());
@@ -211,14 +204,10 @@ public class State {
         CarState state = userSession.getCarState();
         CarState.State<?, ?> step = state.getStepList().get(stateID);
         Object optionByID = step.getOptionByID(id);
-//        step.setValue(optionByID);
         setValue(step, optionByID);
-
         step.setPrevGenerations(state.getGenerations());
-
         int step1 = stateID;
         CarState.State<?, ?> stepNext;
-
         while (step1 + 1 < state.getStepList().size()) {
             ++step1;
             stepNext = state.getStepList().get(step1);
@@ -232,7 +221,6 @@ public class State {
                 break;
             }
             optionByID = options.values().iterator().next();
-//            stepNext.setValue(optionByID);
             setValue(stepNext, optionByID);
             stepNext.setStatus(true);
         }

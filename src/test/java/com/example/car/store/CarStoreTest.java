@@ -1,14 +1,11 @@
 package com.example.car.store;
 
 import com.example.car.model.Car;
-import com.example.car.model.Driver;
 import com.example.car.model.Engine;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
 @SpringBootTest
@@ -17,8 +14,6 @@ class CarStoreTest {
     private CarStore carStore;
     @Autowired
     private EngineStore engineStore;
-    @Autowired
-    private DriverStore driverStore;
 
     @Test
     void addCar() {
