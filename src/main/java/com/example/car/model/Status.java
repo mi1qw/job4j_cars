@@ -6,4 +6,3 @@ public enum Status {
     notActive,
     newItem
 }
-// TODO добавить статус

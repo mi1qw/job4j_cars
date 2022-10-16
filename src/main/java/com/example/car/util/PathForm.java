@@ -23,13 +23,12 @@ public class PathForm {
         mapFields();
     }
 
-    public List<Field> mapFields() {
+    public void mapFields() {
         list.add(new Field<>("city", (t, f) -> f.setCity(t), (car) -> car.getCity().getId()));
         list.add(new Field<>("mark", (t, f) -> f.setMark(t), (car) -> car.getMark().getId()));
         list.add(new Field<>("model", (t, f) -> f.setModel(t), (car) -> car.getModel().getId()));
         list.add(new Field<>("body", (t, f) -> f.setBody(t), (car) -> car.getBody().getId()));
         list.add(new Field<>("engine", (t, f) -> f.setEngine(t), (car) -> car.getEngine().getId()));
-        return list;
     }
 
     public FilterDto carToFilterDto(final Car car) {

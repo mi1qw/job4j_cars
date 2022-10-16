@@ -1,7 +1,5 @@
 package com.example.car.store;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import com.example.car.model.Model;
 import com.example.car.service.GenerationsService;
 import org.junit.jupiter.api.Test;
@@ -11,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 import java.util.Map;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 class GenerationsStoreTest {
     @Autowired
