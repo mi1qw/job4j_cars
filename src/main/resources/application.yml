@@ -9,18 +9,18 @@ logging.level:
       SQL: warn
       orm.jdbc.bind: warn
 
-
 spring:
   sql.init.mode: always
   thymeleaf:
     cache: false
     template-resolver-order: 0
-  servlet:
-    multipart:
-      max-file-size: 10MB
-      max-request-size: 10MB
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
+  servlet.multipart:
+    max-file-size: 10MB
+    max-request-size: 10MB
+
+management.endpoints.web.exposure:
+  include: "*"
+
+server.error:
+  include-exception: true
+  include-stacktrace: always

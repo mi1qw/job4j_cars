@@ -66,4 +66,9 @@ public class PostsController {
         userSession.setFilterForm(filterForm);
         return "redirect:/posts";
     }
+
+    @GetMapping("/ex")
+    public String throwException() {
+        throw new RuntimeException("This is a fake exception for testing");
+    }
 }

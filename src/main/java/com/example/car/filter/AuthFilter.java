@@ -30,7 +30,8 @@ public class AuthFilter implements Filter {
             || uri.endsWith("logIn")
             || uri.endsWith("favicon.ico")
             || uri.endsWith("signPage")
-            || uri.endsWith("signIn")) {
+            || uri.endsWith("signIn")
+            || uri.startsWith("/posts/ex")) {
             chain.doFilter(req, res);
             return;
         }

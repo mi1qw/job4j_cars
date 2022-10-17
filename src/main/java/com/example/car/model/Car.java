@@ -25,6 +25,8 @@ public class Car {
 
     private String name;
     private LocalDateTime created;
+    @Version
+    private LocalDateTime lastUpdated;
     private String description;
     private BigDecimal price;
     private Short odometer;
