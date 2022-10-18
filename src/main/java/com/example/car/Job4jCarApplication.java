@@ -129,11 +129,12 @@ public class Job4jCarApplication {
 
                 toyota = markStore.findByName("Toyota").get(0);
                 try {
+                    modelStore.add(new Model("A-Класс",
+                            markStore.findByName("Mercedes-Benz").get(0)));
                     modelStore.add(new Model("Camry", toyota));
                     modelStore.add(new Model("Crown", toyota));
                     modelStore.add(new Model("2 серии",
                             markStore.findByName("BMW").get(0)));
-
                 } catch (Exception ignored) {
                 }
 
@@ -212,7 +213,12 @@ public class Job4jCarApplication {
 
 
                 try {
-                    ModificationId id = new ModificationId("3.5 CVT 299 л.с", (short) 2018,
+                    ModificationId id = new ModificationId("136 л.с. (200 / 1.3 MT)", (short) 2018,
+                            markStore.findByName("Mercedes-Benz").get(0));
+                    modificationStore.add(new Modification(id, (short) 136, (short) 1332,
+                            (byte) 4, "рядное"));
+
+                    id = new ModificationId("3.5 CVT 299 л.с", (short) 2018,
                             markStore.findByName("Toyota").get(0));
                     modificationStore.add(new Modification(id, (short) 299, (short) 3456,
                             (byte) 6, "V-образное"));
@@ -273,6 +279,35 @@ public class Job4jCarApplication {
                 /* Седан */
                 /*реальн*/
                 try {
+
+                    generationsStore.add(
+                            Generations.builder()
+                                    .name("IV (W177)")
+                                    .image("IV (W177).jpg")
+                                    .year(((short) 2018))
+                                    .model(modelStore.findByName("A-Класс").get(0))
+                                    .body(bodyStore.findByName("Седан").get(0))
+                                    .engine(engineStore.findByName("Бензин").get(0))
+                                    .transmission(transmissionStore.findByName("Передний").get(0))
+                                    .gearbox(gearboxStore.findByName("Механическая").get(0))
+                                    .modification(
+                                            modificationStore.findByName(
+                                                    "136 л.с. (200 / 1.3 MT)").get(0))
+                                    .options(Set.of(
+                                            optionsStore.findByName("Светодиодные фары").get(0),
+                                            optionsStore.findByName(
+                                                    "Бортовой компьютер").get(0),
+                                            optionsStore.findByName(
+                                                    "Центральный замок").get(0),
+                                            optionsStore.findByName(
+                                                    "Иммобилайзер").get(0),
+                                            optionsStore.findByName(
+                                                    "Обогрев рулевого колеса").get(0)
+                                    ))
+                                    .build()
+                    );
+
+
                     generationsStore.add(
                             Generations.builder()
                                     .name("XV (S220)")

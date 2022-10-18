@@ -191,7 +191,7 @@ public class CarStore extends CrudPersist<Car> {
         return tx(session -> {
                     CarModfctn modfctn = session.createQuery("""
                                     select c, m, a from Car c, Account a,
-                                    Modification m where c.account= a and c.id=:id and
+                                    Modification m where c.account=a and c.id=:id and
                                     c.modification=m.id.nameId and c.year=m.id.yearId
                                     and c.mark=m.id.markId""", Object[].class)
                             .setParameter("id", id)

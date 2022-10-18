@@ -4,10 +4,10 @@ car:
 
 logging.level:
   root: info
-  org:
-    hibernate:
-      SQL: warn
-      orm.jdbc.bind: warn
+#  org:
+#    hibernate:
+#      SQL: warn
+#      orm.jdbc.bind: warn
 
 spring:
   sql.init.mode: always
