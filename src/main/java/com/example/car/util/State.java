@@ -64,10 +64,10 @@ public class State {
         List<CarState.State<?, ?>> stepList = carState.getStepList();
         List<Boolean> checkList = new ArrayList<>();
 
-
         Mark mark = (Mark) stepList.get(0).getValue();
         newCar.setMark(mark);
-        checkList.add(generations.getModification().getId().getMarkId().equals(mark));
+        checkList.add(generations.getModification().getId().getMarkId()
+                .getId().equals(mark.getId()));
 
         Model model = (Model) stepList.get(1).getValue();
         newCar.setModel(model);
@@ -165,11 +165,11 @@ public class State {
         Gearbox gearbox = car.getGearbox();
         makeStep(gearbox.getId(), 7);
 
-        Modification modification = car.getModification();
+        ModificationId modificationId = car.getModification().getId();
         Collection<CarState.GenMod> genMods = (Collection<CarState.GenMod>) stepList
                 .get(8).getOptions().values();
         id = genMods.stream()
-                .filter(n -> n.modification().equals(modification))
+                .filter(n -> n.modification().getId().equals(modificationId))
                 .findFirst().orElseThrow(IllegalStateException::new)
                 .id();
         makeStep(id, 8);

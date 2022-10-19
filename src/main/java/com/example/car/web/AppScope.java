@@ -29,16 +29,7 @@ public class AppScope {
 
     @PostConstruct
     public void init() {
-//        this.filterMap = Map.of(
-//                "mark", markService.findAllMap(),
-//                "model", modelService.findAllMap(),
-//                "body", bodyService.findAllMap(),
-//                "gearbox", gearboxService.findAllMap(),
-//                "engine", engineService.findAllMap(),
-//                "transmission", transmissionService.findAllMap(),
-//                "sort", sortService.findAllMap(),
-//                "city", cityService.findAllMap()
-//        );
+        log.info("cities {}", cityService.findAllMap());
         this.filterMap = new HashMap<>(Map.of(
                 "mark", markService.findAllMap(),
                 "model", modelService.findAllMap(),

@@ -16,6 +16,12 @@
     background-color: #02a55d;
     border-color: #02a55d;
     font-size: smaller;
+    --bs-btn-hover-color: #ffffff;
+    --bs-btn-hover-border-color: #018248FF;
+    --bs-btn-hover-bg: #018248FF;
+    --bs-btn-active-color: #ffffff;
+    --bs-btn-active-bg: #018248FF;
+    --bs-btn-active-border-color: #018248FF;
 }
 
 .checkboxStatus {

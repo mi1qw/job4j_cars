@@ -21,8 +21,7 @@ public class GenerationsService {
 
     public Map<Long, Short> getYearsByModel(final Model model) {
         return generationsStore.getYearsByModel(model).stream()
-                .collect(Collectors.toMap(Short::longValue, Function.identity(),
-                        (o1, o2) -> o1, TreeMap::new));
+                .collect(Collectors.toMap(Short::longValue, Function.identity()));
     }
 
     public List<Generations> getGenerationsByYearByModel(final Short year, final Model model) {

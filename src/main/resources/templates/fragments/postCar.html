@@ -115,15 +115,19 @@
     </div>
   </td>
   <td class="position-relative" style="width: 170px;">
-    <img th:if="${!#lists.isEmpty(item.images)}"
-         th:src="@{|/cars/img/*{item.images[0]}|}" class="main-ticket-photo">
+    <a th:href="@{|/posts/${item.id}|}">
+      <img th:if="${!#lists.isEmpty(item.images)}"
+           th:src="@{|/cars/img/*{item.images[0]}|}" class="main-ticket-photo">
+    </a>
     <div th:if="${#lists.isEmpty(item.images)}"
          class="position-absolute top-50 start-50 translate-middle">NO IMAGE
     </div>
   </td>
   <td style="width: 350px;">
     <div class="mt-2">
-      <span th:text="${item.name}" class="carName"></span>
+      <a th:href="@{|/posts/${item.id}|}">
+        <span th:text="${item.name}" class="carName"></span>
+      </a>
       <div class="d-flex justify-content-between align-items-center mt-3">
         <div th:insert="fragments/postCar::clockSVG(*{item.created})" class="me-2"></div>
         <a th:href="@{|/cars/edit/${item.id}|}" style="margin-right: 20px;">

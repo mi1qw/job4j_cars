@@ -33,7 +33,7 @@ public class PostDto {
     private Short power;
     private Account account;
     private Color color;
-    private ModificationId modificationId;
+    private Modification modification;
     private Map<String, List<Options>> optionsMap;
     private List<String> images;
 }

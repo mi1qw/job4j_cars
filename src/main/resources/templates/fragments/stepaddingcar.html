@@ -45,11 +45,16 @@
      th:if="${@userSession.getCarState().getStepList().get(__${state.step-1}__).status}">
   <div th:if="*{!state.status}">
     <div th:replace="::title(*{state})"></div>
-    <div th:each="option:*{state.getOptions().values()}">
-      <a class="btn btn-light"
-         th:href="@{|/cars/addState?stateID=*{state.step}&id=*{option}|}"
-         th:text="*{option}"></a>
+    <div class="d-flex flex-column flex-wrap"
+         style="height: 160px; width: fit-content;">
+      <div th:each="option:*{#lists.sort(state.getOptions().values(),reverse)}"
+           class="mb-2 me-3">
+        <a class="btn btn-light" style="--bs-btn-padding-y: 0.175rem;"
+           th:href="@{|/cars/addState?stateID=*{state.step}&id=*{option}|}"
+           th:text="*{option}"></a>
+      </div>
     </div>
+
   </div>
   <div th:if="*{state.status}">
     <div th:replace="::resetStep('год', *{state.value}, *{state})"></div>
@@ -139,14 +144,18 @@
      th:if="${@userSession.getCarState().getStepList().get(__${state.step-1}__).status}">
   <div th:if="*{!state.status}">
     <div th:replace="::title(*{state})"></div>
-    <div th:each="option,iterStat:*{state.getOptions().values()}">
-      <a class="btn btn-light"
-         th:href="@{|/cars/addState?stateID=*{state.step}&id=*{option.id}|}"
-         th:text="*{option.name}"></a>
+    <div class="d-flex flex-column flex-wrap"
+         style="height: 160px; width: fit-content;">
+      <div th:each="option,iterStat:*{state.getOptions().values()}" class="mb-2 me-3">
+        <a class="btn btn-light" style="--bs-btn-padding-y: 0.175rem;"
+           th:href="@{|/cars/addState?stateID=*{state.step}&id=*{option.id}|}"
+           th:text="*{option.modification.id.nameId}"></a>
+      </div>
     </div>
   </div>
   <div th:if="*{state.status}">
-    <div th:replace="::resetStep('модификация', *{state.value.name}, *{state})"></div>
+    <div
+        th:replace="::resetStep('модификация', *{state.value.modification.id.nameId}, *{state})"></div>
   </div>
 </div>
 
@@ -288,15 +297,15 @@
 
 
 <div th:fragment="options(opt, isOn, isDisabled)" class="form-check">
-    <input type="checkbox" name="options" th:value="${opt.options().id}"
-           th:id="|options${opt.options().id}|"
-           class="form-check-input"
-           th:checked="${isOn}"
-           th:disabled="${isDisabled}"
-    />
-    <label th:for="|options${opt.options().id}|"
-           th:text="${opt.options().name}"
-           class="form-check-label"></label>
+  <input type="checkbox" name="options" th:value="${opt.options().id}"
+         th:id="|options${opt.options().id}|"
+         class="form-check-input"
+         th:checked="${isOn}"
+         th:disabled="${isDisabled}"
+  />
+  <label th:for="|options${opt.options().id}|"
+         th:text="${opt.options().name}"
+         class="form-check-label"></label>
 </div>
 
 

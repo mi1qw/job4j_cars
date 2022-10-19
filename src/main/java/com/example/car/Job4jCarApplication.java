@@ -279,12 +279,299 @@ public class Job4jCarApplication {
                 /* Седан */
                 /*реальн*/
                 try {
+                    generationsStore.add(
+                            Generations.builder()
+                                    .name("IV (W177)")
+                                    .image("IV (W177).jpg")
+                                    .year(((short) 2021))
+                                    .model(modelStore.findByName("A-Класс").get(0))
+                                    .body(bodyStore.findByName("Седан").get(0))
+                                    .engine(engineStore.findByName("Бензин").get(0))
+                                    .transmission(transmissionStore.findByName("Передний").get(0))
+                                    .gearbox(gearboxStore.findByName("Механическая").get(0))
+                                    .modification(
+                                            modificationStore.findByName(
+                                                    "136 л.с. (200 / 1.3 MT)").get(0))
+                                    .options(Set.of(
+                                            optionsStore.findByName("Светодиодные фары").get(0),
+                                            optionsStore.findByName(
+                                                    "Бортовой компьютер").get(0),
+                                            optionsStore.findByName(
+                                                    "Центральный замок").get(0),
+                                            optionsStore.findByName(
+                                                    "Иммобилайзер").get(0),
+                                            optionsStore.findByName(
+                                                    "Обогрев рулевого колеса").get(0)
+                                    ))
+                                    .build()
+                    );
+                    generationsStore.add(
+                            Generations.builder()
+                                    .name("IV (W177)")
+                                    .image("IV (W177).jpg")
+                                    .year(((short) 2020))
+                                    .model(modelStore.findByName("A-Класс").get(0))
+                                    .body(bodyStore.findByName("Седан").get(0))
+                                    .engine(engineStore.findByName("Бензин").get(0))
+                                    .transmission(transmissionStore.findByName("Передний").get(0))
+                                    .gearbox(gearboxStore.findByName("Механическая").get(0))
+                                    .modification(
+                                            modificationStore.findByName(
+                                                    "136 л.с. (200 / 1.3 MT)").get(0))
+                                    .options(Set.of(
+                                            optionsStore.findByName("Светодиодные фары").get(0),
+                                            optionsStore.findByName(
+                                                    "Бортовой компьютер").get(0),
+                                            optionsStore.findByName(
+                                                    "Центральный замок").get(0),
+                                            optionsStore.findByName(
+                                                    "Иммобилайзер").get(0),
+                                            optionsStore.findByName(
+                                                    "Обогрев рулевого колеса").get(0)
+                                    ))
+                                    .build()
+                    );
+                    generationsStore.add(
+                            Generations.builder()
+                                    .name("IV (W177)")
+                                    .image("IV (W177).jpg")
+                                    .year(((short) 2019))
+                                    .model(modelStore.findByName("A-Класс").get(0))
+                                    .body(bodyStore.findByName("Седан").get(0))
+                                    .engine(engineStore.findByName("Бензин").get(0))
+                                    .transmission(transmissionStore.findByName("Передний").get(0))
+                                    .gearbox(gearboxStore.findByName("Механическая").get(0))
+                                    .modification(
+                                            modificationStore.findByName(
+                                                    "136 л.с. (200 / 1.3 MT)").get(0))
+                                    .options(Set.of(
+                                            optionsStore.findByName("Светодиодные фары").get(0),
+                                            optionsStore.findByName(
+                                                    "Бортовой компьютер").get(0),
+                                            optionsStore.findByName(
+                                                    "Центральный замок").get(0),
+                                            optionsStore.findByName(
+                                                    "Иммобилайзер").get(0),
+                                            optionsStore.findByName(
+                                                    "Обогрев рулевого колеса").get(0)
+                                    ))
+                                    .build()
+                    );
+                    generationsStore.add(
+                            Generations.builder()
+                                    .name("IV (W177)")
+                                    .image("IV (W177).jpg")
+                                    .year(((short) 2018))
+                                    .model(modelStore.findByName("A-Класс").get(0))
+                                    .body(bodyStore.findByName("Седан").get(0))
+                                    .engine(engineStore.findByName("Бензин").get(0))
+                                    .transmission(transmissionStore.findByName("Передний").get(0))
+                                    .gearbox(gearboxStore.findByName("Механическая").get(0))
+                                    .modification(
+                                            modificationStore.findByName(
+                                                    "136 л.с. (200 / 1.3 MT)").get(0))
+                                    .options(Set.of(
+                                            optionsStore.findByName("Светодиодные фары").get(0),
+                                            optionsStore.findByName(
+                                                    "Бортовой компьютер").get(0),
+                                            optionsStore.findByName(
+                                                    "Центральный замок").get(0),
+                                            optionsStore.findByName(
+                                                    "Иммобилайзер").get(0),
+                                            optionsStore.findByName(
+                                                    "Обогрев рулевого колеса").get(0)
+                                    ))
+                                    .build()
+                    );
+                    generationsStore.add(
+                            Generations.builder()
+                                    .name("IV (W177)")
+                                    .image("IV (W177).jpg")
+                                    .year(((short) 2017))
+                                    .model(modelStore.findByName("A-Класс").get(0))
+                                    .body(bodyStore.findByName("Седан").get(0))
+                                    .engine(engineStore.findByName("Бензин").get(0))
+                                    .transmission(transmissionStore.findByName("Передний").get(0))
+                                    .gearbox(gearboxStore.findByName("Механическая").get(0))
+                                    .modification(
+                                            modificationStore.findByName(
+                                                    "136 л.с. (200 / 1.3 MT)").get(0))
+                                    .options(Set.of(
+                                            optionsStore.findByName("Светодиодные фары").get(0),
+                                            optionsStore.findByName(
+                                                    "Бортовой компьютер").get(0),
+                                            optionsStore.findByName(
+                                                    "Центральный замок").get(0),
+                                            optionsStore.findByName(
+                                                    "Иммобилайзер").get(0),
+                                            optionsStore.findByName(
+                                                    "Обогрев рулевого колеса").get(0)
+                                    ))
+                                    .build()
+                    );
+                    generationsStore.add(
+                            Generations.builder()
+                                    .name("IV (W177)")
+                                    .image("IV (W177).jpg")
+                                    .year(((short) 2016))
+                                    .model(modelStore.findByName("A-Класс").get(0))
+                                    .body(bodyStore.findByName("Седан").get(0))
+                                    .engine(engineStore.findByName("Бензин").get(0))
+                                    .transmission(transmissionStore.findByName("Передний").get(0))
+                                    .gearbox(gearboxStore.findByName("Механическая").get(0))
+                                    .modification(
+                                            modificationStore.findByName(
+                                                    "136 л.с. (200 / 1.3 MT)").get(0))
+                                    .options(Set.of(
+                                            optionsStore.findByName("Светодиодные фары").get(0),
+                                            optionsStore.findByName(
+                                                    "Бортовой компьютер").get(0),
+                                            optionsStore.findByName(
+                                                    "Центральный замок").get(0),
+                                            optionsStore.findByName(
+                                                    "Иммобилайзер").get(0),
+                                            optionsStore.findByName(
+                                                    "Обогрев рулевого колеса").get(0)
+                                    ))
+                                    .build()
+                    );
+                    generationsStore.add(
+                            Generations.builder()
+                                    .name("IV (W177)")
+                                    .image("IV (W177).jpg")
+                                    .year(((short) 2015))
+                                    .model(modelStore.findByName("A-Класс").get(0))
+                                    .body(bodyStore.findByName("Седан").get(0))
+                                    .engine(engineStore.findByName("Бензин").get(0))
+                                    .transmission(transmissionStore.findByName("Передний").get(0))
+                                    .gearbox(gearboxStore.findByName("Механическая").get(0))
+                                    .modification(
+                                            modificationStore.findByName(
+                                                    "136 л.с. (200 / 1.3 MT)").get(0))
+                                    .options(Set.of(
+                                            optionsStore.findByName("Светодиодные фары").get(0),
+                                            optionsStore.findByName(
+                                                    "Бортовой компьютер").get(0),
+                                            optionsStore.findByName(
+                                                    "Центральный замок").get(0),
+                                            optionsStore.findByName(
+                                                    "Иммобилайзер").get(0),
+                                            optionsStore.findByName(
+                                                    "Обогрев рулевого колеса").get(0)
+                                    ))
+                                    .build()
+                    );
+                    generationsStore.add(
+                            Generations.builder()
+                                    .name("IV (W177)")
+                                    .image("IV (W177).jpg")
+                                    .year(((short) 2014))
+                                    .model(modelStore.findByName("A-Класс").get(0))
+                                    .body(bodyStore.findByName("Седан").get(0))
+                                    .engine(engineStore.findByName("Бензин").get(0))
+                                    .transmission(transmissionStore.findByName("Передний").get(0))
+                                    .gearbox(gearboxStore.findByName("Механическая").get(0))
+                                    .modification(
+                                            modificationStore.findByName(
+                                                    "136 л.с. (200 / 1.3 MT)").get(0))
+                                    .options(Set.of(
+                                            optionsStore.findByName("Светодиодные фары").get(0),
+                                            optionsStore.findByName(
+                                                    "Бортовой компьютер").get(0),
+                                            optionsStore.findByName(
+                                                    "Центральный замок").get(0),
+                                            optionsStore.findByName(
+                                                    "Иммобилайзер").get(0),
+                                            optionsStore.findByName(
+                                                    "Обогрев рулевого колеса").get(0)
+                                    ))
+                                    .build()
+                    );
+                    generationsStore.add(
+                            Generations.builder()
+                                    .name("IV (W177)")
+                                    .image("IV (W177).jpg")
+                                    .year(((short) 2013))
+                                    .model(modelStore.findByName("A-Класс").get(0))
+                                    .body(bodyStore.findByName("Седан").get(0))
+                                    .engine(engineStore.findByName("Бензин").get(0))
+                                    .transmission(transmissionStore.findByName("Передний").get(0))
+                                    .gearbox(gearboxStore.findByName("Механическая").get(0))
+                                    .modification(
+                                            modificationStore.findByName(
+                                                    "136 л.с. (200 / 1.3 MT)").get(0))
+                                    .options(Set.of(
+                                            optionsStore.findByName("Светодиодные фары").get(0),
+                                            optionsStore.findByName(
+                                                    "Бортовой компьютер").get(0),
+                                            optionsStore.findByName(
+                                                    "Центральный замок").get(0),
+                                            optionsStore.findByName(
+                                                    "Иммобилайзер").get(0),
+                                            optionsStore.findByName(
+                                                    "Обогрев рулевого колеса").get(0)
+                                    ))
+                                    .build()
+                    );
+                    generationsStore.add(
+                            Generations.builder()
+                                    .name("IV (W177)")
+                                    .image("IV (W177).jpg")
+                                    .year(((short) 2012))
+                                    .model(modelStore.findByName("A-Класс").get(0))
+                                    .body(bodyStore.findByName("Седан").get(0))
+                                    .engine(engineStore.findByName("Бензин").get(0))
+                                    .transmission(transmissionStore.findByName("Передний").get(0))
+                                    .gearbox(gearboxStore.findByName("Механическая").get(0))
+                                    .modification(
+                                            modificationStore.findByName(
+                                                    "136 л.с. (200 / 1.3 MT)").get(0))
+                                    .options(Set.of(
+                                            optionsStore.findByName("Светодиодные фары").get(0),
+                                            optionsStore.findByName(
+                                                    "Бортовой компьютер").get(0),
+                                            optionsStore.findByName(
+                                                    "Центральный замок").get(0),
+                                            optionsStore.findByName(
+                                                    "Иммобилайзер").get(0),
+                                            optionsStore.findByName(
+                                                    "Обогрев рулевого колеса").get(0)
+                                    ))
+                                    .build()
+                    );
+
 
                     generationsStore.add(
                             Generations.builder()
                                     .name("IV (W177)")
                                     .image("IV (W177).jpg")
-                                    .year(((short) 2022))
+                                    .year(((short) 2011))
+                                    .model(modelStore.findByName("A-Класс").get(0))
+                                    .body(bodyStore.findByName("Седан").get(0))
+                                    .engine(engineStore.findByName("Бензин").get(0))
+                                    .transmission(transmissionStore.findByName("Передний").get(0))
+                                    .gearbox(gearboxStore.findByName("Механическая").get(0))
+                                    .modification(
+                                            modificationStore.findByName(
+                                                    "136 л.с. (200 / 1.3 MT)").get(0))
+                                    .options(Set.of(
+                                            optionsStore.findByName("Светодиодные фары").get(0),
+                                            optionsStore.findByName(
+                                                    "Бортовой компьютер").get(0),
+                                            optionsStore.findByName(
+                                                    "Центральный замок").get(0),
+                                            optionsStore.findByName(
+                                                    "Иммобилайзер").get(0),
+                                            optionsStore.findByName(
+                                                    "Обогрев рулевого колеса").get(0)
+                                    ))
+                                    .build()
+                    );
+                    generationsStore.add(
+                            Generations.builder()
+                                    .name("IV (W177)")
+                                    .image("IV (W177).jpg")
+                                    .year(((short) 2010))
                                     .model(modelStore.findByName("A-Класс").get(0))
                                     .body(bodyStore.findByName("Седан").get(0))
                                     .engine(engineStore.findByName("Бензин").get(0))

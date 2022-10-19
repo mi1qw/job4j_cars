@@ -100,6 +100,7 @@ public class CarFormController {
         }
         CarDto carDto = getCarDtoAndState(newCar);
         model.addAttribute("carform", carDto);
+        model.addAttribute("reverse", Comparator.reverseOrder());
         return "addCar";
     }
 
@@ -118,6 +119,7 @@ public class CarFormController {
         userSession.getOrder().set(car.getImages().size());
         CarDto carDto = carMapper.carToDto(car);
         model.addAttribute("carform", carDto);
+        model.addAttribute("reverse", Comparator.reverseOrder());
         CarState state = this.state.fillList(car);
         userSession.setCarState(state);
         return "addCar";
@@ -143,6 +145,7 @@ public class CarFormController {
             CarDto carDto = getCarDtoAndState(userSession.getNewCar());
             model.addAttribute("carform", carDto);
         }
+        model.addAttribute("reverse", Comparator.reverseOrder());
         return "addCar";
     }
 
