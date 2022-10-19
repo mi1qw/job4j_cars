@@ -97,9 +97,8 @@ public class State {
         checkList.add(generations.getGearbox().equals(gearbox));
 
         CarState.GenMod modification = (CarState.GenMod) stepList.get(8).getValue();
-        newCar.setModification(modification.name());
-        checkList.add(generations.getModification().getId()
-                .getNameId().equals(modification.name()));
+        newCar.setModification(modification.modification());
+        checkList.add(generations.getModification().equals(modification.modification()));
 
         boolean allMatch = checkList.stream().allMatch(n -> n);
         if (!allMatch) {
@@ -166,11 +165,11 @@ public class State {
         Gearbox gearbox = car.getGearbox();
         makeStep(gearbox.getId(), 7);
 
-        String modification = car.getModification();
+        Modification modification = car.getModification();
         Collection<CarState.GenMod> genMods = (Collection<CarState.GenMod>) stepList
                 .get(8).getOptions().values();
         id = genMods.stream()
-                .filter(n -> n.name().equals(modification))
+                .filter(n -> n.modification().equals(modification))
                 .findFirst().orElseThrow(IllegalStateException::new)
                 .id();
         makeStep(id, 8);

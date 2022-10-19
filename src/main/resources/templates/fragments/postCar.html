@@ -33,7 +33,7 @@
             </li>
           </ul>
         </div>
-        <div th:text="*{post.modification}"></div>
+        <div th:text="*{post.modification.id.nameId}"></div>
         <div th:text="${#strings.abbreviate(post.description, 40)}"
              class="pt-2"></div>
         <span th:replace="::clockSVG(*{post.created})"></span>

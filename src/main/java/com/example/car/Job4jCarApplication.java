@@ -284,7 +284,7 @@ public class Job4jCarApplication {
                             Generations.builder()
                                     .name("IV (W177)")
                                     .image("IV (W177).jpg")
-                                    .year(((short) 2018))
+                                    .year(((short) 2022))
                                     .model(modelStore.findByName("A-Класс").get(0))
                                     .body(bodyStore.findByName("Седан").get(0))
                                     .engine(engineStore.findByName("Бензин").get(0))

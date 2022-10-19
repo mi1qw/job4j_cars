@@ -70,7 +70,13 @@ public class Car {
     @ManyToOne(fetch = FetchType.LAZY)
     private Gearbox gearbox;
 
-    private String modification;
+    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumns({
+//            @JoinColumn(name = "mark_id", referencedColumnName = "mark_id"),
+//            @JoinColumn(name = "name_id", referencedColumnName = "name"),
+//            @JoinColumn(name = "year_id", referencedColumnName = "year_id")
+//    })
+    private Modification modification;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     private Set<Options> options = new HashSet<>();
