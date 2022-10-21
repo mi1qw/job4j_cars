@@ -1,13 +1,24 @@
 body {
     -webkit-font-smoothing: antialiased;
     font-feature-settings: "pnum";
-    font-family: YS Text, Arial, Helvetica Neue, Helvetica, yandex-sans-rub-sign, sans-serif;
+    /*font-family: YS Text, Arial, Helvetica Neue, Helvetica, yandex-sans-rub-sign, sans-serif;*/
     font-variant-numeric: proportional-nums;
     height: 100%;
     margin: 0;
     padding: 0;
     width: 100%;
+
+    font-weight: 400;
+    font-style: normal;
+    font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 20px;
+    color: #414042;
+    background: #fff;
+    overflow-y: scroll;
+    text-rendering: optimizeSpeed;
 }
+
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -547,6 +558,18 @@ a:hover {
     color: inherit;
     text-decoration: none;
     cursor: pointer;
+}
+
+.photo-list {
+    color: #208097;
+    cursor: pointer;
+}
+
+.photo-list:hover {
+    color: #208097;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 5px;
 }
 
 .pagination-dots {

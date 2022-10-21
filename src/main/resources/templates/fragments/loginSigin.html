@@ -6,11 +6,12 @@
     <div class="logo me-3"></div>
   </a>
   <div class="d-flex justify-content-end">
-    <div th:if="${@userSession.getAccount()==null}" style="transform: scale(0.9)">
-      <form class="row g-3 flex-nowrap" th:action="@{/logIn}" method="post">
+    <div th:if="${@userSession.getAccount()==null}">
+      <form class="row g-3 flex-nowrap" th:action="@{/logIn}" method="post"
+            style="transform: scale(0.9)">
 
         <div th:if="${param.fail}" class="form-control-sm col-auto alert alert-danger"
-             style="padding: 4px 4px 4px 4px;"
+             style="padding: 4px 4px 4px 4px;margin-bottom:0px"
              role="alert">
           Логин или пароль введены неверно!
         </div>
@@ -27,16 +28,27 @@
                  placeholder="Password"
                  name="password">
         </div>
-        <div class="col-auto">
-          <button type="submit" class="btn btn-outline-danger btn-sm"
-                  style="--bs-btn-color: #414141;border-width: 2px;--bs-btn-border-radius: 15px;"
-          >LogIn
+        <div class="col-auto position-relative"
+             style="width: 110px;">
+          <button type="submit" class="btn position-absolute top-50 start-0 translate-middle-y"
+                  style="--bs-btn-padding-y: 0px; --bs-btn-border-width:0px;--bd-btn-main:#fff;--bs-btn-hover-bg: #fff;">
+            <svg xmlns="http://www.w3.org/2000/svg" height="25" width="24">
+              <path fill="#dc3545"
+                    d="M11.95 21.2v-2.275H19V5.075h-7.05V2.8H19q.95 0 1.613.662.662.663.662 1.613v13.85q0 .95-.662 1.613-.663.662-1.613.662Zm-2.125-3.925L8.25 15.65l2.5-2.5H2.725v-2.3h8.025l-2.5-2.5 1.575-1.625L15.1 12Z"/>
+            </svg>
+            <span>LogIn</span>
           </button>
         </div>
-        <div class="col-auto">
-          <a th:href="@{/signPage}" class="btn btn-outline-danger btn-sm"
-             style="--bs-btn-color: #414141;border-width: 2px;--bs-btn-border-radius: 15px;"
-          >SignIn</a>
+        <div class="col-auto position-relative"
+             style="width: 77px;">
+          <a th:href="@{/signPage}"
+             style="color: black; font-size: 1rem;"
+             class="position-absolute top-50 start-0 translate-middle-y">
+            <svg xmlns="http://www.w3.org/2000/svg" height="25" width="24">
+              <path fill="#dc3545"
+                    d="M9.425 5.4q-.85 0-1.462-.613-.613-.612-.613-1.462 0-.875.613-1.488.612-.612 1.462-.612.875 0 1.488.612.612.613.612 1.488 0 .85-.612 1.462-.613.613-1.488.613ZM2.75 23.1 5.5 9.025l-1.6.7V13.1H1.7V8.225l5.35-2.15q.725-.3 1.45-.075.725.225 1.125.925l.975 1.6q.675 1.075 1.825 1.725 1.15.65 2.525.65v2.2q-1.65 0-3.075-.675Q10.45 11.75 9.45 10.6l-.55 2.8 2.05 2.025V23.1H8.775v-6.075l-2-1.85-1.75 7.925Zm13.95 0V9.05h-3.85V1.575h9.475V9.05h-3.85V23.1Zm1.375-15.15L20.7 5.325l-2.625-2.65-1.15 1.15.7.7H14.5V6.1h3.125l-.7.7Z"/>
+            </svg>
+            SignIn</a>
         </div>
       </form>
     </div>
@@ -45,10 +57,14 @@
         Мои объявления
       </a>
       <span class="pe-3" th:text="${@userSession.getAccount().getFirstName()}"></span>
-      <a class="text-decoration-none me-5 btn btn-outline-danger btn-sm"
-         th:href="@{/logout}"
-         style="--bs-btn-color: #414141;border-width: 2px;--bs-btn-border-radius: 15px;"
-      >LogOut</a>
+      <a class="text-decoration-none me-5"
+         th:href="@{/logout}">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24">
+          <path fill="#dc3545"
+                d="M5 21.2q-.95 0-1.612-.662-.663-.663-.663-1.613V5.075q0-.95.663-1.613Q4.05 2.8 5 2.8h7.05v2.275H5v13.85h7.05V21.2Zm11-3.925-1.575-1.625 2.525-2.5H8.9v-2.3h8.05l-2.525-2.5L16 6.725 21.275 12Z"/>
+        </svg>
+        LogOut
+      </a>
     </div>
   </div>
 </div>
