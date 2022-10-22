@@ -342,300 +342,370 @@ public class Job4jCarApplication {
                     );
 
 
+                    generationsStore.add(
+                            Generations.builder()
+                                    .name("VIII (XV70) Рестайлинг")
+                                    .image("VIII(XV70)reystaling.jpg")
+                                    .year((short) 2021)
+                                    .model(modelStore.findByName("Camry").get(0))
+                                    .body(bodyStore.findByName("Седан").get(0))
+                                    .engine(engineStore.findByName("Бензин").get(0))
+                                    .transmission(transmissionStore.findByName("Передний").get(0))
+                                    .gearbox(gearboxStore.findByName("Автомат").get(0))
+                                    .modification(
+                                            modificationStore.findByName("2.5 AT 203 л.с.").get(0))
+                                    .options(Set.of(
+                                            optionsStore.findByName("Светодиодные фары").get(0),
+                                            optionsStore.findByName("Бортовой компьютер").get(0),
+                                            optionsStore.findByName(
+                                                    "Система доступа без ключа").get(0),
+                                            optionsStore.findByName(
+                                                    "Центральный замок").get(0),
+                                            optionsStore.findByName(
+                                                    "Навигационная система").get(0),
+                                            optionsStore.findByName(
+                                                    "Иммобилайзер").get(0),
+                                            optionsStore.findByName(
+                                                    "Обогрев рулевого колеса").get(0)
+                                    ))
+                                    .build()
+                    );
+
+                    generationsStore.add(
+                            Generations.builder()
+                                    .name("VIII (XV70) Рестайлинг")
+                                    .image("VIII(XV70)reystaling.jpg")
+                                    .year((short) 2021)
+                                    .model(modelStore.findByName("Camry").get(0))
+                                    .body(bodyStore.findByName("Седан").get(0))
+                                    .engine(engineStore.findByName("Бензин").get(0))
+                                    .transmission(transmissionStore.findByName("Передний").get(0))
+                                    .gearbox(gearboxStore.findByName("Вариатор").get(0))
+                                    .modification(
+                                            modificationStore.findByName("2.5 CVT 208 л.с.").get(0))
+                                    .options(Set.of(
+                                            optionsStore.findByName("Светодиодные фары").get(0),
+                                            optionsStore.findByName("Бортовой компьютер").get(0),
+                                            optionsStore.findByName(
+                                                    "Система доступа без ключа").get(0),
+                                            optionsStore.findByName(
+                                                    "Центральный замок").get(0),
+                                            optionsStore.findByName(
+                                                    "Навигационная система").get(0),
+                                            optionsStore.findByName(
+                                                    "Иммобилайзер").get(0),
+                                            optionsStore.findByName(
+                                                    "Обогрев рулевого колеса").get(0)
+                                    ))
+                                    .build()
+                    );
+
+
+                    generationsStore.add(
+                            Generations.builder()
+                                    .name("VIII (XV70) Рестайлинг")
+                                    .image("VIII(XV70)reystaling.jpg")
+                                    .year((short) 2021)
+                                    .model(modelStore.findByName("Camry").get(0))
+                                    .body(bodyStore.findByName("Седан").get(0))
+                                    .engine(engineStore.findByName("Бензин").get(0))
+                                    .transmission(transmissionStore.findByName("Полный").get(0))
+                                    .gearbox(gearboxStore.findByName("Автомат").get(0))
+                                    .modification(
+                                            modificationStore.findByName("2.5 AT 202 л.с. 4x4").get(
+                                                    0))
+                                    .options(Set.of(
+                                            optionsStore.findByName("Светодиодные фары").get(0),
+                                            optionsStore.findByName("Бортовой компьютер").get(0),
+                                            optionsStore.findByName(
+                                                    "Система доступа без ключа").get(0),
+                                            optionsStore.findByName(
+                                                    "Центральный замок").get(0),
+                                            optionsStore.findByName(
+                                                    "Навигационная система").get(0),
+                                            optionsStore.findByName(
+                                                    "Иммобилайзер").get(0),
+                                            optionsStore.findByName(
+                                                    "Обогрев рулевого колеса").get(0)
+                                    ))
+                                    .build()
+                    );
+
+
+                    generationsStore.add(
+                            Generations.builder()
+                                    .name("VIII (XV70)")
+                                    .image("VIII(XV70).jpg")
+                                    .year((short) 2021)
+                                    .model(modelStore.findByName("Camry").get(0))
+                                    .body(bodyStore.findByName("Седан").get(0))
+                                    .engine(engineStore.findByName("Бензин").get(0))
+                                    .transmission(transmissionStore.findByName("Передний").get(0))
+                                    .gearbox(gearboxStore.findByName("Автомат").get(0))
+                                    .modification(
+                                            modificationStore.findByName("3.5 AT 249 л.с.").get(0))
+                                    .options(Set.of(
+                                            optionsStore.findByName("Светодиодные фары").get(0),
+                                            optionsStore.findByName("Бортовой компьютер").get(0),
+                                            optionsStore.findByName(
+                                                    "Система доступа без ключа").get(0),
+                                            optionsStore.findByName(
+                                                    "Центральный замок").get(0),
+                                            optionsStore.findByName(
+                                                    "Навигационная система").get(0),
+                                            optionsStore.findByName(
+                                                    "Иммобилайзер").get(0),
+                                            optionsStore.findByName(
+                                                    "Обогрев рулевого колеса").get(0)
+                                    ))
+                                    .build()
+                    );
+
+
+                    generationsStore.add(
+                            Generations.builder()
+                                    .name("VIII (XV70)")
+                                    .image("VIII(XV70).jpg")
+                                    .year((short) 2021)
+                                    .model(modelStore.findByName("Camry").get(0))
+                                    .body(bodyStore.findByName("Седан").get(0))
+                                    .engine(engineStore.findByName("Гибрид").get(0))
+                                    .transmission(transmissionStore.findByName("Передний").get(0))
+                                    .gearbox(gearboxStore.findByName("Вариатор").get(0))
+                                    .modification(
+                                            modificationStore.findByName("2.5 CVT 208 л.с.").get(0))
+                                    .options(Set.of(
+                                            optionsStore.findByName("Светодиодные фары").get(0),
+                                            optionsStore.findByName("Бортовой компьютер").get(0),
+                                            optionsStore.findByName(
+                                                    "Система доступа без ключа").get(0),
+                                            optionsStore.findByName(
+                                                    "Центральный замок").get(0),
+                                            optionsStore.findByName(
+                                                    "Навигационная система").get(0),
+                                            optionsStore.findByName(
+                                                    "Иммобилайзер").get(0),
+                                            optionsStore.findByName(
+                                                    "Обогрев рулевого колеса").get(0)
+                                    ))
+                                    .build()
+                    );
+
+
+                    generationsStore.add(
+                            Generations.builder()
+                                    .name("VIII (XV70)")
+                                    .image("VIII(XV70).jpg")
+                                    .year((short) 2021)
+                                    .model(modelStore.findByName("Camry").get(0))
+                                    .body(bodyStore.findByName("Седан").get(0))
+                                    .engine(engineStore.findByName("Гибрид").get(0))
+                                    .transmission(transmissionStore.findByName("Полный").get(0))
+                                    .gearbox(gearboxStore.findByName("Вариатор").get(0))
+                                    .modification(
+                                            modificationStore.findByName(
+                                                    "2.5 CVT 178 л.с. 4x4").get(0))
+                                    .options(Set.of(
+                                            optionsStore.findByName("Светодиодные фары").get(0),
+                                            optionsStore.findByName("Бортовой компьютер").get(0),
+                                            optionsStore.findByName(
+                                                    "Система доступа без ключа").get(0),
+                                            optionsStore.findByName(
+                                                    "Центральный замок").get(0),
+                                            optionsStore.findByName(
+                                                    "Навигационная система").get(0),
+                                            optionsStore.findByName(
+                                                    "Иммобилайзер").get(0),
+                                            optionsStore.findByName(
+                                                    "Обогрев рулевого колеса").get(0)
+                                    ))
+                                    .build()
+                    );
+
+
+                    generationsStore.add(
+                            Generations.builder()
+                                    .name("F44")
+                                    .image("F44.jpg")
+                                    .year((short) 2019)
+                                    .model(modelStore.findByName("2 серии").get(0))
+                                    .body(bodyStore.findByName("Седан").get(0))
+                                    .engine(engineStore.findByName("Бензин").get(0))
+                                    .transmission(transmissionStore.findByName("Передний").get(0))
+                                    .gearbox(gearboxStore.findByName("Механическая").get(0))
+                                    .modification(
+                                            modificationStore.findByName(
+                                                    "218i 1.5 MT 140 л.с.").get(0))
+                                    .options(Set.of(
+                                            optionsStore.findByName("Светодиодные фары").get(0),
+                                            optionsStore.findByName("Противотуманные фары").get(0),
+
+                                            optionsStore.findByName("Бортовой компьютер").get(0),
+                                            optionsStore.findByName(
+                                                    "Система доступа без ключа").get(0),
+                                            optionsStore.findByName(
+                                                    "Центральный замок").get(0)))
+                                    .build()
+                    );
+                    generationsStore.add(
+                            Generations.builder()
+                                    .name("F44")
+                                    .image("F44.jpg")
+                                    .year((short) 2019)
+                                    .model(modelStore.findByName("2 серии").get(0))
+                                    .body(bodyStore.findByName("Седан").get(0))
+                                    .engine(engineStore.findByName("Бензин").get(0))
+                                    .transmission(transmissionStore.findByName("Передний").get(0))
+                                    .gearbox(gearboxStore.findByName("Автомат").get(0))
+                                    .modification(
+                                            modificationStore.findByName(
+                                                    "2.0 AT 231 л.с.").get(0))
+                                    .options(Set.of(
+                                            optionsStore.findByName("Светодиодные фары").get(0),
+                                            optionsStore.findByName("Противотуманные фары").get(0),
+
+                                            optionsStore.findByName("Бортовой компьютер").get(0),
+                                            optionsStore.findByName(
+                                                    "Система доступа без ключа").get(0),
+                                            optionsStore.findByName(
+                                                    "Центральный замок").get(0)))
+                                    .build()
+                    );
+
+
+                    generationsStore.add(
+                            Generations.builder()
+                                    .name("F44")
+                                    .image("F44.jpg")
+                                    .year((short) 2019)
+                                    .model(modelStore.findByName("2 серии").get(0))
+                                    .body(bodyStore.findByName("Седан").get(0))
+                                    .engine(engineStore.findByName("Бензин").get(0))
+                                    .transmission(transmissionStore.findByName("Передний").get(0))
+                                    .gearbox(gearboxStore.findByName("Робот").get(0))
+                                    .modification(
+                                            modificationStore.findByName(
+                                                    "218i 1.5 MT 140 л.с.").get(0))
+                                    .options(Set.of(
+                                            optionsStore.findByName("Светодиодные фары").get(0),
+                                            optionsStore.findByName("Противотуманные фары").get(0),
+
+                                            optionsStore.findByName("Бортовой компьютер").get(0),
+                                            optionsStore.findByName(
+                                                    "Система доступа без ключа").get(0),
+                                            optionsStore.findByName(
+                                                    "Центральный замок").get(0)))
+                                    .build()
+                    );
+                    generationsStore.add(
+                            Generations.builder()
+                                    .name("F44")
+                                    .image("F44.jpg")
+                                    .year((short) 2019)
+                                    .model(modelStore.findByName("2 серии").get(0))
+                                    .body(bodyStore.findByName("Седан").get(0))
+                                    .engine(engineStore.findByName("Бензин").get(0))
+                                    .transmission(transmissionStore.findByName("Полный").get(0))
+                                    .gearbox(gearboxStore.findByName("Автомат").get(0))
+                                    .modification(
+                                            modificationStore.findByName(
+                                                    "2.0 AT 231 л.с.").get(0))
+                                    .options(Set.of(
+                                            optionsStore.findByName("Светодиодные фары").get(0),
+                                            optionsStore.findByName("Противотуманные фары").get(0),
+
+                                            optionsStore.findByName("Бортовой компьютер").get(0),
+                                            optionsStore.findByName(
+                                                    "Система доступа без ключа").get(0),
+                                            optionsStore.findByName(
+                                                    "Центральный замок").get(0)))
+                                    .build()
+                    );
+
+
+                    generationsStore.add(
+                            Generations.builder()
+                                    .name("F22 Рестайлинг")
+                                    .image("F22restayling.jpg")
+                                    .year((short) 2019)
+                                    .model(modelStore.findByName("2 серии").get(0))
+                                    .body(bodyStore.findByName("Купе").get(0))
+                                    .engine(engineStore.findByName("Дизель").get(0))
+                                    .transmission(transmissionStore.findByName("Задний").get(0))
+                                    .gearbox(gearboxStore.findByName("Автомат").get(0))
+                                    .modification(
+                                            modificationStore.findByName(
+                                                    "2.0 AT 150 л.с.").get(0))
+                                    .options(Set.of(
+                                            optionsStore.findByName("Светодиодные фары").get(0),
+                                            optionsStore.findByName("Противотуманные фары").get(0),
+                                            optionsStore.findByName("Дневные ходовые огни").get(0),
+
+                                            optionsStore.findByName("Бортовой компьютер").get(0),
+                                            optionsStore.findByName("Иммобилайзер").get(0),
+                                            optionsStore.findByName("Обогрев рулевого колеса")
+                                                    .get(0),
+                                            optionsStore.findByName("Центральный замок").get(0)))
+                                    .build()
+                    );
+                    generationsStore.add(
+                            Generations.builder()
+                                    .name("Кабриолет F22 Рестайлинг")
+                                    .image("F22restaylingCabriolet.jpg")
+                                    .year((short) 2019)
+                                    .model(modelStore.findByName("2 серии").get(0))
+                                    .body(bodyStore.findByName("Кабриолет").get(0))
+                                    .engine(engineStore.findByName("Дизель").get(0))
+                                    .transmission(transmissionStore.findByName("Задний").get(0))
+                                    .gearbox(gearboxStore.findByName("Автомат").get(0))
+                                    .modification(
+                                            modificationStore.findByName(
+                                                    "2.0 AT 150 л.с.").get(0))
+                                    .options(Set.of(
+                                            optionsStore.findByName("Светодиодные фары").get(0),
+                                            optionsStore.findByName("Противотуманные фары").get(0),
+                                            optionsStore.findByName("Дневные ходовые огни").get(0),
+
+                                            optionsStore.findByName("Бортовой компьютер").get(0),
+                                            optionsStore.findByName("Иммобилайзер").get(0),
+                                            optionsStore.findByName("Обогрев рулевого колеса")
+                                                    .get(0),
+                                            optionsStore.findByName("Центральный замок").get(0)))
+                                    .build()
+                    );
+                    generationsStore.add(
+                            Generations.builder()
+                                    .name("Кабриолет F22 Рестайлинг")
+                                    .image("F22restaylingCabriolet.jpg")
+                                    .year((short) 2019)
+                                    .model(modelStore.findByName("2 серии").get(0))
+                                    .body(bodyStore.findByName("Кабриолет").get(0))
+                                    .engine(engineStore.findByName("Бензин").get(0))
+                                    .transmission(transmissionStore.findByName("Задний").get(0))
+                                    .gearbox(gearboxStore.findByName("Механическая").get(0))
+                                    .modification(
+                                            modificationStore.findByName(
+                                                    "1.5 MT 136 л.с.").get(0))
+                                    .options(Set.of(
+                                            optionsStore.findByName("Светодиодные фары").get(0),
+                                            optionsStore.findByName("Противотуманные фары").get(0),
+                                            optionsStore.findByName("Дневные ходовые огни").get(0),
+
+                                            optionsStore.findByName("Бортовой компьютер").get(0),
+                                            optionsStore.findByName("Иммобилайзер").get(0),
+                                            optionsStore.findByName("Обогрев рулевого колеса")
+                                                    .get(0),
+                                            optionsStore.findByName("Центральный замок").get(0)))
+                                    .build()
+                    );
+
+
 //                    мерседес
                     generationsStore.add(
                             Generations.builder()
                                     .name("IV (W177)")
                                     .image("IV (W177).jpg")
                                     .year(((short) 2021))
-                                    .model(modelStore.findByName("A-Класс").get(0))
-                                    .body(bodyStore.findByName("Седан").get(0))
-                                    .engine(engineStore.findByName("Бензин").get(0))
-                                    .transmission(transmissionStore.findByName("Передний").get(0))
-                                    .gearbox(gearboxStore.findByName("Механическая").get(0))
-                                    .modification(
-                                            modificationStore.findByName(
-                                                    "136 л.с. (200 / 1.3 MT)").get(0))
-                                    .options(Set.of(
-                                            optionsStore.findByName("Светодиодные фары").get(0),
-                                            optionsStore.findByName(
-                                                    "Бортовой компьютер").get(0),
-                                            optionsStore.findByName(
-                                                    "Центральный замок").get(0),
-                                            optionsStore.findByName(
-                                                    "Иммобилайзер").get(0),
-                                            optionsStore.findByName(
-                                                    "Обогрев рулевого колеса").get(0)
-                                    ))
-                                    .build()
-                    );
-                    generationsStore.add(
-                            Generations.builder()
-                                    .name("IV (W177)")
-                                    .image("IV (W177).jpg")
-                                    .year(((short) 2020))
-                                    .model(modelStore.findByName("A-Класс").get(0))
-                                    .body(bodyStore.findByName("Седан").get(0))
-                                    .engine(engineStore.findByName("Бензин").get(0))
-                                    .transmission(transmissionStore.findByName("Передний").get(0))
-                                    .gearbox(gearboxStore.findByName("Механическая").get(0))
-                                    .modification(
-                                            modificationStore.findByName(
-                                                    "136 л.с. (200 / 1.3 MT)").get(0))
-                                    .options(Set.of(
-                                            optionsStore.findByName("Светодиодные фары").get(0),
-                                            optionsStore.findByName(
-                                                    "Бортовой компьютер").get(0),
-                                            optionsStore.findByName(
-                                                    "Центральный замок").get(0),
-                                            optionsStore.findByName(
-                                                    "Иммобилайзер").get(0),
-                                            optionsStore.findByName(
-                                                    "Обогрев рулевого колеса").get(0)
-                                    ))
-                                    .build()
-                    );
-                    generationsStore.add(
-                            Generations.builder()
-                                    .name("IV (W177)")
-                                    .image("IV (W177).jpg")
-                                    .year(((short) 2019))
-                                    .model(modelStore.findByName("A-Класс").get(0))
-                                    .body(bodyStore.findByName("Седан").get(0))
-                                    .engine(engineStore.findByName("Бензин").get(0))
-                                    .transmission(transmissionStore.findByName("Передний").get(0))
-                                    .gearbox(gearboxStore.findByName("Механическая").get(0))
-                                    .modification(
-                                            modificationStore.findByName(
-                                                    "136 л.с. (200 / 1.3 MT)").get(0))
-                                    .options(Set.of(
-                                            optionsStore.findByName("Светодиодные фары").get(0),
-                                            optionsStore.findByName(
-                                                    "Бортовой компьютер").get(0),
-                                            optionsStore.findByName(
-                                                    "Центральный замок").get(0),
-                                            optionsStore.findByName(
-                                                    "Иммобилайзер").get(0),
-                                            optionsStore.findByName(
-                                                    "Обогрев рулевого колеса").get(0)
-                                    ))
-                                    .build()
-                    );
-                    generationsStore.add(
-                            Generations.builder()
-                                    .name("IV (W177)")
-                                    .image("IV (W177).jpg")
-                                    .year(((short) 2018))
-                                    .model(modelStore.findByName("A-Класс").get(0))
-                                    .body(bodyStore.findByName("Седан").get(0))
-                                    .engine(engineStore.findByName("Бензин").get(0))
-                                    .transmission(transmissionStore.findByName("Передний").get(0))
-                                    .gearbox(gearboxStore.findByName("Механическая").get(0))
-                                    .modification(
-                                            modificationStore.findByName(
-                                                    "136 л.с. (200 / 1.3 MT)").get(0))
-                                    .options(Set.of(
-                                            optionsStore.findByName("Светодиодные фары").get(0),
-                                            optionsStore.findByName(
-                                                    "Бортовой компьютер").get(0),
-                                            optionsStore.findByName(
-                                                    "Центральный замок").get(0),
-                                            optionsStore.findByName(
-                                                    "Иммобилайзер").get(0),
-                                            optionsStore.findByName(
-                                                    "Обогрев рулевого колеса").get(0)
-                                    ))
-                                    .build()
-                    );
-                    generationsStore.add(
-                            Generations.builder()
-                                    .name("IV (W177)")
-                                    .image("IV (W177).jpg")
-                                    .year(((short) 2017))
-                                    .model(modelStore.findByName("A-Класс").get(0))
-                                    .body(bodyStore.findByName("Седан").get(0))
-                                    .engine(engineStore.findByName("Бензин").get(0))
-                                    .transmission(transmissionStore.findByName("Передний").get(0))
-                                    .gearbox(gearboxStore.findByName("Механическая").get(0))
-                                    .modification(
-                                            modificationStore.findByName(
-                                                    "136 л.с. (200 / 1.3 MT)").get(0))
-                                    .options(Set.of(
-                                            optionsStore.findByName("Светодиодные фары").get(0),
-                                            optionsStore.findByName(
-                                                    "Бортовой компьютер").get(0),
-                                            optionsStore.findByName(
-                                                    "Центральный замок").get(0),
-                                            optionsStore.findByName(
-                                                    "Иммобилайзер").get(0),
-                                            optionsStore.findByName(
-                                                    "Обогрев рулевого колеса").get(0)
-                                    ))
-                                    .build()
-                    );
-                    generationsStore.add(
-                            Generations.builder()
-                                    .name("IV (W177)")
-                                    .image("IV (W177).jpg")
-                                    .year(((short) 2016))
-                                    .model(modelStore.findByName("A-Класс").get(0))
-                                    .body(bodyStore.findByName("Седан").get(0))
-                                    .engine(engineStore.findByName("Бензин").get(0))
-                                    .transmission(transmissionStore.findByName("Передний").get(0))
-                                    .gearbox(gearboxStore.findByName("Механическая").get(0))
-                                    .modification(
-                                            modificationStore.findByName(
-                                                    "136 л.с. (200 / 1.3 MT)").get(0))
-                                    .options(Set.of(
-                                            optionsStore.findByName("Светодиодные фары").get(0),
-                                            optionsStore.findByName(
-                                                    "Бортовой компьютер").get(0),
-                                            optionsStore.findByName(
-                                                    "Центральный замок").get(0),
-                                            optionsStore.findByName(
-                                                    "Иммобилайзер").get(0),
-                                            optionsStore.findByName(
-                                                    "Обогрев рулевого колеса").get(0)
-                                    ))
-                                    .build()
-                    );
-                    generationsStore.add(
-                            Generations.builder()
-                                    .name("IV (W177)")
-                                    .image("IV (W177).jpg")
-                                    .year(((short) 2015))
-                                    .model(modelStore.findByName("A-Класс").get(0))
-                                    .body(bodyStore.findByName("Седан").get(0))
-                                    .engine(engineStore.findByName("Бензин").get(0))
-                                    .transmission(transmissionStore.findByName("Передний").get(0))
-                                    .gearbox(gearboxStore.findByName("Механическая").get(0))
-                                    .modification(
-                                            modificationStore.findByName(
-                                                    "136 л.с. (200 / 1.3 MT)").get(0))
-                                    .options(Set.of(
-                                            optionsStore.findByName("Светодиодные фары").get(0),
-                                            optionsStore.findByName(
-                                                    "Бортовой компьютер").get(0),
-                                            optionsStore.findByName(
-                                                    "Центральный замок").get(0),
-                                            optionsStore.findByName(
-                                                    "Иммобилайзер").get(0),
-                                            optionsStore.findByName(
-                                                    "Обогрев рулевого колеса").get(0)
-                                    ))
-                                    .build()
-                    );
-                    generationsStore.add(
-                            Generations.builder()
-                                    .name("IV (W177)")
-                                    .image("IV (W177).jpg")
-                                    .year(((short) 2014))
-                                    .model(modelStore.findByName("A-Класс").get(0))
-                                    .body(bodyStore.findByName("Седан").get(0))
-                                    .engine(engineStore.findByName("Бензин").get(0))
-                                    .transmission(transmissionStore.findByName("Передний").get(0))
-                                    .gearbox(gearboxStore.findByName("Механическая").get(0))
-                                    .modification(
-                                            modificationStore.findByName(
-                                                    "136 л.с. (200 / 1.3 MT)").get(0))
-                                    .options(Set.of(
-                                            optionsStore.findByName("Светодиодные фары").get(0),
-                                            optionsStore.findByName(
-                                                    "Бортовой компьютер").get(0),
-                                            optionsStore.findByName(
-                                                    "Центральный замок").get(0),
-                                            optionsStore.findByName(
-                                                    "Иммобилайзер").get(0),
-                                            optionsStore.findByName(
-                                                    "Обогрев рулевого колеса").get(0)
-                                    ))
-                                    .build()
-                    );
-                    generationsStore.add(
-                            Generations.builder()
-                                    .name("IV (W177)")
-                                    .image("IV (W177).jpg")
-                                    .year(((short) 2013))
-                                    .model(modelStore.findByName("A-Класс").get(0))
-                                    .body(bodyStore.findByName("Седан").get(0))
-                                    .engine(engineStore.findByName("Бензин").get(0))
-                                    .transmission(transmissionStore.findByName("Передний").get(0))
-                                    .gearbox(gearboxStore.findByName("Механическая").get(0))
-                                    .modification(
-                                            modificationStore.findByName(
-                                                    "136 л.с. (200 / 1.3 MT)").get(0))
-                                    .options(Set.of(
-                                            optionsStore.findByName("Светодиодные фары").get(0),
-                                            optionsStore.findByName(
-                                                    "Бортовой компьютер").get(0),
-                                            optionsStore.findByName(
-                                                    "Центральный замок").get(0),
-                                            optionsStore.findByName(
-                                                    "Иммобилайзер").get(0),
-                                            optionsStore.findByName(
-                                                    "Обогрев рулевого колеса").get(0)
-                                    ))
-                                    .build()
-                    );
-                    generationsStore.add(
-                            Generations.builder()
-                                    .name("IV (W177)")
-                                    .image("IV (W177).jpg")
-                                    .year(((short) 2012))
-                                    .model(modelStore.findByName("A-Класс").get(0))
-                                    .body(bodyStore.findByName("Седан").get(0))
-                                    .engine(engineStore.findByName("Бензин").get(0))
-                                    .transmission(transmissionStore.findByName("Передний").get(0))
-                                    .gearbox(gearboxStore.findByName("Механическая").get(0))
-                                    .modification(
-                                            modificationStore.findByName(
-                                                    "136 л.с. (200 / 1.3 MT)").get(0))
-                                    .options(Set.of(
-                                            optionsStore.findByName("Светодиодные фары").get(0),
-                                            optionsStore.findByName(
-                                                    "Бортовой компьютер").get(0),
-                                            optionsStore.findByName(
-                                                    "Центральный замок").get(0),
-                                            optionsStore.findByName(
-                                                    "Иммобилайзер").get(0),
-                                            optionsStore.findByName(
-                                                    "Обогрев рулевого колеса").get(0)
-                                    ))
-                                    .build()
-                    );
-
-
-                    generationsStore.add(
-                            Generations.builder()
-                                    .name("IV (W177)")
-                                    .image("IV (W177).jpg")
-                                    .year(((short) 2011))
-                                    .model(modelStore.findByName("A-Класс").get(0))
-                                    .body(bodyStore.findByName("Седан").get(0))
-                                    .engine(engineStore.findByName("Бензин").get(0))
-                                    .transmission(transmissionStore.findByName("Передний").get(0))
-                                    .gearbox(gearboxStore.findByName("Механическая").get(0))
-                                    .modification(
-                                            modificationStore.findByName(
-                                                    "136 л.с. (200 / 1.3 MT)").get(0))
-                                    .options(Set.of(
-                                            optionsStore.findByName("Светодиодные фары").get(0),
-                                            optionsStore.findByName(
-                                                    "Бортовой компьютер").get(0),
-                                            optionsStore.findByName(
-                                                    "Центральный замок").get(0),
-                                            optionsStore.findByName(
-                                                    "Иммобилайзер").get(0),
-                                            optionsStore.findByName(
-                                                    "Обогрев рулевого колеса").get(0)
-                                    ))
-                                    .build()
-                    );
-                    generationsStore.add(
-                            Generations.builder()
-                                    .name("IV (W177)")
-                                    .image("IV (W177).jpg")
-                                    .year(((short) 2010))
                                     .model(modelStore.findByName("A-Класс").get(0))
                                     .body(bodyStore.findByName("Седан").get(0))
                                     .engine(engineStore.findByName("Бензин").get(0))
@@ -681,214 +751,69 @@ public class Job4jCarApplication {
                                     .build()
                     );
 
-//                    generationsStore.add(
-//                            new Generations("XV (S220)", "CrownXV(S220).jpg",
-//                                    (short) 2018,
-//                                    markStore.findByName("Toyota").get(0),
-//                                    modelStore.findByName("Crown").get(0),
-//                                    bodyStore.findByName("Седан").get(0),
-//                                    engineStore.findByName("Гибрид").get(0),
-//                                    transmissionStore.findByName("Задний").get(0),
-//                                    gearboxStore.findByName("Вариатор").get(0),
-//                                    modificationStore.findByName("2.5 CVT 184 л.с").get(0))
-//                    );
-                    // новый реальный
                     generationsStore.add(
-                            new Generations("XV (S220)", "CrownXV(S220).jpg",
-                                    (short) 2018,
-                                    markStore.findByName("Toyota").get(0),
-                                    modelStore.findByName("Crown").get(0),
-                                    bodyStore.findByName("Седан").get(0),
-                                    engineStore.findByName("Бензин").get(0),
-                                    transmissionStore.findByName("Задний").get(0),
-                                    gearboxStore.findByName("Автомат").get(0),
-                                    modificationStore.findByName("2.0 AT 245 л.c.").get(0))
-                    );
-                    /*реал*/
-                    generationsStore.add(
-                            new Generations("XIV (S210)", "CrownXIV(S210).jpg",
-                                    (short) 2018,
-                                    markStore.findByName("Toyota").get(0),
-                                    modelStore.findByName("Crown").get(0),
-                                    bodyStore.findByName("Седан").get(0),
-                                    engineStore.findByName("Гибрид").get(0),
-                                    transmissionStore.findByName("Задний").get(0),
-                                    gearboxStore.findByName("Вариатор").get(0),
-                                    modificationStore.findByName("2.5 CVT 184 л.с").get(0))
-                    );
-                    generationsStore.add(
-                            new Generations("XIV (S210)", "CrownXIV(S210).jpg",
-                                    (short) 2018,
-                                    markStore.findByName("Toyota").get(0),
-                                    modelStore.findByName("Crown").get(0),
-                                    bodyStore.findByName("Седан").get(0),
-                                    engineStore.findByName("Бензин").get(0),
-                                    transmissionStore.findByName("Задний").get(0),
-                                    gearboxStore.findByName("Автомат").get(0),
-                                    modificationStore.findByName("3.5 CVT 299 л.с").get(0))
-                    );
-
-//                Camry
-//                    generationsStore.add(
-//                            new Generations("VIII (XV70) Рестайлинг", "VIII(XV70)reystaling.jpg",
-//                                    (short) 2021,
-//                                    markStore.findByName("Toyota").get(0),
-//                                    modelStore.findByName("Camry").get(0),
-//                                    bodyStore.findByName("Седан").get(0),
-//                                    engineStore.findByName("Бензин").get(0),
-//                                    transmissionStore.findByName("Передний").get(0),
-//                                    gearboxStore.findByName("Автомат").get(0),
-//                                    modificationStore.findByName("3.5 AT 249 л.с.").get(0))
-//                    );
-                    generationsStore.add(
-                            new Generations("VIII (XV70) Рестайлинг", "VIII(XV70)reystaling.jpg",
-                                    (short) 2021,
-                                    markStore.findByName("Toyota").get(0),
-                                    modelStore.findByName("Camry").get(0),
-                                    bodyStore.findByName("Седан").get(0),
-                                    engineStore.findByName("Бензин").get(0),
-                                    transmissionStore.findByName("Передний").get(0),
-                                    gearboxStore.findByName("Автомат").get(0),
-                                    modificationStore.findByName("2.5 AT 203 л.с.").get(0))
-                    );
-                    generationsStore.add(
-                            new Generations("VIII (XV70) Рестайлинг", "VIII(XV70)reystaling.jpg",
-                                    (short) 2021,
-                                    markStore.findByName("Toyota").get(0),
-                                    modelStore.findByName("Camry").get(0),
-                                    bodyStore.findByName("Седан").get(0),
-                                    engineStore.findByName("Бензин").get(0),
-                                    transmissionStore.findByName("Передний").get(0),
-                                    gearboxStore.findByName("Вариатор").get(0),
-                                    modificationStore.findByName("2.5 CVT 208 л.с.").get(0))
-                    );
-                    generationsStore.add(
-                            new Generations("VIII (XV70) Рестайлинг", "VIII(XV70)reystaling.jpg",
-                                    (short) 2021,
-                                    markStore.findByName("Toyota").get(0),
-                                    modelStore.findByName("Camry").get(0),
-                                    bodyStore.findByName("Седан").get(0),
-                                    engineStore.findByName("Бензин").get(0),
-                                    transmissionStore.findByName("Полный").get(0),
-                                    gearboxStore.findByName("Автомат").get(0),
-                                    modificationStore.findByName("2.5 AT 202 л.с. 4x4").get(0))
+                            Generations.builder()
+                                    .name("XV (S220)")
+                                    .image("CrownXV(S220).jpg")
+                                    .year(((short) 2018))
+                                    .model(modelStore.findByName("Crown").get(0))
+                                    .body(bodyStore.findByName("Седан").get(0))
+                                    .engine(engineStore.findByName("Бензин").get(0))
+                                    .transmission(transmissionStore.findByName("Задний").get(0))
+                                    .gearbox(gearboxStore.findByName("Автомат").get(0))
+                                    .modification(
+                                            modificationStore.findByName("2.0 AT 245 л.c.").get(0))
+                                    .options(Set.of(
+                                            optionsStore.findByName("Светодиодные фары").get(0),
+                                            optionsStore.findByName(
+                                                    "Система доступа без ключа").get(0),
+                                            optionsStore.findByName(
+                                                    "Мультимедиа система с ЖК-экраном").get(0)
+                                    ))
+                                    .build()
                     );
 
                     generationsStore.add(
-                            new Generations("VIII (XV70)", "VIII(XV70).jpg",
-                                    (short) 2021,
-                                    markStore.findByName("Toyota").get(0),
-                                    modelStore.findByName("Camry").get(0),
-                                    bodyStore.findByName("Седан").get(0),
-                                    engineStore.findByName("Бензин").get(0),
-                                    transmissionStore.findByName("Передний").get(0),
-                                    gearboxStore.findByName("Автомат").get(0),
-                                    modificationStore.findByName("3.5 AT 249 л.с.").get(0))
+                            Generations.builder()
+                                    .name("XIV (S210)")
+                                    .image("CrownXIV(S210).jpg")
+                                    .year(((short) 2018))
+                                    .model(modelStore.findByName("Crown").get(0))
+                                    .body(bodyStore.findByName("Седан").get(0))
+                                    .engine(engineStore.findByName("Бензин").get(0))
+                                    .transmission(transmissionStore.findByName("Задний").get(0))
+                                    .gearbox(gearboxStore.findByName("Автомат").get(0))
+                                    .modification(
+                                            modificationStore.findByName("3.5 CVT 299 л.с").get(0))
+                                    .options(Set.of(
+                                            optionsStore.findByName("Светодиодные фары").get(0),
+                                            optionsStore.findByName(
+                                                    "Система доступа без ключа").get(0),
+                                            optionsStore.findByName(
+                                                    "Мультимедиа система с ЖК-экраном").get(0)
+                                    ))
+                                    .build()
                     );
                     generationsStore.add(
-                            new Generations("VIII (XV70)", "VIII(XV70).jpg",
-                                    (short) 2021,
-                                    markStore.findByName("Toyota").get(0),
-                                    modelStore.findByName("Camry").get(0),
-                                    bodyStore.findByName("Седан").get(0),
-                                    engineStore.findByName("Гибрид").get(0),
-                                    transmissionStore.findByName("Передний").get(0),
-                                    gearboxStore.findByName("Вариатор").get(0),
-                                    modificationStore.findByName("2.5 CVT 208 л.с.").get(0))
-                    );
-                    generationsStore.add(
-                            new Generations("VIII (XV70)", "VIII(XV70).jpg",
-                                    (short) 2021,
-                                    markStore.findByName("Toyota").get(0),
-                                    modelStore.findByName("Camry").get(0),
-                                    bodyStore.findByName("Седан").get(0),
-                                    engineStore.findByName("Гибрид").get(0),
-                                    transmissionStore.findByName("Полный").get(0),
-                                    gearboxStore.findByName("Вариатор").get(0),
-                                    modificationStore.findByName("2.5 CVT 178 л.с. 4x4").get(0))
-                    );
-
-//                    bmw
-                    generationsStore.add(
-                            new Generations("F44", "F44.jpg",
-                                    (short) 2019,
-                                    markStore.findByName("BMW").get(0),
-                                    modelStore.findByName("2 серии").get(0),
-                                    bodyStore.findByName("Седан").get(0),
-                                    engineStore.findByName("Бензин").get(0),
-                                    transmissionStore.findByName("Передний").get(0),
-                                    gearboxStore.findByName("Механическая").get(0),
-                                    modificationStore.findByName("218i 1.5 MT 140 л.с.").get(0))
-                    );
-                    generationsStore.add(
-                            new Generations("F44", "F44.jpg",
-                                    (short) 2019,
-                                    markStore.findByName("BMW").get(0),
-                                    modelStore.findByName("2 серии").get(0),
-                                    bodyStore.findByName("Седан").get(0),
-                                    engineStore.findByName("Бензин").get(0),
-                                    transmissionStore.findByName("Передний").get(0),
-                                    gearboxStore.findByName("Автомат").get(0),
-                                    modificationStore.findByName("2.0 AT 231 л.с.").get(0))
-                    );
-                    generationsStore.add(
-                            new Generations("F44", "F44.jpg",
-                                    (short) 2019,
-                                    markStore.findByName("BMW").get(0),
-                                    modelStore.findByName("2 серии").get(0),
-                                    bodyStore.findByName("Седан").get(0),
-                                    engineStore.findByName("Бензин").get(0),
-                                    transmissionStore.findByName("Передний").get(0),
-                                    gearboxStore.findByName("Робот").get(0),
-                                    modificationStore.findByName("218i 1.5 MT 140 л.с.").get(0))
-                    );
-                    generationsStore.add(
-                            new Generations("F44", "F44.jpg",
-                                    (short) 2019,
-                                    markStore.findByName("BMW").get(0),
-                                    modelStore.findByName("2 серии").get(0),
-                                    bodyStore.findByName("Седан").get(0),
-                                    engineStore.findByName("Бензин").get(0),
-                                    transmissionStore.findByName("Полный").get(0),
-                                    gearboxStore.findByName("Автомат").get(0),
-                                    modificationStore.findByName("2.0 AT 231 л.с.").get(0))
-                    );
-//                    купе
-                    generationsStore.add(
-                            new Generations("F22 Рестайлинг", "F22restayling.jpg",
-                                    (short) 2019,
-                                    markStore.findByName("BMW").get(0),
-                                    modelStore.findByName("2 серии").get(0),
-                                    bodyStore.findByName("Купе").get(0),
-                                    engineStore.findByName("Дизель").get(0),
-                                    transmissionStore.findByName("Задний").get(0),
-                                    gearboxStore.findByName("Автомат").get(0),
-                                    modificationStore.findByName("2.0 AT 150 л.с.").get(0))
-                    );
-//                    кабриолет
-                    generationsStore.add(
-                            new Generations("Кабриолет F22 Рестайлинг ",
-                                    "F22restaylingCabriolet.jpg",
-                                    (short) 2019,
-                                    markStore.findByName("BMW").get(0),
-                                    modelStore.findByName("2 серии").get(0),
-                                    bodyStore.findByName("Кабриолет").get(0),
-                                    engineStore.findByName("Дизель").get(0),
-                                    transmissionStore.findByName("Задний").get(0),
-                                    gearboxStore.findByName("Автомат").get(0),
-                                    modificationStore.findByName("2.0 AT 150 л.с.").get(0))
-                    );
-                    generationsStore.add(
-                            new Generations("Кабриолет F22 Рестайлинг ",
-                                    "F22restaylingCabriolet.jpg",
-                                    (short) 2019,
-                                    markStore.findByName("BMW").get(0),
-                                    modelStore.findByName("2 серии").get(0),
-                                    bodyStore.findByName("Кабриолет").get(0),
-                                    engineStore.findByName("Бензин").get(0),
-                                    transmissionStore.findByName("Задний").get(0),
-                                    gearboxStore.findByName("Механическая").get(0),
-                                    modificationStore.findByName("1.5 MT 136 л.с.").get(0))
+                            Generations.builder()
+                                    .name("XIV (S210)")
+                                    .image("CrownXIV(S210).jpg")
+                                    .year(((short) 2018))
+                                    .model(modelStore.findByName("Crown").get(0))
+                                    .body(bodyStore.findByName("Седан").get(0))
+                                    .engine(engineStore.findByName("Гибрид").get(0))
+                                    .transmission(transmissionStore.findByName("Задний").get(0))
+                                    .gearbox(gearboxStore.findByName("Вариатор").get(0))
+                                    .modification(
+                                            modificationStore.findByName("2.5 CVT 184 л.с").get(0))
+                                    .options(Set.of(
+                                            optionsStore.findByName("Светодиодные фары").get(0),
+                                            optionsStore.findByName(
+                                                    "Система доступа без ключа").get(0),
+                                            optionsStore.findByName(
+                                                    "Мультимедиа система с ЖК-экраном").get(0)
+                                    ))
+                                    .build()
                     );
                 } catch (Exception ignored) {
                 }

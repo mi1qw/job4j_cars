@@ -51,19 +51,4 @@ public class Generations {
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinTable(name = "generations_options")
     private Set<Options> options = new HashSet<>();
-
-    public Generations(final String name, final String image, final Short year,
-                       final Mark mark, final Model model,
-                       final Body body, final Engine engine, final Transmission transmission,
-                       final Gearbox gearbox, final Modification modification) {
-        this.name = name;
-        this.image = image;
-        this.year = year;
-        this.model = model;
-        this.body = body;
-        this.engine = engine;
-        this.transmission = transmission;
-        this.gearbox = gearbox;
-        this.modification = modification;
-    }
 }

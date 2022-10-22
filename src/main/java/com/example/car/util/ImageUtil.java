@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 public class ImageUtil {
 
     private static final Pattern PATTERN = Pattern
-            .compile("[^\\s]+(\\.(?i)(jpe?g|png|gif|bmp))$");
+            .compile(".+(\\.(?i)(jpe?g|png|gif|bmp|webp))$");
     private static final Pattern ID = Pattern
             .compile("^\\d+-(\\d+)-.*");
 
