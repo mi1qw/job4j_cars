@@ -25,6 +25,10 @@ public class OptionsService {
                           final UserSession userSession) {
         this.optionsStore = optionsStore;
         this.userSession = userSession;
+        init();
+    }
+
+    public void init() {
         optionsStore.findAll().forEach(n -> optionsMap.put(n.getId(), n));
     }
 

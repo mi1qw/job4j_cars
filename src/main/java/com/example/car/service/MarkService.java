@@ -15,6 +15,10 @@ public class MarkService {
 
     public MarkService(final MarkStore markStore) {
         this.markStore = markStore;
+        init();
+    }
+
+    public void init() {
         markStore.findAll().forEach(n -> marksMap.put(n.getId(), n));
     }
 

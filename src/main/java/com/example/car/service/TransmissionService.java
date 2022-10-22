@@ -17,6 +17,10 @@ public class TransmissionService {
 
     public TransmissionService(final TransmissionStore transmissionStore) {
         this.transmissionStore = transmissionStore;
+        init();
+    }
+
+    public void init() {
         transmissionStore.findAll().forEach(n -> transmissionMap.put(n.getId(), n));
     }
 

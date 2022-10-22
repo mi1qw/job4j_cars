@@ -16,6 +16,10 @@ public class CityService {
 
     public CityService(final CityStore cityStore) {
         this.cityStore = cityStore;
+        init();
+    }
+
+    public void init() {
         cityStore.findAll().forEach(n -> cityMap.put(n.getId(), n));
     }
 

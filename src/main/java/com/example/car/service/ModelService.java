@@ -24,11 +24,12 @@ public class ModelService {
     public ModelService(final ModelStore modelStore, final UserSession userSession) {
         this.modelStore = modelStore;
         this.userSession = userSession;
-        modelStore.findAll().forEach(n -> modelsMap.put(n.getId(), n));
+        init();
     }
 
     @PostConstruct
     public void init() {
+        modelStore.findAll().forEach(n -> modelsMap.put(n.getId(), n));
         this.namesByMarkIdMap = modelsMap.values().stream()
                 .collect(Collectors.groupingBy(
                         n -> n.getMark().getId(),

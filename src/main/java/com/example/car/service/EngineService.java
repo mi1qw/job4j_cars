@@ -17,6 +17,10 @@ public class EngineService {
 
     public EngineService(final EngineStore engineStore) {
         this.engineStore = engineStore;
+        init();
+    }
+
+    public void init() {
         engineStore.findAll().forEach(n -> engineMap.put(n.getId(), n));
     }
 

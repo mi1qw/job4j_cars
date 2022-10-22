@@ -29,7 +29,6 @@ public class AppScope {
 
     @PostConstruct
     public void init() {
-        log.info("cities {}", cityService.findAllMap());
         this.filterMap = new HashMap<>(Map.of(
                 "mark", markService.findAllMap(),
                 "model", modelService.findAllMap(),

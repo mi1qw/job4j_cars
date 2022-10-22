@@ -16,6 +16,10 @@ public class ColorService {
 
     public ColorService(final ColorStore colorStore) {
         this.colorStore = colorStore;
+        init();
+    }
+
+    public void init() {
         colorStore.findAll().forEach(n -> colorsMap.put(n.getId(), n));
     }
 

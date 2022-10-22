@@ -17,6 +17,10 @@ public class GearboxService {
 
     public GearboxService(final GearboxStore gearboxStore) {
         this.gearboxStore = gearboxStore;
+        init();
+    }
+
+    public void init() {
         gearboxStore.findAll().forEach(n -> gearboxMap.put(n.getId(), n));
     }
 

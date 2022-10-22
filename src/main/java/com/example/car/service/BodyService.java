@@ -18,6 +18,10 @@ public class BodyService {
 
     public BodyService(final BodyStore bodyStore) {
         this.bodyStore = bodyStore;
+        init();
+    }
+
+    public void init() {
         bodyStore.findAll().forEach(n -> bodyMap.put(n.getId(), n));
     }
 

@@ -1,7 +1,9 @@
 package com.example.car;
 
 import com.example.car.model.*;
+import com.example.car.service.*;
 import com.example.car.store.*;
+import com.example.car.web.AppScope;
 import jakarta.servlet.ServletContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -44,6 +46,27 @@ public class Job4jCarApplication {
     private FileSystemStore fileSystemStore;
     @Autowired
     private OptionsStore optionsStore;
+    @Autowired
+    private AppScope appScope;
+    @Autowired
+    private CityService cityService;
+    @Autowired
+    private BodyService bodyService;
+    @Autowired
+    private ColorService colorService;
+    @Autowired
+    private EngineService engineService;
+    @Autowired
+    private GearboxService gearboxService;
+    @Autowired
+    private MarkService markService;
+    @Autowired
+    private ModelService modelService;
+    @Autowired
+    private OptionsService optionsService;
+    @Autowired
+    private TransmissionService transmissionService;
+
 
     public static void main(final String[] args) {
         SpringApplication.run(Job4jCarApplication.class, args);
@@ -211,6 +234,15 @@ public class Job4jCarApplication {
                 } catch (Exception ignored) {
                 }
 
+                cityService.init();
+                bodyService.init();
+                colorService.init();
+                engineService.init();
+                gearboxService.init();
+                markService.init();
+                modelService.init();
+                optionsService.init();
+                transmissionService.init();
 
                 try {
                     ModificationId id = new ModificationId("136 л.с. (200 / 1.3 MT)", (short) 2018,
@@ -279,6 +311,38 @@ public class Job4jCarApplication {
                 /* Седан */
                 /*реальн*/
                 try {
+//                    Camry
+                    generationsStore.add(
+                            Generations.builder()
+                                    .name("VIII (XV70) Рестайлинг")
+                                    .image("VIII(XV70)reystaling.jpg")
+                                    .year((short) 2021)
+                                    .model(modelStore.findByName("Camry").get(0))
+                                    .body(bodyStore.findByName("Седан").get(0))
+                                    .engine(engineStore.findByName("Бензин").get(0))
+                                    .transmission(transmissionStore.findByName("Передний").get(0))
+                                    .gearbox(gearboxStore.findByName("Автомат").get(0))
+                                    .modification(
+                                            modificationStore.findByName("3.5 AT 249 л.с.").get(0))
+                                    .options(Set.of(
+                                            optionsStore.findByName("Светодиодные фары").get(0),
+                                            optionsStore.findByName("Бортовой компьютер").get(0),
+                                            optionsStore.findByName(
+                                                    "Система доступа без ключа").get(0),
+                                            optionsStore.findByName(
+                                                    "Центральный замок").get(0),
+                                            optionsStore.findByName(
+                                                    "Навигационная система").get(0),
+                                            optionsStore.findByName(
+                                                    "Иммобилайзер").get(0),
+                                            optionsStore.findByName(
+                                                    "Обогрев рулевого колеса").get(0)
+                                    ))
+                                    .build()
+                    );
+
+
+//                    мерседес
                     generationsStore.add(
                             Generations.builder()
                                     .name("IV (W177)")
@@ -665,17 +729,17 @@ public class Job4jCarApplication {
                     );
 
 //                Camry
-                    generationsStore.add(
-                            new Generations("VIII (XV70) Рестайлинг", "VIII(XV70)reystaling.jpg",
-                                    (short) 2021,
-                                    markStore.findByName("Toyota").get(0),
-                                    modelStore.findByName("Camry").get(0),
-                                    bodyStore.findByName("Седан").get(0),
-                                    engineStore.findByName("Бензин").get(0),
-                                    transmissionStore.findByName("Передний").get(0),
-                                    gearboxStore.findByName("Автомат").get(0),
-                                    modificationStore.findByName("3.5 AT 249 л.с.").get(0))
-                    );
+//                    generationsStore.add(
+//                            new Generations("VIII (XV70) Рестайлинг", "VIII(XV70)reystaling.jpg",
+//                                    (short) 2021,
+//                                    markStore.findByName("Toyota").get(0),
+//                                    modelStore.findByName("Camry").get(0),
+//                                    bodyStore.findByName("Седан").get(0),
+//                                    engineStore.findByName("Бензин").get(0),
+//                                    transmissionStore.findByName("Передний").get(0),
+//                                    gearboxStore.findByName("Автомат").get(0),
+//                                    modificationStore.findByName("3.5 AT 249 л.с.").get(0))
+//                    );
                     generationsStore.add(
                             new Generations("VIII (XV70) Рестайлинг", "VIII(XV70)reystaling.jpg",
                                     (short) 2021,
