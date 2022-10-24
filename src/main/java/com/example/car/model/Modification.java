@@ -1,5 +1,6 @@
 package com.example.car.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -20,5 +21,6 @@ public class Modification {
     private short power;
     private short engineDisplacement;
     private byte numberOfCylinders;
+    @Column(length = 15)
     private String positionOfCylinders;
 }

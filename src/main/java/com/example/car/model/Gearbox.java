@@ -15,9 +15,10 @@ public class Gearbox {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, nullable = false, length = 20)
     private String name;
 
+    @Column(length = 20)
     private String image;
 
     public Gearbox(final String name, final String image) {

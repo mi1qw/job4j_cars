@@ -481,7 +481,7 @@
           <div class="ms-5 pt-3">
             <input th:field="*{images}" hidden form="carform">
 
-            <div class="form-floating mb-3" style="width: 8em">
+            <div class="form-floating mb-3" style="width: 9em">
               <input type="number" min="1" class="form-control" id="odometer" placeholder="km"
                      form="carform"
                      th:classappend="${#fields.hasErrors('odometer')} ? ' is-invalid'"
@@ -489,7 +489,7 @@
               <div class="text-danger"
                    th:if="${#fields.hasErrors('odometer')}"
                    th:text="${#strings.listJoin(#fields.errors('odometer'),', ')}"></div>
-              <label for="odometer">Пробег км.</label>
+              <label for="odometer">Пробег тыс. км.</label>
             </div>
 
             <label class="small-label mt-2" for="yearPurchase">год покупки</label>

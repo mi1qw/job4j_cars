@@ -5,6 +5,15 @@
     border-radius: 5px;
 }
 
+.bold-700-s18 {
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.green {
+    color: #3c9806;
+}
+
 .IconSvg_size_18 {
     width: 18px;
     height: 18px;

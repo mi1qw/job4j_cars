@@ -8,7 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 
 @Entity
 @Table(name = "options")
-@Slf4j
 @Data
 @EqualsAndHashCode(of = "id")
 @NoArgsConstructor
@@ -17,9 +16,10 @@ public class Options {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(length = 30)
     private String nameCategory;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false, length = 80)
     private String name;
 
     public Options(final String nameCategory, final String name) {

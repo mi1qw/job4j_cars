@@ -15,9 +15,10 @@ public class Transmission {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, nullable = false, length = 15)
     private String name;
 
+    @Column(length = 25)
     private String image;
 
     public Transmission(final String name, final String image) {

@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Embeddable
 public class ModificationId implements Serializable {
 
-    @Column(name = "name")
+    @Column(name = "name", length = 30)
     private String nameId;
 
     @Column(name = "year_id")

@@ -22,11 +22,12 @@ public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @Column(length = 80)
     private String name;
     private LocalDateTime created;
     @Version
     private LocalDateTime lastUpdated;
+    @Column(length = 1000)
     private String description;
     private BigDecimal price;
     private Short odometer;
@@ -71,11 +72,6 @@ public class Car {
     private Gearbox gearbox;
 
     @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumns({
-//            @JoinColumn(name = "mark_id", referencedColumnName = "mark_id"),
-//            @JoinColumn(name = "name_id", referencedColumnName = "name"),
-//            @JoinColumn(name = "year_id", referencedColumnName = "year_id")
-//    })
     private Modification modification;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)

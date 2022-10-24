@@ -15,9 +15,10 @@ public class Color {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    @Column(unique = true, length = 20)
     private String name;
 
+    @Column(length = 20)
     private String color;
 
     public Color(final String name, final String color) {

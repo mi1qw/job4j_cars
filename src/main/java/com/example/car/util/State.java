@@ -10,8 +10,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.*;
 
-import static java.util.stream.Collectors.*;
-
 @Component
 @Slf4j
 @AllArgsConstructor
@@ -187,6 +185,9 @@ public class State {
         CarState state = userSession.getCarState();
         CarState.State<?, ?> step = state.getStepList().get(stateID);
         Object optionByID = step.getOptionByID(id);
+        if (optionByID == null) {
+            log.error(stateID + "  optionByID ==null");
+        }
         step.setValue(optionByID);
         step.setPrevGenerations(state.getGenerations());
         if (stateID + 1 < state.getStepList().size()) {

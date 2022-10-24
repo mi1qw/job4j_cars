@@ -128,7 +128,12 @@
       <a th:href="@{|/posts/${item.id}|}">
         <span th:text="${item.name}" class="carName"></span>
       </a>
-      <div class="d-flex justify-content-between align-items-center mt-3">
+      <div class="price-ticket ticket-item" style="margin-top: 7px">
+        <span class="bold-700-s18 green"
+              th:text="${#numbers.formatDecimal(item.price, 0, 'DEFAULT', 0, 'DEFAULT')}"></span>
+        <span class="bold-700-s18 green">$</span>
+      </div>
+      <div class="d-flex justify-content-between align-items-center mt-2">
         <div th:insert="fragments/postCar::clockSVG(*{item.created})" class="me-2"></div>
         <a th:href="@{|/cars/edit/${item.id}|}" style="margin-right: 20px;">
           <button type="button" class="btn edit-btn">редактировать</button>

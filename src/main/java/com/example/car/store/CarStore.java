@@ -119,7 +119,8 @@ public class CarStore extends CrudPersist<Car> {
 
     public List<Car> findMyCars(final Account account) {
         return tx(session ->
-                session.createQuery("from Car c where c.account=:account", Car.class)
+                session.createQuery("from Car c where c.account=:account order by c.created",
+                                Car.class)
                         .setParameter("account", account)
                         .list()
         );
