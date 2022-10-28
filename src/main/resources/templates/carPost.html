@@ -403,7 +403,17 @@
                   th:text="|${#numbers.formatDecimal(post.price, 0, 'DEFAULT', 0, 'DEFAULT')} $|"></span>
           </div>
         </div>
-        <h3 class="under-head bold" th:text="*{modification.id.nameId}"></h3>
+        <div class="d-flex" style="height: 2rem;">
+          <h3 class="under-head bold" th:text="*{modification.id.nameId}"></h3>
+          <div th:if="*{@userSession.account?.id==account.id}"
+               class="position-relative flex-grow-1">
+            <a th:href="@{|/cars/edit/*{id}|}"
+               class="position-absolute top-100 start-50 translate-middle">
+              <button type="button" class="btn edit-btn">редактировать</button>
+            </a>
+          </div>
+
+        </div>
         <div th:replace="fragments/postCar::clockSVG(*{created})"></div>
       </div>
 
@@ -580,7 +590,7 @@
             </div>
 
             <div class="mb-1" style="color: #9b9b9b;">Описание</div>
-            <div th:text="*{description}"></div>
+            <div th:text="*{description}" class="ms-3"></div>
           </div>
 
           <div class="ms-3 mt-3" style="margin-bottom: 200px">

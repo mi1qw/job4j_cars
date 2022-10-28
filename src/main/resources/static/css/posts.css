@@ -338,6 +338,7 @@ li.item-char {
 .findBtn {
     grid-area: findBtn;
 }
+
 .resetBtn {
     grid-area: resetBtn;
 }

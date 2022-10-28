@@ -19,20 +19,6 @@
     height: 18px;
 }
 
-.edit-btn {
-    padding: 0.1em 0.5em 0.1em 0.5em;
-    color: white;
-    background-color: #02a55d;
-    border-color: #02a55d;
-    font-size: smaller;
-    --bs-btn-hover-color: #ffffff;
-    --bs-btn-hover-border-color: #018248FF;
-    --bs-btn-hover-bg: #018248FF;
-    --bs-btn-active-color: #ffffff;
-    --bs-btn-active-bg: #018248FF;
-    --bs-btn-active-border-color: #018248FF;
-}
-
 .checkboxStatus {
     background-color: hsl(153deg 98% 29%) !important;
     border-color: hsl(153deg 98% 29%) !important;
