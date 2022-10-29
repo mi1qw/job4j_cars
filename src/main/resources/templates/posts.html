@@ -15,12 +15,12 @@
 </th:block>
 
 <div layout:fragment="page-content">
-  <div th:replace="fragments/defssvg::difssvg"></div>
-  <div th:replace="fragments/filter::filterForm(${filter})"></div>
+  <div th:replace="~{fragments/defssvg::difssvg}"></div>
+  <div th:replace="~{fragments/filter::filterForm(${filter})}"></div>
   <div th:each="post:${posts}">
-    <div th:replace="fragments/postCar::post(*{post})"></div>
+    <div th:replace="~{fragments/postCar::post(*{post})}"></div>
   </div>
-  <div th:replace="fragments/pagination::pagination(${page},${totalPages})"></div>
+  <div th:replace="~{fragments/pagination::pagination(${page},${totalPages})}"></div>
 </div>
 
 <th:block layout:fragment="page-scripts">

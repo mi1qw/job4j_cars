@@ -20,23 +20,23 @@
         <div>
           <ul class="unstyle characteristic">
             <li class="item-char">
-              <span th:replace="::odometerSVG(*{post.odometer})"></span>
+              <span th:replace="~{::odometerSVG(*{post.odometer})}"></span>
             </li>
             <li class="item-char">
-              <span th:replace="::tagSVG(*{post.gearbox})"></span>
+              <span th:replace="~{::tagSVG(*{post.gearbox})}"></span>
             </li>
             <li class="item-char">
-              <span th:replace="::tagSVG(*{post.engine})"></span>
+              <span th:replace="~{::tagSVG(*{post.engine})}"></span>
             </li>
             <li class="item-char">
-              <span th:replace="::tagSVG(*{post.transmission})"></span>
+              <span th:replace="~{::tagSVG(*{post.transmission})}"></span>
             </li>
           </ul>
         </div>
         <div th:text="*{post.modification.id.nameId}"></div>
         <div th:text="${#strings.abbreviate(post.description, 40)}"
              class="pt-2"></div>
-        <span th:replace="::clockSVG(*{post.created})"></span>
+        <span th:replace="~{::clockSVG(*{post.created})}"></span>
       </div>
     </a>
   </div>
@@ -134,7 +134,7 @@
         <span class="bold-700-s18 green">$</span>
       </div>
       <div class="d-flex justify-content-between align-items-center mt-2">
-        <div th:insert="fragments/postCar::clockSVG(*{item.created})" class="me-2"></div>
+        <div th:insert="~{fragments/postCar::clockSVG(*{item.created})}" class="me-2"></div>
         <a th:href="@{|/cars/edit/${item.id}|}" style="margin-right: 20px;">
           <button type="button" class="btn edit-btn">редактировать</button>
         </a>

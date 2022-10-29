@@ -7,61 +7,62 @@
         id="form-filter">
     <div class="grid-filter">
 
-      <div th:insert="::fieldSelect('Марка', 'mark', *{mark})" class="mark width-elm"></div>
+      <div th:insert="~{::fieldSelect('Марка', 'mark', *{mark})}" class="mark width-elm"></div>
 
-      <div th:insert="::fieldSelect('Модель', 'model', *{model})" class="model width-elm"></div>
+      <div th:insert="~{::fieldSelect('Модель', 'model', *{model})}" class="model width-elm"></div>
 
-      <div th:insert="::fieldSelect('Город', 'city', *{city})" class="city width-elm"></div>
+      <div th:insert="~{::fieldSelect('Город', 'city', *{city})}" class="city width-elm"></div>
 
       <div class="odometerFrom">
-        <div th:insert="::fieldInput('Пробег от', 'odometerFrom', *{odometerFrom},'left-group')"
+        <div th:insert="~{::fieldInput('Пробег от', 'odometerFrom', *{odometerFrom},'left-group')}"
              class="child"></div>
-        <div th:insert="::fieldInput('до', 'odometerBefore', *{odometerBefore},'right-group')"
+        <div th:insert="~{::fieldInput('до', 'odometerBefore', *{odometerBefore},'right-group')}"
              class="child"></div>
       </div>
 
-      <div th:insert="::fieldSelect('Кузов', 'body', *{body})" class="body width-elm"></div>
+      <div th:insert="~{::fieldSelect('Кузов', 'body', *{body})}" class="body width-elm"></div>
 
-      <div th:insert="::fieldSelect('Коробка', 'gearbox', *{gearbox})" class="gear width-elm"></div>
+      <div th:insert="~{::fieldSelect('Коробка', 'gearbox', *{gearbox})}"
+           class="gear width-elm"></div>
 
-      <div th:insert="::fieldSelect('Двигатель', 'engine', *{engine})"
+      <div th:insert="~{::fieldSelect('Двигатель', 'engine', *{engine})}"
            class="engine width-elm"></div>
 
-      <div th:insert="::fieldSelect('Привод', 'transmission', *{transmission})"
+      <div th:insert="~{::fieldSelect('Привод', 'transmission', *{transmission})}"
            class="transmission width-elm"></div>
 
       <div class="yearFrom">
-        <div th:insert="::valueSelect('Год после', 'yearFrom', *{yearFrom},'left-group')"
+        <div th:insert="~{::valueSelect('Год после', 'yearFrom', *{yearFrom},'left-group')}"
              class="child"></div>
-        <div th:insert="::valueSelect('до', 'yearBefore', *{yearBefore},'right-group')"
+        <div th:insert="~{::valueSelect('до', 'yearBefore', *{yearBefore},'right-group')}"
              class="child"></div>
       </div>
 
 
       <div class="priceFrom">
-        <div th:insert="::fieldInput('Цена от', 'priceFrom', *{priceFrom},'left-group')"
+        <div th:insert="~{::fieldInput('Цена от', 'priceFrom', *{priceFrom},'left-group')}"
              class="child"></div>
-        <div th:insert="::fieldInput('до', 'priceBefore', *{priceBefore},'right-group')"
+        <div th:insert="~{::fieldInput('до', 'priceBefore', *{priceBefore},'right-group')}"
              class="child"></div>
       </div>
 
       <div class="displacementFrom">
         <div
-            th:insert="::valueSelect('Объём от', 'engineDisplacementFrom', *{engineDisplacementFrom},'left-group')"
+            th:insert="~{::valueSelect('Объём от', 'engineDisplacementFrom', *{engineDisplacementFrom},'left-group')}"
             class="child"></div>
         <div
-            th:insert="::valueSelect('до', 'engineDisplacementBefore', *{engineDisplacementBefore},'right-group')"
+            th:insert="~{::valueSelect('до', 'engineDisplacementBefore', *{engineDisplacementBefore},'right-group')}"
             class="child"></div>
       </div>
 
       <div class="powerFrom">
-        <div th:insert="::fieldInput('Мощн. от', 'powerFrom', *{powerFrom},'left-group')"
+        <div th:insert="~{::fieldInput('Мощн. от', 'powerFrom', *{powerFrom},'left-group')}"
              class="child"></div>
-        <div th:insert="::fieldInput('до', 'powerBefore', *{powerBefore},'right-group')"
+        <div th:insert="~{::fieldInput('до', 'powerBefore', *{powerBefore},'right-group')}"
              class="child"></div>
       </div>
 
-      <div th:insert="::sort('Сортировка', 'sort', *{sort})"
+      <div th:insert="~{::sort('Сортировка', 'sort', *{sort})}"
            class="sort width-elm"></div>
 
       <button type="reset" class="btn btn-light resetBtn">Сбросить</button>

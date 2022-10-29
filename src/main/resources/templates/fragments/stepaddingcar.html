@@ -4,7 +4,7 @@
 
 <div th:fragment="stepMark(state)" class="pt-3">
   <div th:if="*{!state.status}">
-    <div th:replace="::title(*{state})"></div>
+    <div th:replace="~{::title(*{state})}"></div>
     <ul class="MarkField__items">
       <li class="MarkFieldTile position-relative"
           th:each="option:*{state.getOptions().values()}"
@@ -19,7 +19,7 @@
     </ul>
   </div>
   <div th:if="*{state.status}">
-    <div th:replace="::resetStep('марка', *{state.value.name}, *{state})"></div>
+    <div th:replace="~{::resetStep('марка', *{state.value.name}, *{state})}"></div>
   </div>
 </div>
 
@@ -27,7 +27,7 @@
 <div th:fragment="stepModel(state)" class="pt-3"
      th:if="${@userSession.getCarState().getStepList().get(__${state.step-1}__).status}">
   <div th:if="*{!state.status}">
-    <div th:replace="::title(*{state})"></div>
+    <div th:replace="~{::title(*{state})}"></div>
     <select id="select-models" class="form-select form-select-sm mb-3 w-50"
             name="option.id">
       <option selected>выбрать модель</option>
@@ -36,7 +36,7 @@
     </select>
   </div>
   <div th:if="*{state.status}">
-    <div th:replace="::resetStep('модель', *{state.value.name}, *{state})"></div>
+    <div th:replace="~{::resetStep('модель', *{state.value.name}, *{state})}"></div>
   </div>
 </div>
 
@@ -44,7 +44,7 @@
 <div th:fragment="stepYear(state)" class="pt-3"
      th:if="${@userSession.getCarState().getStepList().get(__${state.step-1}__).status}">
   <div th:if="*{!state.status}">
-    <div th:replace="::title(*{state})"></div>
+    <div th:replace="~{::title(*{state})}"></div>
     <div class="d-flex flex-column flex-wrap"
          style="height: 160px; width: fit-content;">
       <div th:each="option:*{#lists.sort(state.getOptions().values(),reverse)}"
@@ -57,7 +57,7 @@
 
   </div>
   <div th:if="*{state.status}">
-    <div th:replace="::resetStep('год', *{state.value}, *{state})"></div>
+    <div th:replace="~{::resetStep('год', *{state.value}, *{state})}"></div>
   </div>
 </div>
 
@@ -65,7 +65,7 @@
 <div th:fragment="stepBody(state)" class="pt-3"
      th:if="${@userSession.getCarState().getStepList().get(__${state.step-1}__).status}">
   <div th:if="*{!state.status}">
-    <div th:replace="::title(*{state})"></div>
+    <div th:replace="~{::title(*{state})}"></div>
     <div class="BodyTypeField">
       <div class="BodyTypeField__tile position-relative"
            th:each="option:*{state.getOptions().values()}">
@@ -78,7 +78,7 @@
     </div>
   </div>
   <div th:if="*{state.status}">
-    <div th:replace="::resetStep('кузов', *{state.value.name}, *{state})"></div>
+    <div th:replace="~{::resetStep('кузов', *{state.value.name}, *{state})}"></div>
   </div>
 </div>
 
@@ -86,7 +86,7 @@
 <div th:fragment="stepGen(state)" class="pt-3"
      th:if="${@userSession.getCarState().getStepList().get(__${state.step-1}__).status}">
   <div th:if="*{!state.status}">
-    <div th:replace="::title(*{state})"></div>
+    <div th:replace="~{::title(*{state})}"></div>
     <div class="BodyTypeField">
       <label class="SuperGenField__tile position-relative"
              th:each="option:*{state.getOptions().values()}">
@@ -102,7 +102,7 @@
     </div>
   </div>
   <div th:if="*{state.status}">
-    <div th:replace="::resetStep('поколение', *{state.value.name}, *{state})"></div>
+    <div th:replace="~{::resetStep('поколение', *{state.value.name}, *{state})}"></div>
   </div>
 </div>
 
@@ -110,10 +110,10 @@
 <div th:fragment="stepEngine(state)" class="pt-3"
      th:if="${@userSession.getCarState().getStepList().get(__${state.step-1}__).status}">
   <div th:if="*{!state.status}">
-    <div th:replace="::tag(*{state})"></div>
+    <div th:replace="~{::tag(*{state})}"></div>
   </div>
   <div th:if="*{state.status}">
-    <div th:replace="::resetStepSVG('двигатель', *{state.value}, *{state})"></div>
+    <div th:replace="~{::resetStepSVG('двигатель', *{state.value}, *{state})}"></div>
   </div>
 </div>
 
@@ -121,10 +121,10 @@
 <div th:fragment="stepTransm(state)" class="pt-3"
      th:if="${@userSession.getCarState().getStepList().get(__${state.step-1}__).status}">
   <div th:if="*{!state.status}">
-    <div th:replace="::tag(*{state})"></div>
+    <div th:replace="~{::tag(*{state})}"></div>
   </div>
   <div th:if="*{state.status}">
-    <div th:replace="::resetStepSVG('привод', *{state.value}, *{state})"></div>
+    <div th:replace="~{::resetStepSVG('привод', *{state.value}, *{state})}"></div>
   </div>
 </div>
 
@@ -132,10 +132,10 @@
 <div th:fragment="stepGear(state)" class="pt-3"
      th:if="${@userSession.getCarState().getStepList().get(__${state.step-1}__).status}">
   <div th:if="*{!state.status}">
-    <div th:replace="::tag(*{state})"></div>
+    <div th:replace="~{::tag(*{state})}"></div>
   </div>
   <div th:if="*{state.status}">
-    <div th:replace="::resetStepSVG('коробка передач', *{state.value}, *{state})"></div>
+    <div th:replace="~{::resetStepSVG('коробка передач', *{state.value}, *{state})}"></div>
   </div>
 </div>
 
@@ -143,7 +143,7 @@
 <div th:fragment="stepModif(state)" class="pt-3"
      th:if="${@userSession.getCarState().getStepList().get(__${state.step-1}__).status}">
   <div th:if="*{!state.status}">
-    <div th:replace="::title(*{state})"></div>
+    <div th:replace="~{::title(*{state})}"></div>
     <div class="d-flex flex-column flex-wrap"
          style="height: 160px; width: fit-content;">
       <div th:each="option,iterStat:*{state.getOptions().values()}" class="mb-2 me-3">
@@ -155,7 +155,7 @@
   </div>
   <div th:if="*{state.status}">
     <div
-        th:replace="::resetStep('модификация', *{state.value.modification.id.nameId}, *{state})"></div>
+        th:replace="~{::resetStep('модификация', *{state.value.modification.id.nameId}, *{state})}"></div>
   </div>
 </div>
 
@@ -163,7 +163,7 @@
 <div th:fragment="stepColor(state)" class="pt-3"
      th:if="${@userSession.getCarState().getStepList().get(__${state.step-1}__).status}">
   <div th:if="*{!state.status}">
-    <div th:replace="::title(*{state})"></div>
+    <div th:replace="~{::title(*{state})}"></div>
     <div class="ColorField p-2">
       <div th:each="option,iterStat:*{state.getOptions().values()}">
         <!--      <p th:text="*{iterStat.index}"></p>-->
@@ -174,7 +174,7 @@
     </div>
   </div>
   <div th:if="*{state.status}">
-    <div th:replace="::resetStepColor('Цвет', *{state.value}, *{state})"></div>
+    <div th:replace="~{::resetStepColor('Цвет', *{state.value}, *{state})}"></div>
   </div>
 </div>
 
@@ -186,7 +186,7 @@
 
 
 <div th:fragment="tag(state)" class="pt-1">
-  <div th:replace="::title(*{state})"></div>
+  <div th:replace="~{::title(*{state})}"></div>
   <div class="Tags Tags_wrap_wrap Tags_properGaps">
     <span class="Tags__tag position-relative" th:each="option:*{state.getOptions().values()}">
       <button

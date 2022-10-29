@@ -107,9 +107,9 @@ public class FilterForm {
                     .concat(params.get(i).getQuery());
         }
         String sort = switch (filterDto.getSort()) {
-            case 1 -> " ORDER BY c.price ASC";
-            case 2 -> " ORDER BY c.price DESC";
-            default -> " ORDER BY c.created DESC";
+            case 1 -> " ORDER BY c.price ASC, c.id";
+            case 2 -> " ORDER BY c.price DESC, c.id";
+            default -> " ORDER BY c.created DESC, c.id";
         };
         query = query.concat(sort);
         return query;
@@ -166,9 +166,9 @@ public class FilterForm {
                 @Override
                 public String getQuery() {
                     return query = switch (((int) value)) {
-                        case 1 -> " ORDER BY c.price ASC";
-                        case 2 -> " ORDER BY c.price DESC";
-                        default -> " ORDER BY c.created DESC";
+                        case 1 -> " ORDER BY c.price ASC, c.id";
+                        case 2 -> " ORDER BY c.price DESC, c.id";
+                        default -> " ORDER BY c.created DESC, c.id";
                     };
                 }
 
