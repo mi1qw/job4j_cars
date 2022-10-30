@@ -1,7 +1,6 @@
 package com.example.car.service;
 
 import com.example.car.model.Body;
-import com.example.car.model.Model;
 import com.example.car.store.BodyStore;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

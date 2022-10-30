@@ -10,7 +10,7 @@
     <!--    <suppress files="[a-zA-Z0-9]*" checks="[a-zA-Z0-9]*"/>-->
 
     <suppress checks="DesignForExtension" files="\.(java|xml)$"/>
-    <suppress checks="ConstantName" files="\.(java|xml)$"/>
+<!--    <suppress checks="ConstantName" files="\.(java|xml)$"/>-->
 
     <suppress checks="MethodLength" files="\.*Test.(java|xml)$"/>
 
@@ -26,5 +26,7 @@
     <!--    Each variable declaration must be in its own statement. [MultipleVariableDeclarations]-->
     <suppress checks="MultipleVariableDeclarations" files="\.(java|xml)$"/>
 
-
+    <!--    Количество строк у метода dataLoader 513 (максимум 150). (77:5) [MethodLength]-->
+    <suppress checks="MethodLength"
+              files="src[\\/].*[\\/]Job4jCarApplication.java"/>
 </suppressions>

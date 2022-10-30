@@ -2,15 +2,12 @@ package com.example.car.service;
 
 import com.example.car.model.Generations;
 import com.example.car.model.Model;
-import com.example.car.model.Options;
 import com.example.car.store.GenerationsStore;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 

@@ -43,6 +43,13 @@ public class FilterForm {
         return query == null;
     }
 
+    /**
+     * Обновляем фильтр.
+     * сортировку не добавил, по умолчанию
+     * addSorting("sort", filter.getSort());
+     *
+     * @param filter filter
+     */
     public void update(final FilterDto filter) {
         this.filterDto = filter;
         params.clear();
@@ -76,8 +83,6 @@ public class FilterForm {
         addParamID("gearbox", filter.getGearbox(), false, (n) -> n.setGearbox(null));
         addParamID("engine", filter.getEngine(), true, (n) -> n.setEngine(null));
         addParamID("transmission", filter.getTransmission(), false, (n) -> n.setTransmission(null));
-
-//        addSorting("sort", filter.getSort());
     }
 
     public FilterForm sliceFilter(final String element) {

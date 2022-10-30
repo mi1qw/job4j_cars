@@ -24,7 +24,7 @@ public class ImageUtil {
         return PATTERN.matcher(img).matches();
     }
 
-    public static int findMaxID(final Car car) {
+    public static int findImageMaxID(final Car car) {
         List<String> images = car.getImages();
         Optional<Integer> max =
                 images.stream()

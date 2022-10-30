@@ -11,7 +11,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 public interface SessionStore {
-    SessionFactory sessionFactory = sessionFactory();
+    SessionFactory SESSION_FACTORY = sessionFactory();
 
     private static SessionFactory sessionFactory() {
         final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
@@ -20,7 +20,7 @@ public interface SessionStore {
     }
 
     default <T> T tx(final Function<Session, T> command) {
-        final Session session = sessionFactory.openSession();
+        final Session session = SESSION_FACTORY.openSession();
         final Transaction tx = session.beginTransaction();
         try {
             T rsl = command.apply(session);
@@ -35,7 +35,7 @@ public interface SessionStore {
     }
 
     default void txv(final Consumer<Session> command) {
-        final Session session = sessionFactory.openSession();
+        final Session session = SESSION_FACTORY.openSession();
         final Transaction tx = session.beginTransaction();
         try {
             command.accept(session);

@@ -6,7 +6,6 @@ import com.example.car.model.Status;
 import com.example.car.util.CarState;
 import com.example.car.util.FilterForm;
 import com.example.car.web.UserSession;
-import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletRequestEvent;
 import jakarta.servlet.annotation.WebListener;
 import lombok.extern.slf4j.Slf4j;
@@ -25,11 +24,9 @@ public class MyListener extends RequestContextListener {
 
     @Override
     public void requestInitialized(final ServletRequestEvent requestEvent) {
-        ServletRequest servletRequest = requestEvent.getServletRequest();
-        //        super.requestInitialized(requestEvent);
+        super.requestInitialized(requestEvent);
         userSessionLog();
     }
-
 
     public void userSessionLog() {
         try {

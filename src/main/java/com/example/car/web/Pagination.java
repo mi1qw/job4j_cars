@@ -1,13 +1,7 @@
 package com.example.car.web;
 
-import lombok.Data;
-
-@Data
-public class Pagination {
-    private final int page;
-    private final int size;
-
-    private Pagination(final int page, final int size) {
+public record Pagination(int page, int size) {
+    public Pagination(final int page, final int size) {
         if (page < 0) {
             throw new IllegalArgumentException("Page index must not be less than zero!");
         } else if (size < 1) {

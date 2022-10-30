@@ -106,18 +106,6 @@ public class CarState {
                 .collect(Collectors.toMap(Gearbox::getId, Function.identity()));
     }
 
-//    public Map<Long, GenMod> getGenerationsModification1() {
-//        Gearbox gearbox = (Gearbox) stepList.get(7).value;
-//        generations = generations.stream()
-//                .filter(n -> n.getGearbox().equals(gearbox))
-//                .collect(Collectors.toList());
-//        return generations.stream()
-//                .collect(Collectors.toMap(Generations::getId,
-//                        (n) -> new GenMod(
-//                                n.getId(),
-//                                n.getModification().getId().getNameId())));
-//    }
-
     public Map<Long, GenMod> getGenerationsModification() {
         Gearbox gearbox = (Gearbox) stepList.get(7).value;
         generations = generations.stream()

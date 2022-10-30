@@ -1,15 +1,15 @@
 package com.example.car.service;
 
-import com.example.car.config.PostsConfig;
-import com.example.car.dto.CarMapper;
 import com.example.car.dto.FileImageDto;
 import com.example.car.dto.FilterDto;
-import com.example.car.model.*;
+import com.example.car.model.Account;
+import com.example.car.model.Car;
+import com.example.car.model.Gearbox;
+import com.example.car.model.Status;
 import com.example.car.service.dto.PaginationDto;
 import com.example.car.store.CarStore;
 import com.example.car.util.CarModfctn;
 import com.example.car.web.Pagination;
-import com.example.car.util.State;
 import com.example.car.web.UserSession;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -36,5 +36,5 @@ build/
 *.mv.db
 
 ### images folder ###
-uploadPosts/
-*.png
+#uploadPosts/
+#*.png

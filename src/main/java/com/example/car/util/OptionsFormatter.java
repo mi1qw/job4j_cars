@@ -5,7 +5,6 @@ import com.example.car.service.OptionsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.Formatter;
 
-import java.text.ParseException;
 import java.util.Locale;
 
 public class OptionsFormatter implements Formatter<Options> {

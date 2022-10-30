@@ -32,8 +32,6 @@ import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static java.util.stream.Collectors.*;
-
 @Slf4j
 @Controller
 @RequestMapping("/cars")
@@ -180,7 +178,7 @@ public class CarFormController {
         }
         AtomicInteger maxID = userSession.getMaxID();
         if (maxID == null) {
-            int maxIDa = ImageUtil.findMaxID(newCar);
+            int maxIDa = ImageUtil.findImageMaxID(newCar);
             maxID = new AtomicInteger(maxIDa);
             userSession.setMaxID(maxID);
         }
