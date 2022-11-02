@@ -76,7 +76,7 @@ class CarMapperTest {
         assertThat(car.getImages()).isEqualTo(List.of("A", "C", "B"));
     }
 
-    @Test
+    @Deprecated
     void postMapper() {
         Car car = carService.getCar(3L);
         CarModfctn carModfctn = carService.findCarPost(car.getId());
