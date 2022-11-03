@@ -9,7 +9,7 @@ import java.util.Set;
 @Entity
 @Table(name = "generations",
         uniqueConstraints = @UniqueConstraint(columnNames =
-                {"name", "year", "body_id", "engine_id", "gearbox_id", "model_id", "mark_id",
+                {"name", "yearg", "body_id", "engine_id", "gearbox_id", "model_id", "mark_id",
                         "name_id", "year_id", "transmission_id"}))
 @Data
 @Builder
@@ -23,6 +23,7 @@ public class Generations {
 
     private String name;
     private String image;
+    @Column(name = "yearg")
     private Short year;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -31,6 +31,7 @@ public class Car {
     private String description;
     private BigDecimal price;
     private Short odometer;
+    @Column(name = "yearc")
     private Short year;
     private Short yearPurchase;
     private Short power;
