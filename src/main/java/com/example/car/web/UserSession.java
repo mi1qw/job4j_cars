@@ -21,4 +21,5 @@ public class UserSession {
     private AtomicInteger order = new AtomicInteger();
     private FilterForm filterForm = new FilterForm();
     private FilterForm breadcrumb = new FilterForm();
+    private String str = "Session";
 }

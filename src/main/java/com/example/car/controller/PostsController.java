@@ -11,6 +11,7 @@ import com.example.car.util.FilterForm;
 import com.example.car.web.Pagination;
 import com.example.car.util.PathForm;
 import com.example.car.web.UserSession;
+import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -50,7 +51,12 @@ public class PostsController {
 
     @GetMapping("/{id}")
     String carPost(final @PathVariable("id") Long id,
-                   final Model model) {
+                   final Model model,
+                   final HttpSession session) {
+        String id1 = session.getId();
+        log.info("{}", id1);
+        log.info("str={}", userSession.getStr());
+
         CarModfctn carModfctn = carService.findCarPost(id);
         PostDto postDto = postMapper.carToPostDto(carModfctn.car(), carModfctn.modification());
         model.addAttribute("post", postDto);

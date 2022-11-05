@@ -15,6 +15,8 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockHttpServletRequest;
@@ -38,7 +40,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 //@SpringBootTest
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureWebMvc
-//@AutoConfigureMockMvc
+@AutoConfigureMockMvc
 @EnableWebMvc
 @Import({Migrator.class})
 @Slf4j
@@ -49,8 +51,8 @@ class CarFormControllerTest {
     private TestRestTemplate restTemplate;
     @LocalServerPort
     private int port;
-    //    @Autowired
-//    private MockMvc mockMvc;
+    @Autowired
+    private MockMvc mockMvc;
     @Autowired
     private UserSession userSession;
 
@@ -95,35 +97,64 @@ class CarFormControllerTest {
 //        Car newCar = userSession.getNewCar();
 //        log.info("newCar {}", newCar == null);
 
-        int length = restTemplate.getForObject("http://localhost:" + port + "/add",
+        int length = restTemplate.getForObject("http://localhost:" + port + "/posts/3",
                         String.class)
                 .length();
+        Thread.sleep(500);
+        restTemplate.getForObject("http://localhost:" + port + "/posts/3",
+                String.class);
+        Thread.sleep(500);
 
 
-        ResponseEntity<?> response = restTemplate.exchange(
-                "http://localhost:" + port + "/add",
-                HttpMethod.GET, null, new ParameterizedTypeReference<>() {
-                });
+//restTemplate.exchange()
 
+//
+
+        ResponseEntity<String> response
+                = restTemplate.getForEntity("http://localhost:" + port + "/posts/3", String.class);
+
+//        log.info("{}", response.getHeaders().entrySet());
+        log.info("получили {}", response.getHeaders().get("Set-Cookie"));
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.addAll("Set-Cookie", response.getHeaders().get("Set-Cookie"));
+        HttpEntity<Integer> request = new HttpEntity<>(headers);
         response = restTemplate.exchange(
                 "http://localhost:" + port + "/posts/3",
-                HttpMethod.GET, null, new ParameterizedTypeReference<>() {
-                });
+                HttpMethod.GET,
+                request,
+                String.class,
+                "get"
+        );
+        log.info("получили {}", response.getHeaders().get("Set-Cookie"));
+        log.info("Session {}", userSession != null);
+        log.info("{}", userSession.getFilterForm());
+
+//
+//        ResponseEntity<?> response = restTemplate.exchange(
+//                "http://localhost:" + port + "/add",
+//                HttpMethod.GET, null, new ParameterizedTypeReference<>() {
+//                });
+//
+//        response = restTemplate.exchange(
+//                "http://localhost:" + port + "/posts/3",
+//                HttpMethod.GET, null, new ParameterizedTypeReference<>() {
+//                });
 //        response.
 
-        log.info("{}", response);
-//        MvcResult mvcResult = mockMvc.perform(get("/add"))
-//                .andDo(print())
-//                .andExpect(status().isFound())
+//        log.info("{}", response);
+//        MvcResult mvcResult = mockMvc.perform(get("/posts/3"))
+////                .andDo(print())
+////                .andExpect(status().isFound())
 //                .andReturn();//                .andExpect(content().string
 // (containsString(" ")))
 
 //        MockHttpServletRequest request = mvcResult.getRequest();
 //        UserSession userSession = (UserSession) Objects.requireNonNull(request.getSession())
 //                .getAttribute("scopedTarget.userSession");
-
-        Car newCar = userSession.getNewCar();
-        log.info("newCar {}", newCar == null);
+//
+//        Car newCar = userSession.getNewCar();
+//        log.info("newCar {}", newCar == null);
     }
 
     @Test

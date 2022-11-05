@@ -13,6 +13,7 @@ import com.example.car.util.JsonUtil;
 import com.example.car.util.State;
 import com.example.car.validation.ValidationGroupSequence;
 import com.example.car.web.UserSession;
+import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.Resource;
