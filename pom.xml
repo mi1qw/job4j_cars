@@ -23,21 +23,23 @@
     <profiles>
         <profile>
             <id>test</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <properties>
+                <!--                <spring.profiles.active>test</spring.profiles.active>-->
                 <db.url>
-                    jdbc:h2:./testdb;MODE=PostgreSQL;CASE_INSENSITIVE_IDENTIFIERS=TRUE;
+                    jdbc:h2:mem:car;MODE=PostgreSQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;CASE_INSENSITIVE_IDENTIFIERS=TRUE;
                 </db.url>
                 <db.username>sa</db.username>
                 <db.password>""</db.password>
                 <db.driver>org.h2.Driver</db.driver>
             </properties>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
         </profile>
         <profile>
             <id>production</id>
             <properties>
+                <spring.profiles.active>production</spring.profiles.active>
                 <db.url>jdbc:postgresql://127.0.0.1:5432/car</db.url>
                 <db.username>postgres</db.username>
                 <db.password>Password12!</db.password>
@@ -103,7 +105,6 @@
         <dependency>
             <groupId>org.hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
-            <version>2.7.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -154,6 +155,10 @@
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-maven-plugin</artifactId>
             <version>4.17.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
         </dependency>
     </dependencies>
 
