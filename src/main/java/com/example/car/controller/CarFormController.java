@@ -32,9 +32,9 @@ import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
-@Slf4j
 @Controller
 @RequestMapping("/cars")
+@Slf4j
 @AllArgsConstructor
 public class CarFormController {
     private final State state;
