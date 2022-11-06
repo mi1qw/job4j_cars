@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -88,5 +89,12 @@ public class Car {
     public Car(final String name, final Engine engine) {
         this.name = name;
         this.engine = engine;
+    }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+               "id=" + id +
+               '}';
     }
 }

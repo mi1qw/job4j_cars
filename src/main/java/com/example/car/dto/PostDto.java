@@ -36,4 +36,11 @@ public class PostDto {
     private Modification modification;
     private Map<String, List<Options>> optionsMap;
     private List<String> images;
+
+    @Override
+    public String toString() {
+        return "PostDto{" +
+               "mock"+
+               '}';
+    }
 }

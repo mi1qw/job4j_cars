@@ -5,6 +5,7 @@ import com.example.car.model.Car;
 import com.example.car.util.CarState;
 import com.example.car.util.FilterForm;
 import lombok.Data;
+import lombok.ToString;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
@@ -21,5 +22,12 @@ public class UserSession {
     private AtomicInteger order = new AtomicInteger();
     private FilterForm filterForm = new FilterForm();
     private FilterForm breadcrumb = new FilterForm();
-    private String str = "Session";
+
+
+    @Override
+    public String toString() {
+        return "UserSession{" +
+               "mock"+
+               '}';
+    }
 }

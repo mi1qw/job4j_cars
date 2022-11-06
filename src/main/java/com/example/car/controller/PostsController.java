@@ -51,12 +51,7 @@ public class PostsController {
 
     @GetMapping("/{id}")
     String carPost(final @PathVariable("id") Long id,
-                   final Model model,
-                   final HttpSession session) {
-        String id1 = session.getId();
-        log.info("{}", id1);
-        log.info("str={}", userSession.getStr());
-
+                   final Model model) {
         CarModfctn carModfctn = carService.findCarPost(id);
         PostDto postDto = postMapper.carToPostDto(carModfctn.car(), carModfctn.modification());
         model.addAttribute("post", postDto);

@@ -25,7 +25,6 @@ function addCheckboxes() {
 }
 
 function sendClick(value, url, callback) {
-    var url = url
     var xhr = new XMLHttpRequest()
     var formData = new FormData()
     xhr.open('POST', url, true)
