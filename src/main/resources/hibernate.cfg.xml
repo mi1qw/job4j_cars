@@ -9,7 +9,7 @@
         <property name="hibernate.connection.url">jdbc:postgresql://127.0.0.1:5432/car
         </property>
         <property name="hibernate.connection.username">postgres</property>
-        <property name="hibernate.connection.password">Password12!</property>
+        <property name="hibernate.connection.password">123</property>
         <property name="hibernate.connection.pool_size">4</property>
         <property name="hibernate.current_session_context_class">thread</property>
         <property name="hibernate.auto_quote_keyword=true">true</property>

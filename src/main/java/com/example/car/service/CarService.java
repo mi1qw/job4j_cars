@@ -50,7 +50,7 @@ public class CarService {
         return carStore.reorderImg(car.getId(), names);
     }
 
-    public List<Car> finAll() {
+    public List<Car> findAll() {
         return carStore.findAll();
     }
 

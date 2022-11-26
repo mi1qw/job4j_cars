@@ -16,10 +16,10 @@ public class SessionTracking implements ResultHandler {
     private MockHttpSession lastSession = new MockHttpSession();
     private UserSession userSession;
     @Autowired
-    UserTestSession userTestSession;
+    private UserTestSession userTestSession;
 
     @Override
-    public void handle(MvcResult result) {
+    public void handle(final MvcResult result) {
         lastSession = (MockHttpSession) result.getRequest().getSession(false);
         assert lastSession != null;
         userSession = (UserSession) lastSession.getAttribute("scopedTarget.userSession");

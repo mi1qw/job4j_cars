@@ -34,8 +34,7 @@ public class FileSystemStore implements StorageService {
             if (file.isEmpty()) {
                 throw new StorageException("Failed to store empty file.");
             }
-            Path destinationFile = this.rootLocation.resolve(
-                            Paths.get(filename))
+            Path destinationFile = this.rootLocation.resolve(Paths.get(filename))
                     .normalize().toAbsolutePath();
             if (!destinationFile.getParent().equals(this.rootLocation.toAbsolutePath())) {
                 throw new StorageException(
@@ -90,12 +89,11 @@ public class FileSystemStore implements StorageService {
     @Override
     public void deleteByName(final String filename) {
         try {
-            Path destinationFile = this.rootLocation.resolve(
-                            Paths.get(filename))
+            Path destinationFile = this.rootLocation.resolve(Paths.get(filename))
                     .normalize().toAbsolutePath();
             Files.delete(destinationFile);
         } catch (IOException e) {
-            throw new StorageException("Failed to delete file.", e);
+            throw new StorageException("Failed to delete file " + filename, e);
         }
     }
 

@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Data;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -26,6 +27,7 @@ public class CarDto implements Serializable {
     private Short yearPurchase;
 
     @NotNull(message = "Выберите город")
+    @ToString.Exclude
     private City city;
 
     private String description;

@@ -39,8 +39,6 @@ public class PostDto {
 
     @Override
     public String toString() {
-        return "PostDto{" +
-               "mock"+
-               '}';
+        return "PostDto{" + "mock" + '}';
     }
 }

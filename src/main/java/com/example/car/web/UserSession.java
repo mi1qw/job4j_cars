@@ -5,7 +5,6 @@ import com.example.car.model.Car;
 import com.example.car.util.CarState;
 import com.example.car.util.FilterForm;
 import lombok.Data;
-import lombok.ToString;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
@@ -26,8 +25,6 @@ public class UserSession {
 
     @Override
     public String toString() {
-        return "UserSession{" +
-               "mock"+
-               '}';
+        return "UserSession{" + "mock" + '}';
     }
 }

@@ -41,7 +41,6 @@ public class Migrator {
     private OptionsService optionsService;
     @Autowired
     private TransmissionService transmissionService;
-
     private final DataSource ds = new XmlParser().dataSource();
 
     @PostConstruct
@@ -70,7 +69,7 @@ public class Migrator {
             LockServiceFactory.getInstance().register(new StandardLockService());
             ClassLoader classLoader = this.getClass().getClassLoader();
             ResourceAccessor resourceAccessor = new ClassLoaderResourceAccessor(classLoader);
-            Liquibase liquibase = new Liquibase("db/master.xml", resourceAccessor, db);
+            Liquibase liquibase = new Liquibase("dbTest/master.xml", resourceAccessor, db);
             liquibase.update(new Contexts());
         } catch (LiquibaseException | SQLException e) {
             log.error(e.getMessage(), e);

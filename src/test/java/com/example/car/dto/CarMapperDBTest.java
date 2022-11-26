@@ -1,5 +1,6 @@
 package com.example.car.dto;
 
+import com.example.car.Cleaner;
 import com.example.car.Migrator;
 import com.example.car.model.Car;
 import com.example.car.service.*;
@@ -7,8 +8,7 @@ import com.example.car.store.CityStore;
 import com.example.car.store.ModificationStore;
 import com.example.car.util.CarModfctn;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
@@ -19,8 +19,9 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-@Import({Migrator.class})
+@Import({Migrator.class, Cleaner.class})
 @Slf4j
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class CarMapperDBTest {
     @Autowired
     private CarMapper carMapper;
@@ -51,6 +52,13 @@ class CarMapperDBTest {
     private CityStore cityStore;
     @Autowired
     private ModificationStore modificationStore;
+    @Autowired
+    private Cleaner cleaner;
+
+    @AfterAll
+    void cleanDB() {
+        cleaner.clean();
+    }
 
     @Test
     @Tag("withDB")

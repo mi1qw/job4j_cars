@@ -8,7 +8,7 @@
         </Console>
         <Console name="ConsoleAppenderON" target="SYSTEM_OUT">
             <PatternLayout disableAnsi="false"
-                           pattern="%msg{FATAL=red blink, ERROR=red, WARN=yellow bold, INFO=black, DEBUG=green bold, TRACE=blue}                  %highlight{[%d{HH:mm:ss.SSS}] %t %tp %c{1} %M %L  %ex{10} } %n"/>
+                           pattern="%msg{FATAL=red blink, ERROR=red, WARN=yellow bold, INFO=black, DEBUG=green bold, TRACE=blue}                  %highlight{[%d{HH:mm:ss.SSS}] %t %tp %c{1} %M %L  %ex{50} } %n"/>
         </Console>
     </Appenders>
     <Loggers>

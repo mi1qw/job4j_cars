@@ -210,7 +210,7 @@ public class FilterForm {
 
     @Data
     @AllArgsConstructor
-    private static class ElementForm<T> {
+    public static class ElementForm<T> {
         private final String name;
         private final T value;
         private final boolean isSliced;

@@ -38,6 +38,8 @@ public class XmlParser {
                                     .setPassword(eventData(reader));
                             case "hibernate.connection.username" -> ds
                                     .setUser(eventData(reader));
+                            default -> {
+                            }
                         }
                     }
                 }

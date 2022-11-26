@@ -29,8 +29,6 @@ public class MyPoststsController {
         List<Car> cars = carService.findMyCars();
         Map<Status, List<Car>> statusMap = cars.stream()
                 .collect(Collectors.groupingBy(Car::getStatus));
-//        model.addAttribute("posts", cars);
-
         model.addAttribute("onSale", statusMap.get(Status.onSale));
         model.addAttribute("bought", statusMap.get(Status.bought));
         model.addAttribute("newItem", statusMap.get(Status.newItem));
