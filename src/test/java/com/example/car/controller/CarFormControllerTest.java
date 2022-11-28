@@ -15,21 +15,27 @@ import com.example.car.service.CityService;
 import com.example.car.store.SessionStore;
 import com.example.car.util.CarModfctn;
 import com.example.car.util.CarState;
+import jakarta.servlet.ServletException;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
@@ -180,6 +186,14 @@ class CarFormControllerTest implements SessionStore {
     void changeStatusOfMyCarPost() throws Exception {
         Car car = carService.getCar(10L);
         assertThat(car.getStatus()).isEqualTo(Status.onSale);
+
+        mockMvc.perform(get("/myposts").session(sessions.getLastSession()))
+                .andDo(sessions)
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(view().name("myPosts"))
+                .andExpect(model().attribute("onSale", hasSize(5)))
+                .andExpect(model().attribute("notActive", nullValue()));
+
         mockMvc.perform(post("/myposts/status").session(sessions.getLastSession())
                         .param("id", "10")
                         .param("value", "false"))
@@ -188,6 +202,13 @@ class CarFormControllerTest implements SessionStore {
         car = carService.getCar(10L);
         assertThat(car.getStatus()).isEqualTo(Status.notActive);
 
+        mockMvc.perform(get("/myposts").session(sessions.getLastSession()))
+                .andDo(sessions)
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(view().name("myPosts"))
+                .andExpect(model().attribute("onSale", hasSize(4)))
+                .andExpect(model().attribute("notActive", hasSize(1)));
+
         mockMvc.perform(post("/myposts/status").session(sessions.getLastSession())
                         .param("id", "10")
                         .param("value", "true"))
@@ -195,6 +216,13 @@ class CarFormControllerTest implements SessionStore {
                 .andExpect(status().is2xxSuccessful());
         car = carService.getCar(10L);
         assertThat(car.getStatus()).isEqualTo(Status.onSale);
+
+        mockMvc.perform(get("/myposts").session(sessions.getLastSession()))
+                .andDo(sessions)
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(view().name("myPosts"))
+                .andExpect(model().attribute("onSale", hasSize(5)))
+                .andExpect(model().attribute("notActive", nullValue()));
     }
 
     @Test
@@ -279,12 +307,87 @@ class CarFormControllerTest implements SessionStore {
 
 
     @Test
-    @Order(13)
+    @Order(121)
+    void uploadImageOfCar() throws Exception {
+        MockMultipartFile file1 = new MockMultipartFile(
+                "files",
+                "imgCar1.jpg",
+                String.valueOf(MediaType.IMAGE_JPEG),
+                "image1 of my old Car".getBytes());
+        MockMultipartFile file2 = new MockMultipartFile(
+                "files",
+                "imgCar2.jpg",
+                String.valueOf(MediaType.IMAGE_JPEG),
+                "image2 of my old Car".getBytes());
+        mockMvc.perform(multipart("/cars/upload")
+                        .file(file1)
+                        .session(sessions.getLastSession()))
+                .andDo(sessions)
+                .andExpect(status().is2xxSuccessful());
+        mockMvc.perform(multipart("/cars/upload")
+                        .file(file2)
+                        .session(sessions.getLastSession()))
+                .andDo(sessions)
+                .andExpect(status().is2xxSuccessful());
+
+        log.info("{}", userSession.getNewCar().getImages());
+        assertThat(userSession.getNewCar().getImages().size()).isEqualTo(2);
+    }
+
+    @Test
+    @Order(122)
+    void getImg() throws Exception {
+        assertThat(isExistImage(userSession.getNewCar().getImages().get(0))).isTrue();
+        assertThat(isExistImage(userSession.getNewCar().getImages().get(1))).isTrue();
+    }
+
+
+    @Test
+    @Order(123)
+    void deleteImageOfCarShouldDeleteFile() throws Exception {
+        List<String> prevImages = new ArrayList<>(userSession.getNewCar().getImages());
+        MockMultipartFile file3 = new MockMultipartFile(
+                "files",
+                "imgCar3.jpg",
+                String.valueOf(MediaType.IMAGE_JPEG),
+                "image3 of my old Car".getBytes());
+
+        mockMvc.perform(multipart("/cars/upload")
+                        .file(file3)
+                        .session(sessions.getLastSession()))
+                .andDo(sessions)
+                .andExpect(status().is2xxSuccessful());
+        assertThat(userSession.getNewCar().getImages().size()).isEqualTo(3);
+        log.info("{}", userSession.getNewCar().getImages());
+
+        List<String> images = userSession.getNewCar().getImages();
+        images.removeAll(prevImages);
+        assertThat(images.size()).isEqualTo(1);
+        String img3 = images.get(0);
+        assertThat(isExistImage(img3)).isTrue();
+
+        mockMvc.perform(post("/cars/removeImg")
+                        .session(sessions.getLastSession())
+                        .param("value", img3))
+                .andDo(sessions)
+                .andExpect(status().is2xxSuccessful());
+        assertThat(userSession.getNewCar().getImages().size()).isEqualTo(2);
+        log.info("{} have been removed", img3);
+
+        Exception exception = assertThrows(ServletException.class, () ->
+                isExistImage(img3));
+        String expectedMessage = "Could not read file: 1-2-imgCar3.jpg";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    @Order(130)
     void saveCarPost() throws Exception {
         City city = cityService.findById(1L);
         mockMvc.perform(post("/cars/add").session(sessions.getLastSession())
                         .flashAttr("carform", CarDto.builder()
-                                .images("image.jpg")
+                                .images(imgMapToString(userSession.getNewCar().getImages()))
                                 .description("description")
                                 .odometer((short) 11)
                                 .price(BigDecimal.valueOf(50000L))
@@ -312,7 +415,7 @@ class CarFormControllerTest implements SessionStore {
     }
 
     @Test
-    @Order(14)
+    @Order(140)
     void editCarPost() throws Exception {
         mockMvc.perform(get("/cars/edit/{id}", newCarId)
                         .session(sessions.getLastSession()))
@@ -324,7 +427,7 @@ class CarFormControllerTest implements SessionStore {
         assertThat(userSession.getAccount().getFirstName()).isEqualTo("Ann");
 
         CarDto carDto = carMapper.carToDto(userSession.getNewCar());
-        carDto.setImages("image.jpg");
+        carDto.setImages(imgMapToString(userSession.getNewCar().getImages()));
         carDto.setDescription(carDto.getDescription() + " Test");
 
         mockMvc.perform(post("/cars/add").session(sessions.getLastSession())
@@ -333,7 +436,6 @@ class CarFormControllerTest implements SessionStore {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/myposts"))
                 .andExpect(redirectedUrl("/myposts"));
-        assertThat(userSession.getAccount().getFirstName()).isEqualTo("Ann");
         log.info("{}", carService.findCarPost(newCarId).car().getDescription());
         assertThat(carService.findCarPost(newCarId)).satisfies(
                 n -> assertThat(n.car().getName())
@@ -345,7 +447,7 @@ class CarFormControllerTest implements SessionStore {
     }
 
     @Test
-    @Order(15)
+    @Order(150)
     void deleteCarPost() throws Exception {
         mockMvc.perform(get("/myposts/deleteCar/{id}", newCarId)
                         .session(sessions.getLastSession())
@@ -358,7 +460,7 @@ class CarFormControllerTest implements SessionStore {
     }
 
     @Test
-    @Order(16)
+    @Order(160)
     void mainPageWithListOfCarPosts() throws Exception {
         mockMvc.perform(get("/posts").session(sessions.getLastSession())
                         .flashAttr("filter",
@@ -377,7 +479,7 @@ class CarFormControllerTest implements SessionStore {
     }
 
     @Test
-    @Order(17)
+    @Order(170)
     void filterGetModelsMersShouldReturnJsonModels() throws Exception {
         mockMvc.perform(get("/cars/models").session(sessions.getLastSession())
                         .param("id", "3"))
@@ -389,7 +491,7 @@ class CarFormControllerTest implements SessionStore {
     }
 
     @Test
-    @Order(18)
+    @Order(180)
     void filterPostsByMarkMersShouldReturnOnlyMers1() throws Exception {
         mockMvc.perform(get("/posts").session(sessions.getLastSession())
                         .flashAttr("filter",
@@ -411,7 +513,7 @@ class CarFormControllerTest implements SessionStore {
     }
 
     @Test
-    @Order(19)
+    @Order(190)
     void breadCrumbsPostsByMarkShouldReturnOnlyOneMark() throws Exception {
         assertThat(sessions.getUserSession().getFilterForm().getParams()).satisfies(
                 (n) -> assertThat(n.size()).isEqualTo(2),
@@ -441,14 +543,27 @@ class CarFormControllerTest implements SessionStore {
     }
 
     @Test
-    void getImg() {
+    @Order(200)
+    void logOut() throws Exception {
+        mockMvc.perform(get("/logout").session(sessions.getLastSession()))
+                .andDo(sessions)
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/posts"));
+        assertThat(userSession.getAccount()).isNull();
     }
 
-    @Test
-    void resetState() {
+    private boolean isExistImage(final String name) throws Exception {
+        MvcResult mvcResult = mockMvc.perform(get("/cars/img/{img}", name)
+                        .session(sessions.getLastSession()))
+                .andDo(sessions)
+                .andExpect(status().is2xxSuccessful())
+                .andReturn();
+        String content = mvcResult.getResponse().getContentAsString();
+        log.info("getImg= {}", content);
+        return content.matches("image\\d of my old Car");
     }
 
-    @Test
-    void upload() {
+    private String imgMapToString(final List<String> images) {
+        return String.join("|", images);
     }
 }

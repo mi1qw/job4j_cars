@@ -35,7 +35,6 @@ public class FilterForm {
 
     public FilterForm(final FilterDto filterDto) {
         this.baseQuery = "select c from Car c";
-        this.filterDto = filterDto;
         update(filterDto);
     }
 
@@ -151,7 +150,7 @@ public class FilterForm {
             params.add(new ElementForm<>(name, before, false, resetField) {
                 @Override
                 public String getQuery() {
-                    return " c.".concat(name).concat(" < " + before);
+                    return " c.".concat(name).concat(" <= " + before);
                 }
 
                 @Override

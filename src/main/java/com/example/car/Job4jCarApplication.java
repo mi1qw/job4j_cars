@@ -579,7 +579,5 @@ public class Job4jCarApplication {
             } catch (Exception ignored) {
             }
         };
-
-
     }
 }

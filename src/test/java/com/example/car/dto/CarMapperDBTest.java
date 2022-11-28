@@ -3,12 +3,13 @@ package com.example.car.dto;
 import com.example.car.Cleaner;
 import com.example.car.Migrator;
 import com.example.car.model.Car;
-import com.example.car.service.*;
-import com.example.car.store.CityStore;
-import com.example.car.store.ModificationStore;
+import com.example.car.service.CarService;
 import com.example.car.util.CarModfctn;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
@@ -29,29 +30,6 @@ class CarMapperDBTest {
     private PostMapper postMapper;
     @Autowired
     private CarService carService;
-    @Autowired
-    private CityService cityService;
-    @Autowired
-    private BodyService bodyService;
-    @Autowired
-    private ColorService colorService;
-    @Autowired
-    private EngineService engineService;
-    @Autowired
-    private GearboxService gearboxService;
-    @Autowired
-    private MarkService markService;
-    @Autowired
-    private ModelService modelService;
-    @Autowired
-    private OptionsService optionsService;
-    @Autowired
-    private TransmissionService transmissionService;
-
-    @Autowired
-    private CityStore cityStore;
-    @Autowired
-    private ModificationStore modificationStore;
     @Autowired
     private Cleaner cleaner;
 

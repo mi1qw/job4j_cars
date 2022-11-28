@@ -76,9 +76,8 @@ public class CarFormController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/img/{img}")
-    public ResponseEntity<?> getImg(final @PathVariable("img") String img,
-                                    final Model model) {
+    @GetMapping(value = "/img/{img}", produces = "text/plain;charset=utf-8")
+    public ResponseEntity<?> getImg(final @PathVariable("img") String img) {
         try {
             Resource resource = fileService.download(img);
             return ResponseEntity.ok()
@@ -151,8 +150,7 @@ public class CarFormController {
     }
 
     @GetMapping("/resetState")
-    public String resetState(final @RequestParam(name = "stateID") int stateID,
-                             final Model model) {
+    public String resetState(final @RequestParam(name = "stateID") int stateID) {
         CarState state = userSession.getCarState();
         if (state == null) {
             return "addCar";
@@ -168,15 +166,19 @@ public class CarFormController {
         return "redirect:/cars/addState";
     }
 
-
-    @PostMapping("/upload")
+    /* T ODO: 26.11.2022 order  totalFiles убрать*/
+    @PostMapping(value = "/upload", produces = "multipart/form-data; charset=utf-8")
     public ResponseEntity<?> upload(
-            final @RequestParam("files") MultipartFile file,
-            final @RequestParam("order") int order,
-            final @RequestParam("totalFiles") int totalFiles) {
+            final @RequestParam("files") MultipartFile file) {
         Car newCar = userSession.getNewCar();
+        if (newCar == null) {
+            return new ResponseEntity<>("Noneditable mode", HttpStatus.BAD_REQUEST);
+        }
+        if (!userSession.getAccount().getId().equals(newCar.getAccount().getId())) {
+            return new ResponseEntity<>("It`s not your post", HttpStatus.BAD_REQUEST);
+        }
         String filename = file.getOriginalFilename();
-        if (newCar == null || !ImageUtil.isValid(filename)) {
+        if (!ImageUtil.isValid(filename)) {
             return new ResponseEntity<>("Wrong image type.", HttpStatus.BAD_REQUEST);
         }
         AtomicInteger maxID = userSession.getMaxID();
@@ -199,8 +201,7 @@ public class CarFormController {
     @PostMapping("/add")
     public String savePost(final @Validated(ValidationGroupSequence.class)
                            @ModelAttribute("carform") CarDto carDto,
-                           final BindingResult bindingResult,
-                           final Model model) {
+                           final BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             log.error("{}", bindingResult);
             return "addCar";

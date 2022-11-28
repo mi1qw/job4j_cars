@@ -1,21 +1,29 @@
 package com.example.car.store;
 
+import com.example.car.Cleaner;
 import com.example.car.model.Color;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @SpringBootTest
+@Import(Cleaner.class)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class ColorStoreTest implements SessionStore {
     @Autowired
     private ColorStore store;
+    @Autowired
+    private Cleaner cleaner;
     private static Color color;
+
+    @AfterAll
+    void cleanDB() {
+        cleaner.clean();
+    }
 
     @Test
     @Order(1)

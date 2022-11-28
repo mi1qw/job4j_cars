@@ -22,7 +22,6 @@ public class UserSession {
     private FilterForm filterForm = new FilterForm();
     private FilterForm breadcrumb = new FilterForm();
 
-
     @Override
     public String toString() {
         return "UserSession{" + "mock" + '}';

@@ -33,13 +33,10 @@ public class PathForm {
 
     public FilterDto carToFilterDto(final Car car) {
         FilterDto filterDto = userSession.getFilterForm().getFilterDto().clone();
-
-        log.info("{}", filterDto);
         list.forEach(n -> {
             Object id = n.getter.apply(car);
             n.setter.accept(id, filterDto);
         });
-        log.info("{}", filterDto);
         return filterDto;
     }
 

@@ -32,7 +32,7 @@ public class FileService {
         try {
             fileSystemStore.store(file, imageDto.getName());
         } catch (StorageException e) {
-            fileSystemStore.deleteByName(imageDto.getName());
+            carService.deleteImageByName(car, imageDto.getName());
             log.error(e.getMessage(), e);
             return false;
         }

@@ -23,21 +23,21 @@ public class AuthFilter implements Filter {
         HttpServletResponse res = (HttpServletResponse) response;
         String uri = req.getRequestURI();
         if (uri.equals("/")
-            || uri.endsWith(".css")
-            || uri.endsWith(".js")
-            || uri.startsWith("/posts")
-            || uri.startsWith("/cars/img")
-            || uri.startsWith("/cars/models")
-            || uri.endsWith("logIn")
-            || uri.endsWith("favicon.ico")
-            || uri.endsWith("signPage")
-            || uri.endsWith("signIn")
-            || uri.startsWith("/posts/ex")) {
+                || uri.startsWith("/css")
+                || uri.startsWith("/js")
+                || uri.startsWith("/images")
+                || uri.startsWith("/posts")
+                || uri.startsWith("/cars/img")
+                || uri.startsWith("/cars/models")
+                || uri.endsWith("logIn")
+                || uri.endsWith("signPage")
+                || uri.endsWith("signIn")
+                || uri.startsWith("/posts/ex")) {
             chain.doFilter(req, res);
             return;
         }
-        UserSession userSession = (UserSession) req.getSession().getAttribute(
-                "scopedTarget.userSession");
+        UserSession userSession = (UserSession) req.getSession()
+                .getAttribute("scopedTarget.userSession");
         if (userSession == null || userSession.getAccount() == null) {
             res.sendRedirect(req.getContextPath() + "/");
             return;
