@@ -18,7 +18,7 @@ Java 17, Maven 3.8, PostgreSQL 14
 ### Запуск проекта
 в psql или другим способом 
 ```sh
-create database cinema;
+create database car;
 mvn spring-boot:run;
 ```
 в вашем браузере
@@ -26,4 +26,17 @@ mvn spring-boot:run;
 http://127.0.0.1:8080/posts
 ```
 ***
+Поиск нужного авто по каким-то параметрам
 
+<img src="/img/ezgif-1-10330229d9.gif" width="800px"/>
+
+***
+
+Регистрация. Размещение или скрытие объявления
+
+<img src="/img/ezgif-5-39d080c8ef.gif" width="800px"/>
+
+***
+Редактирование объявления
+
+<img src="/img/ezgif-5-129a301d85.gif" width="800px"/>
