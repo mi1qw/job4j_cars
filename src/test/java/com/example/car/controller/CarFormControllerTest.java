@@ -10,6 +10,7 @@ import com.example.car.dto.FilterDto;
 import com.example.car.model.Car;
 import com.example.car.model.City;
 import com.example.car.model.Status;
+import com.example.car.service.AccountService;
 import com.example.car.service.CarService;
 import com.example.car.service.CityService;
 import com.example.car.store.SessionStore;
@@ -52,6 +53,8 @@ class CarFormControllerTest implements SessionStore {
     private SessionTracking sessions;
     @Autowired
     private UserTestSession userSession;
+    @Autowired
+    private AccountService accountService;
     @Autowired
     private CarService carService;
     @Autowired
@@ -382,6 +385,21 @@ class CarFormControllerTest implements SessionStore {
     }
 
     @Test
+    @Order(124)
+    void reorderImageOfCarShouldChangeCarImmage() throws Exception {
+        List<String> images = userSession.getNewCar().getImages();
+        assertThat(images).asList().containsExactly(images.get(0), images.get(1));
+        String newOrder = images.get(1) + "|" + images.get(0);
+        mockMvc.perform(post("/cars/reorder")
+                        .session(sessions.getLastSession())
+                        .param("value", newOrder))
+                .andDo(sessions)
+                .andExpect(status().is2xxSuccessful());
+        assertThat(userSession.getNewCar().getImages())
+                .asList().containsExactly(images.get(1), images.get(0));
+    }
+
+    @Test
     @Order(130)
     void saveCarPost() throws Exception {
         City city = cityService.findById(1L);
@@ -444,6 +462,28 @@ class CarFormControllerTest implements SessionStore {
                 n -> assertThat(n.account().getFirstName()).isEqualTo("Ann"),
                 n -> assertThat(n.car().getDescription()).isEqualTo("description Test")
         );
+    }
+
+    @Test
+    @Order(145)
+    void editCarPostAndResetState() throws Exception {
+        mockMvc.perform(get("/cars/edit/{id}", newCarId)
+                        .session(sessions.getLastSession()))
+                .andDo(sessions)
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(view().name("addCar"))
+                .andExpect(model().attribute("carform", notNullValue()))
+                .andExpect(model().attributeExists("reverse"));
+        assertThat(userSession.getAccount().getFirstName()).isEqualTo("Ann");
+
+        mockMvc.perform(get("/cars/resetState").session(sessions.getLastSession())
+                        .param("stateID", "1"))
+                .andDo(sessions)
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/cars/addState"))
+                .andExpect(redirectedUrl("/cars/addState"));
+        CarState carState = userSession.getCarState();
+        assertThat(carState.isDone()).isFalse();
     }
 
     @Test
@@ -550,6 +590,64 @@ class CarFormControllerTest implements SessionStore {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/posts"));
         assertThat(userSession.getAccount()).isNull();
+    }
+
+    @Test
+    @Order(210)
+    void exception404() throws Exception {
+        mockMvc.perform(get("/posts1").session(sessions.getLastSession()))
+                .andDo(sessions)
+                .andExpect(status().is4xxClientError());
+        assertThat(userSession.getAccount()).isNull();
+    }
+
+    @Test
+    @Order(220)
+    void signinWithWrongFormatLoginShouldReturnErrorField() throws Exception {
+        mockMvc.perform(post("/signIn")
+                        .param("firstName", "firstName")
+                        .param("lastName", "lastName")
+                        .param("login", "login")
+                        .param("password", "password")
+                        .param("phoneNumber", "095 5555555")
+                        .param("city", "1"))
+                .andExpect(view().name("signin"))
+                .andExpect(model().errorCount(1))
+                .andExpect(model().attributeHasFieldErrorCode("account",
+                        "login", "EmailReg"));
+    }
+
+    @Test
+    @Order(230)
+    void signinWithExistingLoginShouldReturnErrorField() throws Exception {
+        mockMvc.perform(post("/signIn")
+                        .param("firstName", "firstName")
+                        .param("lastName", "lastName")
+                        .param("login", "ann@gmail.com")
+                        .param("password", "password")
+                        .param("phoneNumber", "095 5555555")
+                        .param("city", "1"))
+                .andExpect(view().name("signin"))
+                .andExpect(model().errorCount(2))
+                .andExpect(model().attributeHasFieldErrorCode("account",
+                        "login", "NotExistingAccount"));
+    }
+
+    @Test
+    @Order(240)
+    void signinWithCorrectDataAccountShouldSaveInDatabse() throws Exception {
+        mockMvc.perform(post("/signIn")
+                        .param("firstName", "firstName")
+                        .param("lastName", "lastName")
+                        .param("login", "bob@gmail.com")
+                        .param("password", "password")
+                        .param("phoneNumber", "095 5555555")
+                        .param("city", "1"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/posts"))
+                .andExpect(model().errorCount(0));
+        assertThat(accountService.findUserByLogin("bob@gmail.com").orElse(null)).isNotNull();
+        log.info("{}", accountService.findUserByLogin("bob@gmail.com").get().getId());
     }
 
     private boolean isExistImage(final String name) throws Exception {

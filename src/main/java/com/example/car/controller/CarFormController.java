@@ -166,10 +166,8 @@ public class CarFormController {
         return "redirect:/cars/addState";
     }
 
-    /* T ODO: 26.11.2022 order  totalFiles убрать*/
     @PostMapping(value = "/upload", produces = "multipart/form-data; charset=utf-8")
-    public ResponseEntity<?> upload(
-            final @RequestParam("files") MultipartFile file) {
+    public ResponseEntity<?> upload(final @RequestParam("files") MultipartFile file) {
         Car newCar = userSession.getNewCar();
         if (newCar == null) {
             return new ResponseEntity<>("Noneditable mode", HttpStatus.BAD_REQUEST);
@@ -203,7 +201,6 @@ public class CarFormController {
                            @ModelAttribute("carform") CarDto carDto,
                            final BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            log.error("{}", bindingResult);
             return "addCar";
         }
         Set<Options> options = carDto.getOptions();

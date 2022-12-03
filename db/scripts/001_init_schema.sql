@@ -13,7 +13,6 @@ CREATE TABLE account
     city_id     BIGINT,
     CONSTRAINT account_pkey PRIMARY KEY (id)
 );
-select setval('account_id_seq', 99);
 
 -- changeset mibmy:1667080962380-2
 CREATE TABLE body
@@ -23,7 +22,6 @@ CREATE TABLE body
     name  VARCHAR(20)                             NOT NULL,
     CONSTRAINT body_pkey PRIMARY KEY (id)
 );
-select setval('body_id_seq', 99);
 
 -- changeset mibmy:1667080962380-3
 CREATE TABLE car
@@ -55,7 +53,6 @@ CREATE TABLE car
     transmission_id      BIGINT,
     CONSTRAINT car_pkey PRIMARY KEY (id)
 );
-select setval('car_id_seq', 99);
 
 -- changeset mibmy:1667080962380-4
 CREATE TABLE city
@@ -64,7 +61,6 @@ CREATE TABLE city
     name VARCHAR(30),
     CONSTRAINT city_pkey PRIMARY KEY (id)
 );
-select setval('city_id_seq', 99);
 
 -- changeset mibmy:1667080962380-5
 CREATE TABLE color
@@ -74,7 +70,6 @@ CREATE TABLE color
     name  VARCHAR(20),
     CONSTRAINT color_pkey PRIMARY KEY (id)
 );
-select setval('color_id_seq', 99);
 
 -- changeset mibmy:1667080962380-6
 CREATE TABLE engine
@@ -84,7 +79,6 @@ CREATE TABLE engine
     name  VARCHAR(20)                             NOT NULL,
     CONSTRAINT engine_pkey PRIMARY KEY (id)
 );
-select setval('engine_id_seq', 99);
 
 -- changeset mibmy:1667080962380-7
 CREATE TABLE gearbox
@@ -94,7 +88,6 @@ CREATE TABLE gearbox
     name  VARCHAR(20)                             NOT NULL,
     CONSTRAINT gearbox_pkey PRIMARY KEY (id)
 );
-select setval('gearbox_id_seq', 99);
 
 -- changeset mibmy:1667080962380-8
 CREATE TABLE generations
@@ -113,7 +106,6 @@ CREATE TABLE generations
     transmission_id BIGINT,
     CONSTRAINT generations_pkey PRIMARY KEY (id)
 );
-select setval('generations_id_seq', 99);
 
 -- changeset mibmy:1667080962380-9
 CREATE TABLE mark
@@ -123,7 +115,6 @@ CREATE TABLE mark
     name  VARCHAR(20)                             NOT NULL,
     CONSTRAINT mark_pkey PRIMARY KEY (id)
 );
-select setval('mark_id_seq', 99);
 
 -- changeset mibmy:1667080962380-10
 CREATE TABLE model
@@ -133,7 +124,6 @@ CREATE TABLE model
     mark_id BIGINT,
     CONSTRAINT model_pkey PRIMARY KEY (id)
 );
-select setval('model_id_seq', 99);
 
 -- changeset mibmy:1667080962380-11
 CREATE TABLE options
@@ -143,7 +133,6 @@ CREATE TABLE options
     namecategory VARCHAR(30),
     CONSTRAINT options_pkey PRIMARY KEY (id)
 );
-select setval('options_id_seq', 99);
 
 -- changeset mibmy:1667080962380-12
 CREATE TABLE transmission
@@ -153,7 +142,6 @@ CREATE TABLE transmission
     name  VARCHAR(15)                             NOT NULL,
     CONSTRAINT transmission_pkey PRIMARY KEY (id)
 );
-select setval('transmission_id_seq', 99);
 
 -- changeset mibmy:1667080962380-13
 ALTER TABLE account

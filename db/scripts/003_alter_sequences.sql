@@ -1,0 +1,12 @@
+select setval('account_id_seq', 99);
+select setval('body_id_seq', 99);
+select setval('car_id_seq', 99);
+select setval('city_id_seq', 99);
+select setval('color_id_seq', 99);
+select setval('engine_id_seq', 99);
+select setval('gearbox_id_seq', 99);
+select setval('generations_id_seq', 99);
+select setval('mark_id_seq', 99);
+select setval('model_id_seq', 99);
+select setval('options_id_seq', 99);
+select setval('transmission_id_seq', 99);

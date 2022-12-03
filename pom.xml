@@ -27,7 +27,9 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
+
                 <!--                <spring.profiles.active>test</spring.profiles.active>-->
+                <db.changeLogFile>db/master_test.xml</db.changeLogFile>
                 <db.url>
                     jdbc:h2:mem:car;MODE=PostgreSQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;CASE_INSENSITIVE_IDENTIFIERS=TRUE;
                 </db.url>
@@ -40,6 +42,7 @@
             <id>production</id>
             <properties>
                 <spring.profiles.active>production</spring.profiles.active>
+                <db.changeLogFile>db/master.xml</db.changeLogFile>
                 <db.url>jdbc:postgresql://127.0.0.1:5432/car</db.url>
                 <db.username>postgres</db.username>
                 <db.password>123</db.password>
@@ -102,11 +105,11 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
+<!--        <dependency>
             <groupId>org.hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
             <scope>test</scope>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
@@ -171,7 +174,7 @@
                 <executions>
                     <execution>
                         <configuration>
-                            <changeLogFile>db/master.xml</changeLogFile>
+                            <changeLogFile>${db.changeLogFile}</changeLogFile>
                             <url>${db.url}</url>
                             <driver>${db.driver}</driver>
                             <username>${db.username}</username>
@@ -187,7 +190,6 @@
                     </execution>
                 </executions>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
@@ -249,6 +251,11 @@
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.0.1.RELEASE</version>
+            </plugin>
+            <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.8</version>
@@ -258,6 +265,8 @@
                         <exclude>**/dto/**</exclude>
                         <exclude>**/model/**</exclude>
                         <exclude>**/config/**</exclude>
+                        <exclude>**/GlobalControllerAdvice.class</exclude>
+
                     </excludes>
                 </configuration>
                 <executions>

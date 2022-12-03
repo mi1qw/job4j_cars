@@ -22,22 +22,22 @@
         <div class="card-body pt-0">
           <form th:action="@{/signIn}" method="POST" th:object="${account}">
             <div
-                th:replace="fragments/validInput::inputfield('имя','firstName')">
+                th:replace="~{fragments/validInput::inputfield('имя','firstName')}">
             </div>
             <div
-                th:replace="fragments/validInput::inputfield('фамилия','lastName')">
+                th:replace="~{fragments/validInput::inputfield('фамилия','lastName')}">
             </div>
             <div
-                th:replace="fragments/validInput::selectfield('город','city',*{city?.id})">
+                th:replace="~{fragments/validInput::selectfield('город','city',*{city?.id})}">
             </div>
             <div
-                th:replace="fragments/validInput::inputfield('телефон','phoneNumber')">
+                th:replace="~{fragments/validInput::inputfield('телефон','phoneNumber')}">
             </div>
             <div
-                th:replace="fragments/validInput::inputfield(labelText='почта',fieldName='login', inputType='email')">
+                th:replace="~{fragments/validInput::inputfield(labelText='почта',fieldName='login', inputType='email')}">
             </div>
             <div
-                th:replace="fragments/validInput::inputfield('пароль','password')">
+                th:replace="~{fragments/validInput::inputfield('пароль','password')}">
             </div>
             <div class="d-flex pt-4">
               <div>
