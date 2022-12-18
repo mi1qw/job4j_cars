@@ -42,7 +42,7 @@ $ \q
 ```
 запуск
 ```sh
-$ mvn spring-boot:run;
+$ mvn spring-boot:run
 ```
 в вашем браузере<br>
 <http://127.0.0.1:8080/posts>
@@ -64,4 +64,4 @@ $ mvn spring-boot:run;
 
 ***
 Контакты<br>
-Email address: my@gmail.com
+Email: my@gmail.com

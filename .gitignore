@@ -35,6 +35,9 @@ build/
 *.trace.db
 *.mv.db
 
+mvnw
+mvnw.cmd
+
 ### images folder ###
 #uploadPosts/
 #*.png
